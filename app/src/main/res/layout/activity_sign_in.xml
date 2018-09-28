@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background"
+    tools:context=".Activities.SignInActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/txt_email"
+        android:inputType="textEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/email"
+        android:text="fake@gmail.com"
+        app:met_underlineColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:textColor="@android:color/white"
+        app:met_floatingLabel="highlight"
+        app:met_baseColor="@android:color/white"
+        app:met_primaryColor="@android:color/white"
+        app:met_singleLineEllipsis="true"
+        />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/txt_password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:text="fake@gmail.com"
+            app:met_underlineColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textColor="@android:color/white"
+            app:met_floatingLabel="highlight"
+            app:met_baseColor="@android:color/white"
+            app:met_primaryColor="@android:color/white"
+            app:met_singleLineEllipsis="true"
+            />
+
+    <com.rey.material.widget.CheckBox
+        android:id="@+id/chk_remember_me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rempass"
+        android:gravity="center_vertical"
+        android:textSize="16sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@android:color/white"
+        app:cbd_strokeColor = "@android:color/white"
+        app:cbd_tickColor = "@color/colorPrimary"
+        />
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/btn_login"
+            android:text="@string/login"
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:textAllCaps="false"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content"
+            android:shadowColor="@android:color/black"
+            app:shadowEnabled="true"
+            app:fButtonColor="@color/fbutton_color_peter_river"
+            app:shadowHeight="5dp"
+            app:cornerRadius="4dp"
+            app:shadowColor="@android:color/black"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linerar2"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="@string/account"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_signuphere"
+            android:text="@string/signhere"
+            android:textStyle="bold"
+            android:textColor="@color/fbutton_color_peter_river"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>

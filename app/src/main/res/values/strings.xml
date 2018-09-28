@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">Knockwork</string>
+
+    <!--Facebook login-->
+    <string name="facebook_app_id">1247438575403320</string>
+    <string name="fb_login_protocol_scheme">fb1247438575403320</string>
+    <string name="hire">Hire</string>
+    <string name="work">Work</string>
+    <string name="signin">SIGN IN</string>
+    <string name="skip">SKIP</string>
+    <string name="terms">By Joining you agree to our</string>
+    <string name="temscondition"><![CDATA[Terms&Conditions]]></string>
+    <string name="SignEmail">Sign Up with Email</string>
+    <string name="signgmail">Connect With Gmail</string>
+    <string name="signfacebook">Connect with Facebook</string>
+    <string name="email">Email</string>
+    <string name="rempass">Remember my password</string>
+    <string name="login">Login</string>
+    <string name="account">Don\'t have an Account?</string>
+    <string name="signhere">SignUp here.</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 </resources>
