@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "604551927176",
+    "firebase_url": "https://knockwork-f3b1d.firebaseio.com",
+    "project_id": "knockwork-f3b1d",
+    "storage_bucket": "knockwork-f3b1d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604551927176:android:89c80e41c9863730",
+        "android_client_info": {
+          "package_name": "com.pasistence.knockwork"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604551927176-t2kjo5ji5fis4rd32a970t5as1jiejbg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pasistence.knockwork",
+            "certificate_hash": "a30a5fe4902bc4b25f9a6b98d1db3be54bcee554"
+          }
+        },
+        {
+          "client_id": "604551927176-fbictk2l7ktrl9842uqvvhc2k6fvdme9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pasistence.knockwork",
+            "certificate_hash": "534692bc19ad5131f543b17ff856b6027a5d8a55"
+          }
+        },
+        {
+          "client_id": "604551927176-vk2qm3k24hjm8033qu25u574tdavocon.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwEYgvivGZi5DniIj8qMMpTjQOdgBEi1k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "604551927176-vk2qm3k24hjm8033qu25u574tdavocon.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
