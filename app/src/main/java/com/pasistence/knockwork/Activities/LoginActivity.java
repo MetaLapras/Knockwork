@@ -68,9 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
                     .build(), PRE_LOGIN);
         }
-
-        if (v==btn_gmail)
-        {
+        if (v==btn_gmail){
             AuthUI.IdpConfig googleIdp = new AuthUI.IdpConfig.GoogleBuilder()
                     //.setScopes(Arrays.asList(Scopes.GAMES))
                     .build();
@@ -82,7 +80,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             .setAvailableProviders(Arrays.asList(googleIdp))
                             .build(), PRE_LOGIN);
         }
-
         if (v==btn_facebook)
         {
             Toast.makeText(LoginActivity.this, "Facebook Login...", Toast.LENGTH_SHORT).show();
