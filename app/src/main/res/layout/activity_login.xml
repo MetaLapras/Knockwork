@@ -110,12 +110,12 @@
             app:cornerRadius="4dp"
             app:shadowColor="@android:color/black"
             />
-        <com.facebook.login.widget.LoginButton
+       <!-- <com.facebook.login.widget.LoginButton
             android:id="@+id/fb_login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-             />
+             />-->
     </LinearLayout>
 
     <LinearLayout

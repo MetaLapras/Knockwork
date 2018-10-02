@@ -2,8 +2,8 @@
     <string name="app_name">Knockwork</string>
 
     <!--Facebook login-->
-    <string name="facebook_app_id">1247438575403320</string>
-    <string name="fb_login_protocol_scheme">fb1247438575403320</string>
+    <string name="facebook_application_id" translatable="false">1247438575403320</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb1247438575403320</string>
     <string name="hire">Hire</string>
     <string name="work">Work</string>
     <string name="signin">SIGN IN</string>

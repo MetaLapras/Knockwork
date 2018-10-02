@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.SignUpEmailActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="126dp"
+        android:src="@drawable/building" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/txt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="EMAIL : test@gmail.com"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/txt_uid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="UID : "
+            android:gravity="center"/>
+
+
+        <TextView
+            android:id="@+id/txt_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="STATUS : "
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SEND"
+            android:id="@+id/btn_send"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="REFREASH"
+            android:id="@+id/btn_refresh"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="LOgout"
+            android:textAllCaps="true"
+            android:id="@+id/btn_logout"/>
+    </LinearLayout>
+
+
+</RelativeLayout>
