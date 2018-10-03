@@ -39,6 +39,10 @@ public class Common {
         switch (datareference){
             case "popular":
                 databaseReference = database.getReference("popular");
+                break;
+            case "top":
+                databaseReference = database.getReference("top");
+                break;
         }
 
     }
