@@ -21,6 +21,7 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -31,7 +32,8 @@ import info.hoang8f.widget.FButton;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     Context mContext;
-    FButton btn_email,btn_gmail,btn_facebook,btn_phone;
+    FButton btn_email,btn_gmail,btn_facebook;
+    TextView txtSignIn,txtSkip;
     //LoginButton fbLoginButton, emilLoginButton;
 
     private static final int PRE_LOGIN = 1000;
@@ -54,6 +56,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btn_email      = (FButton)findViewById(R.id.btn_SignUp_Email);
         btn_gmail      = (FButton)findViewById(R.id.btn_SignUp_Gmail);
         btn_facebook   = (FButton)findViewById(R.id.btn_SignUp_Facebook);
+        txtSignIn      = (TextView)findViewById(R.id.txt_SignIn);
+        txtSkip      = (TextView)findViewById(R.id.txt_skip);
         btn_phone      = (FButton)findViewById(R.id.btn_SignUp_Number);
     }
 
@@ -62,6 +66,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btn_gmail.setOnClickListener(this);
         btn_facebook.setOnClickListener(this);
         btn_phone.setOnClickListener(this);
+        txtSkip.setOnClickListener(this);
+        txtSignIn.setOnClickListener(this);
     }
 
 
@@ -111,7 +117,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             .setAvailableProviders(Arrays.asList(facebookIdp))
                             .build(),PRE_LOGIN);
         }
-
+        if(v==txtSignIn){
+            startActivity(new Intent(mContext,SignInActivity.class));
+        }
+        if(v==txtSkip){
+            startActivity(new Intent(mContext,DashboardActivity.class));
+        }
 
 
     }
@@ -169,6 +180,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
         else
-            Toast.makeText(this, "Login Failed!!!!!!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show();
     }
 }
