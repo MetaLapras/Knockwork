@@ -49,6 +49,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()){
             case R.id.txt_signuphere:
                 startActivity(new Intent(mContext,LoginActivity.class));
+                break;
+            case R.id.btn_login:
+                startActivity(new Intent(mContext,DashboardActivity.class));
         }
     }
 }

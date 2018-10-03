@@ -25,5 +25,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="signPhoneNumber">Sign Up with Number</string>>
+    <string name="signPhoneNumber">Sign Up with Number</string>
+    <string name="pServices">Popular Services</string>
+    <string name="category">Top Categories</string>>
 </resources>

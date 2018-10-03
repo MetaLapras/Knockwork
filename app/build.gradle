@@ -75,6 +75,11 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 
     implementation 'com.google.firebase:firebase-auth:16.0.1'
+
+
+    //Material Search bar
+    implementation 'com.github.mancj:MaterialSearchBar:+'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
