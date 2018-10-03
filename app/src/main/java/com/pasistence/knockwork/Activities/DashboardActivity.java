@@ -24,10 +24,17 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Interfaces.ItemClickListener;
 import com.pasistence.knockwork.Models.PopularServices;
@@ -36,6 +43,8 @@ import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.ViewHolder.ViewHolderPopularServices;
 import com.pasistence.knockwork.ViewHolder.ViewHolderTopServices;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
 
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -50,8 +59,12 @@ public class DashboardActivity extends AppCompatActivity
     public DatabaseReference Top_dataReference ;
 
 
-    FirebaseRecyclerAdapter<PopularServices,ViewHolderPopularServices> popularAdapter;
+   // FirebaseRecyclerAdapter<PopularServices,ViewHolderPopularServices> popularAdapter;
     FirebaseRecyclerAdapter<TopServices,ViewHolderTopServices> TopServiceAdapter;
+
+    //Sliders
+    HashMap<String,String>image_list;
+    SliderLayout mslider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,50 +98,16 @@ public class DashboardActivity extends AppCompatActivity
         Top_dataReference = database.getReference("top");
 
 
-        refreshLayout.setColorSchemeResources(R.color.colorPrimary,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_dark,
-                android.R.color.holo_blue_dark);
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                //to Load menu from Firebase
-                if(Common.isConnectedToInterNet(getBaseContext())) {
-                    loadPopularServices();
-                    loadTopServices();
-                }else
-                {
-                    Toast.makeText(getBaseContext(), "Check Your Internet Connection ! ", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            }
-        });
-        //Default Load
-        refreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                //to Load menu from Firebase
-                if(Common.isConnectedToInterNet(getBaseContext())) {
-                    loadPopularServices();
-                    loadTopServices();
-                }else
-                {
-                    Toast.makeText(getBaseContext(), "Check Your Internet Connection ! ", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-            }
-        });
 
 
 
-        FirebaseRecyclerOptions<PopularServices> options = new FirebaseRecyclerOptions.Builder<PopularServices>()
+       /* FirebaseRecyclerOptions<PopularServices> options = new FirebaseRecyclerOptions.Builder<PopularServices>()
                 .setQuery(popular_dataReference,PopularServices.class)
                 .build();
 
         popularAdapter = new FirebaseRecyclerAdapter<PopularServices, ViewHolderPopularServices>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull ViewHolderPopularServices viewHolder, int position, @NonNull PopularServices model) {
+            protected void onBindViewHolder( ViewHolderPopularServices viewHolder, int position, final PopularServices model) {
                 viewHolder.txtPopularservice.setText(model.getName());
                 Picasso.with(getBaseContext()).load(model.getImage())
                         .into(viewHolder.imgPopularservice);
@@ -139,10 +118,10 @@ public class DashboardActivity extends AppCompatActivity
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                       /* Intent intent = new Intent(Home.this, FoodMenu.class);
-                        intent.putExtra("CategoryId",adapter.getRef(position).getKey());
-                        startActivity(intent);*/
-                        Toast.makeText(mContext,""+clickitem.getName(),Toast.LENGTH_LONG).show();
+                        //Toast.makeText(DashboardActivity.this, "", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(view, ""+clickitem.name, Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                        Log.e("popular", model.toString());
                     }
                 });
             }
@@ -155,7 +134,7 @@ public class DashboardActivity extends AppCompatActivity
                         .inflate(R.layout.custome_template_popularservices,parent,false);
                 return new ViewHolderPopularServices(itemView);
             }
-        };
+        };*/
 
 
         FirebaseRecyclerOptions<TopServices> topOptions = new FirebaseRecyclerOptions.Builder<TopServices>()
@@ -185,6 +164,8 @@ public class DashboardActivity extends AppCompatActivity
                         intent.putExtra("CategoryId",adapter.getRef(position).getKey());
                         startActivity(intent);*/
                        // Toast.makeText(mContext,""+clickitem.getHead(),Toast.LENGTH_LONG).show();
+                        Snackbar.make(view, ""+clickitem.getHead(), Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
                     }
                 });
             }
@@ -199,26 +180,75 @@ public class DashboardActivity extends AppCompatActivity
 
             }
         };
+        recyclerTopServices.setAdapter(TopServiceAdapter);
+        recyclerTopServices.scheduleLayoutAnimation();
+        TopServiceAdapter.notifyDataSetChanged();
+        TopServiceAdapter.startListening();
 
 
+      //  loadPopularServices();
+        loadTopServices();
+
+
+
+
+
+    refreshLayout.setColorSchemeResources(R.color.colorPrimary,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_dark,
+                android.R.color.holo_blue_dark);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //to Load menu from Firebase
+                if(Common.isConnectedToInterNet(getBaseContext())) {
+                    //loadPopularServices();
+                    loadTopServices();
+                }else
+                {
+                    Toast.makeText(getBaseContext(), "Check Your Internet Connection ! ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+        });
+        //Default Load
+        refreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                //to Load menu from Firebase
+                if(Common.isConnectedToInterNet(getBaseContext())) {
+                    //loadPopularServices();
+                    loadTopServices();
+                }else
+                {
+                    Toast.makeText(getBaseContext(), "Check Your Internet Connection ! ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+            }
+        });
+
+
+    //Slider setup
+        setupSlider();
 
     }
 
     private void loadTopServices() {
-        popularAdapter.notifyDataSetChanged();
-        popularAdapter.startListening();
-        recyclerPopularServices.setAdapter(popularAdapter);
-        recyclerPopularServices.scheduleLayoutAnimation();
+        recyclerTopServices.setAdapter(TopServiceAdapter);
+        recyclerTopServices.scheduleLayoutAnimation();
+        TopServiceAdapter.notifyDataSetChanged();
+        TopServiceAdapter.startListening();
         refreshLayout.setRefreshing(false);
+
     }
 
     private void loadPopularServices() {
-        TopServiceAdapter.notifyDataSetChanged();
-        TopServiceAdapter.startListening();
-        recyclerTopServices.setAdapter(TopServiceAdapter);
-        recyclerTopServices.scheduleLayoutAnimation();
-        refreshLayout.setRefreshing(false);
-
+      /*  popularAdapter.notifyDataSetChanged();
+        popularAdapter.startListening();
+        recyclerPopularServices.setAdapter(popularAdapter);
+        recyclerPopularServices.scheduleLayoutAnimation();
+        refreshLayout.setRefreshing(false);*/
     }
 
     private void mInit() {
@@ -235,6 +265,9 @@ public class DashboardActivity extends AppCompatActivity
         recyclerTopServices.setHasFixedSize(true);
         GridlayoutManager       = new GridLayoutManager(this,2);
         recyclerTopServices.setLayoutManager(GridlayoutManager);
+
+        mslider = (SliderLayout)findViewById(R.id.slider);
+
 
     }
 
@@ -277,20 +310,36 @@ public class DashboardActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
             // Handle the camera action
         } else if (id == R.id.nav_inbox) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
 
         } else if (id == R.id.nav_notification) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Notification", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
 
         } else if (id == R.id.nav_manage) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
 
         } else if (id == R.id.nav_posting) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Posting", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
 
         } else if (id == R.id.nav_contest) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Contest", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
 
         }else if (id == R.id.nav_settings) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Settings", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
 
         }else if (id == R.id.nav_support) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Support", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
 
         }
 
@@ -298,4 +347,96 @@ public class DashboardActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+       /* if(popularAdapter!=null)
+            popularAdapter.startListening();*/
+        if(TopServiceAdapter!=null)
+            TopServiceAdapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //popularAdapter.stopListening();
+        TopServiceAdapter.stopListening();
+        //  mslider.stopAutoCycle();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(TopServiceAdapter!=null)
+            TopServiceAdapter.startListening();
+    }
+
+    private void setupSlider() {
+        image_list = new HashMap<>();
+        final DatabaseReference Fbanner = database.getReference("popular");
+        Fbanner.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot postsnapshot : dataSnapshot.getChildren())
+                {
+                    PopularServices banner = postsnapshot.getValue(PopularServices.class);
+                    //we will concat String name and Id
+                    //PIZZA_01 => and we will use pizza for show description, 01 for food id to click
+
+                    image_list.put(banner.getName()+"@@@"+banner.getId(),banner.getImage());
+                    Log.e("banner", image_list.toString() );
+                }
+                for(String key : image_list.keySet())
+                {
+                    String[] keySplit = key.split("@@@");
+                    final String NameofFood = keySplit[0];
+                    String IdofFood   = keySplit[1];
+
+
+                    //Create Slider
+                    final TextSliderView textSliderView = new TextSliderView(getBaseContext());
+                    textSliderView.description(NameofFood)
+                            .image(image_list.get(key))
+                            .setScaleType(BaseSliderView.ScaleType.Fit)
+                            .setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+                                @Override
+                                public void onSliderClick(BaseSliderView slider) {
+                                   /* Intent intent = new Intent(DashboardActivity.this,FoodDetails.class);
+                                    //send food id to food details
+                                    intent.putExtras(textSliderView.getBundle());
+                                    startActivity(intent);*/
+
+                                    Snackbar.make(findViewById(R.id.swipe_refresh_layout), ""+NameofFood, Snackbar.LENGTH_LONG)
+                                            .setAction("Action", null).show();
+
+
+                                }
+                            });
+                    //Add Extras to Bundle
+                    textSliderView.bundle(new Bundle());
+                    textSliderView.getBundle().putString("FoodId",IdofFood);
+
+                    mslider.addSlider(textSliderView);
+
+                    //Remove event after finish
+                    Fbanner.removeEventListener(this);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+        mslider.setPresetTransformer(SliderLayout.Transformer.Accordion);
+        mslider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        mslider.setCustomAnimation(new DescriptionAnimation());
+        mslider.setDuration(4000);
+
+    }
+
+
+
 }
