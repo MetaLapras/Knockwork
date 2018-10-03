@@ -32,4 +32,14 @@
     <string name="moneyearned">25k earned</string>
     <string name="info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, send do eiusmod tempor incididunt ut labor et dolore magna aliqua....</string>
     <string name="feedback">80%</string>
+    <string name="inboxName">Cristina Afeeba</string>
+    <string name="inboxdescription">Professional Designer needed for Tshirts...........</>
+    <string name="icandothis">I can do this </string>
+    <string name="fixedprice">Fixed Price </string>
+    <string name="price_range">5k - 7k</string>
+    <string name="posted2daysago">Posted 2 days ago </string>
+    <string name="quotes"> 85 Quotes </string>
+    <string name="job_posting_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, send do eiusmod tempor incididunt ut labor et dolore magna aliqua....</string>
+    <string name="job_posting_edit"> Edit </string>
+    <string name="job_posting_remove"> Remove </string>
 </resources>

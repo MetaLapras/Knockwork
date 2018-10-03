@@ -28,7 +28,9 @@
         <item
             android:id="@+id/nav_contest"
             android:title="Post a Contest"
-         android:icon="@drawable/ic_trophy"/>
+            android:icon="@drawable/ic_trophy"
+            />
+
     </group>
 
 

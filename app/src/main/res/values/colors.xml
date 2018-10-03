@@ -30,5 +30,8 @@
     <color name="fbutton_gmail">#f24c38</color>
     <color name="com_facebook_blue" >#FF032C6E</color>
     <color name="com_facebook_green">#FF027B08</color >
+    <color name="black">#FF00070D</color>
+    <color name="gray">#FF5C6268</color>
+    <color name="red">#FFE71A21</color>
 
 </resources>
