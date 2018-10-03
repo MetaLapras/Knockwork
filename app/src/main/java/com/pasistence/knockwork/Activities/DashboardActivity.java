@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Interfaces.ItemClickListener;
 import com.pasistence.knockwork.Models.PopularServices;
@@ -39,6 +41,9 @@ public class DashboardActivity extends AppCompatActivity
     RecyclerView recyclerPopularServices,recyclerTopServices;
     RecyclerView.LayoutManager GridlayoutManager,LinearLayoutManager ;
     SwipeRefreshLayout refreshLayout;
+
+    public FirebaseDatabase database;
+    public DatabaseReference databaseReference ;
 
 
     FirebaseRecyclerAdapter<PopularServices,ViewHolderPopularServices> popularAdapter;
@@ -69,6 +74,9 @@ public class DashboardActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //init Fire base
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("popular");
 
 
         refreshLayout.setColorSchemeResources(R.color.colorPrimary,
@@ -109,7 +117,7 @@ public class DashboardActivity extends AppCompatActivity
 
         Common.InitFirebase("popular");
         FirebaseRecyclerOptions<PopularServices> options = new FirebaseRecyclerOptions.Builder<PopularServices>()
-                .setQuery(Common.databaseReference,PopularServices.class)
+                .setQuery(databaseReference,PopularServices.class)
                 .build();
 
         popularAdapter = new FirebaseRecyclerAdapter<PopularServices, ViewHolderPopularServices>(options) {
