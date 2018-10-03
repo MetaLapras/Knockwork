@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.ErrorCodes;
+import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.pasistence.knockwork.R;
 import com.squareup.picasso.Picasso;
@@ -29,7 +31,7 @@ import info.hoang8f.widget.FButton;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     Context mContext;
-    FButton btn_email,btn_gmail,btn_facebook;
+    FButton btn_email,btn_gmail,btn_facebook,btn_phone;
     //LoginButton fbLoginButton, emilLoginButton;
 
     private static final int PRE_LOGIN = 1000;
@@ -52,18 +54,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btn_email      = (FButton)findViewById(R.id.btn_SignUp_Email);
         btn_gmail      = (FButton)findViewById(R.id.btn_SignUp_Gmail);
         btn_facebook   = (FButton)findViewById(R.id.btn_SignUp_Facebook);
+        btn_phone      = (FButton)findViewById(R.id.btn_SignUp_Number);
     }
 
     private void monClick() {
         btn_email.setOnClickListener(this);
         btn_gmail.setOnClickListener(this);
         btn_facebook.setOnClickListener(this);
+        btn_phone.setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View v) {
-        if (v==btn_email)
+        if(v == btn_phone)
+        {
+            AuthUI.IdpConfig phoneConfigWithDefaultNumber = new AuthUI.IdpConfig.PhoneBuilder()
+                    .setDefaultNumber("+91")
+                    .build();
+
+            startActivityForResult(
+                    AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .setAvailableProviders(Arrays.asList(phoneConfigWithDefaultNumber))
+                            .build(),PRE_LOGIN);
+
+        }
+        if (v == btn_email)
         {
             startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
                     .build(), PRE_LOGIN);
@@ -103,7 +120,44 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == PRE_LOGIN) {
             handleSignInResponse(resultCode, data);
+            phoneNumberSignInResponse(resultCode, data);
             return;
+        }
+    }
+
+    private void phoneNumberSignInResponse(int resultCode, Intent data) {
+        IdpResponse response =  IdpResponse.fromResultIntent(data);
+
+        //successfully sign in
+        if(resultCode == RESULT_OK)
+        {
+            if(!FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber().isEmpty())
+            {
+                startActivity(new Intent(LoginActivity.this,PhonNumberSignIn.class).putExtra("phone",FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()));
+                finish();
+                return;
+            }
+            else
+            {
+                if (response == null)
+                {
+                    Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (response.getError().getErrorCode()== ErrorCodes.NO_NETWORK)
+                {
+                    Toast.makeText(this, "No Internet", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (response.getError().getErrorCode()== ErrorCodes.UNKNOWN_ERROR)
+                {
+                    Toast.makeText(this, "Unknown Error", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+            Toast.makeText(this, "Unknown Sign In Error!!!!", Toast.LENGTH_SHORT).show();
         }
     }
 

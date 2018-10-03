@@ -110,6 +110,24 @@
             app:cornerRadius="4dp"
             app:shadowColor="@android:color/black"
             />
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/btn_SignUp_Number"
+            android:text="@string/signPhoneNumber"
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:textAllCaps="false"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content"
+            android:shadowColor="@android:color/black"
+            app:shadowEnabled="true"
+            app:fButtonColor="@color/com_facebook_green"
+            app:shadowHeight="5dp"
+            app:cornerRadius="4dp"
+            app:shadowColor="@android:color/black"
+            />
        <!-- <com.facebook.login.widget.LoginButton
             android:id="@+id/fb_login_button"
             android:layout_width="wrap_content"
