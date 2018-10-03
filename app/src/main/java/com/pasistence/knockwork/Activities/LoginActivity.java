@@ -32,7 +32,7 @@ import info.hoang8f.widget.FButton;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     Context mContext;
-    FButton btn_email,btn_gmail,btn_facebook;
+    FButton btn_email,btn_gmail,btn_facebook,btn_phone;
     TextView txtSignIn,txtSkip;
     //LoginButton fbLoginButton, emilLoginButton;
 
