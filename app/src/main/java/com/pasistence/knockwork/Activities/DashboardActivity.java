@@ -10,6 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -25,11 +26,15 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Interfaces.ItemClickListener;
 import com.pasistence.knockwork.Models.PopularServices;
+import com.pasistence.knockwork.Models.TopServices;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.ViewHolder.ViewHolderPopularServices;
+import com.pasistence.knockwork.ViewHolder.ViewHolderTopServices;
 import com.squareup.picasso.Picasso;
 
 public class DashboardActivity extends AppCompatActivity
@@ -40,8 +45,13 @@ public class DashboardActivity extends AppCompatActivity
     RecyclerView.LayoutManager GridlayoutManager,LinearLayoutManager ;
     SwipeRefreshLayout refreshLayout;
 
+    public FirebaseDatabase database;
+    public DatabaseReference popular_dataReference ;
+    public DatabaseReference Top_dataReference ;
+
 
     FirebaseRecyclerAdapter<PopularServices,ViewHolderPopularServices> popularAdapter;
+    FirebaseRecyclerAdapter<TopServices,ViewHolderTopServices> TopServiceAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +79,10 @@ public class DashboardActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //init Fire base
+        database = FirebaseDatabase.getInstance();
+        popular_dataReference = database.getReference("popular");
+        Top_dataReference = database.getReference("top");
 
 
         refreshLayout.setColorSchemeResources(R.color.colorPrimary,
@@ -107,9 +121,9 @@ public class DashboardActivity extends AppCompatActivity
         });
 
 
-        Common.InitFirebase("popular");
+
         FirebaseRecyclerOptions<PopularServices> options = new FirebaseRecyclerOptions.Builder<PopularServices>()
-                .setQuery(Common.databaseReference,PopularServices.class)
+                .setQuery(popular_dataReference,PopularServices.class)
                 .build();
 
         popularAdapter = new FirebaseRecyclerAdapter<PopularServices, ViewHolderPopularServices>(options) {
@@ -120,6 +134,7 @@ public class DashboardActivity extends AppCompatActivity
                         .into(viewHolder.imgPopularservice);
 
                 final PopularServices clickitem = model;
+                Log.e("popular", model.toString() );
 
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
@@ -132,11 +147,55 @@ public class DashboardActivity extends AppCompatActivity
                 });
             }
 
+
+
             @Override
             public ViewHolderPopularServices onCreateViewHolder(ViewGroup parent, int viewType) {
                 View itemView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.custome_template_popularservices,parent,false);
                 return new ViewHolderPopularServices(itemView);
+            }
+        };
+
+
+        FirebaseRecyclerOptions<TopServices> topOptions = new FirebaseRecyclerOptions.Builder<TopServices>()
+                .setQuery(Top_dataReference,TopServices.class)
+                .build();
+
+        TopServiceAdapter = new FirebaseRecyclerAdapter<TopServices, ViewHolderTopServices>(topOptions) {
+            @Override
+            protected void onBindViewHolder(@NonNull ViewHolderTopServices viewHolder, int position, @NonNull TopServices model) {
+
+                viewHolder.txtHead.setText(model.getHead());
+                viewHolder.txtContent.setText(model.getContent());
+
+                Picasso.with(getBaseContext()).load(model.getImage())
+                        .into(viewHolder.imgTopServices);
+
+                Picasso.with(getBaseContext()).load(model.getLogo())
+                        .into(viewHolder.imgLogo);
+
+
+                final TopServices clickitem = model;
+
+                viewHolder.setItemClickListener(new ItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position, boolean isLongClick) {
+                       /* Intent intent = new Intent(Home.this, FoodMenu.class);
+                        intent.putExtra("CategoryId",adapter.getRef(position).getKey());
+                        startActivity(intent);*/
+                       // Toast.makeText(mContext,""+clickitem.getHead(),Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+
+
+
+            @Override
+            public ViewHolderTopServices onCreateViewHolder(ViewGroup parent, int viewType) {
+                View itemView = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.custom_template_topservices,parent,false);
+                return new ViewHolderTopServices(itemView);
 
             }
         };
@@ -146,14 +205,18 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     private void loadTopServices() {
-
-    }
-
-    private void loadPopularServices() {
         popularAdapter.notifyDataSetChanged();
         popularAdapter.startListening();
         recyclerPopularServices.setAdapter(popularAdapter);
         recyclerPopularServices.scheduleLayoutAnimation();
+        refreshLayout.setRefreshing(false);
+    }
+
+    private void loadPopularServices() {
+        TopServiceAdapter.notifyDataSetChanged();
+        TopServiceAdapter.startListening();
+        recyclerTopServices.setAdapter(TopServiceAdapter);
+        recyclerTopServices.scheduleLayoutAnimation();
         refreshLayout.setRefreshing(false);
 
     }
@@ -163,8 +226,10 @@ public class DashboardActivity extends AppCompatActivity
 
         recyclerPopularServices =(RecyclerView)findViewById(R.id.recycler_popular_services);
         recyclerPopularServices.setHasFixedSize(true);
-        LinearLayoutManager     = new LinearLayoutManager(this);
-        recyclerPopularServices.setLayoutManager(GridlayoutManager);
+        //LinearLayoutManager     = new LinearLayoutManager(this).HORIZONTAL;
+        recyclerPopularServices.setLayoutManager(new LinearLayoutManager(this, android.support.v7.widget.LinearLayoutManager.HORIZONTAL, false));
+
+       // recyclerPopularServices.setLayoutManager(LinearLayoutManager);
 
         recyclerTopServices     =(RecyclerView)findViewById(R.id.recycler_top_services);
         recyclerTopServices.setHasFixedSize(true);
