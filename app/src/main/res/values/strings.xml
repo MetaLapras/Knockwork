@@ -27,5 +27,9 @@
     <string name="action_settings">Settings</string>
     <string name="signPhoneNumber">Sign Up with Number</string>
     <string name="pServices">Popular Services</string>
-    <string name="category">Top Categories</string>>
+    <string name="category">Top Categories</string>
+    <string name="country" >United States</string>
+    <string name="moneyearned">25k earned</string>
+    <string name="info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, send do eiusmod tempor incididunt ut labor et dolore magna aliqua....</string>
+    <string name="feedback">80%</string>
 </resources>

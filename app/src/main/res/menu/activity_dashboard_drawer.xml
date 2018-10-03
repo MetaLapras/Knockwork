@@ -27,9 +27,10 @@
             android:title="Post a Jon" />
         <item
             android:id="@+id/nav_contest"
-            android:icon="@drawable/ic_trophy"
             android:title="Post a Contest" />
     </group>
+
+   <!-- android:icon="@drawable/ic_trophy"-->
     <group>
         <menu>
             <item
