@@ -228,19 +228,15 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
 
-
-    //Slider setup
+        //Slider setup
         setupSlider();
-
     }
 
     private void loadTopServices() {
+        TopServiceAdapter.startListening();
         recyclerTopServices.setAdapter(TopServiceAdapter);
         recyclerTopServices.scheduleLayoutAnimation();
-        TopServiceAdapter.notifyDataSetChanged();
-        TopServiceAdapter.startListening();
         refreshLayout.setRefreshing(false);
-
     }
 
     private void loadPopularServices() {
@@ -252,12 +248,13 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     private void mInit() {
+
         refreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
 
-        recyclerPopularServices =(RecyclerView)findViewById(R.id.recycler_popular_services);
-        recyclerPopularServices.setHasFixedSize(true);
+       // recyclerPopularServices =(RecyclerView)findViewById(R.id.recycler_popular_services);
+      //  recyclerPopularServices.setHasFixedSize(true);
         //LinearLayoutManager     = new LinearLayoutManager(this).HORIZONTAL;
-        recyclerPopularServices.setLayoutManager(new LinearLayoutManager(this, android.support.v7.widget.LinearLayoutManager.HORIZONTAL, false));
+       // recyclerPopularServices.setLayoutManager(new LinearLayoutManager(this, android.support.v7.widget.LinearLayoutManager.HORIZONTAL, false));
 
        // recyclerPopularServices.setLayoutManager(LinearLayoutManager);
 
