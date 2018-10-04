@@ -77,10 +77,13 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-auth:16.0.1'
 
-
     //Material Search bar
     implementation 'com.github.mancj:MaterialSearchBar:+'
+   //implementation 'com.github.mancj:MaterialSearchBar:0.7.6'
 
+    // Material Slider
+    implementation 'com.nineoldandroids:library:2.4.0'
+    implementation 'com.daimajia.slider:library:1.1.5@aar'
 }
 
 apply plugin: 'com.google.gms.google-services'

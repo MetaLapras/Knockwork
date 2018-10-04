@@ -16,7 +16,7 @@ public class ViewHolderPopularServices extends RecyclerView.ViewHolder implement
 
     private ItemClickListener itemClickListener;
 
-    public ViewHolderPopularServices(@NonNull View itemView) {
+    public ViewHolderPopularServices(View itemView) {
         super(itemView);
 
         imgPopularservice = (ImageView)itemView.findViewById(R.id.img_popular_service);
@@ -32,6 +32,5 @@ public class ViewHolderPopularServices extends RecyclerView.ViewHolder implement
     @Override
     public void onClick(View view) {
         itemClickListener.onClick(view,getAdapterPosition(),false);
-
     }
 }

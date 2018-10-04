@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         if(v == btn_phone)
         {
-            AuthUI.IdpConfig phoneConfigWithDefaultNumber = new AuthUI.IdpConfig.PhoneBuilder()
+           /* AuthUI.IdpConfig phoneConfigWithDefaultNumber = new AuthUI.IdpConfig.PhoneBuilder()
                     .setDefaultNumber("+91")
                     .build();
 
@@ -83,16 +83,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
                             .setAvailableProviders(Arrays.asList(phoneConfigWithDefaultNumber))
-                            .build(),PRE_LOGIN);
+                            .build(),PRE_LOGIN);*/
 
         }
         if (v == btn_email)
         {
-            startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
-                    .build(), PRE_LOGIN);
+          /*  startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
+                    .build(), PRE_LOGIN);*/
         }
         if (v==btn_gmail){
-            AuthUI.IdpConfig googleIdp = new AuthUI.IdpConfig.GoogleBuilder()
+           /* AuthUI.IdpConfig googleIdp = new AuthUI.IdpConfig.GoogleBuilder()
                     //.setScopes(Arrays.asList(Scopes.GAMES))
                     .build();
 
@@ -101,10 +101,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
                             .setAvailableProviders(Arrays.asList(googleIdp))
-                            .build(), PRE_LOGIN);
+                            .build(), PRE_LOGIN);*/
         }
         if (v==btn_facebook)
-        {
+        {/*
             Toast.makeText(LoginActivity.this, "Facebook Login...", Toast.LENGTH_SHORT).show();
 
             AuthUI.IdpConfig facebookIdp = new AuthUI.IdpConfig.FacebookBuilder()
@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
                             .setAvailableProviders(Arrays.asList(facebookIdp))
-                            .build(),PRE_LOGIN);
+                            .build(),PRE_LOGIN);*/
         }
         if(v==txtSignIn){
             startActivity(new Intent(mContext,SignInActivity.class));

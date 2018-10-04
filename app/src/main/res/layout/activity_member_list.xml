@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/member_list"
+    tools:context=".Activities.MemberListActivity">
+
+    <com.mancj.materialsearchbar.MaterialSearchBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mt_hint="Search"
+        app:mt_dividerColor="@color/leftTextSelectorColor"
+        app:mt_hintColor="@color/fbutton_color_peter_river"
+        app:mt_placeholderColor="@color/fbutton_color_carrot"
+        app:mt_speechMode="false"
+        android:id="@+id/Transfer_search_bar"
+        android:layout_alignParentTop="true">
+
+    </com.mancj.materialsearchbar.MaterialSearchBar>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerTranser_search"
+        android:layout_below="@+id/Transfer_search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+</RelativeLayout>
