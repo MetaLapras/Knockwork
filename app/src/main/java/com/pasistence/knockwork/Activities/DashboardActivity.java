@@ -259,7 +259,7 @@ public class DashboardActivity extends AppCompatActivity
        // recyclerPopularServices.setLayoutManager(LinearLayoutManager);
 
         recyclerTopServices     =(RecyclerView)findViewById(R.id.recycler_top_services);
-        recyclerTopServices.setHasFixedSize(true);
+        recyclerTopServices.setHasFixedSize(false);
         GridlayoutManager       = new GridLayoutManager(this,2);
         recyclerTopServices.setLayoutManager(GridlayoutManager);
 
