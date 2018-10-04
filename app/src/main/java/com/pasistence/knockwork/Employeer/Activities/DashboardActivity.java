@@ -54,7 +54,6 @@ public class DashboardActivity extends AppCompatActivity
     public DatabaseReference popular_dataReference ;
     public DatabaseReference Top_dataReference ;
 
-
    // FirebaseRecyclerAdapter<PopularServices,ViewHolderPopularServices> popularAdapter;
     FirebaseRecyclerAdapter<TopServices,ViewHolderTopServices> TopServiceAdapter;
 
@@ -155,8 +154,6 @@ public class DashboardActivity extends AppCompatActivity
                 });
             }
 
-
-
             @Override
             public ViewHolderPopularServices onCreateViewHolder(ViewGroup parent, int viewType) {
                 View itemView = LayoutInflater.from(parent.getContext())
@@ -212,17 +209,14 @@ public class DashboardActivity extends AppCompatActivity
         recyclerTopServices.setAdapter(TopServiceAdapter);
         recyclerTopServices.scheduleLayoutAnimation();
         TopServiceAdapter.notifyDataSetChanged();
+
         TopServiceAdapter.startListening();
 
 
       //  loadPopularServices();
-        loadTopServices();
+          loadTopServices();
 
-
-
-
-
-    refreshLayout.setColorSchemeResources(R.color.colorPrimary,
+        refreshLayout.setColorSchemeResources(R.color.colorPrimary,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_dark,
                 android.R.color.holo_blue_dark);
@@ -293,8 +287,6 @@ public class DashboardActivity extends AppCompatActivity
         recyclerTopServices.setLayoutManager(GridlayoutManager);
 
         mslider = (SliderLayout)findViewById(R.id.slider);
-
-
     }
 
     @Override

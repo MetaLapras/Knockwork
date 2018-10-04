@@ -33,7 +33,8 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".Employeer.Activities.SignUpEmailActivity" />
         <activity android:name=".Employeer.Activities.PhonNumberSignIn" />
-        <activity android:name=".Employeer.Activities.MemberListActivity"></activity>
+        <activity android:name=".Employeer.Activities.MemberListActivity" />
+        <activity android:name=".Employeer.Activities.LancerListActivity"></activity>
     </application>
 
 </manifest>
