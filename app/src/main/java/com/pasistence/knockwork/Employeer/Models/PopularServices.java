@@ -1,4 +1,4 @@
-package com.pasistence.knockwork.Models;
+package com.pasistence.knockwork.Employeer.Models;
 
 import java.io.Serializable;
 

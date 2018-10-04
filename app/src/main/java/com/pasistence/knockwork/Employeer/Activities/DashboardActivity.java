@@ -1,14 +1,11 @@
-package com.pasistence.knockwork.Activities;
+package com.pasistence.knockwork.Employeer.Activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,13 +32,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.pasistence.knockwork.Common.Common;
-import com.pasistence.knockwork.Interfaces.ItemClickListener;
-import com.pasistence.knockwork.Models.PopularServices;
-import com.pasistence.knockwork.Models.TopServices;
+import com.pasistence.knockwork.Employeer.Common.Common;
+import com.pasistence.knockwork.Employeer.Interfaces.ItemClickListener;
+import com.pasistence.knockwork.Employeer.Models.PopularServices;
+import com.pasistence.knockwork.Employeer.Models.TopServices;
 import com.pasistence.knockwork.R;
-import com.pasistence.knockwork.ViewHolder.ViewHolderPopularServices;
-import com.pasistence.knockwork.ViewHolder.ViewHolderTopServices;
+import com.pasistence.knockwork.Employeer.ViewHolder.ViewHolderTopServices;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;

@@ -18,22 +18,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.SplashActivity">
+        <activity android:name=".Employeer.Activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.LoginActivity" />
-        <activity android:name=".Activities.SignInActivity" />
+        <activity android:name=".Employeer.Activities.LoginActivity" />
+        <activity android:name=".Employeer.Activities.SignInActivity" />
         <activity
-            android:name=".Activities.DashboardActivity"
+            android:name=".Employeer.Activities.DashboardActivity"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activities.SignUpEmailActivity" />
-        <activity android:name=".Activities.PhonNumberSignIn" />
-        <activity android:name=".Activities.MemberListActivity"></activity>
+        <activity android:name=".Employeer.Activities.SignUpEmailActivity" />
+        <activity android:name=".Employeer.Activities.PhonNumberSignIn" />
+        <activity android:name=".Employeer.Activities.MemberListActivity"></activity>
     </application>
 
 </manifest>
