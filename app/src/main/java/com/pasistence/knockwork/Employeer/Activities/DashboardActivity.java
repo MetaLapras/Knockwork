@@ -33,6 +33,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Employeer.Common.Common;
 import com.pasistence.knockwork.Employeer.Interfaces.ItemClickListener;
 import com.pasistence.knockwork.Employeer.Models.PopularServices;
@@ -54,7 +55,7 @@ public class DashboardActivity extends AppCompatActivity
     public FirebaseDatabase database;
     public DatabaseReference popular_dataReference ;
     public DatabaseReference Top_dataReference ;
-
+    public MaterialSearchBar SearchBar;
 
    // FirebaseRecyclerAdapter<PopularServices,ViewHolderPopularServices> popularAdapter;
     FirebaseRecyclerAdapter<TopServices,ViewHolderTopServices> TopServiceAdapter;
@@ -156,8 +157,6 @@ public class DashboardActivity extends AppCompatActivity
                 });
             }
 
-
-
             @Override
             public ViewHolderPopularServices onCreateViewHolder(ViewGroup parent, int viewType) {
                 View itemView = LayoutInflater.from(parent.getContext())
@@ -213,17 +212,14 @@ public class DashboardActivity extends AppCompatActivity
         recyclerTopServices.setAdapter(TopServiceAdapter);
         recyclerTopServices.scheduleLayoutAnimation();
         TopServiceAdapter.notifyDataSetChanged();
+
         TopServiceAdapter.startListening();
 
 
       //  loadPopularServices();
-        loadTopServices();
+          loadTopServices();
 
-
-
-
-
-    refreshLayout.setColorSchemeResources(R.color.colorPrimary,
+        refreshLayout.setColorSchemeResources(R.color.colorPrimary,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_dark,
                 android.R.color.holo_blue_dark);
@@ -260,6 +256,16 @@ public class DashboardActivity extends AppCompatActivity
 
         //Slider setup
         setupSlider();
+
+
+        SearchBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mContext,LancerListActivity.class));
+                overridePendingTransition(R.anim.fade_in_left,R.anim.fade_in_right);
+            }
+        });
+
     }
 
     private void loadTopServices() {
@@ -279,6 +285,8 @@ public class DashboardActivity extends AppCompatActivity
 
     private void mInit() {
 
+        mContext = DashboardActivity.this;
+
         refreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
 
        // recyclerPopularServices =(RecyclerView)findViewById(R.id.recycler_popular_services);
@@ -295,7 +303,7 @@ public class DashboardActivity extends AppCompatActivity
 
         mslider = (SliderLayout)findViewById(R.id.slider);
 
-
+        SearchBar = (MaterialSearchBar)findViewById(R.id.search_bar);
     }
 
     @Override

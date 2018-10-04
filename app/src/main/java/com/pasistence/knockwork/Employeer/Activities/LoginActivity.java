@@ -5,14 +5,21 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.widget.LoginButton;
+import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.common.Scopes;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.pasistence.knockwork.R;
+
+import java.util.Arrays;
 
 import info.hoang8f.widget.FButton;
 
@@ -21,11 +28,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Context mContext;
     FButton btn_email,btn_gmail,btn_facebook,btn_phone;
     TextView txtSignIn,txtSkip;
-    //LoginButton fbLoginButton, emilLoginButton;
+    LoginButton fbLoginButton, emilLoginButton;
 
     private static final int PRE_LOGIN = 1000;
     public FirebaseAuth firebaseAuth;
-    //private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
 
 
     @Override
@@ -62,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         if(v == btn_phone)
         {
-           /* AuthUI.IdpConfig phoneConfigWithDefaultNumber = new AuthUI.IdpConfig.PhoneBuilder()
+            AuthUI.IdpConfig phoneConfigWithDefaultNumber = new AuthUI.IdpConfig.PhoneBuilder()
                     .setDefaultNumber("+91")
                     .build();
 
@@ -70,16 +77,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
                             .setAvailableProviders(Arrays.asList(phoneConfigWithDefaultNumber))
-                            .build(),PRE_LOGIN);*/
+                            .build(),PRE_LOGIN);
 
         }
         if (v == btn_email)
         {
-          /*  startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
-                    .build(), PRE_LOGIN);*/
+            startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
+                    .build(), PRE_LOGIN);
         }
         if (v==btn_gmail){
-           /* AuthUI.IdpConfig googleIdp = new AuthUI.IdpConfig.GoogleBuilder()
+            AuthUI.IdpConfig googleIdp = new AuthUI.IdpConfig.GoogleBuilder()
                     //.setScopes(Arrays.asList(Scopes.GAMES))
                     .build();
 
@@ -88,10 +95,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
                             .setAvailableProviders(Arrays.asList(googleIdp))
-                            .build(), PRE_LOGIN);*/
+                            .build(), PRE_LOGIN);
         }
         if (v==btn_facebook)
-        {/*
+        {
             Toast.makeText(LoginActivity.this, "Facebook Login...", Toast.LENGTH_SHORT).show();
 
             AuthUI.IdpConfig facebookIdp = new AuthUI.IdpConfig.FacebookBuilder()
@@ -102,7 +109,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
                             .setAvailableProviders(Arrays.asList(facebookIdp))
-                            .build(),PRE_LOGIN);*/
+                            .build(),PRE_LOGIN);
         }
         if(v==txtSignIn){
             startActivity(new Intent(mContext,SignInActivity.class));
@@ -129,6 +136,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //successfully sign in
         if(resultCode == RESULT_OK)
         {
+            try{
             if(!FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber().isEmpty())
             {
                 startActivity(new Intent(LoginActivity.this,PhonNumberSignIn.class).putExtra("phone",FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()));
@@ -156,6 +164,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
             Toast.makeText(this, "Unknown Sign In Error!!!!", Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+                Log.e("error>> ",e.getMessage());
+            }
         }
     }
 
