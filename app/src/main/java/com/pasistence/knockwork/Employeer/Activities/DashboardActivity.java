@@ -1,6 +1,7 @@
 package com.pasistence.knockwork.Employeer.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -342,6 +343,8 @@ public class DashboardActivity extends AppCompatActivity
         } else if (id == R.id.nav_inbox) {
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
+            startActivity(new Intent(DashboardActivity.this,InboxActivity.class));
+
 
         } else if (id == R.id.nav_notification) {
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Notification", Snackbar.LENGTH_LONG)
