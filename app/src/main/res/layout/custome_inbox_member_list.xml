@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/inboxdescription"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:textColor="@color/black"/>
 
             <TextView
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/icandothis"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:textColor="@color/gray"/>
         </LinearLayout>
     </LinearLayout>
