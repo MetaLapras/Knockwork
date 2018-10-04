@@ -42,7 +42,11 @@
     <string name="job_posting_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, send do eiusmod tempor incididunt ut labor et dolore magna aliqua....</string>
     <string name="job_posting_edit"> Edit </string>
     <string name="job_posting_remove"> Remove </string>
+<<<<<<< HEAD
+    <string name="title_activity_inbox">InboxActivity</string>
+=======
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+>>>>>>> 09d796a258ed09adf417e796432c131d2b7846ed
 </resources>
