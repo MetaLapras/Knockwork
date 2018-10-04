@@ -1,6 +1,7 @@
 package com.pasistence.knockwork.Employeer.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -32,6 +33,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Employeer.Common.Common;
 import com.pasistence.knockwork.Employeer.Interfaces.ItemClickListener;
 import com.pasistence.knockwork.Employeer.Models.PopularServices;
@@ -53,6 +55,7 @@ public class DashboardActivity extends AppCompatActivity
     public FirebaseDatabase database;
     public DatabaseReference popular_dataReference ;
     public DatabaseReference Top_dataReference ;
+    public MaterialSearchBar SearchBar;
 
    // FirebaseRecyclerAdapter<PopularServices,ViewHolderPopularServices> popularAdapter;
     FirebaseRecyclerAdapter<TopServices,ViewHolderTopServices> TopServiceAdapter;
@@ -253,6 +256,16 @@ public class DashboardActivity extends AppCompatActivity
 
         //Slider setup
         setupSlider();
+
+
+        SearchBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mContext,LancerListActivity.class));
+                overridePendingTransition(R.anim.fade_in_left,R.anim.fade_in_right);
+            }
+        });
+
     }
 
     private void loadTopServices() {
@@ -272,6 +285,8 @@ public class DashboardActivity extends AppCompatActivity
 
     private void mInit() {
 
+        mContext = DashboardActivity.this;
+
         refreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
 
        // recyclerPopularServices =(RecyclerView)findViewById(R.id.recycler_popular_services);
@@ -287,6 +302,8 @@ public class DashboardActivity extends AppCompatActivity
         recyclerTopServices.setLayoutManager(GridlayoutManager);
 
         mslider = (SliderLayout)findViewById(R.id.slider);
+
+        SearchBar = (MaterialSearchBar)findViewById(R.id.search_bar);
     }
 
     @Override

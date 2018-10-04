@@ -14,8 +14,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ViewHolderFreeLancerList extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public CircleImageView CircularImageViewProfile;
-    TextView txtLancerName,txtLancerState,txtLancerEarned,txtLancerLike,txtLancerDescription;
-    Button btnLancerMessage,btnLancerHire;
+    public TextView txtLancerName,txtLancerState,txtLancerEarned,txtLancerLike,txtLancerDescription;
+    public Button btnLancerMessage,btnLancerHire;
 
     public ViewHolderFreeLancerList(@NonNull View itemView) {
         super(itemView);
