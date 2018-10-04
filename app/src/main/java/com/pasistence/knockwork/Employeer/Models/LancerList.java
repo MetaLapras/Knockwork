@@ -3,9 +3,9 @@ package com.pasistence.knockwork.Employeer.Models;
 import java.io.Serializable;
 
 public class LancerList implements Serializable {
-    String Id,name,description,country,earning,like,image;
+    String Id,name,description,country,earning,like,image,category;
 
-    public LancerList(String id, String name, String description, String country, String earning, String like, String image) {
+    public LancerList(String id, String name, String description, String country, String earning, String like, String image, String category) {
         Id = id;
         this.name = name;
         this.description = description;
@@ -13,6 +13,7 @@ public class LancerList implements Serializable {
         this.earning = earning;
         this.like = like;
         this.image = image;
+        this.category = category;
     }
 
     public LancerList() {
@@ -28,6 +29,7 @@ public class LancerList implements Serializable {
                 ", earning='" + earning + '\'' +
                 ", like='" + like + '\'' +
                 ", image='" + image + '\'' +
+                ", category='" + category + '\'' +
                 '}';
     }
 
@@ -85,5 +87,13 @@ public class LancerList implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
