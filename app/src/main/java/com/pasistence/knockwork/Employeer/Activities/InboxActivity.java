@@ -1,6 +1,7 @@
 package com.pasistence.knockwork.Employeer.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -177,7 +178,7 @@ public class InboxActivity extends AppCompatActivity implements NavigationView.O
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    /*public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -192,6 +193,51 @@ public class InboxActivity extends AppCompatActivity implements NavigationView.O
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }*/
+
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_home) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+            // Handle the camera action
+        } else if (id == R.id.nav_inbox) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+            startActivity(new Intent(mContext,InboxActivity.class));
+
+
+        } else if (id == R.id.nav_notification) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Notification", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+
+        } else if (id == R.id.nav_manage) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+
+        } else if (id == R.id.nav_posting) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Posting", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+
+        } else if (id == R.id.nav_contest) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Contest", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+
+        }else if (id == R.id.nav_settings) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Settings", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+
+        }else if (id == R.id.nav_support) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Support", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
 
         }
 

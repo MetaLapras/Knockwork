@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Employeer.Adapters.LancerListAdapter;
@@ -88,7 +89,6 @@ public class LancerListActivity extends AppCompatActivity {
 
             }
         });
-
         searchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
             @Override
             public void onSearchStateChanged(boolean enabled) {
@@ -101,7 +101,6 @@ public class LancerListActivity extends AppCompatActivity {
             @Override
             public void onSearchConfirmed(CharSequence text) {
                 startSearch(text);
-
             }
 
             @Override
@@ -109,7 +108,6 @@ public class LancerListActivity extends AppCompatActivity {
 
             }
         });
-
 
 
         lancerListAdapter = new LancerListAdapter(LancerListActivity.this, lancerList);
