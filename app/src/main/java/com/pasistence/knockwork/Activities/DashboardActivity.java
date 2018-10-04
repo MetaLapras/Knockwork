@@ -98,7 +98,40 @@ public class DashboardActivity extends AppCompatActivity
         Top_dataReference = database.getReference("top");
 
 
+        refreshLayout.setColorSchemeResources(R.color.colorPrimary,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_dark,
+                android.R.color.holo_blue_dark);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //to Load menu from Firebase
+                if(Common.isConnectedToInterNet(getBaseContext())) {
+                    loadPopularServices();
+                    loadTopServices();
+                }else
+                {
+                    Toast.makeText(getBaseContext(), "Check Your Internet Connection ! ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+        });
+        //Default Load
+        refreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                //to Load menu from Firebase
+                if(Common.isConnectedToInterNet(getBaseContext())) {
+                    loadPopularServices();
+                    loadTopServices();
+                }else
+                {
+                    Toast.makeText(getBaseContext(), "Check Your Internet Connection ! ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
+            }
+        });
 
 
        /* FirebaseRecyclerOptions<PopularServices> options = new FirebaseRecyclerOptions.Builder<PopularServices>()
@@ -259,7 +292,7 @@ public class DashboardActivity extends AppCompatActivity
        // recyclerPopularServices.setLayoutManager(LinearLayoutManager);
 
         recyclerTopServices     =(RecyclerView)findViewById(R.id.recycler_top_services);
-        recyclerTopServices.setHasFixedSize(true);
+        recyclerTopServices.setHasFixedSize(false);
         GridlayoutManager       = new GridLayoutManager(this,2);
         recyclerTopServices.setLayoutManager(GridlayoutManager);
 
@@ -315,12 +348,8 @@ public class DashboardActivity extends AppCompatActivity
                     .setAction("Action", null).show();
 
         } else if (id == R.id.nav_notification) {
-<<<<<<< HEAD
-            startActivity(new Intent(DashboardActivity.this,MemberListActivity.class));
-=======
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Notification", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
->>>>>>> 19dc3f66c493b815e945f2fb3f407ea433d22e72
 
         } else if (id == R.id.nav_manage) {
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage", Snackbar.LENGTH_LONG)
