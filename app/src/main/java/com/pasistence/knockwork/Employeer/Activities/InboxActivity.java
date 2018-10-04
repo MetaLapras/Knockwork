@@ -206,13 +206,16 @@ public class InboxActivity extends AppCompatActivity implements NavigationView.O
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
+
+            startActivity(new Intent(mContext,InboxActivity.class));
+
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
             // Handle the camera action
         } else if (id == R.id.nav_inbox) {
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
-            startActivity(new Intent(mContext,InboxActivity.class));
+          //  startActivity(new Intent(mContext,InboxActivity.class));
 
 
         } else if (id == R.id.nav_notification) {
