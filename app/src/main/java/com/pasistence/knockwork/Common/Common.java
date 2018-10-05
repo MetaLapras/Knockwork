@@ -1,4 +1,4 @@
-package com.pasistence.knockwork.Employeer.Common;
+package com.pasistence.knockwork.Common;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

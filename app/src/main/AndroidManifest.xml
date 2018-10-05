@@ -25,14 +25,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Employeer.Activities.LoginActivity" />
-        <activity android:name=".Employeer.Activities.SignInActivity" />
         <activity
             android:name=".Employeer.Activities.DashboardActivity"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Employeer.Activities.SignUpEmailActivity" />
-        <activity android:name=".Employeer.Activities.PhonNumberSignIn" />
         <activity android:name=".Employeer.Activities.MemberListActivity" />
         <activity
             android:name=".Employeer.Activities.InboxActivity"
@@ -42,6 +38,16 @@
         <activity
             android:name=".Employeer.Activities.SettingActivity"
             android:label="@string/title_activity_setting"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Employeer.Activities.LancerListActivity" />
+        <activity android:name=".Employeer.Activities.ManageJobPostingActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".PhonNumberSignInActivity" />
+        <activity android:name=".SignInActivity" />
+        <activity android:name=".SignUpEmailActivity" />
+        <activity
+            android:name=".Freelancer.Activities.SearchPageFreelancerActivity"
+            android:label="@string/title_activity_search_page_freelancer"
             android:theme="@style/AppTheme"></activity>
     </application>
 

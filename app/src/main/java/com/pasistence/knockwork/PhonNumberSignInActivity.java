@@ -1,12 +1,10 @@
-package com.pasistence.knockwork.Employeer.Activities;
+package com.pasistence.knockwork;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.pasistence.knockwork.R;
-
-public class PhonNumberSignIn extends AppCompatActivity {
+public class PhonNumberSignInActivity extends AppCompatActivity {
 
     TextView txtPhone;
     @Override

@@ -1,11 +1,11 @@
-package com.pasistence.knockwork.Employeer.Models;
+package com.pasistence.knockwork.Model;
 
 import java.io.Serializable;
 
-public class LancerList implements Serializable {
+public class LancerListModel implements Serializable {
     String Id,name,description,country,earning,like,image,category;
 
-    public LancerList(String id, String name, String description, String country, String earning, String like, String image, String category) {
+    public LancerListModel(String id, String name, String description, String country, String earning, String like, String image, String category) {
         Id = id;
         this.name = name;
         this.description = description;
@@ -16,12 +16,12 @@ public class LancerList implements Serializable {
         this.category = category;
     }
 
-    public LancerList() {
+    public LancerListModel() {
     }
 
     @Override
     public String toString() {
-        return "LancerList{" +
+        return "LancerListModel{" +
                 "Id='" + Id + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +

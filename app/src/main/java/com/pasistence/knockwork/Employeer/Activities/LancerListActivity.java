@@ -11,9 +11,8 @@ import android.util.Log;
 import android.view.Gravity;
 
 import com.mancj.materialsearchbar.MaterialSearchBar;
-import com.pasistence.knockwork.Employeer.Adapters.LancerListAdapter;
-import com.pasistence.knockwork.Employeer.Adapters.SearchAdapterLancer;
-import com.pasistence.knockwork.Employeer.Models.LancerList;
+import com.pasistence.knockwork.Adapter.LancerListAdapter;
+import com.pasistence.knockwork.Model.LancerListModel;
 import com.pasistence.knockwork.R;
 
 import java.util.ArrayList;
@@ -26,7 +25,7 @@ public class LancerListActivity extends AppCompatActivity {
     RecyclerView recyclerLancer;
     RecyclerView.LayoutManager layoutManager;
 
-    ArrayList<LancerList> lancerList = new ArrayList<LancerList>();
+    ArrayList<LancerListModel> lancerList = new ArrayList<LancerListModel>();
     LancerListAdapter lancerListAdapter;
     LancerListAdapter searchAdapter;
     List<String> suggestList = new ArrayList<>();
@@ -38,9 +37,9 @@ public class LancerListActivity extends AppCompatActivity {
         mInit();
 
 
-        LancerList lancers = new LancerList("1","Lorem Ipsum","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.","United State"," $ 25","80%","https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg","Web Developer");
-        LancerList lancers2 = new LancerList("2","Cupcake","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.","United State"," $ 55","70%","https://cdn.cultofmac.com/wp-content/uploads/2011/10/97571564a70014ca5658b67f64f2ce23_1253524914.jpeg","Android Developer");
-        LancerList lancers3 = new LancerList("3","Jelly Bean","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ","United State"," $ 55","70%","https://i.cricketcb.com/stats/img/faceImages/8364.jpg","Software Developer");
+        LancerListModel lancers = new LancerListModel("1","Lorem Ipsum","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.","United State"," $ 25","80%","https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg","Web Developer");
+        LancerListModel lancers2 = new LancerListModel("2","Cupcake","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.","United State"," $ 55","70%","https://cdn.cultofmac.com/wp-content/uploads/2011/10/97571564a70014ca5658b67f64f2ce23_1253524914.jpeg","Android Developer");
+        LancerListModel lancers3 = new LancerListModel("3","Jelly Bean","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ","United State"," $ 55","70%","https://i.cricketcb.com/stats/img/faceImages/8364.jpg","Software Developer");
 
         lancerList.add(lancers);
         lancerList.add(lancers2);
@@ -128,8 +127,8 @@ public class LancerListActivity extends AppCompatActivity {
     }
 
    private void startSearch(CharSequence text) {
-       ArrayList<LancerList> searchLancer = new ArrayList<LancerList>();
-        for(LancerList list : lancerList){
+       ArrayList<LancerListModel> searchLancer = new ArrayList<LancerListModel>();
+        for(LancerListModel list : lancerList){
             if(list.getCategory().equals(text.toString())){
 
                 searchLancer.add(list);
@@ -144,7 +143,7 @@ public class LancerListActivity extends AppCompatActivity {
 
     private void loadSuggestList() {
         //get Data into the list
-        /*for(LancerList list : lancerList){
+        /*for(LancerListModel list : lancerList){
             suggestList.add(list.getCategory());
         }*/
         suggestList.add("Software Developer");
