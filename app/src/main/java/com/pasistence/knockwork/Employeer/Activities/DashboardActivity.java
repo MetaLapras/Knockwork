@@ -361,6 +361,7 @@ public class DashboardActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
+            startActivity(new Intent(DashboardActivity.this,ManageJobPostingActivity.class));
 
         } else if (id == R.id.nav_posting) {
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Posting", Snackbar.LENGTH_LONG)

@@ -103,7 +103,7 @@ public class InboxActivity extends AppCompatActivity implements NavigationView.O
     private void mInit() {
         mContext = InboxActivity.this;
 
-        inboxsearchBar     = (MaterialSearchBar) findViewById(R.id.inbox_search_bar);
+       // inboxsearchBar     = (MaterialSearchBar) findViewById(R.id.inbox_search_bar);
         inboxrecyclerview  = (RecyclerView) findViewById(R.id.inbox_recycler_view);
         inboxrecyclerview.setHasFixedSize(false);
         layoutManager      = new LinearLayoutManager(this);
