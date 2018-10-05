@@ -34,14 +34,15 @@
         <activity android:name=".Employeer.Activities.SignUpEmailActivity" />
         <activity android:name=".Employeer.Activities.PhonNumberSignIn" />
         <activity android:name=".Employeer.Activities.MemberListActivity" />
-<<<<<<< HEAD
         <activity
             android:name=".Employeer.Activities.InboxActivity"
             android:label="@string/title_activity_inbox"
             android:theme="@style/AppTheme"></activity>
-=======
+
         <activity android:name=".Employeer.Activities.LancerListActivity"></activity>
->>>>>>> 09d796a258ed09adf417e796432c131d2b7846ed
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="aaca7ddf09351832c880e94bd51a5cc2fa9bf8a1" />
     </application>
 
 </manifest>
