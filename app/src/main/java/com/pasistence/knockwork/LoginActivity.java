@@ -17,6 +17,7 @@ import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.pasistence.knockwork.Employeer.Activities.DashboardActivity;
+import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboard;
 
 import java.util.Arrays;
 
@@ -111,7 +112,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             .build(),PRE_LOGIN);
         }
         if(v==txtSignIn){
-            startActivity(new Intent(mContext,SignInActivity.class));
+            //startActivity(new Intent(mContext,SignInActivity.class));
+            startActivity(new Intent(mContext,FreeLancerDashboard.class));
         }
         if(v==txtSkip){
             startActivity(new Intent(mContext,DashboardActivity.class));

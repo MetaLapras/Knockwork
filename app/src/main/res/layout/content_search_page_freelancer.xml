@@ -8,4 +8,7 @@
     tools:context=".Freelancer.Activities.SearchPageFreelancerActivity"
     tools:showIn="@layout/app_bar_search_page_freelancer">
 
+
+
+
 </RelativeLayout>
