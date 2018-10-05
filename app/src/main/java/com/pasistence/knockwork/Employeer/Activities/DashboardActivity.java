@@ -371,10 +371,16 @@ public class DashboardActivity extends AppCompatActivity
                     .setAction("Action", null).show();
 
         }else if (id == R.id.nav_settings) {
+
+            startActivity(new Intent(mContext,SettingActivity.class));
+
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Settings", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
 
         }else if (id == R.id.nav_support) {
+
+
+
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Support", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
 

@@ -34,14 +34,15 @@
         <activity android:name=".Employeer.Activities.SignUpEmailActivity" />
         <activity android:name=".Employeer.Activities.PhonNumberSignIn" />
         <activity android:name=".Employeer.Activities.MemberListActivity" />
-
         <activity
             android:name=".Employeer.Activities.InboxActivity"
             android:label="@string/title_activity_inbox"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Employeer.Activities.LancerListActivity" />
+        <activity
+            android:name=".Employeer.Activities.SettingActivity"
+            android:label="@string/title_activity_setting"
             android:theme="@style/AppTheme"></activity>
-
-        <activity android:name=".Employeer.Activities.LancerListActivity"></activity>
-
     </application>
 
 </manifest>
