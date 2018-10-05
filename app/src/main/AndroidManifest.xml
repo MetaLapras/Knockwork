@@ -34,15 +34,23 @@
         <activity android:name=".Employeer.Activities.SignUpEmailActivity" />
         <activity android:name=".Employeer.Activities.PhonNumberSignIn" />
         <activity android:name=".Employeer.Activities.MemberListActivity" />
+<<<<<<< HEAD
+=======
+
+>>>>>>> f514381c0918c419079f6ccb1ee782f7de148886
         <activity
             android:name=".Employeer.Activities.InboxActivity"
             android:label="@string/title_activity_inbox"
             android:theme="@style/AppTheme"></activity>
 
         <activity android:name=".Employeer.Activities.LancerListActivity"></activity>
+<<<<<<< HEAD
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="aaca7ddf09351832c880e94bd51a5cc2fa9bf8a1" />
+=======
+
+>>>>>>> f514381c0918c419079f6ccb1ee782f7de148886
     </application>
 
 </manifest>

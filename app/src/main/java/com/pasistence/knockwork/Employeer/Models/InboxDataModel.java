@@ -1,34 +1,69 @@
 package com.pasistence.knockwork.Employeer.Models;
 
-public class InboxDataModel {
-    String name;
-    String version;
-    int id_;
-    int image;
+import java.io.Serializable;
 
-    public InboxDataModel(String name, String version, int id_, int image) {
+public class InboxDataModel implements Serializable {
+    String id,name,description,canDo,image;
+
+    public InboxDataModel(String id, String name, String description, String canDo, String image) {
+        this.id = id;
         this.name = name;
-        this.version = version;
-        this.id_ = id_;
+        this.description = description;
+        this.canDo = canDo;
         this.image = image;
     }
 
-   /* public InboxDataModel(String s, String s1) {
-    }*/
+    public InboxDataModel() {
+    }
+
+    @Override
+    public String toString() {
+        return "InboxDataModel{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", canDo='" + canDo + '\'' +
+                ", image='" + image + '\'' +
+                '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
     }
 
-    public String getVersion() {
-        return version;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getId_() {
-        return id_;
+    public String getDescription() {
+        return description;
     }
 
-    public int getImage() {
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCanDo() {
+        return canDo;
+    }
+
+    public void setCanDo(String canDo) {
+        this.canDo = canDo;
+    }
+
+    public String getImage() {
         return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

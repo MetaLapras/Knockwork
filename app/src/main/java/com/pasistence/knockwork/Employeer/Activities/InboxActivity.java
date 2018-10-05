@@ -1,6 +1,7 @@
 package com.pasistence.knockwork.Employeer.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,171 +21,108 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.pasistence.knockwork.Employeer.Adapter.InboxCustomeAdapter;
-import com.pasistence.knockwork.Employeer.Adapter.InboxMyData;
+import com.mancj.materialsearchbar.MaterialSearchBar;
+import com.pasistence.knockwork.Employeer.Adapters.InboxListAdapter;
+import com.pasistence.knockwork.Employeer.Adapters.LancerListAdapter;
 import com.pasistence.knockwork.Employeer.Models.InboxDataModel;
+import com.pasistence.knockwork.Employeer.Models.LancerList;
 import com.pasistence.knockwork.R;
-
 import java.util.ArrayList;
 
-public class InboxActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
+public class InboxActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     RelativeLayout relativeLayout;
 
-    //for static recycler view
-    private static RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
-    private static RecyclerView recyclerView;
-    private static ArrayList<InboxDataModel> data;
-    public static View.OnClickListener myOnClickListener;
-    private static ArrayList<Integer> removedItems;
+    Context mContext;
+    MaterialSearchBar inboxsearchBar;
+    RecyclerView inboxrecyclerview;
+    RecyclerView.LayoutManager layoutManager;
+
+    ArrayList<InboxDataModel> inboxDataModels = new ArrayList<InboxDataModel>();
+    InboxListAdapter inboxListAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inbox);
 
-        //for inflating the custome inbox
-      /*  relativeLayout = (RelativeLayout) findViewById(R.id.inbox_relative_layout);
-        View child = getLayoutInflater().inflate(R.layout.custome_inbox_member_list, null);
-        relativeLayout.addView(child);*/
 
-        //code for static recycler view
-        //myOnClickListener = new MyOnClickListener(InboxActivity.this);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        recyclerView = (RecyclerView) findViewById(R.id.inbox_recycler_view);
-        recyclerView.setHasFixedSize(true);
-
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        data = new ArrayList<InboxDataModel>();
-        for (int i = 0; i < InboxMyData.nameArray.length; i++) {
-            data.add(new InboxDataModel(
-                    InboxMyData.nameArray[i],
-                    InboxMyData.versionArray[i],
-                    InboxMyData.id_[i],
-                    InboxMyData.drawableArray[i]
-            ));
-        }
-
-        removedItems = new ArrayList<Integer>();
-
-        adapter = new InboxCustomeAdapter(data);
-        recyclerView.setAdapter(adapter);
-
-
-
-
-
-
-   /* private static class MyOnClickListener implements View.OnClickListener {
-
-        private final Context context;
-
-        private MyOnClickListener(Context context) {
-            this.context = context;
-        }
-
-        @Override
-        public void onClick(View v) {
-            removeItem(v);
-        }
-
-        private void removeItem(View v) {
-            int selectedItemPosition = recyclerView.getChildPosition(v);
-            RecyclerView.ViewHolder viewHolder
-                    = recyclerView.findViewHolderForPosition(selectedItemPosition);
-            TextView textViewName
-                    = (TextView) viewHolder.itemView.findViewById(R.id.inbox_member_name);
-            String selectedName = (String) textViewName.getText();
-            int selectedItemId = -1;
-            for (int i = 0; i < InboxMyData.nameArray.length; i++) {
-                if (selectedName.equals(InboxMyData.nameArray[i])) {
-                    selectedItemId = InboxMyData.id_[i];
-                }
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
-            removedItems.add(selectedItemId);
-            data.remove(selectedItemPosition);
-            adapter.notifyItemRemoved(selectedItemPosition);
-        }
+        });
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+
+
+    mInit();
+
+
+        InboxDataModel lancers = new InboxDataModel("1", "Cristina Afeeba", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ", "I Can do ", "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg");
+
+        InboxDataModel lancers2 = new InboxDataModel("2", "Afeeba Cristina", "Technology is making online work similar to local work, with added speed, cost, and quality advantages.", "I Can do", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEDdFKBrWfM9lqmjc_Cvg4n4BebNmgNt7OWQ59W0SjTU0TcfoubA");
+
+        inboxDataModels.add(lancers);
+        inboxDataModels.add(lancers2);
+        inboxDataModels.add(lancers);
+        inboxDataModels.add(lancers2);
+        inboxDataModels.add(lancers);
+        inboxDataModels.add(lancers2);
+        inboxDataModels.add(lancers);
+        inboxDataModels.add(lancers2);
+        inboxDataModels.add(lancers);
+        inboxDataModels.add(lancers2);
+        inboxDataModels.add(lancers);
+        inboxDataModels.add(lancers2);
+
+
+        inboxListAdapter = new InboxListAdapter(InboxActivity.this, inboxDataModels);
+        inboxrecyclerview.setAdapter(inboxListAdapter);
+        inboxListAdapter.notifyDataSetChanged();
+
+
+        loadSuggestList();
+
     }
-}*/
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }*/
+    private void mInit() {
+        mContext = InboxActivity.this;
 
-   /* @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
-        if (item.getItemId() == R.id.add_item) {
-            //check if any items to add
-            if (removedItems.size() != 0) {
-                addRemovedItemToList();
-            } else {
-                Toast.makeText(this, "Nothing to add", Toast.LENGTH_SHORT).show();
-            }
-        }
-        return true;
+        inboxsearchBar     = (MaterialSearchBar) findViewById(R.id.inbox_search_bar);
+        inboxrecyclerview  = (RecyclerView) findViewById(R.id.inbox_recycler_view);
+        inboxrecyclerview.setHasFixedSize(false);
+        layoutManager      = new LinearLayoutManager(this);
+        inboxrecyclerview.setLayoutManager(layoutManager);
     }
 
-    private void addRemovedItemToList() {
-        int addItemAtListPosition = 3;
-        data.add(addItemAtListPosition, new InboxDataModel(
-                MyData.nameArray[removedItems.get(0)],
-                MyData.versionArray[removedItems.get(0)],
-                MyData.id_[removedItems.get(0)],
-                MyData.drawableArray[removedItems.get(0)]
-        ));
-        adapter.notifyItemInserted(addItemAtListPosition);
-        removedItems.remove(0);
+    private void startSearch(String text) {
+        // adapter = new SearchAdapter(WorkerDisplayList.this, this, database.getWorkerName(text));
+        // WorkerListRecyclerView.setAdapter(adapter);
     }
-}*/
+
+    private void loadSuggestList() {
+        // suggestList = database.getNames();
+        // materialSearchBar.setLastSuggestions(suggestList);
+    }
+//}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+   /* Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -205,7 +143,7 @@ public class InboxActivity extends AppCompatActivity  implements NavigationView.
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-
+*/
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -240,7 +178,7 @@ public class InboxActivity extends AppCompatActivity  implements NavigationView.
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    /*public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -255,6 +193,54 @@ public class InboxActivity extends AppCompatActivity  implements NavigationView.
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }*/
+
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_home) {
+
+            startActivity(new Intent(mContext,InboxActivity.class));
+
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+            // Handle the camera action
+        } else if (id == R.id.nav_inbox) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+          //  startActivity(new Intent(mContext,InboxActivity.class));
+
+
+        } else if (id == R.id.nav_notification) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Notification", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+
+        } else if (id == R.id.nav_manage) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+
+        } else if (id == R.id.nav_posting) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Posting", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+
+        } else if (id == R.id.nav_contest) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Contest", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+
+        }else if (id == R.id.nav_settings) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Settings", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+
+        }else if (id == R.id.nav_support) {
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Support", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
 
         }
 
