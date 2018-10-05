@@ -11,6 +11,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
+import com.pasistence.knockwork.LoginActivity;
 import com.pasistence.knockwork.R;
 
 import io.fabric.sdk.android.Fabric;

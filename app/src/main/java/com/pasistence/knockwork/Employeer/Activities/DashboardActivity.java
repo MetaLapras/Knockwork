@@ -26,6 +26,7 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -34,12 +35,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mancj.materialsearchbar.MaterialSearchBar;
-import com.pasistence.knockwork.Employeer.Common.Common;
-import com.pasistence.knockwork.Employeer.Interfaces.ItemClickListener;
-import com.pasistence.knockwork.Employeer.Models.PopularServices;
-import com.pasistence.knockwork.Employeer.Models.TopServices;
+import com.pasistence.knockwork.Common.Common;
+import com.pasistence.knockwork.Interface.ItemClickListener;
+import com.pasistence.knockwork.Model.PopularServicesModel;
+import com.pasistence.knockwork.Model.TopServicesModel;
 import com.pasistence.knockwork.R;
-import com.pasistence.knockwork.Employeer.ViewHolder.ViewHolderTopServices;
+import com.pasistence.knockwork.ViewHolder.ViewHolderTopServices;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -57,8 +58,8 @@ public class DashboardActivity extends AppCompatActivity
     public DatabaseReference Top_dataReference ;
     public MaterialSearchBar SearchBar;
 
-   // FirebaseRecyclerAdapter<PopularServices,ViewHolderPopularServices> popularAdapter;
-    FirebaseRecyclerAdapter<TopServices,ViewHolderTopServices> TopServiceAdapter;
+   // FirebaseRecyclerAdapter<PopularServicesModel,ViewHolderPopularServices> popularAdapter;
+    FirebaseRecyclerAdapter<TopServicesModel,ViewHolderTopServices> TopServiceAdapter;
 
     //Sliders
     HashMap<String,String>image_list;
@@ -132,18 +133,18 @@ public class DashboardActivity extends AppCompatActivity
         });
 
 
-       /* FirebaseRecyclerOptions<PopularServices> options = new FirebaseRecyclerOptions.Builder<PopularServices>()
-                .setQuery(popular_dataReference,PopularServices.class)
+       /* FirebaseRecyclerOptions<PopularServicesModel> options = new FirebaseRecyclerOptions.Builder<PopularServicesModel>()
+                .setQuery(popular_dataReference,PopularServicesModel.class)
                 .build();
 
-        popularAdapter = new FirebaseRecyclerAdapter<PopularServices, ViewHolderPopularServices>(options) {
+        popularAdapter = new FirebaseRecyclerAdapter<PopularServicesModel, ViewHolderPopularServices>(options) {
             @Override
-            protected void onBindViewHolder( ViewHolderPopularServices viewHolder, int position, final PopularServices model) {
+            protected void onBindViewHolder( ViewHolderPopularServices viewHolder, int position, final PopularServicesModel model) {
                 viewHolder.txtPopularservice.setText(model.getName());
                 Picasso.with(getBaseContext()).load(model.getImage())
                         .into(viewHolder.imgPopularservice);
 
-                final PopularServices clickitem = model;
+                final PopularServicesModel clickitem = model;
                 Log.e("popular", model.toString() );
 
                 viewHolder.setItemClickListener(new ItemClickListener() {
@@ -166,13 +167,13 @@ public class DashboardActivity extends AppCompatActivity
         };*/
 
 
-        FirebaseRecyclerOptions<TopServices> topOptions = new FirebaseRecyclerOptions.Builder<TopServices>()
-                .setQuery(Top_dataReference,TopServices.class)
+        FirebaseRecyclerOptions<TopServicesModel> topOptions = new FirebaseRecyclerOptions.Builder<TopServicesModel>()
+                .setQuery(Top_dataReference,TopServicesModel.class)
                 .build();
 
-        TopServiceAdapter = new FirebaseRecyclerAdapter<TopServices, ViewHolderTopServices>(topOptions) {
+        TopServiceAdapter = new FirebaseRecyclerAdapter<TopServicesModel, ViewHolderTopServices>(topOptions) {
             @Override
-            protected void onBindViewHolder(@NonNull ViewHolderTopServices viewHolder, int position, @NonNull TopServices model) {
+            protected void onBindViewHolder(@NonNull ViewHolderTopServices viewHolder, int position, @NonNull TopServicesModel model) {
 
                 viewHolder.txtHead.setText(model.getHead());
                 viewHolder.txtContent.setText(model.getContent());
@@ -184,7 +185,7 @@ public class DashboardActivity extends AppCompatActivity
                         .into(viewHolder.imgLogo);
 
 
-                final TopServices clickitem = model;
+                final TopServicesModel clickitem = model;
 
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
@@ -419,7 +420,7 @@ public class DashboardActivity extends AppCompatActivity
 
                 for(DataSnapshot postsnapshot : dataSnapshot.getChildren())
                 {
-                    PopularServices banner = postsnapshot.getValue(PopularServices.class);
+                    PopularServicesModel banner = postsnapshot.getValue(PopularServicesModel.class);
                     //we will concat String name and Id
                     //PIZZA_01 => and we will use pizza for show description, 01 for food id to click
 

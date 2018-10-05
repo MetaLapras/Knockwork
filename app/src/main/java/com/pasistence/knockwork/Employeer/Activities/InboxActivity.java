@@ -22,10 +22,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mancj.materialsearchbar.MaterialSearchBar;
-import com.pasistence.knockwork.Employeer.Adapters.InboxListAdapter;
-import com.pasistence.knockwork.Employeer.Adapters.LancerListAdapter;
-import com.pasistence.knockwork.Employeer.Models.InboxDataModel;
-import com.pasistence.knockwork.Employeer.Models.LancerList;
+
+import com.pasistence.knockwork.Adapter.InboxListAdapter;
+import com.pasistence.knockwork.Model.InboxDataModel;
 import com.pasistence.knockwork.R;
 import java.util.ArrayList;
 
@@ -91,7 +90,7 @@ public class InboxActivity extends AppCompatActivity implements NavigationView.O
         inboxDataModels.add(lancers2);
 
 
-        inboxListAdapter = new InboxListAdapter(InboxActivity.this, inboxDataModels);
+        inboxListAdapter = new InboxListAdapter(mContext, inboxDataModels);
         inboxrecyclerview.setAdapter(inboxListAdapter);
         inboxListAdapter.notifyDataSetChanged();
 

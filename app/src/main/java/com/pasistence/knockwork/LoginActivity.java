@@ -1,10 +1,10 @@
-package com.pasistence.knockwork.Employeer.Activities;
+package com.pasistence.knockwork;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -14,10 +14,9 @@ import com.facebook.login.widget.LoginButton;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
-import com.google.android.gms.common.Scopes;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.pasistence.knockwork.R;
+import com.pasistence.knockwork.Employeer.Activities.DashboardActivity;
 
 import java.util.Arrays;
 
@@ -139,7 +138,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             try{
             if(!FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber().isEmpty())
             {
-                startActivity(new Intent(LoginActivity.this,PhonNumberSignIn.class).putExtra("phone",FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()));
+                startActivity(new Intent(LoginActivity.this,PhonNumberSignInActivity.class).putExtra("phone",FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()));
                 finish();
                 return;
             }

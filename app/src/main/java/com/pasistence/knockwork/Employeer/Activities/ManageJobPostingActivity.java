@@ -10,10 +10,9 @@ import android.text.TextWatcher;
 import android.util.Log;
 
 import com.mancj.materialsearchbar.MaterialSearchBar;
-import com.pasistence.knockwork.Employeer.Adapters.LancerListAdapter;
-import com.pasistence.knockwork.Employeer.Adapters.ManageJobPostingAdapter;
-import com.pasistence.knockwork.Employeer.Models.LancerList;
-import com.pasistence.knockwork.Employeer.Models.ManageJobPostingModel;
+
+import com.pasistence.knockwork.Adapter.ManageJobPostingAdapter;
+import com.pasistence.knockwork.Model.ManageJobPostingModel;
 import com.pasistence.knockwork.R;
 
 import java.util.ArrayList;
@@ -146,7 +145,7 @@ public class ManageJobPostingActivity extends AppCompatActivity {
 
   /*  private void loadSuggestList() {
         //get Data into the list
-        *//*for(LancerList list : lancerList){
+        *//*for(LancerListModel list : lancerList){
             suggestList.add(list.getCategory());
         }*//*
         suggestList.add("Software Developer");

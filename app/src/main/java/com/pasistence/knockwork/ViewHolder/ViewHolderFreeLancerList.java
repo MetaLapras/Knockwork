@@ -1,4 +1,4 @@
-package com.pasistence.knockwork.Employeer.ViewHolder;
+package com.pasistence.knockwork.ViewHolder;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;

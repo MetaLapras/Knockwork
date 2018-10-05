@@ -1,22 +1,22 @@
-package com.pasistence.knockwork.Employeer.Models;
+package com.pasistence.knockwork.Model;
 
 import java.io.Serializable;
 
-public class PopularServices implements Serializable {
+public class PopularServicesModel implements Serializable {
     public String id,name,image;
 
-    public PopularServices(String id, String name, String image) {
+    public PopularServicesModel(String id, String name, String image) {
         this.id = id;
         this.name = name;
         this.image = image;
     }
 
-    public PopularServices() {
+    public PopularServicesModel() {
     }
 
     @Override
     public String toString() {
-        return "PopularServices{" +
+        return "PopularServicesModel{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", image='" + image + '\'' +

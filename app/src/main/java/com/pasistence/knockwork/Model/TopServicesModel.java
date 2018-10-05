@@ -1,11 +1,11 @@
-package com.pasistence.knockwork.Employeer.Models;
+package com.pasistence.knockwork.Model;
 
 import java.io.Serializable;
 
-public class TopServices implements Serializable {
+public class TopServicesModel implements Serializable {
     public String id,logo,head,content,image;
 
-    public TopServices(String id, String logo, String head, String content, String image) {
+    public TopServicesModel(String id, String logo, String head, String content, String image) {
         this.id = id;
         this.logo = logo;
         this.head = head;
@@ -13,12 +13,12 @@ public class TopServices implements Serializable {
         this.image = image;
     }
 
-    public TopServices() {
+    public TopServicesModel() {
     }
 
     @Override
     public String toString() {
-        return "TopServices{" +
+        return "TopServicesModel{" +
                 "id='" + id + '\'' +
                 ", logo='" + logo + '\'' +
                 ", head='" + head + '\'' +

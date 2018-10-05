@@ -1,4 +1,4 @@
-package com.pasistence.knockwork.Employeer.ViewHolder;
+package com.pasistence.knockwork.ViewHolder;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -8,8 +8,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.pasistence.knockwork.R;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ViewHolderMnageJobPosting
         extends RecyclerView.ViewHolder implements View.OnClickListener {

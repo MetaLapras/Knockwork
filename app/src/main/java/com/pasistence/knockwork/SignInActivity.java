@@ -1,16 +1,15 @@
-package com.pasistence.knockwork.Employeer.Activities;
+package com.pasistence.knockwork;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.pasistence.knockwork.R;
+import com.pasistence.knockwork.Employeer.Activities.DashboardActivity;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.rey.material.widget.CheckBox;
-
 
 import info.hoang8f.widget.FButton;
 

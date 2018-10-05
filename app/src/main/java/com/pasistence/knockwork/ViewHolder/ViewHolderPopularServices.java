@@ -1,11 +1,11 @@
-package com.pasistence.knockwork.Employeer.ViewHolder;
+package com.pasistence.knockwork.ViewHolder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pasistence.knockwork.Employeer.Interfaces.ItemClickListener;
+import com.pasistence.knockwork.Interface.ItemClickListener;
 import com.pasistence.knockwork.R;
 
 public class ViewHolderPopularServices extends RecyclerView.ViewHolder implements View.OnClickListener {
