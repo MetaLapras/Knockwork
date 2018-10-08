@@ -36,6 +36,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Common.Common;
+import com.pasistence.knockwork.Freelancer.Activities.SearchPageFreelancerActivity;
 import com.pasistence.knockwork.Interface.ItemClickListener;
 import com.pasistence.knockwork.Model.PopularServicesModel;
 import com.pasistence.knockwork.Model.TopServicesModel;
@@ -348,6 +349,7 @@ public class DashboardActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
+            startActivity(new Intent(DashboardActivity.this,SearchPageFreelancerActivity.class));
             // Handle the camera action
         } else if (id == R.id.nav_inbox) {
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
