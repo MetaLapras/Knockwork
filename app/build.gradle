@@ -98,6 +98,15 @@ dependencies {
     implementation 'com.github.mancj:MaterialSearchBar:+'
     //implementation 'com.github.mancj:MaterialSearchBar:0.7.6'
 
+    // Retrofit & OkHttp
+    //implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+
+    // JSON Converter
+    //implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.4.0'
+
     // Material Slider
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.daimajia.slider:library:1.1.5@aar'

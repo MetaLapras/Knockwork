@@ -50,12 +50,32 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_search_page_free_lancer">SearchPageFreeLancer</string>
     <string name="title_activity_search_page_freelancer">SearchPageFreelancerActivity</string>
-<<<<<<< HEAD
+
     <string name="apply">Apply </string>
-=======
+
     <string name="title_activity_free_lancer_dashboard">FreeLancerDashboard</string>
     <string name="title_activity_free_lancer_dashboard_bids">Manage Bids</string>
     <string name="title_activity_manage_bids">ManageBidsActivity</string>
->>>>>>> b8ad96ed4e12d207467bfa3d6a0917e552ede8eb
+    <string name="JobName">Professional Designer Needed for T-shirt and other Products, WebProjects</string>
+    <string name="poasted">Poasted 2 days ago</string>
+    <string name="quotesfreelancer">85 Quotes</string>
+    <string name="duration">Duration</string>
+    <string name="durationinmonths"> 1-3 months </string>
+    <string name="budget"> Budget</string>
+    <string name="rangeprice">5k-7k</string>
+    <string name="jobtype">Job Type</string>
+    <string name="projectBased">Project Based </string>
+    <string name="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, send do eiusmod tempor incididunt ut labor et dolore magna aliqua.... </string>
+    <string name="description1">-Morbi enim nunc faucibus a. Duis convallis convallis tellus id. Arcu..</string>
+    <string name="description2">-non sodales neque sodales ut etiam sit. sed viverra ipsum nunc</string>
+    <string name="description3">-aliquet bibendum enim facilisis. Quis enim lobortis scelerisque..</string>
+    <string name="description4">-fermentum. vel pretium lectus wuam id. Arcu cursus vitae congue..</string>
+    <string name="requird_skills">Requird Skills</string>
+    <string name="Photoshop">Photoshop </string>
+    <string name="illustrator">illustrator</string>
+    <string name="Editor">Editor</string>
+    <string name="Designer">Designer</string>
+    <string name="title_activity_search_freelancer">SearchFreelancerActivity</string>
+
 
 </resources>
