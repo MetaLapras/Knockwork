@@ -22,6 +22,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Sample Employeer</string>
+    <string name="nav_header_title_lancer">Sample Lancer</string>
     <string name="nav_header_subtitle">Pasistence pvt ltd</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
@@ -42,12 +43,19 @@
     <string name="job_posting_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, send do eiusmod tempor incididunt ut labor et dolore magna aliqua....</string>
     <string name="job_posting_edit"> Edit </string>
     <string name="job_posting_remove"> Remove </string>
+
     <string name="title_activity_inbox">InboxActivity</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_search_page_free_lancer">SearchPageFreeLancer</string>
     <string name="title_activity_search_page_freelancer">SearchPageFreelancerActivity</string>
+<<<<<<< HEAD
     <string name="apply">Apply </string>
+=======
+    <string name="title_activity_free_lancer_dashboard">FreeLancerDashboard</string>
+    <string name="title_activity_free_lancer_dashboard_bids">Manage Bids</string>
+    <string name="title_activity_manage_bids">ManageBidsActivity</string>
+>>>>>>> b8ad96ed4e12d207467bfa3d6a0917e552ede8eb
 
 </resources>
