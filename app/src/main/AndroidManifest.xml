@@ -4,14 +4,17 @@
     package="com.pasistence.knockwork">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <!-- for facebook application id -->
+        <!-- for facebook application id -->
     <meta-data
         android:name="com.facebook.sdk.ApplicationId"
         android:value="@string/facebook_application_id"
         tools:replace="android:value" />
 
     <application
+        android:name=".ChatBox.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -54,7 +57,8 @@
         <activity
             android:name=".Freelancer.Activities.ManageBidsActivity"
             android:label="@string/title_activity_manage_bids"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ChatBox.ChatActivity"></activity>
     </application>
 
 </manifest>
