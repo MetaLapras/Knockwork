@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 
 import com.pasistence.knockwork.Freelancer.Activities.JobDescriptionActivity;
 import com.pasistence.knockwork.Model.JobDescriptionModel;
+import com.pasistence.knockwork.Model.JobList;
 import com.pasistence.knockwork.Model.SearchPageFreelancerModel;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.ViewHolder.ViewHolderJobDescription;
 import com.pasistence.knockwork.ViewHolder.ViewHolderSearchPageFreelancer;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchPageFreelancerAdapter  extends RecyclerView.Adapter<ViewHolderSearchPageFreelancer> {
@@ -24,9 +26,12 @@ public class SearchPageFreelancerAdapter  extends RecyclerView.Adapter<ViewHolde
     List<SearchPageFreelancerModel> searchPageFreelancerModels ;
 
 
-    public SearchPageFreelancerAdapter(Context mContext, List<SearchPageFreelancerModel> workerList) {
+    public SearchPageFreelancerAdapter(Context mContext, ArrayList<SearchPageFreelancerModel> workerList) {
         this.mContext = mContext;
         this.searchPageFreelancerModels = workerList;
+    }
+
+    public SearchPageFreelancerAdapter(List<JobList> searchPageFreelancerModels) {
     }
 
     @NonNull
@@ -43,7 +48,16 @@ public class SearchPageFreelancerAdapter  extends RecyclerView.Adapter<ViewHolde
 
         final SearchPageFreelancerModel lancers = searchPageFreelancerModels.get(position);
 
-        Picasso.with(mContext).load(lancers.getImage())
+        holder.txtjobName.setText(lancers.getJd_title());
+        holder.txtfixedPrice.setText(lancers.getJd_price_type());
+        holder.txtpriceRange.setText(lancers.getJd_price());
+        //holder.txtpoastedDays.setText(lancers.getPoasteddays());
+        holder.txtjobQuotes.setText(lancers.getJd_quotes());
+        holder.txtjobDescription.setText(lancers.getJd_description());
+        holder.txtnamefreelancer.setText(lancers.getJd_client());
+       // holder.txtfreelancerstate.setText(lancers.getState());
+
+      /*  Picasso.with(mContext).load(lancers.getImage())
                 .into(holder.img);
 
 
@@ -57,7 +71,7 @@ public class SearchPageFreelancerAdapter  extends RecyclerView.Adapter<ViewHolde
         holder.txtfreelancerstate.setText(lancers.getState());
         holder.txtprojectrange.setText(lancers.getProjectrange());
         holder.txtfeedback.setText(lancers.getFeedback());
-
+*/
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

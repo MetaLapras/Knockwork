@@ -26,12 +26,15 @@ import com.pasistence.knockwork.Adapter.SearchPageFreelancerAdapter;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Employeer.Activities.InboxActivity;
 import com.pasistence.knockwork.Model.InboxDataModel;
+import com.pasistence.knockwork.Model.JobList;
 import com.pasistence.knockwork.Model.SearchPageFreelancerModel;
+import com.pasistence.knockwork.Model.SearchPageListModel;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.Remote.MyApi;
 import com.pasistence.knockwork.Remote.RetrofitClient;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -82,28 +85,48 @@ public class SearchFreelancerActivity extends AppCompatActivity
        // mContext = SearchFreelancerActivity.this;
         /** Create handle for the RetrofitInstance interface*/
         mMyServices = RetrofitClient.getClient("").create(MyApi.class);
+        /** Call the method with parameter in the interface to get the notice data*/
+        Call<List<SearchPageListModel>> call = mMyServices.getIP();
 
-       // mMyServices = RetrofitClient.getClient().create(MyApi.class);
+
 
         /** Call the method with parameter in the interface to get the notice data*/
-        Call<SearchPageFreelancerModel> call = mMyServices.getIP();
+      //  Call<SearchPageFreelancerModel> call = mMyServices.getIP();
 
-        call.enqueue(new Callback<SearchPageFreelancerModel>() {
+        //Call<List<SearchPageListModel>> listcall = RetrofitClient.getClient("").getIP();
+        call.enqueue(new Callback<List<SearchPageListModel>>() {
             @Override
-            public void onResponse(Call<SearchPageFreelancerModel> call, Response<SearchPageFreelancerModel> response) {
-                Toast.makeText(SearchFreelancerActivity.this, "URl get Connected", Toast.LENGTH_SHORT).show();
-                SearchPageFreelancerModel result = response.body();
+            public void onResponse(Call<List<SearchPageListModel>> call, Response<List<SearchPageListModel>> response) {
+                SearchPageListModel result= (SearchPageListModel) response.body();
+                generateSearchList(((SearchPageListModel) response.body()).getJob_list());
+                Toast.makeText(SearchFreelancerActivity.this, "Done ", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
-            public void onFailure(Call<SearchPageFreelancerModel> call, Throwable t) {
-               // Toast.makeText(SearchFreelancerActivity.this, "Something went wrong...Error message: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<List<SearchPageListModel>> call, Throwable t) {
+                Toast.makeText(SearchFreelancerActivity.this, "Faield", Toast.LENGTH_SHORT).show();
+
             }
         });
+
+        /*call.enqueue(new Callback<SearchPageListModel>() {
+            @Override
+            public void onResponse(Call<SearchPageListModel> call, Response<SearchPageListModel> response) {
+                Toast.makeText(SearchFreelancerActivity.this, "URl get Connected", Toast.LENGTH_SHORT).show();
+                //SearchPageListModel result = response.body();
+                generateSearchList((ArrayList<SearchPageFreelancerModel>) response.body().getCustomer());
+            }
+
+            @Override
+            public void onFailure(Call<SearchPageListModel> call, Throwable t) {
+                Toast.makeText(SearchFreelancerActivity.this, "Something went wrong...Error message: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });*/
   // }
 
 
-        SearchPageFreelancerModel lancers = new SearchPageFreelancerModel("Professional Designer", "Fixed Price","5k-7k","Poasted 2 days ago","85 Quotes", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ", "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg","Jaime Lindsey","United State","25k Spent","80%");
+        /*SearchPageFreelancerModel lancers = new SearchPageFreelancerModel("Professional Designer", "Fixed Price","5k-7k","Poasted 2 days ago","85 Quotes", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ", "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg","Jaime Lindsey","United State","25k Spent","80%");
 
         SearchPageFreelancerModel lancers2 = new SearchPageFreelancerModel("Professional Designer", "Fixed Price", "5k-7k","Poasted 2 days ago","85 Quotes","Technology is making online work similar to local work, with added speed, cost, and quality advantages.", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEDdFKBrWfM9lqmjc_Cvg4n4BebNmgNt7OWQ59W0SjTU0TcfoubA","carname thondia","Australia","45k Spent","70%");
 
@@ -119,7 +142,7 @@ public class SearchFreelancerActivity extends AppCompatActivity
         searchPageFreelancerModels.add(lancers2);
         searchPageFreelancerModels.add(lancers);
         searchPageFreelancerModels.add(lancers2);
-
+*/
 
         searchPageFreelancerAdapter = new SearchPageFreelancerAdapter(mContext, searchPageFreelancerModels);
         searchFreelancerrecyclerview.setAdapter(searchPageFreelancerAdapter);
@@ -128,6 +151,14 @@ public class SearchFreelancerActivity extends AppCompatActivity
 
         loadSuggestList();
 
+    }
+
+    private void generateSearchList(List<JobList> jobLists) {
+        searchFreelancerrecyclerview = findViewById(R.id.search_recycler_view);
+        searchPageFreelancerAdapter = new SearchPageFreelancerAdapter(jobLists);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(SearchFreelancerActivity.this);
+        searchFreelancerrecyclerview.setLayoutManager(layoutManager);
+        searchFreelancerrecyclerview.setAdapter(searchPageFreelancerAdapter);
     }
 
     private void mInit() {

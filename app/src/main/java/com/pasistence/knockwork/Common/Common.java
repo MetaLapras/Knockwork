@@ -14,7 +14,7 @@ public class Common {
    // private static final String BASE_URL = "http://192.168.0.151/mantra/public/index.php/api/";
     //private static final String BASE_URL = "http://ip.jsontest.com/";
 
-    public static final String BASE_URL = "http://192.168.0.103/knockwork/public/index.php/api/jobdescriptions/freelancer/page/3/";
+    public static final String BASE_URL = "http://192.168.0.102/knockwork/public/index.php/api/jobdescriptions/lancer/page/2/";
 
     public static MyApi getApi(){
         return RetrofitClient.getClient(BASE_URL).create(MyApi.class);

@@ -27,7 +27,7 @@ public class RetrofitClient {
             retrofit = new Retrofit.Builder()
                     .baseUrl(baseURL)
                     .addConverterFactory(GsonConverterFactory.create())
-                    .addConverterFactory(ScalarsConverterFactory.create())
+                   // .addConverterFactory(ScalarsConverterFactory.create())
                     .build();
 
         }
@@ -39,13 +39,13 @@ public class RetrofitClient {
             .connectTimeout(120, TimeUnit.SECONDS)
             .build();*/
 
-    private static OkHttpClient okClient() {
+   /* private static OkHttpClient okClient() {
         return new OkHttpClient.Builder()
                 .connectTimeout(120, TimeUnit.SECONDS)
                 .writeTimeout(120, TimeUnit.SECONDS)
                 .readTimeout(120, TimeUnit.SECONDS)
                 .build();
-    }
+    }*/
 
 
 
