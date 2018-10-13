@@ -77,8 +77,8 @@ public class DashboardActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         mInit();
-        isLancer=getIntent().getBooleanExtra("isLancer",false);
-        isClient=getIntent().getBooleanExtra("isClient",false);
+      //  isLancer=getIntent().getBooleanExtra("isLancer",false);
+        //isClient=getIntent().getBooleanExtra("isClient",false);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -154,8 +154,10 @@ public class DashboardActivity extends AppCompatActivity
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Snackbar.make(view, ""+clickitem.getHead(), Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
+//                        Snackbar.make(view, ""+clickitem.getHead(), Snackbar.LENGTH_LONG)
+//                                .setAction("Action", null).show();
+
+                    startActivity(new Intent(mContext,LancersActivity.class));
                     }
                 });
             }
@@ -221,7 +223,7 @@ public class DashboardActivity extends AppCompatActivity
         SearchBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mContext,LancerListActivity.class));
+                startActivity(new Intent(mContext,LancersActivity.class));
                 overridePendingTransition(R.anim.fade_in_left,R.anim.fade_in_right);
             }
         });
@@ -289,41 +291,42 @@ public class DashboardActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
+//       //     startActivity(new Intent(mContext,DashboardActivity.class));
 
         } else if (id == R.id.nav_inbox) {
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
             startActivity(new Intent(mContext,InboxActivity.class));
 
 
         } else if (id == R.id.nav_notification) {
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Notification", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Notification", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
 
         } else if (id == R.id.nav_manage) {
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-            startActivity(new Intent(mContext,ManageJobPostingActivity.class));
+ //           Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage", Snackbar.LENGTH_LONG)
+   //                 .setAction("Action", null).show();
+            startActivity(new Intent(mContext,ManageJobPostActivity.class));
 
         } else if (id == R.id.nav_posting) {
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Posting", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Posting", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
 
         } else if (id == R.id.nav_contest) {
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Contest", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Contest", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
 
         }else if (id == R.id.nav_settings) {
 
             startActivity(new Intent(mContext,SettingActivity.class));
-               Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Settings", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+  //             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Settings", Snackbar.LENGTH_LONG)
+    //                .setAction("Action", null).show();
 
         }else if (id == R.id.nav_support) {
-                Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Support", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+//                Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Support", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
 
         }
 

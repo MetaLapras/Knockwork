@@ -179,45 +179,43 @@ public class InboxActivity extends AppCompatActivity implements NavigationView.O
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-
+//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
             startActivity(new Intent(mContext,DashboardActivity.class));
 
         } else if (id == R.id.nav_inbox) {
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
+         //   startActivity(new Intent(mContext,InboxActivity.class));
 
 
         } else if (id == R.id.nav_notification) {
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Notification", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Notification", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
 
         } else if (id == R.id.nav_manage) {
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-            startActivity(new Intent(mContext,ManageJobPostingActivity.class));
-
+//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
+            startActivity(new Intent(mContext,ManageJobPostActivity.class));
 
         } else if (id == R.id.nav_posting) {
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Posting", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-
+//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Posting", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
 
         } else if (id == R.id.nav_contest) {
-
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Contest", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Contest", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
 
         }else if (id == R.id.nav_settings) {
+//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Settings", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
 
             startActivity(new Intent(mContext,SettingActivity.class));
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Settings", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
 
         }else if (id == R.id.nav_support) {
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Support", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Support", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

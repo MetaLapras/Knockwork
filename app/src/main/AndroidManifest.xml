@@ -69,6 +69,14 @@
         <activity
             android:name=".Freelancer.Activities.FreelancerInboxActivity"
             android:label="@string/title_activity_freelancer_inbox"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Client.Activities.LancersActivity"
+            android:label="@string/title_activity_lancers"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Client.Activities.ManageJobPostActivity"
+            android:label="@string/title_activity_manage_job_post"
             android:theme="@style/AppTheme"></activity>
     </application>
 

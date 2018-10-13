@@ -1,12 +1,12 @@
 package com.pasistence.knockwork.Client.Activities;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,25 +16,70 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.TextView;
 
+import com.mancj.materialsearchbar.MaterialSearchBar;
+import com.pasistence.knockwork.Adapter.ManageJobPostingAdapter;
+import com.pasistence.knockwork.Model.ManageJobPostingModel;
 import com.pasistence.knockwork.R;
 
-public class SettingActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener{
+import java.util.ArrayList;
+import java.util.List;
 
+public class ManageJobPostActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     Context mContext;
-    TextView txtAboutus,txtVersion,txtTermsServices;
+    MaterialSearchBar searchBar;
+    RecyclerView recyclerLancer;
+    RecyclerView.LayoutManager layoutManager;
+    private static final String TAG = "search";
+
+    ArrayList<ManageJobPostingModel> manageJobPostingModels = new ArrayList<ManageJobPostingModel>();
+    ManageJobPostingAdapter manageJobPostingAdapter;
+    ManageJobPostingAdapter searchAdapter;
+    List<String> suggestList = new ArrayList<>();
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
+        setContentView(R.layout.activity_manage_job_post);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /*--------------------------------------------------------------*/
+
+
+        mInit();
+
+
+        ManageJobPostingModel jobModel1 = new ManageJobPostingModel("1","Web Development","Fixed Price","$5k - $7k","Posted 2 days ago","85 Quots","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
+        ManageJobPostingModel jobMoel2 = new ManageJobPostingModel("2","Professional Designer needed for Tshirt and other Products, WebProjects.","Fixed Price","$5k - $7k","Posted 2 days ago","85 Quots","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
+        ManageJobPostingModel jobModel3 = new ManageJobPostingModel("3","App Developer for creating a custome water sports application","Fixed Price","$5k - $7k","Posted 2 days ago","85 Quots","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
+
+        manageJobPostingModels.add(jobModel1);
+        manageJobPostingModels.add(jobMoel2);
+        manageJobPostingModels.add(jobModel3);
+        manageJobPostingModels.add(jobModel1);
+        manageJobPostingModels.add(jobMoel2);
+        manageJobPostingModels.add(jobModel3);
+        manageJobPostingModels.add(jobModel1);
+        manageJobPostingModels.add(jobMoel2);
+        manageJobPostingModels.add(jobModel3);
+        manageJobPostingModels.add(jobModel1);
+        manageJobPostingModels.add(jobMoel2);
+        manageJobPostingModels.add(jobModel3);
+        manageJobPostingModels.add(jobModel1);
+        manageJobPostingModels.add(jobMoel2);
+        manageJobPostingModels.add(jobModel3);
+
+
+        manageJobPostingAdapter = new ManageJobPostingAdapter(mContext, manageJobPostingModels);
+        recyclerLancer.setAdapter(manageJobPostingAdapter);
+        manageJobPostingAdapter.notifyDataSetChanged();
+
+        /*--------------------------------------------------------------*/
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,24 +97,7 @@ public class SettingActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        mInit();
-        mOnclick();
     }
-
-    private void mOnclick() {
-        txtAboutus.setOnClickListener(this);
-        txtTermsServices.setOnClickListener(this);
-        txtVersion.setOnClickListener(this);
-    }
-
-    private void mInit() {
-        mContext = SettingActivity.this;
-        txtAboutus = (TextView)findViewById(R.id.txt_aboutUs);
-        txtTermsServices = (TextView)findViewById(R.id.txt_terms_services);
-        txtVersion = (TextView)findViewById(R.id.txt_version);
-    }
-
-
 
     @Override
     public void onBackPressed() {
@@ -84,7 +112,7 @@ public class SettingActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.setting, menu);
+        getMenuInflater().inflate(R.menu.manage_job_post, menu);
         return true;
     }
 
@@ -109,10 +137,11 @@ public class SettingActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
         if (id == R.id.nav_home) {
-           // Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
-            //        .setAction("Action", null).show();
-                 startActivity(new Intent(mContext,DashboardActivity.class));
+            //Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
+              //      .setAction("Action", null).show();
+              startActivity(new Intent(mContext,DashboardActivity.class));
 
         } else if (id == R.id.nav_inbox) {
 //            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
@@ -125,9 +154,9 @@ public class SettingActivity extends AppCompatActivity
 //                    .setAction("Action", null).show();
 
         } else if (id == R.id.nav_manage) {
-            //           Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage", Snackbar.LENGTH_LONG)
-            //                 .setAction("Action", null).show();
-            startActivity(new Intent(mContext,ManageJobPostActivity.class));
+//                       Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage", Snackbar.LENGTH_LONG)
+//                             .setAction("Action", null).show();
+//            //startActivity(new Intent(mContext,ManageJobPostActivity.class));
 
         } else if (id == R.id.nav_posting) {
 //            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Posting", Snackbar.LENGTH_LONG)
@@ -139,7 +168,7 @@ public class SettingActivity extends AppCompatActivity
 
         }else if (id == R.id.nav_settings) {
 
-            //startActivity(new Intent(mContext,SettingActivity.class));
+ //           startActivity(new Intent(mContext,SettingActivity.class));
 //                         Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Settings", Snackbar.LENGTH_LONG)
 //                            .setAction("Action", null).show();
 
@@ -155,45 +184,13 @@ public class SettingActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v==txtAboutus){
-            showDialogue("http://www.pasistence.com/about.html");
-        }
-        if(v==txtTermsServices){
 
-            showDialogue("https://termsfeed.com/terms-conditions/25c27dad185714e543c322fa2e14381b");
-        }
-        if(v==txtVersion){
-
-        }
+    private void mInit() {
+        mContext = ManageJobPostActivity.this;
+        recyclerLancer = (RecyclerView)findViewById(R.id.jobposting_recycler_view);
+        recyclerLancer.setHasFixedSize(false);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerLancer.setLayoutManager(layoutManager);
     }
-
-    private void showDialogue(String Url) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-       // alert.setTitle("Title here");
-
-
-        WebView wv = new WebView(this);
-        wv.loadUrl(Url);
-        wv.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-
-                return true;
-            }
-        });
-
-        alert.setView(wv);
-        alert.setNegativeButton("Close", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.dismiss();
-            }
-        });
-        alert.show();
-    }
-
 
 }
