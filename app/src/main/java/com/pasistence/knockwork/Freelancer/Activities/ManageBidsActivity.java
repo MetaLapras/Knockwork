@@ -94,7 +94,7 @@ public class ManageBidsActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
 
-             startActivity(new Intent(mContext,FreeLancerDashboard.class));
+             startActivity(new Intent(mContext,FreeLancerDashboardActivity.class));
             // Handle the camera action
         } else if (id == R.id.nav_inbox) {
 

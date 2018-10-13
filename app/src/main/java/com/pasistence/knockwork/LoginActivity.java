@@ -19,7 +19,7 @@ import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.pasistence.knockwork.Employeer.Activities.DashboardActivity;
-import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboard;
+import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboardActivity;
 
 import java.util.Arrays;
 
@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         if (v == txtSignIn) {
-            startActivity(new Intent(mContext, FreeLancerDashboard.class));
+            startActivity(new Intent(mContext, FreeLancerDashboardActivity.class));
         }
 
         if (v == txtSkip) {
@@ -185,7 +185,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             try{
             if(!FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber().isEmpty())
             {
-                startActivity(new Intent(LoginActivity.this,FreeLancerDashboard.class).putExtra("phone",FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()));
+                startActivity(new Intent(LoginActivity.this,FreeLancerDashboardActivity.class).putExtra("phone",FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()));
                 finish();
                 return;
             }
