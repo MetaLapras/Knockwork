@@ -1,16 +1,16 @@
 package com.pasistence.knockwork.Model;
 
 public class JobList {
-    public String jd_id;
-    public String jd_title;
-    public String jd_price_type;
-    public String jd_price;
-    public String jd_description;
-    public String jd_updated_at = " ";
-    public String jd_quotes;
-    public String jd_client;
+    public String jd_id ;
+    public String jd_title ;
+    public String jd_price_type ;
+    public String jd_price ;
+    public String jd_description ;
+    public String jd_updated_at ;
+    public String jd_quotes ;
+    public JdClient jd_client;
 
-    public JobList(String jd_id, String jd_title, String jd_price_type, String jd_price, String jd_description, String jd_updated_at, String jd_quotes, String jd_client) {
+    public JobList(String jd_id, String jd_title, String jd_price_type, String jd_price, String jd_description, String jd_updated_at, String jd_quotes, JdClient jd_client) {
         this.jd_id = jd_id;
         this.jd_title = jd_title;
         this.jd_price_type = jd_price_type;
@@ -34,7 +34,7 @@ public class JobList {
                 ", jd_description='" + jd_description + '\'' +
                 ", jd_updated_at='" + jd_updated_at + '\'' +
                 ", jd_quotes='" + jd_quotes + '\'' +
-                ", jd_client='" + jd_client + '\'' +
+                ", jd_client=" + jd_client +
                 '}';
     }
 
@@ -94,11 +94,11 @@ public class JobList {
         this.jd_quotes = jd_quotes;
     }
 
-    public String getJd_client() {
+    public JdClient getJd_client() {
         return jd_client;
     }
 
-    public void setJd_client(String jd_client) {
+    public void setJd_client(JdClient jd_client) {
         this.jd_client = jd_client;
     }
 }

@@ -19,6 +19,9 @@ import com.pasistence.knockwork.R;
 public class SearchPageFreelancerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public SearchPageFreelancerActivity(String web_designing, String fixed_price, String s, String s1, String s2, String s3, String s4, String jimey_lindsy, String united_state, String s5, String s6) {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-        <!-- for facebook application id -->
+    <!-- for facebook application id -->
     <meta-data
         android:name="com.facebook.sdk.ApplicationId"
         android:value="@string/facebook_application_id"
@@ -58,12 +58,23 @@
             android:name=".Freelancer.Activities.ManageBidsActivity"
             android:label="@string/title_activity_manage_bids"
             android:theme="@style/AppTheme" />
+<<<<<<< HEAD
         <activity android:name=".ChatBox.ChatActivity"></activity>
+=======
+        <activity android:name=".ChatBox.ChatActivity" />
+>>>>>>> 04291b5fb6020a071abb564d573d79eb6122562d
         <activity android:name=".Freelancer.Activities.JobDescriptionActivity" />
         <activity
             android:name=".Freelancer.Activities.SearchFreelancerActivity"
             android:label="@string/title_activity_search_freelancer"
+<<<<<<< HEAD
             android:theme="@style/AppTheme"></activity>
+=======
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Freelancer.Activities.SettingFreelancerActivity" />
+        <activity android:name=".Freelancer.Activities.InboxFreelancerActivity" />
+        <activity android:name=".Freelancer.Activities.JobPoastingActivity"></activity>
+>>>>>>> 04291b5fb6020a071abb564d573d79eb6122562d
     </application>
 
 </manifest>
