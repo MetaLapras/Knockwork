@@ -36,11 +36,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Common.Common;
-<<<<<<< HEAD:app/src/main/java/com/pasistence/knockwork/Freelancer/Activities/FreeLancerDashboard.java
+
 import com.pasistence.knockwork.Client.Activities.LancerListActivity;
-=======
-import com.pasistence.knockwork.Employeer.Activities.LancerListActivity;
->>>>>>> 9d68d8ee7f680ac1b17510a59ab1de6748e07864:app/src/main/java/com/pasistence/knockwork/Freelancer/Activities/FreeLancerDashboardActivity.java
 import com.pasistence.knockwork.Interface.ItemClickListener;
 import com.pasistence.knockwork.Model.PopularServicesModel;
 import com.pasistence.knockwork.Model.TopServicesModel;
