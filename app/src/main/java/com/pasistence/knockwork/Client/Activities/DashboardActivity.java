@@ -113,11 +113,10 @@ public class DashboardActivity extends AppCompatActivity
                 }
             }
         });
-        //Default Load
+
         refreshLayout.post(new Runnable() {
             @Override
             public void run() {
-                //to Load menu from Firebase
                 if(Common.isConnectedToInterNet(getBaseContext())) {
                     loadPopularServices();
                     loadTopServices();
@@ -130,39 +129,6 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
 
-
-       /* FirebaseRecyclerOptions<PopularServicesModel> options = new FirebaseRecyclerOptions.Builder<PopularServicesModel>()
-                .setQuery(popular_dataReference,PopularServicesModel.class)
-                .build();
-
-        popularAdapter = new FirebaseRecyclerAdapter<PopularServicesModel, ViewHolderPopularServices>(options) {
-            @Override
-            protected void onBindViewHolder( ViewHolderPopularServices viewHolder, int position, final PopularServicesModel model) {
-                viewHolder.txtPopularservice.setText(model.getName());
-                Picasso.with(getBaseContext()).load(model.getImage())
-                        .into(viewHolder.imgPopularservice);
-
-                final PopularServicesModel clickitem = model;
-                Log.e("popular", model.toString() );
-
-                viewHolder.setItemClickListener(new ItemClickListener() {
-                    @Override
-                    public void onClick(View view, int position, boolean isLongClick) {
-                        //Toast.makeText(DashboardActivity.this, "", Toast.LENGTH_SHORT).show();
-                        Snackbar.make(view, ""+clickitem.name, Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                        Log.e("popular", model.toString());
-                    }
-                });
-            }
-
-            @Override
-            public ViewHolderPopularServices onCreateViewHolder(ViewGroup parent, int viewType) {
-                View itemView = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.custome_template_popularservices,parent,false);
-                return new ViewHolderPopularServices(itemView);
-            }
-        };*/
 
 
         FirebaseRecyclerOptions<TopServicesModel> topOptions = new FirebaseRecyclerOptions.Builder<TopServicesModel>()
@@ -188,10 +154,6 @@ public class DashboardActivity extends AppCompatActivity
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                       /* Intent intent = new Intent(Home.this, FoodMenu.class);
-                        intent.putExtra("CategoryId",adapter.getRef(position).getKey());
-                        startActivity(intent);*/
-                       // Toast.makeText(mContext,""+clickitem.getHead(),Toast.LENGTH_LONG).show();
                         Snackbar.make(view, ""+clickitem.getHead(), Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                     }
@@ -215,7 +177,6 @@ public class DashboardActivity extends AppCompatActivity
         TopServiceAdapter.startListening();
 
 
-      //  loadPopularServices();
           loadTopServices();
 
         refreshLayout.setColorSchemeResources(R.color.colorPrimary,
@@ -330,11 +291,11 @@ public class DashboardActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
-            startActivity(new Intent(DashboardActivity.this,SearchFreelancerActivity.class));
+
         } else if (id == R.id.nav_inbox) {
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
-            startActivity(new Intent(DashboardActivity.this,InboxActivity.class));
+            startActivity(new Intent(mContext,InboxActivity.class));
 
 
         } else if (id == R.id.nav_notification) {
@@ -344,7 +305,7 @@ public class DashboardActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
-            startActivity(new Intent(DashboardActivity.this,ManageJobPostingActivity.class));
+            startActivity(new Intent(mContext,ManageJobPostingActivity.class));
 
         } else if (id == R.id.nav_posting) {
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Posting", Snackbar.LENGTH_LONG)
