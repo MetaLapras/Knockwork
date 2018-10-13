@@ -79,6 +79,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             .setAvailableProviders(Arrays.asList(phoneConfigWithDefaultNumber))
                             .build(),PRE_LOGIN);
 
+
         }
         if (v == btn_email)
         {
@@ -96,6 +97,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             .createSignInIntentBuilder()
                             .setAvailableProviders(Arrays.asList(googleIdp))
                             .build(), PRE_LOGIN);
+
+
         }
         if (v==btn_facebook)
         {
@@ -110,6 +113,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             .createSignInIntentBuilder()
                             .setAvailableProviders(Arrays.asList(facebookIdp))
                             .build(),PRE_LOGIN);
+
+
         }
         if(v==txtSignIn){
             //startActivity(new Intent(mContext,SignInActivity.class));
@@ -140,7 +145,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             try{
             if(!FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber().isEmpty())
             {
-                startActivity(new Intent(LoginActivity.this,PhonNumberSignInActivity.class).putExtra("phone",FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()));
+                startActivity(new Intent(LoginActivity.this,FreeLancerDashboard.class).putExtra("phone",FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()));
                 finish();
                 return;
             }
@@ -173,7 +178,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void handleSignInResponse(int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
-            Intent newActivity = new Intent(LoginActivity.this, SignUpEmailActivity.class);
+            Intent newActivity = new Intent(LoginActivity.this, DashboardActivity.class);
             startActivity(newActivity);
             finish();
             return;

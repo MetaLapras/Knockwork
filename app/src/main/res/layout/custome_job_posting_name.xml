@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_job_name_page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/JobNamepage"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@color/fbutton_color_belize_hole"/>
+
+        <View
+            android:layout_width="120dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="#31acf4" />
+
+        <TextView
+        android:id="@+id/txt_jobName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/jobpostingname"
+            android:layout_margin="10dp"
+        android:textSize="16dp"/>
+
+        <EditText
+            android:id="@+id/edit_jobName"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rectangular_border" />
+
+    <TextView
+        android:id="@+id/txt_jobCatrgory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/jobcategory"
+        android:layout_marginTop="20dp"
+        android:textSize="16dp"/>
+
+    <Spinner
+        android:id="@+id/spinner_jobCategory"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:entries="@array/array_jobCategory"></Spinner>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:id="@+id/txt_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/jobdescription"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:textColor="@color/fbutton_color_belize_hole"/>
+            <View
+                android:layout_width="160dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:background="#31acf4" />
+            <EditText
+                android:id="@+id/edit_description"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rectangular_border"/>
+
+            <TextView
+                android:id="@+id/txt_additional_projects"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/AdditionalProjectFile"
+                android:layout_marginTop="10dp"
+                android:textSize="16dp" />
+
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:background="@drawable/rectangular_border">
+                <ImageView
+                    android:id="@+id/img_upload"
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_add_circle_outline_black_24dp"/>
+
+                <TextView
+                    android:id="@+id/txt_upload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/upload"
+                    android:textSize="16dp"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
+
+          <!--  <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="90dp"
+                android:weightSum="2">
+                <Button
+                    android:id="@+id/btn_description_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"  />
+
+                <Button
+                    android:id="@+id/btn_description_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Next"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"  />
+            </LinearLayout>-->
+        </LinearLayout>
+
+
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:background="@android:color/transparent"
+            android:gravity="center" />
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:background="@android:color/transparent"
+            android:gravity="center" />
+    </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

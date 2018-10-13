@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Freelancer.Activities.JobPoastingActivity">
+
+    <include
+        android:id="@+id/layer1"
+        layout="@layout/custome_job_posting_name"></include>
+
+    <include
+        android:id="@+id/layer2"
+        android:visibility="invisible"
+        layout="@layout/custome_job_posting_description"></include>
+
+    <include
+        android:id="@+id/layer3"
+        android:visibility="invisible"
+        layout="@layout/custome_job_posting_details"></include>
+</RelativeLayout>

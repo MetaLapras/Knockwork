@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.ErrorCodes;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Adapter.InboxListAdapter;
 import com.pasistence.knockwork.Adapter.SearchPageFreelancerAdapter;
@@ -41,17 +43,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SearchFreelancerActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class SearchFreelancerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private static final String TAG ="aaa" ;
     Context mContext;
-    MyApi mMyServices;
-    RetrofitClient retrofit;
-    //MaterialSearchBar inboxsearchBar;
     RecyclerView searchFreelancerrecyclerview;
     RecyclerView.LayoutManager layoutManager;
 
-    ArrayList<SearchPageFreelancerModel> searchPageFreelancerModels = new ArrayList<SearchPageFreelancerModel>();
+    private final static String API_KEY = "";
+
+
     SearchPageFreelancerAdapter searchPageFreelancerAdapter;
+    public ArrayList<SearchPageFreelancerModel> searchPageListModels = new ArrayList<SearchPageFreelancerModel>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,85 +83,61 @@ public class SearchFreelancerActivity extends AppCompatActivity
 
 
 
-        mInit();
-        mMyServices = Common.getApi();
-       // mContext = SearchFreelancerActivity.this;
-        /** Create handle for the RetrofitInstance interface*/
-        mMyServices = RetrofitClient.getClient("").create(MyApi.class);
-        /** Call the method with parameter in the interface to get the notice data*/
-        Call<List<SearchPageListModel>> call = mMyServices.getIP();
+        /*if (API_KEY.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Please obtain your API KEY first from themoviedb.org", Toast.LENGTH_LONG).show();
+            return;
+        }*/
+       /* MyApi myApiService =
+                RetrofitClient.getClient("").create(MyApi.class);
 
+        Call<SearchPageListModel> call = myApiService.getIP(API_KEY);
 
-
-        /** Call the method with parameter in the interface to get the notice data*/
-      //  Call<SearchPageFreelancerModel> call = mMyServices.getIP();
-
-        //Call<List<SearchPageListModel>> listcall = RetrofitClient.getClient("").getIP();
-        call.enqueue(new Callback<List<SearchPageListModel>>() {
-            @Override
-            public void onResponse(Call<List<SearchPageListModel>> call, Response<List<SearchPageListModel>> response) {
-                SearchPageListModel result= (SearchPageListModel) response.body();
-                generateSearchList(((SearchPageListModel) response.body()).getJob_list());
-                Toast.makeText(SearchFreelancerActivity.this, "Done ", Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onFailure(Call<List<SearchPageListModel>> call, Throwable t) {
-                Toast.makeText(SearchFreelancerActivity.this, "Faield", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        /*call.enqueue(new Callback<SearchPageListModel>() {
+        call.enqueue(new Callback<SearchPageListModel>() {
             @Override
             public void onResponse(Call<SearchPageListModel> call, Response<SearchPageListModel> response) {
-                Toast.makeText(SearchFreelancerActivity.this, "URl get Connected", Toast.LENGTH_SHORT).show();
-                //SearchPageListModel result = response.body();
-                generateSearchList((ArrayList<SearchPageFreelancerModel>) response.body().getCustomer());
+                List<JobList> movies = response.body().getJob_list();
+                Toast.makeText(SearchFreelancerActivity.this, "Number of movies received:" + movies.size(), Toast.LENGTH_SHORT).show();
+                // Log.d(TAG, "Number of movies received: " + movies.size());
             }
 
             @Override
             public void onFailure(Call<SearchPageListModel> call, Throwable t) {
-                Toast.makeText(SearchFreelancerActivity.this, "Something went wrong...Error message: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                // Log error here since request failed
+                Toast.makeText(SearchFreelancerActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, t.toString());
             }
-        });*/
-  // }
-
-
-        /*SearchPageFreelancerModel lancers = new SearchPageFreelancerModel("Professional Designer", "Fixed Price","5k-7k","Poasted 2 days ago","85 Quotes", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ", "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg","Jaime Lindsey","United State","25k Spent","80%");
-
-        SearchPageFreelancerModel lancers2 = new SearchPageFreelancerModel("Professional Designer", "Fixed Price", "5k-7k","Poasted 2 days ago","85 Quotes","Technology is making online work similar to local work, with added speed, cost, and quality advantages.", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEDdFKBrWfM9lqmjc_Cvg4n4BebNmgNt7OWQ59W0SjTU0TcfoubA","carname thondia","Australia","45k Spent","70%");
-
-        searchPageFreelancerModels.add(lancers);
-        searchPageFreelancerModels.add(lancers2);
-        searchPageFreelancerModels.add(lancers);
-        searchPageFreelancerModels.add(lancers2);
-        searchPageFreelancerModels.add(lancers);
-        searchPageFreelancerModels.add(lancers2);
-        searchPageFreelancerModels.add(lancers);
-        searchPageFreelancerModels.add(lancers2);
-        searchPageFreelancerModels.add(lancers);
-        searchPageFreelancerModels.add(lancers2);
-        searchPageFreelancerModels.add(lancers);
-        searchPageFreelancerModels.add(lancers2);
+        });
+    }
 */
 
-        searchPageFreelancerAdapter = new SearchPageFreelancerAdapter(mContext, searchPageFreelancerModels);
+        mInit();
+
+
+        SearchPageFreelancerModel searchPage1 = new SearchPageFreelancerModel("Web designing", "Fixed Price","5k-7k","Poasted 2 days ago","85 Quots","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ", "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg","Jimey Lindsy","United State","25k spent","80%");
+
+       // SearchPageFreelancerModel searchPage2 = new SearchPageFreelancerModel("create logo for brand t-shirt Company", "Fixed Price","5k-7k","Poasted 2 days ago","85 Quots", "Technology is making online work similar to local work, with added speed, cost, and quality advantages.", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEDdFKBrWfM9lqmjc_Cvg4n4BebNmgNt7OWQ59W0SjTU0TcfoubA","Carmne uhanre","Austrelia","50k spent","95%");
+
+        searchPageListModels.add(searchPage1);
+        searchPageListModels.add(searchPage1);
+        searchPageListModels.add(searchPage1);
+        searchPageListModels.add(searchPage1);
+        searchPageListModels.add(searchPage1);
+        searchPageListModels.add(searchPage1);
+        searchPageListModels.add(searchPage1);
+        searchPageListModels.add(searchPage1);
+        searchPageListModels.add(searchPage1);
+        searchPageListModels.add(searchPage1);
+        searchPageListModels.add(searchPage1);
+        searchPageListModels.add(searchPage1);
+
+
+        searchPageFreelancerAdapter = new SearchPageFreelancerAdapter(mContext, searchPageListModels);
         searchFreelancerrecyclerview.setAdapter(searchPageFreelancerAdapter);
         searchPageFreelancerAdapter.notifyDataSetChanged();
 
 
         loadSuggestList();
 
-    }
-
-    private void generateSearchList(List<JobList> jobLists) {
-        searchFreelancerrecyclerview = findViewById(R.id.search_recycler_view);
-        searchPageFreelancerAdapter = new SearchPageFreelancerAdapter(jobLists);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(SearchFreelancerActivity.this);
-        searchFreelancerrecyclerview.setLayoutManager(layoutManager);
-        searchFreelancerrecyclerview.setAdapter(searchPageFreelancerAdapter);
     }
 
     private void mInit() {
@@ -169,8 +148,8 @@ public class SearchFreelancerActivity extends AppCompatActivity
         searchFreelancerrecyclerview.setHasFixedSize(false);
         layoutManager      = new LinearLayoutManager(this);
         searchFreelancerrecyclerview.setLayoutManager(layoutManager);
-
     }
+
     private void startSearch(String text) {
         // adapter = new SearchAdapter(WorkerDisplayList.this, this, database.getWorkerName(text));
         // WorkerListRecyclerView.setAdapter(adapter);
@@ -180,6 +159,8 @@ public class SearchFreelancerActivity extends AppCompatActivity
         // suggestList = database.getNames();
         // materialSearchBar.setLastSuggestions(suggestList);
     }
+//}
+
 
 
 
