@@ -46,10 +46,10 @@
         <activity android:name=".PhonNumberSignInActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".SignUpEmailActivity" />
-        <activity
+       <!-- <activity
             android:name=".Freelancer.Activities.SearchPageFreelancerActivity"
             android:label="@string/title_activity_search_page_freelancer"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme" />-->
         <activity
             android:name=".Freelancer.Activities.FreeLancerDashboard"
             android:label="@string/title_activity_free_lancer_dashboard"
@@ -58,23 +58,23 @@
             android:name=".Freelancer.Activities.ManageBidsActivity"
             android:label="@string/title_activity_manage_bids"
             android:theme="@style/AppTheme" />
-<<<<<<< HEAD
+
         <activity android:name=".ChatBox.ChatActivity"></activity>
-=======
-        <activity android:name=".ChatBox.ChatActivity" />
->>>>>>> 04291b5fb6020a071abb564d573d79eb6122562d
+
+      <!--  <activity android:name=".ChatBox.ChatActivity" />-->
+
         <activity android:name=".Freelancer.Activities.JobDescriptionActivity" />
         <activity
             android:name=".Freelancer.Activities.SearchFreelancerActivity"
             android:label="@string/title_activity_search_freelancer"
-<<<<<<< HEAD
+
             android:theme="@style/AppTheme"></activity>
-=======
+
             android:theme="@style/AppTheme" />
         <activity android:name=".Freelancer.Activities.SettingFreelancerActivity" />
         <activity android:name=".Freelancer.Activities.InboxFreelancerActivity" />
         <activity android:name=".Freelancer.Activities.JobPoastingActivity"></activity>
->>>>>>> 04291b5fb6020a071abb564d573d79eb6122562d
+
     </application>
 
 </manifest>
