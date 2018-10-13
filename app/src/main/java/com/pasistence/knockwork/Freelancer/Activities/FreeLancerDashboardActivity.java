@@ -198,8 +198,10 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
                         intent.putExtra("CategoryId",adapter.getRef(position).getKey());
                         startActivity(intent);*/
                         // Toast.makeText(mContext,""+clickitem.getHead(),Toast.LENGTH_LONG).show();
-                        Snackbar.make(view, ""+clickitem.getHead(), Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
+                       // Snackbar.make(view, ""+clickitem.getHead(), Snackbar.LENGTH_LONG)
+                         //       .setAction("Action", null).show();
+
+                        startActivity(new Intent(mContext,SearchFreelancerActivity.class));
                     }
                 });
             }
@@ -266,7 +268,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         SearchBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mContext,LancerListActivity.class));
+                startActivity(new Intent(mContext,SearchFreelancerActivity.class));
                 overridePendingTransition(R.anim.fade_in_left,R.anim.fade_in_right);
             }
         });
