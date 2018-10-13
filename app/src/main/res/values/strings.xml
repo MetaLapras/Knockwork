@@ -93,7 +93,7 @@
     <string name="upload">Upload</string>
     <string name="details">Details </string>
     <string name="typesofproject">Types of Projects</string>
-    <string name="onetimeproject" >- One Time Projects</string>
+    <string name="onetimeproject">- One Time Projects</string>
     <string name="ongoingproject">- OnGoing Projects </string>
     <string name="notypeproject">- No type of Projects</string>
     <string name="add">Add</string>
@@ -108,11 +108,11 @@
     <string name="invite">- Invite a friend only</string>
     <string name="BudgetJOb">Budget</string>
     <string name="paybyhours">- Pay by the Hours</string>
-    <string name="payweekly" >- Pay by the Weekly</string>
+    <string name="payweekly">- Pay by the Weekly</string>
     <string name="paybymonthly">- Pay by the Monthly</string>
     <string name="paybyeveryotherday">- Pay by Every other day</string>
     <string name="paybyeveryotherweek">- Pay by Every other Week</string>
-    <string name="postajob" >Post a Job</string>
+    <string name="postajob">Post a Job</string>
 
     <string-array name="array_jobCategory">
         <item>Select Category</item>
@@ -124,5 +124,6 @@
         <item>Local jobs</item>
         <item>Other Projects</item>
     </string-array>
+    <string name="title_activity_freelancer_inbox">FreelancerInboxActivity</string>
 
 </resources>

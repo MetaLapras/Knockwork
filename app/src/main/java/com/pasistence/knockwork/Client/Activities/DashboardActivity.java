@@ -66,7 +66,7 @@ public class DashboardActivity extends AppCompatActivity
     FirebaseRecyclerAdapter<TopServicesModel,ViewHolderTopServices> TopServiceAdapter;
 
     //Sliders
-    HashMap<String,String>image_list;
+    HashMap<String,String> image_list;
     SliderLayout mslider;
 
     @Override

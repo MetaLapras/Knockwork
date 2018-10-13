@@ -46,10 +46,10 @@
         <activity android:name=".PhonNumberSignInActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".SignUpEmailActivity" />
-        <!--<activity-->
-            <!--android:name=".Freelancer.Activities.SearchPageFreelancerActivity"-->
-            <!--android:label="@string/title_activity_search_page_freelancer"-->
-            <!--android:theme="@style/AppTheme" />-->
+        <!-- <activity -->
+        <!-- android:name=".Freelancer.Activities.SearchPageFreelancerActivity" -->
+        <!-- android:label="@string/title_activity_search_page_freelancer" -->
+        <!-- android:theme="@style/AppTheme" /> -->
         <activity
             android:name=".Freelancer.Activities.FreeLancerDashboardActivity"
             android:label="@string/title_activity_free_lancer_dashboard"
@@ -63,10 +63,13 @@
         <activity
             android:name=".Freelancer.Activities.SearchFreelancerActivity"
             android:label="@string/title_activity_search_freelancer"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity android:name=".Freelancer.Activities.SettingFreelancerActivity" />
-        <activity android:name=".Freelancer.Activities.InboxFreelancerActivity" />
-        <activity android:name=".Freelancer.Activities.JobPoastingActivity"></activity>
+        <activity android:name=".Freelancer.Activities.JobPoastingActivity" />
+        <activity
+            android:name=".Freelancer.Activities.FreelancerInboxActivity"
+            android:label="@string/title_activity_freelancer_inbox"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

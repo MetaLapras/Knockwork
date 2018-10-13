@@ -4,22 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Freelancer.Activities.InboxFreelancerActivity">
-
-
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/toolBar"
-        app:title="Inbox"
-        android:minHeight="?attr/actionBarSize"
-        app:titleTextColor="@android:color/white"
-        android:background="?attr/colorPrimary"></android.support.v7.widget.Toolbar>
-
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Freelancer.Activities.FreelancerInboxActivity"
+    tools:showIn="@layout/app_bar_freelancer_inbox">
 
     <android.support.v7.widget.RecyclerView
         android:layout_below="@id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recycler_inbox_freelancer"></android.support.v7.widget.RecyclerView>
+
 </RelativeLayout>

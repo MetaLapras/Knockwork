@@ -76,14 +76,14 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         mInit();
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -342,7 +342,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
                     .setAction("Action", null).show();
             // Handle the camera action
         } else if (id == R.id.nav_inbox) {
-            startActivity(new Intent(FreeLancerDashboardActivity.this,InboxFreelancerActivity.class));
+            startActivity(new Intent(FreeLancerDashboardActivity.this,FreelancerInboxActivity.class));
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
            // startActivity(new Intent(mContext,InboxActivity.class));
