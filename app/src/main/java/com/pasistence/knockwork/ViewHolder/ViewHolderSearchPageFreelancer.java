@@ -38,7 +38,6 @@ public class ViewHolderSearchPageFreelancer    extends RecyclerView.ViewHolder i
 
         btnapply           = (Button)itemView.findViewById(R.id.btn_apply);
 
-
         btnapply.setOnClickListener(this);
 
     }

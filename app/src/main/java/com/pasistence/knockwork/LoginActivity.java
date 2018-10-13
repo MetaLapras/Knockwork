@@ -81,19 +81,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (v == buttonEmail) {
             startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), EMAIL_LOGIN);
+        }
 
-            if (v == buttonGmail) {
-                AuthUI.IdpConfig googleIdp = new AuthUI.IdpConfig.GoogleBuilder()
-                        .build();
-
-
-                startActivityForResult(AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setAvailableProviders(Arrays.asList(googleIdp))
-                        .build(), GMAIL_LOGIN);
+        if (v == buttonGmail) {
+            AuthUI.IdpConfig googleIdp = new AuthUI.IdpConfig.GoogleBuilder()
+                    .build();
 
 
-            }
+            startActivityForResult(AuthUI.getInstance()
+                    .createSignInIntentBuilder()
+                    .setAvailableProviders(Arrays.asList(googleIdp))
+                    .build(), GMAIL_LOGIN);
+
+        }
 
             if (v == buttonFacebook) {
                 Toast.makeText(LoginActivity.this, "Facebook Login...", Toast.LENGTH_SHORT).show();
@@ -107,31 +107,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         .setAvailableProviders(Arrays.asList(facebookIdp))
                         .build(), FACEBOOK_LOGIN);
 
-            }
+        }
 
-            if (v == buttonPhone) {
+        if (v == buttonPhone) {
 
-                AuthUI.IdpConfig phoneConfigWithDefaultNumber = new AuthUI.IdpConfig.PhoneBuilder()
-                        .setDefaultNumber("+91")
-                        .build();
+            AuthUI.IdpConfig phoneConfigWithDefaultNumber = new AuthUI.IdpConfig.PhoneBuilder()
+                    .setDefaultNumber("+91")
+                    .build();
 
-                startActivityForResult(AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setAvailableProviders(Arrays.asList(phoneConfigWithDefaultNumber))
-                        .build(), PHONE_LOGIN);
-
-            }
-
-            if (v == txtSignIn) {
-                startActivity(new Intent(mContext, FreeLancerDashboard.class));
-            }
-
-            if (v == txtSkip) {
-                startActivity(new Intent(mContext, DashboardActivity.class));
-            }
+            startActivityForResult(AuthUI.getInstance()
+                    .createSignInIntentBuilder()
+                    .setAvailableProviders(Arrays.asList(phoneConfigWithDefaultNumber))
+                    .build(), PHONE_LOGIN);
 
         }
+
+        if (v == txtSignIn) {
+            startActivity(new Intent(mContext, FreeLancerDashboard.class));
+        }
+
+        if (v == txtSkip) {
+            startActivity(new Intent(mContext, DashboardActivity.class));
+        }
+
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
