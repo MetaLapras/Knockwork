@@ -58,15 +58,12 @@
             android:name=".Freelancer.Activities.ManageBidsActivity"
             android:label="@string/title_activity_manage_bids"
             android:theme="@style/AppTheme" />
-<<<<<<< HEAD
         <activity android:name=".ChatBox.ChatActivity"></activity>
-=======
         <activity android:name=".Freelancer.Activities.JobDescriptionActivity" />
         <activity
             android:name=".Freelancer.Activities.SearchFreelancerActivity"
             android:label="@string/title_activity_search_freelancer"
             android:theme="@style/AppTheme"></activity>
->>>>>>> d02a498b8d6f8717ed2b9a62c17f02bb22b60126
     </application>
 
 </manifest>

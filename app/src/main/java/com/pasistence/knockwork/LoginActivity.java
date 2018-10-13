@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,11 +28,19 @@ import info.hoang8f.widget.FButton;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     Context mContext;
-    FButton btn_email,btn_gmail,btn_facebook,btn_phone;
+    FButton buttonEmail,buttonGmail,buttonFacebook,buttonPhone;
     TextView txtSignIn,txtSkip;
-    LoginButton fbLoginButton, emilLoginButton;
+    LoginButton fbLoginButton, emailLoginButton;
 
-    private static final int PRE_LOGIN = 1000;
+    RadioGroup radioGroupWH;
+    RadioButton radioButton;
+
+
+    private static final int EMAIL_LOGIN      = 1000;
+    private static final int GMAIL_LOGIN      = 2000;
+    private static final int FACEBOOK_LOGIN   = 3000;
+    private static final int PHONE_LOGIN      = 4000;
+
     public FirebaseAuth firebaseAuth;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
 
@@ -42,24 +52,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         firebaseAuth = FirebaseAuth.getInstance();
         mInit();
-        monClick();
+        mOnClick();
     }
      //Init
     private void mInit() {
         mContext       = LoginActivity.this;
-        btn_email      = (FButton)findViewById(R.id.btn_SignUp_Email);
-        btn_gmail      = (FButton)findViewById(R.id.btn_SignUp_Gmail);
-        btn_facebook   = (FButton)findViewById(R.id.btn_SignUp_Facebook);
+        buttonEmail    = (FButton)findViewById(R.id.btn_SignUp_Email);
+        buttonGmail      = (FButton)findViewById(R.id.btn_SignUp_Gmail);
+        buttonFacebook   = (FButton)findViewById(R.id.btn_SignUp_Facebook);
         txtSignIn      = (TextView)findViewById(R.id.txt_SignIn);
-        txtSkip      = (TextView)findViewById(R.id.txt_skip);
-        btn_phone      = (FButton)findViewById(R.id.btn_SignUp_Number);
+        txtSkip        = (TextView)findViewById(R.id.txt_skip);
+        buttonPhone      = (FButton)findViewById(R.id.btn_SignUp_Number);
+        radioGroupWH    =(RadioGroup)findViewById(R.id.radio_group);
     }
 
-    private void monClick() {
-        btn_email.setOnClickListener(this);
-        btn_gmail.setOnClickListener(this);
-        btn_facebook.setOnClickListener(this);
-        btn_phone.setOnClickListener(this);
+    private void mOnClick() {
+        buttonEmail.setOnClickListener(this);
+        buttonGmail.setOnClickListener(this);
+        buttonFacebook.setOnClickListener(this);
+        buttonPhone.setOnClickListener(this);
         txtSkip.setOnClickListener(this);
         txtSignIn.setOnClickListener(this);
     }
@@ -67,54 +78,48 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if(v == btn_phone)
-        {
+        if (v == buttonEmail) {
+            startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), EMAIL_LOGIN);
+        }
+        if (v==buttonGmail){
+            AuthUI.IdpConfig googleIdp = new AuthUI.IdpConfig.GoogleBuilder()
+                    .build();
+
+            startActivityForResult(AuthUI.getInstance()
+                    .createSignInIntentBuilder()
+                    .setAvailableProviders(Arrays.asList(googleIdp))
+                    .build(), GMAIL_LOGIN);
+        }
+
+        if (v==buttonFacebook) {
+            Toast.makeText(LoginActivity.this, "Facebook Login...", Toast.LENGTH_SHORT).show();
+
+            AuthUI.IdpConfig facebookIdp = new AuthUI.IdpConfig.FacebookBuilder()
+                    .build();
+
+            startActivityForResult(AuthUI.getInstance()
+                    .createSignInIntentBuilder()
+                    .setAvailableProviders(Arrays.asList(facebookIdp))
+                    .build(),FACEBOOK_LOGIN);
+        }
+
+        if(v == buttonPhone) {
+
             AuthUI.IdpConfig phoneConfigWithDefaultNumber = new AuthUI.IdpConfig.PhoneBuilder()
                     .setDefaultNumber("+91")
                     .build();
 
-            startActivityForResult(
-                    AuthUI.getInstance()
-                            .createSignInIntentBuilder()
-                            .setAvailableProviders(Arrays.asList(phoneConfigWithDefaultNumber))
-                            .build(),PRE_LOGIN);
+            startActivityForResult(AuthUI.getInstance()
+                    .createSignInIntentBuilder()
+                    .setAvailableProviders(Arrays.asList(phoneConfigWithDefaultNumber))
+                    .build(),PHONE_LOGIN);
 
         }
-        if (v == btn_email)
-        {
-            startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
-                    .build(), PRE_LOGIN);
-        }
-        if (v==btn_gmail){
-            AuthUI.IdpConfig googleIdp = new AuthUI.IdpConfig.GoogleBuilder()
-                    //.setScopes(Arrays.asList(Scopes.GAMES))
-                    .build();
 
-
-            startActivityForResult(
-                    AuthUI.getInstance()
-                            .createSignInIntentBuilder()
-                            .setAvailableProviders(Arrays.asList(googleIdp))
-                            .build(), PRE_LOGIN);
-        }
-        if (v==btn_facebook)
-        {
-            Toast.makeText(LoginActivity.this, "Facebook Login...", Toast.LENGTH_SHORT).show();
-
-            AuthUI.IdpConfig facebookIdp = new AuthUI.IdpConfig.FacebookBuilder()
-                    //  .setPermissions(Arrays.asList("user_friends"))
-                    .build();
-
-            startActivityForResult(
-                    AuthUI.getInstance()
-                            .createSignInIntentBuilder()
-                            .setAvailableProviders(Arrays.asList(facebookIdp))
-                            .build(),PRE_LOGIN);
-        }
         if(v==txtSignIn){
-            //startActivity(new Intent(mContext,SignInActivity.class));
             startActivity(new Intent(mContext,FreeLancerDashboard.class));
         }
+
         if(v==txtSkip){
             startActivity(new Intent(mContext,DashboardActivity.class));
         }
@@ -124,12 +129,46 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == PRE_LOGIN) {
+        if (requestCode == EMAIL_LOGIN) {
             handleSignInResponse(resultCode, data);
+            return;
+        }
+        if (requestCode == GMAIL_LOGIN) {
+            handleSignInResponse(resultCode, data);
+            return;
+        }
+        if (requestCode == FACEBOOK_LOGIN) {
+            handleSignInResponse(resultCode, data);
+            return;
+        }
+        if (requestCode == PHONE_LOGIN){
             phoneNumberSignInResponse(resultCode, data);
             return;
         }
+
     }
+
+    private void handleSignInResponse(int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+            switch (radioGroupWH.getCheckedRadioButtonId()){
+                case R.id.radio_button_hire:
+                    intent.putExtra("isLancer",false);
+                    intent.putExtra("isClient",true);
+                    break;
+                case R.id.radio_button_work:
+                    intent.putExtra("isLancer",true);
+                    intent.putExtra("isClient",false);
+                    break;
+            }
+
+            startActivity(intent);
+            finish();
+        }
+        else
+            Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show();
+    }
+
 
     private void phoneNumberSignInResponse(int resultCode, Intent data) {
         IdpResponse response =  IdpResponse.fromResultIntent(data);
@@ -171,14 +210,4 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void handleSignInResponse(int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            Intent newActivity = new Intent(LoginActivity.this, SignUpEmailActivity.class);
-            startActivity(newActivity);
-            finish();
-            return;
-        }
-        else
-            Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show();
-    }
 }
