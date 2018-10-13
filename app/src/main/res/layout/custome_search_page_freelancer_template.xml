@@ -161,6 +161,7 @@
                         <View
                             android:layout_width="2dp"
                             android:layout_height="15dp"
+                            android:layout_marginTop="4dp"
                             android:layout_gravity="center"
                             android:layout_marginLeft="10dp"
                             android:background="#31acf4" />
@@ -179,7 +180,7 @@
                             android:layout_width="2dp"
                             android:layout_height="15dp"
                             android:layout_gravity="center"
-
+                            android:layout_marginTop="4dp"
                             android:layout_marginLeft="10dp"
                             android:background="#31acf4" />
 
@@ -188,6 +189,7 @@
                             android:layout_height="17dp"
                             android:layout_gravity="center"
                             android:layout_marginLeft="10dp"
+                            android:layout_marginTop="4dp"
                             android:background="@color/fbutton_color_peter_river"
                             android:orientation="horizontal">
                              <ImageView
@@ -213,6 +215,7 @@
                             android:layout_width="wrap_content"
                            android:layout_height="30dp"
                             android:layout_marginLeft="15dp"
+                            android:textAllCaps="false"
                             android:textColor="@color/white"
                             android:text="Apply"
                             fbutton:buttonColor="@color/color_concrete"

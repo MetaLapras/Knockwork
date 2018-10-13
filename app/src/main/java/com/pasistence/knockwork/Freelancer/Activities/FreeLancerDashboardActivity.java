@@ -36,7 +36,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Common.Common;
+<<<<<<< HEAD:app/src/main/java/com/pasistence/knockwork/Freelancer/Activities/FreeLancerDashboard.java
 import com.pasistence.knockwork.Client.Activities.LancerListActivity;
+=======
+import com.pasistence.knockwork.Employeer.Activities.LancerListActivity;
+>>>>>>> 9d68d8ee7f680ac1b17510a59ab1de6748e07864:app/src/main/java/com/pasistence/knockwork/Freelancer/Activities/FreeLancerDashboardActivity.java
 import com.pasistence.knockwork.Interface.ItemClickListener;
 import com.pasistence.knockwork.Model.PopularServicesModel;
 import com.pasistence.knockwork.Model.TopServicesModel;
@@ -46,7 +50,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
-public class FreeLancerDashboard extends AppCompatActivity
+public class FreeLancerDashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Context mContext;
 
@@ -275,7 +279,7 @@ public class FreeLancerDashboard extends AppCompatActivity
     }
 
     private void mInit() {
-        mContext = FreeLancerDashboard.this;
+        mContext = FreeLancerDashboardActivity.this;
 
         refreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
 
@@ -336,12 +340,12 @@ public class FreeLancerDashboard extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            startActivity(new Intent(FreeLancerDashboard.this,SearchFreelancerActivity.class));
+            startActivity(new Intent(FreeLancerDashboardActivity.this,SearchFreelancerActivity.class));
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
             // Handle the camera action
         } else if (id == R.id.nav_inbox) {
-            startActivity(new Intent(FreeLancerDashboard.this,InboxFreelancerActivity.class));
+            startActivity(new Intent(FreeLancerDashboardActivity.this,InboxFreelancerActivity.class));
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
            // startActivity(new Intent(mContext,InboxActivity.class));
@@ -360,7 +364,7 @@ public class FreeLancerDashboard extends AppCompatActivity
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Active Jobs", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         } else if (id == R.id.nav_manage_jobs) {
-            startActivity(new Intent(FreeLancerDashboard.this,JobPoastingActivity.class));
+            startActivity(new Intent(FreeLancerDashboardActivity.this,JobPoastingActivity.class));
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Job Posting", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
 
@@ -369,7 +373,7 @@ public class FreeLancerDashboard extends AppCompatActivity
                     .setAction("Action", null).show();
 
         }else if (id == R.id.nav_settings) {
-            startActivity(new Intent(FreeLancerDashboard.this,SettingFreelancerActivity.class));
+            startActivity(new Intent(FreeLancerDashboardActivity.this,SettingFreelancerActivity.class));
 
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Settings", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();

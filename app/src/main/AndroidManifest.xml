@@ -51,7 +51,7 @@
             <!--android:label="@string/title_activity_search_page_freelancer"-->
             <!--android:theme="@style/AppTheme" />-->
         <activity
-            android:name=".Freelancer.Activities.FreeLancerDashboard"
+            android:name=".Freelancer.Activities.FreeLancerDashboardActivity"
             android:label="@string/title_activity_free_lancer_dashboard"
             android:theme="@style/AppTheme" />
         <activity
