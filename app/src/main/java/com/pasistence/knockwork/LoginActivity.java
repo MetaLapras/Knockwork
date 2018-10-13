@@ -18,15 +18,12 @@ import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthProvider;
-<<<<<<< HEAD
 import com.pasistence.knockwork.Client.Activities.DashboardActivity;
 import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboardActivity;
 
-=======
 
 import com.pasistence.knockwork.Client.Activities.DashboardActivity;
 import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboardActivity;
->>>>>>> 594d6c109cc1d3c7cabd2d74b286a643f29ad63c
 import java.util.Arrays;
 
 import info.hoang8f.widget.FButton;
@@ -191,10 +188,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             try{
             if(!FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber().isEmpty())
             {
-<<<<<<< HEAD
-=======
-
->>>>>>> 594d6c109cc1d3c7cabd2d74b286a643f29ad63c
 
                 switch (radioGroupWH.getCheckedRadioButtonId()){
                     case R.id.radio_button_hire:
