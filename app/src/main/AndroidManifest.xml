@@ -46,10 +46,10 @@
         <activity android:name=".PhonNumberSignInActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".SignUpEmailActivity" />
-        <activity
-            android:name=".Freelancer.Activities.SearchPageFreelancerActivity"
-            android:label="@string/title_activity_search_page_freelancer"
-            android:theme="@style/AppTheme" />
+        <!--<activity-->
+            <!--android:name=".Freelancer.Activities.SearchPageFreelancerActivity"-->
+            <!--android:label="@string/title_activity_search_page_freelancer"-->
+            <!--android:theme="@style/AppTheme" />-->
         <activity
             android:name=".Freelancer.Activities.FreeLancerDashboard"
             android:label="@string/title_activity_free_lancer_dashboard"

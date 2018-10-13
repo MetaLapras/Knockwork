@@ -28,18 +28,18 @@ import info.hoang8f.widget.FButton;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     Context mContext;
-    FButton buttonEmail,buttonGmail,buttonFacebook,buttonPhone;
-    TextView txtSignIn,txtSkip;
+    FButton buttonEmail, buttonGmail, buttonFacebook, buttonPhone;
+    TextView txtSignIn, txtSkip;
     LoginButton fbLoginButton, emailLoginButton;
 
     RadioGroup radioGroupWH;
     RadioButton radioButton;
 
 
-    private static final int EMAIL_LOGIN      = 1000;
-    private static final int GMAIL_LOGIN      = 2000;
-    private static final int FACEBOOK_LOGIN   = 3000;
-    private static final int PHONE_LOGIN      = 4000;
+    private static final int EMAIL_LOGIN = 1000;
+    private static final int GMAIL_LOGIN = 2000;
+    private static final int FACEBOOK_LOGIN = 3000;
+    private static final int PHONE_LOGIN = 4000;
 
     public FirebaseAuth firebaseAuth;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
@@ -54,16 +54,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mInit();
         mOnClick();
     }
-     //Init
+
+    //Init
     private void mInit() {
-        mContext       = LoginActivity.this;
-        buttonEmail    = (FButton)findViewById(R.id.btn_SignUp_Email);
-        buttonGmail      = (FButton)findViewById(R.id.btn_SignUp_Gmail);
-        buttonFacebook   = (FButton)findViewById(R.id.btn_SignUp_Facebook);
-        txtSignIn      = (TextView)findViewById(R.id.txt_SignIn);
-        txtSkip        = (TextView)findViewById(R.id.txt_skip);
-        buttonPhone      = (FButton)findViewById(R.id.btn_SignUp_Number);
-        radioGroupWH    =(RadioGroup)findViewById(R.id.radio_group);
+        mContext = LoginActivity.this;
+        buttonEmail = (FButton) findViewById(R.id.btn_SignUp_Email);
+        buttonGmail = (FButton) findViewById(R.id.btn_SignUp_Gmail);
+        buttonFacebook = (FButton) findViewById(R.id.btn_SignUp_Facebook);
+        txtSignIn = (TextView) findViewById(R.id.txt_SignIn);
+        txtSkip = (TextView) findViewById(R.id.txt_skip);
+        buttonPhone = (FButton) findViewById(R.id.btn_SignUp_Number);
+        radioGroupWH = (RadioGroup) findViewById(R.id.radio_group);
     }
 
     private void mOnClick() {
@@ -78,6 +79,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+<<<<<<< HEAD
 
         if (v == buttonEmail) {
             startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), EMAIL_LOGIN);
@@ -140,32 +142,58 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             .createSignInIntentBuilder()
                             .setAvailableProviders(Arrays.asList(facebookIdp))
                             .build(),PRE_LOGIN);
+=======
+        if (v == buttonEmail) {
+            startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), EMAIL_LOGIN);
 
+            if (v == buttonGmail) {
+                AuthUI.IdpConfig googleIdp = new AuthUI.IdpConfig.GoogleBuilder()
+                        .build();
+                startActivityForResult(AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setAvailableProviders(Arrays.asList(googleIdp))
+                        .build(), GMAIL_LOGIN);
+            }
 
+            if (v == buttonFacebook) {
+                Toast.makeText(LoginActivity.this, "Facebook Login...", Toast.LENGTH_SHORT).show();
+>>>>>>> 13e919326ecb0d4cf6fd50d4b74b87cb4ea4b4f8
+
+                AuthUI.IdpConfig facebookIdp = new AuthUI.IdpConfig.FacebookBuilder()
+                        .build();
+
+<<<<<<< HEAD
 
         }
+=======
+                startActivityForResult(AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setAvailableProviders(Arrays.asList(facebookIdp))
+                        .build(), FACEBOOK_LOGIN);
+            }
+>>>>>>> 13e919326ecb0d4cf6fd50d4b74b87cb4ea4b4f8
 
-        if(v == buttonPhone) {
+            if (v == buttonPhone) {
 
-            AuthUI.IdpConfig phoneConfigWithDefaultNumber = new AuthUI.IdpConfig.PhoneBuilder()
-                    .setDefaultNumber("+91")
-                    .build();
+                AuthUI.IdpConfig phoneConfigWithDefaultNumber = new AuthUI.IdpConfig.PhoneBuilder()
+                        .setDefaultNumber("+91")
+                        .build();
 
-            startActivityForResult(AuthUI.getInstance()
-                    .createSignInIntentBuilder()
-                    .setAvailableProviders(Arrays.asList(phoneConfigWithDefaultNumber))
-                    .build(),PHONE_LOGIN);
+                startActivityForResult(AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setAvailableProviders(Arrays.asList(phoneConfigWithDefaultNumber))
+                        .build(), PHONE_LOGIN);
 
+            }
+
+            if (v == txtSignIn) {
+                startActivity(new Intent(mContext, FreeLancerDashboard.class));
+            }
+
+            if (v == txtSkip) {
+                startActivity(new Intent(mContext, DashboardActivity.class));
+            }
         }
-
-        if(v==txtSignIn){
-            startActivity(new Intent(mContext,FreeLancerDashboard.class));
-        }
-
-        if(v==txtSkip){
-            startActivity(new Intent(mContext,DashboardActivity.class));
-        }
-
 
     }
 
@@ -183,7 +211,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             handleSignInResponse(resultCode, data);
             return;
         }
-        if (requestCode == PHONE_LOGIN){
+        if (requestCode == PHONE_LOGIN) {
             phoneNumberSignInResponse(resultCode, data);
             return;
         }
@@ -252,6 +280,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+<<<<<<< HEAD
     private void handleSignInResponse(int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             Intent newActivity = new Intent(LoginActivity.this, DashboardActivity.class);
@@ -263,4 +292,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show();
     }
 
+=======
+>>>>>>> 13e919326ecb0d4cf6fd50d4b74b87cb4ea4b4f8
 }
