@@ -18,13 +18,8 @@ import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthProvider;
-<<<<<<< HEAD
 import com.pasistence.knockwork.Client.Activities.DashboardActivity;
-import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboard;
-=======
-import com.pasistence.knockwork.Employeer.Activities.DashboardActivity;
 import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboardActivity;
->>>>>>> 9d68d8ee7f680ac1b17510a59ab1de6748e07864
 
 import java.util.Arrays;
 
@@ -190,7 +185,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             try{
             if(!FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber().isEmpty())
             {
-<<<<<<< HEAD
 
                 switch (radioGroupWH.getCheckedRadioButtonId()){
                     case R.id.radio_button_hire:
@@ -208,10 +202,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 //                startActivity(new Intent(LoginActivity.this,FreeLancerDashboard.class).putExtra("phone",FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()));
 //                finish();
-=======
-                startActivity(new Intent(LoginActivity.this,FreeLancerDashboardActivity.class).putExtra("phone",FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()));
-                finish();
->>>>>>> 9d68d8ee7f680ac1b17510a59ab1de6748e07864
                 return;
             }
             else
