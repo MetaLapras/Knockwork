@@ -125,11 +125,11 @@
         <item>Other Projects</item>
     </string-array>
     <string name="title_activity_freelancer_inbox">FreelancerInboxActivity</string>
-<<<<<<< HEAD
+
     <string name="title_activity_lancers">LancersActivity</string>
     <string name="title_activity_manage_job_post">ManageJobPostActivity</string>
-=======
+
     <string name="title_activity_freelancer_setting">FreelancerSettingActivity</string>
->>>>>>> c539fee62a6473162e4abffba58c3053c5c016f1
+
 
 </resources>
