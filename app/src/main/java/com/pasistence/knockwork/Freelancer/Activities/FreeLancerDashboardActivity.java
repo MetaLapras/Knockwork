@@ -338,47 +338,47 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             startActivity(new Intent(FreeLancerDashboardActivity.this,SearchFreelancerActivity.class));
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();*/
             // Handle the camera action
         } else if (id == R.id.nav_inbox) {
             startActivity(new Intent(FreeLancerDashboardActivity.this,FreelancerInboxActivity.class));
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();*/
            // startActivity(new Intent(mContext,InboxActivity.class));
 
 
         } else if (id == R.id.nav_notification) {
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Notification", Snackbar.LENGTH_LONG)
+            /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Notification", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
-
+*/
         } else if (id == R.id.nav_manage) {
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage Bids", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage Bids", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();*/
             startActivity(new Intent(mContext,ManageBidsActivity.class));
 
         } else if (id == R.id.nav_active) {
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Active Jobs", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Active Jobs", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();*/
         } else if (id == R.id.nav_manage_jobs) {
             startActivity(new Intent(FreeLancerDashboardActivity.this,JobPoastingActivity.class));
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Job Posting", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+           /* Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Job Posting", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();*/
 
         } else if (id == R.id.nav_proposal) {
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Submit a Proposal", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Submit a Proposal", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();*/
 
         }else if (id == R.id.nav_settings) {
-            startActivity(new Intent(FreeLancerDashboardActivity.this,SettingFreelancerActivity.class));
+            startActivity(new Intent(FreeLancerDashboardActivity.this,FreelancerSettingActivity.class));
 
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Settings", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Settings", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();*/
 
         }else if (id == R.id.nav_support) {
 
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Support", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Support", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();*/
 
         }
 

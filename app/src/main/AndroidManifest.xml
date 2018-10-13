@@ -71,12 +71,17 @@
             android:label="@string/title_activity_freelancer_inbox"
             android:theme="@style/AppTheme" />
         <activity
+<<<<<<< HEAD
             android:name=".Client.Activities.LancersActivity"
             android:label="@string/title_activity_lancers"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".Client.Activities.ManageJobPostActivity"
             android:label="@string/title_activity_manage_job_post"
+=======
+            android:name=".Freelancer.Activities.FreelancerSettingActivity"
+            android:label="@string/title_activity_freelancer_setting"
+>>>>>>> c539fee62a6473162e4abffba58c3053c5c016f1
             android:theme="@style/AppTheme"></activity>
     </application>
 
