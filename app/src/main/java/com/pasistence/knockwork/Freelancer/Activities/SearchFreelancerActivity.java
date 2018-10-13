@@ -3,6 +3,7 @@ package com.pasistence.knockwork.Freelancer.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.design.widget.NavigationView;
@@ -181,18 +182,33 @@ public class SearchFreelancerActivity extends AppCompatActivity implements Navig
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            startActivity(new Intent(SearchFreelancerActivity.this,JobDescriptionActivity.class));
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+
+        if (id == R.id.nav_home) {
+            startActivity(new Intent(SearchFreelancerActivity.this,FreeLancerDashboardActivity.class));
+
+
+        } else if (id == R.id.nav_inbox) {
+            startActivity(new Intent(SearchFreelancerActivity.this,FreelancerInboxActivity.class));
+
+        } else if (id == R.id.nav_notification) {
 
         } else if (id == R.id.nav_manage) {
+            startActivity(new Intent(mContext,ManageBidsActivity.class));
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_active) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_manage_jobs) {
+            startActivity(new Intent(SearchFreelancerActivity.this,JobPoastingActivity.class));
+
+        } else if (id == R.id.nav_proposal) {
+
+        }else if (id == R.id.nav_settings) {
+            startActivity(new Intent(SearchFreelancerActivity.this,FreelancerSettingActivity.class));
+
+
+        }else if (id == R.id.nav_support) {
+
 
         }
 

@@ -20,7 +20,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:itemIconTint="@color/colorPrimary"
-        app:headerLayout="@layout/nav_header_free_lancer_dashboard"
-        app:menu="@menu/activity_free_lancer_dashboard_drawer" />
+        app:headerLayout="@layout/nav_header_manage_bids"
+        app:menu="@menu/activity_manage_bids_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

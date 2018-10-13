@@ -93,34 +93,27 @@ public class ManageBidsActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
+            startActivity(new Intent(ManageBidsActivity.this,FreeLancerDashboardActivity.class));
 
-             startActivity(new Intent(mContext,FreeLancerDashboardActivity.class));
-            // Handle the camera action
         } else if (id == R.id.nav_inbox) {
-
-            // startActivity(new Intent(mContext,InboxActivity.class));
-
+            startActivity(new Intent(ManageBidsActivity.this,FreelancerInboxActivity.class));
 
         } else if (id == R.id.nav_notification) {
 
-
         } else if (id == R.id.nav_manage) {
-
-            // startActivity(new Intent(DashboardActivity.this,ManageJobPostingActivity.class));
 
         } else if (id == R.id.nav_active) {
 
+        } else if (id == R.id.nav_manage_jobs) {
+            startActivity(new Intent(ManageBidsActivity.this,JobPoastingActivity.class));
+
         } else if (id == R.id.nav_proposal) {
 
-
         }else if (id == R.id.nav_settings) {
-
-            //  startActivity(new Intent(mContext,SettingActivity.class));
-
+            startActivity(new Intent(ManageBidsActivity.this,FreelancerSettingActivity.class));
 
 
         }else if (id == R.id.nav_support) {
-
 
 
         }
