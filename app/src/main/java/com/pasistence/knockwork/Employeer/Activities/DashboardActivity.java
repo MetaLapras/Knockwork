@@ -37,7 +37,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Freelancer.Activities.SearchFreelancerActivity;
-import com.pasistence.knockwork.Freelancer.Activities.SearchPageFreelancerActivity;
 import com.pasistence.knockwork.Interface.ItemClickListener;
 import com.pasistence.knockwork.Model.PopularServicesModel;
 import com.pasistence.knockwork.Model.TopServicesModel;
@@ -50,6 +49,10 @@ import java.util.HashMap;
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    Boolean isLancer=false;
+    Boolean isClient=false;
+
     Context mContext;
     RecyclerView recyclerPopularServices,recyclerTopServices;
     RecyclerView.LayoutManager GridlayoutManager,LinearLayoutManager ;
@@ -60,7 +63,6 @@ public class DashboardActivity extends AppCompatActivity
     public DatabaseReference Top_dataReference ;
     public MaterialSearchBar SearchBar;
 
-   // FirebaseRecyclerAdapter<PopularServicesModel,ViewHolderPopularServices> popularAdapter;
     FirebaseRecyclerAdapter<TopServicesModel,ViewHolderTopServices> TopServiceAdapter;
 
     //Sliders
@@ -73,16 +75,10 @@ public class DashboardActivity extends AppCompatActivity
         setContentView(R.layout.activity_dashboard);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mInit();
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
+        mInit();
+        isLancer=getIntent().getBooleanExtra("isLancer",false);
+        isClient=getIntent().getBooleanExtra("isClient",false);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -288,25 +284,14 @@ public class DashboardActivity extends AppCompatActivity
 
     private void mInit() {
 
-        mContext = DashboardActivity.this;
-
-        refreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
-
-       // recyclerPopularServices =(RecyclerView)findViewById(R.id.recycler_popular_services);
-      //  recyclerPopularServices.setHasFixedSize(true);
-        //LinearLayoutManager     = new LinearLayoutManager(this).HORIZONTAL;
-       // recyclerPopularServices.setLayoutManager(new LinearLayoutManager(this, android.support.v7.widget.LinearLayoutManager.HORIZONTAL, false));
-
-       // recyclerPopularServices.setLayoutManager(LinearLayoutManager);
-
-        recyclerTopServices     =(RecyclerView)findViewById(R.id.recycler_top_services);
+        mContext                = DashboardActivity.this;
+        refreshLayout           = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
+        mslider                 = (SliderLayout)findViewById(R.id.slider);
+        SearchBar               = (MaterialSearchBar)findViewById(R.id.search_bar);
+        recyclerTopServices     = (RecyclerView)findViewById(R.id.recycler_top_services);
+        GridlayoutManager       =  new GridLayoutManager(this,2);
         recyclerTopServices.setHasFixedSize(false);
-        GridlayoutManager       = new GridLayoutManager(this,2);
         recyclerTopServices.setLayoutManager(GridlayoutManager);
-
-        mslider = (SliderLayout)findViewById(R.id.slider);
-
-        SearchBar = (MaterialSearchBar)findViewById(R.id.search_bar);
     }
 
     @Override
@@ -328,12 +313,8 @@ public class DashboardActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -344,14 +325,12 @@ public class DashboardActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
             startActivity(new Intent(DashboardActivity.this,SearchFreelancerActivity.class));
-            // Handle the camera action
         } else if (id == R.id.nav_inbox) {
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
@@ -378,15 +357,11 @@ public class DashboardActivity extends AppCompatActivity
         }else if (id == R.id.nav_settings) {
 
             startActivity(new Intent(mContext,SettingActivity.class));
-
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Settings", Snackbar.LENGTH_LONG)
+               Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Settings", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
 
         }else if (id == R.id.nav_support) {
-
-
-
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Support", Snackbar.LENGTH_LONG)
+                Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Support", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
 
         }
@@ -399,8 +374,6 @@ public class DashboardActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-       /* if(popularAdapter!=null)
-            popularAdapter.startListening();*/
         if(TopServiceAdapter!=null)
             TopServiceAdapter.startListening();
     }
@@ -408,9 +381,7 @@ public class DashboardActivity extends AppCompatActivity
     @Override
     protected void onStop() {
         super.onStop();
-        //popularAdapter.stopListening();
         TopServiceAdapter.stopListening();
-        //  mslider.stopAutoCycle();
     }
 
     @Override
@@ -430,9 +401,6 @@ public class DashboardActivity extends AppCompatActivity
                 for(DataSnapshot postsnapshot : dataSnapshot.getChildren())
                 {
                     PopularServicesModel banner = postsnapshot.getValue(PopularServicesModel.class);
-                    //we will concat String name and Id
-                    //PIZZA_01 => and we will use pizza for show description, 01 for food id to click
-
                     image_list.put(banner.getName()+"@@@"+banner.getId(),banner.getImage());
                     Log.e("banner", image_list.toString() );
                 }
@@ -451,10 +419,6 @@ public class DashboardActivity extends AppCompatActivity
                             .setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
                                 @Override
                                 public void onSliderClick(BaseSliderView slider) {
-                                   /* Intent intent = new Intent(DashboardActivity.this,FoodDetails.class);
-                                    //send food id to food details
-                                    intent.putExtras(textSliderView.getBundle());
-                                    startActivity(intent);*/
 
                                     Snackbar.make(findViewById(R.id.swipe_refresh_layout), ""+NameofFood, Snackbar.LENGTH_LONG)
                                             .setAction("Action", null).show();
@@ -484,7 +448,5 @@ public class DashboardActivity extends AppCompatActivity
         mslider.setDuration(4000);
 
     }
-
-
 
 }
