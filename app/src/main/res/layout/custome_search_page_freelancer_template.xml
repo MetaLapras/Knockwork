@@ -209,13 +209,17 @@
                       <!--  android:drawableStart="@drawable/ic_thumb_up_black_24dp"-->
 
                         <info.hoang8f.widget.FButton
+                            android:id="@+id/btn_apply"
                             android:layout_width="wrap_content"
-                           android:layout_height="20dp"
+                           android:layout_height="30dp"
+                            android:layout_marginLeft="15dp"
+                            android:textColor="@color/white"
+                            android:text="Apply"
                             fbutton:buttonColor="@color/color_concrete"
                             fbutton:shadowColor="@color/black"
                             fbutton:shadowEnabled="true"
-                            fbutton:shadowHeight="5dp"
-                            fbutton:cornerRadius="5dp" />
+                            fbutton:shadowHeight="2dp"
+                            fbutton:cornerRadius="1dp" />
 
                     </LinearLayout>
                 </LinearLayout>
