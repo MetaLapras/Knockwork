@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/linear_search"
     android:orientation="vertical">
 
@@ -209,15 +209,23 @@
                         </LinearLayout>
                       <!--  android:drawableStart="@drawable/ic_thumb_up_black_24dp"-->
 
-                        <Button
+                        <info.hoang8f.widget.FButton
                             android:id="@+id/btn_apply"
-                            android:layout_width="wrap_content"
-                            android:layout_height="30dp"
                             android:text="@string/apply"
-                            android:textSize="13dp"
-                            android:textColor="@color/white"
-                            android:layout_marginLeft="10dp"
-                            android:background="@color/fbutton_color_peter_river"/>
+                            android:textColor="@android:color/white"
+                            android:layout_width="wrap_content"
+                            android:textAllCaps="false"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_height="30dp"
+                            android:shadowColor="@android:color/black"
+                            app:shadowEnabled="true"
+                            app:fButtonColor="@color/fbutton_color_peter_river"
+                            app:shadowHeight="1dp"
+                            app:cornerRadius="4dp"
+                            app:shadowColor="@android:color/black"
+                            />
+
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
