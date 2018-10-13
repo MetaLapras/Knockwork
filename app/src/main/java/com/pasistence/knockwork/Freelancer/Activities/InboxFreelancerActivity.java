@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Adapter.InboxListAdapter;
-import com.pasistence.knockwork.Employeer.Activities.InboxActivity;
 import com.pasistence.knockwork.Model.InboxDataModel;
 import com.pasistence.knockwork.R;
 

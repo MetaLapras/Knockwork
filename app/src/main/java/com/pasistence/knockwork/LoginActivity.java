@@ -18,7 +18,7 @@ import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.pasistence.knockwork.Employeer.Activities.DashboardActivity;
+import com.pasistence.knockwork.Client.Activities.DashboardActivity;
 import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboard;
 
 import java.util.Arrays;
@@ -156,20 +156,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void handleSignInResponse(int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
-            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
             switch (radioGroupWH.getCheckedRadioButtonId()){
                 case R.id.radio_button_hire:
-                    intent.putExtra("isLancer",false);
-                    intent.putExtra("isClient",true);
+                    Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
+                    startActivity(intent1);
+                    finish();
                     break;
+
                 case R.id.radio_button_work:
-                    intent.putExtra("isLancer",true);
-                    intent.putExtra("isClient",false);
+                    Intent intent2 = new Intent(LoginActivity.this, DashboardActivity.class);
+                    startActivity(intent2);
+                    finish();
                     break;
             }
 
-            startActivity(intent);
-            finish();
         }
         else
             Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show();
@@ -185,8 +185,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             try{
             if(!FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber().isEmpty())
             {
-                startActivity(new Intent(LoginActivity.this,FreeLancerDashboard.class).putExtra("phone",FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()));
-                finish();
+
+                switch (radioGroupWH.getCheckedRadioButtonId()){
+                    case R.id.radio_button_hire:
+                        Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
+                        startActivity(intent1);
+                        finish();
+                        break;
+
+                    case R.id.radio_button_work:
+                        Intent intent2 = new Intent(LoginActivity.this, DashboardActivity.class);
+                        startActivity(intent2);
+                        finish();
+                        break;
+                }
+
+//                startActivity(new Intent(LoginActivity.this,FreeLancerDashboard.class).putExtra("phone",FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()));
+//                finish();
                 return;
             }
             else

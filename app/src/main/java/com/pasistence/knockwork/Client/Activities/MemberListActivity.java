@@ -1,9 +1,7 @@
-package com.pasistence.knockwork.Employeer.Activities;
+package com.pasistence.knockwork.Client.Activities;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 

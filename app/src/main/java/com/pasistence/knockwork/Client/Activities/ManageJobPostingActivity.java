@@ -1,13 +1,10 @@
-package com.pasistence.knockwork.Employeer.Activities;
+package com.pasistence.knockwork.Client.Activities;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 
 import com.mancj.materialsearchbar.MaterialSearchBar;
 

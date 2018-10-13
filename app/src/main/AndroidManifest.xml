@@ -21,7 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Employeer.Activities.SplashActivity">
+        <activity android:name=".Client.Activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,19 +29,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Employeer.Activities.DashboardActivity"
+            android:name=".Client.Activities.DashboardActivity"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Employeer.Activities.MemberListActivity" />
+        <activity android:name=".Client.Activities.MemberListActivity" />
         <activity
-            android:name=".Employeer.Activities.InboxActivity"
+            android:name=".Client.Activities.InboxActivity"
             android:label="@string/title_activity_inbox"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Employeer.Activities.LancerListActivity" />
+        <activity android:name=".Client.Activities.LancerListActivity" />
         <activity
-            android:name=".Employeer.Activities.SettingActivity"
+            android:name=".Client.Activities.SettingActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Employeer.Activities.ManageJobPostingActivity" />
+        <activity android:name=".Client.Activities.ManageJobPostingActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".PhonNumberSignInActivity" />
         <activity android:name=".SignInActivity" />

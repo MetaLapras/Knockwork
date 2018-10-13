@@ -1,4 +1,4 @@
-package com.pasistence.knockwork.Employeer.Activities;
+package com.pasistence.knockwork.Client.Activities;
 
 import android.content.Intent;
 import android.content.pm.PackageInfo;
