@@ -78,11 +78,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-<<<<<<< HEAD
+
         if (v == buttonEmail) {
             startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), EMAIL_LOGIN);
-=======
-        if(v == btn_phone)
+
+        if(v == buttonPhone)
         {
             AuthUI.IdpConfig phoneConfigWithDefaultNumber = new AuthUI.IdpConfig.PhoneBuilder()
                     .setDefaultNumber("+91")
@@ -96,22 +96,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
         }
-        if (v == btn_email)
+        if (v == buttonEmail)
         {
             startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
                     .build(), PRE_LOGIN);
->>>>>>> 04291b5fb6020a071abb564d573d79eb6122562d
+
         }
         if (v==buttonGmail){
             AuthUI.IdpConfig googleIdp = new AuthUI.IdpConfig.GoogleBuilder()
                     .build();
 
-<<<<<<< HEAD
+
             startActivityForResult(AuthUI.getInstance()
                     .createSignInIntentBuilder()
                     .setAvailableProviders(Arrays.asList(googleIdp))
                     .build(), GMAIL_LOGIN);
-=======
+
 
             startActivityForResult(
                     AuthUI.getInstance()
@@ -120,7 +120,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             .build(), PRE_LOGIN);
 
 
->>>>>>> 04291b5fb6020a071abb564d573d79eb6122562d
+
         }
 
         if (v==buttonFacebook) {
@@ -129,12 +129,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             AuthUI.IdpConfig facebookIdp = new AuthUI.IdpConfig.FacebookBuilder()
                     .build();
 
-<<<<<<< HEAD
+
             startActivityForResult(AuthUI.getInstance()
                     .createSignInIntentBuilder()
                     .setAvailableProviders(Arrays.asList(facebookIdp))
                     .build(),FACEBOOK_LOGIN);
-=======
+
             startActivityForResult(
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             .build(),PRE_LOGIN);
 
 
->>>>>>> 04291b5fb6020a071abb564d573d79eb6122562d
+
         }
 
         if(v == buttonPhone) {
@@ -252,8 +252,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-<<<<<<< HEAD
-=======
     private void handleSignInResponse(int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             Intent newActivity = new Intent(LoginActivity.this, DashboardActivity.class);
@@ -264,5 +262,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         else
             Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show();
     }
->>>>>>> 04291b5fb6020a071abb564d573d79eb6122562d
+
 }
