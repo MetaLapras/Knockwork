@@ -53,5 +53,16 @@
     <string name="title_activity_free_lancer_dashboard">FreeLancerDashboard</string>
     <string name="title_activity_free_lancer_dashboard_bids">Manage Bids</string>
     <string name="title_activity_manage_bids">ManageBidsActivity</string>
+    <string name="title_activity_freelancer_jobs">FreelancerJobsActivity</string>
+    <string name="title_activity_freelancer_job_description">FreelancerJobDescriptionActivity
+    </string>
+
+
+    <string-array name="milestones">
+        <item>Select</item>
+        <item>As per Place holder Bid</item>
+        <item>As per Daily Basis</item>
+        <item>According to Hours</item>
+    </string-array>
 
 </resources>

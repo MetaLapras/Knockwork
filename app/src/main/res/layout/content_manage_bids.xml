@@ -200,93 +200,96 @@
             android:layout_height="wrap_content"
             android:elevation="10dp"
             android:layout_centerInParent="true">
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-    <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="10dp"
-        android:layout_margin="5dp"
-        app:cardCornerRadius="5dp">
-
-        <TextView
+        <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="All Time"
-            android:textColor="@color/colorPrimary"
-            android:textAlignment="center"
-            android:textSize="@dimen/text_size_medium"
-            />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="700"
-            android:textAlignment="center"
-            android:textSize="60sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="10dp"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="5dp">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="10dp"
-        android:layout_margin="5dp"
-        app:cardCornerRadius="5dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="All Time"
+                        android:textColor="@color/colorPrimary"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/text_size_medium"
+                        />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Last 30 Days"
-            android:textColor="@color/colorPrimary"
-            android:textAlignment="center"
-            android:textSize="@dimen/text_size_medium"
-            />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:text="700"
+                        android:textAlignment="center"
+                        android:textSize="60sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="160"
-            android:textAlignment="center"
-            android:textSize="60sp" />
+                </android.support.v7.widget.CardView>
 
-    </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="10dp"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="5dp">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="10dp"
-        android:layout_margin="5dp"
-        app:cardCornerRadius="5dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Last 30 Days"
+                        android:textColor="@color/colorPrimary"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/text_size_medium"
+                        />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="30 Days Average"
-            android:textColor="@color/colorPrimary"
-            android:textAlignment="center"
-            android:textSize="@dimen/text_size_medium"
-            />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:text="160"
+                        android:textAlignment="center"
+                        android:textSize="60sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="20.50%"
-            android:textAlignment="center"
-            android:textSize="60sp" />
+                </android.support.v7.widget.CardView>
 
-    </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:elevation="10dp"
+                            app:cardCornerRadius="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="30 Days Average"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/text_size_medium" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="25dp"
+                                android:text="20.50%"
+                                android:textAlignment="center"
+                                android:textSize="60sp" />
+
+                        </android.support.v7.widget.CardView>
 
 
-</LinearLayout>
+            </LinearLayout>
 
+        </HorizontalScrollView>
 
         </android.support.v7.widget.CardView>
 

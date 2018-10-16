@@ -54,6 +54,16 @@
         <activity
             android:name=".Freelancer.Activities.ManageBidsActivity"
             android:label="@string/title_activity_manage_bids"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Freelancer.Activities.FreelancerJobsActivity"
+            android:label="@string/title_activity_freelancer_jobs"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Freelancer.Activities.FreelancerJobDescriptionActivity"
+            android:label="@string/title_activity_freelancer_job_description"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Freelancer.Activities.SubmitProposalActivity"
             android:theme="@style/AppTheme"></activity>
     </application>
 

@@ -70,6 +70,7 @@ public class FreeLancerDashboard extends AppCompatActivity
     HashMap<String,String> image_list;
     SliderLayout mslider;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +78,7 @@ public class FreeLancerDashboard extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mInit();
+
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -203,6 +205,8 @@ public class FreeLancerDashboard extends AppCompatActivity
                         // Toast.makeText(mContext,""+clickitem.getHead(),Toast.LENGTH_LONG).show();
                         Snackbar.make(view, ""+clickitem.getHead(), Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
+
+                        startActivity(new Intent(mContext,FreelancerJobsActivity.class));
                     }
                 });
             }
@@ -278,7 +282,7 @@ public class FreeLancerDashboard extends AppCompatActivity
 
     }
 
-    private void mInit() {
+    public void mInit() {
         mContext = FreeLancerDashboard.this;
 
         refreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
@@ -346,21 +350,23 @@ public class FreeLancerDashboard extends AppCompatActivity
         } else if (id == R.id.nav_inbox) {
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
-           // startActivity(new Intent(mContext,InboxActivity.class));
-
+            startActivity(new Intent(mContext,InboxActivity.class));
 
         } else if (id == R.id.nav_notification) {
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Notification", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
 
         } else if (id == R.id.nav_manage) {
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage Bids", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage Bids", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
             startActivity(new Intent(mContext,ManageBidsActivity.class));
 
         } else if (id == R.id.nav_active) {
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Active Jobs", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Active Jobs", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
+
+            startActivity(new Intent(mContext,FreelancerJobsActivity.class));
+
 
         } else if (id == R.id.nav_proposal) {
             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Submit a Proposal", Snackbar.LENGTH_LONG)
