@@ -60,6 +60,8 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
     public DatabaseReference Top_dataReference ;
     public MaterialSearchBar SearchBar;
 
+
+
     // FirebaseRecyclerAdapter<PopularServicesModel,ViewHolderPopularServices> popularAdapter;
     FirebaseRecyclerAdapter<TopServicesModel,ViewHolderTopServices> TopServiceAdapter;
 
