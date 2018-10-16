@@ -42,9 +42,12 @@ public class Common {
         return false;
     }
 
+
+
     public static void InitFirebase(String datareference){
         //init Fire base
         database = FirebaseDatabase.getInstance();
+
 
         switch (datareference){
             case "popular":

@@ -132,5 +132,16 @@
     <string name="title_activity_freelancer_setting">FreelancerSettingActivity</string>
     <string name="more">More</string>
 
+    <string name="title_activity_freelancer_jobs">FreelancerJobsActivity</string>
+    <string name="title_activity_freelancer_job_description">FreelancerJobDescriptionActivity
+    </string>
+
+
+    <string-array name="milestones">
+        <item>Select</item>
+        <item>As per Place holder Bid</item>
+        <item>As per Daily Basis</item>
+        <item>According to Hours</item>
+    </string-array>
 
 </resources>

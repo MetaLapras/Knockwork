@@ -60,12 +60,15 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
     public DatabaseReference Top_dataReference ;
     public MaterialSearchBar SearchBar;
 
+
+
     // FirebaseRecyclerAdapter<PopularServicesModel,ViewHolderPopularServices> popularAdapter;
     FirebaseRecyclerAdapter<TopServicesModel,ViewHolderTopServices> TopServiceAdapter;
 
     //Sliders
     HashMap<String,String> image_list;
     SliderLayout mslider;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,8 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         mInit();
 
 
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,6 +207,10 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
                          //       .setAction("Action", null).show();
 
                         startActivity(new Intent(mContext,SearchFreelancerActivity.class));
+                        Snackbar.make(view, ""+clickitem.getHead(), Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+
+                        startActivity(new Intent(mContext,FreelancerJobsActivity.class));
                     }
                 });
             }
@@ -278,7 +287,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
     }
 
     private void mInit() {
-        mContext = FreeLancerDashboardActivity.this;
+        mContext = FreeLancerDashboard.this;
 
         refreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
 
@@ -349,6 +358,9 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
                     .setAction("Action", null).show();*/
            // startActivity(new Intent(mContext,InboxActivity.class));
 
+            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+            startActivity(new Intent(mContext,InboxActivity.class));
 
         } else if (id == R.id.nav_notification) {
             /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Notification", Snackbar.LENGTH_LONG)
@@ -357,6 +369,8 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
             /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage Bids", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();*/
+//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage Bids", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
             startActivity(new Intent(mContext,ManageBidsActivity.class));
 
         } else if (id == R.id.nav_active) {
@@ -365,6 +379,11 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage_jobs) {
            /* Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Job Posting", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();*/
+//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Active Jobs", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
+
+            startActivity(new Intent(mContext,FreelancerJobsActivity.class));
+
 
         } else if (id == R.id.nav_proposal) {
             /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Submit a Proposal", Snackbar.LENGTH_LONG)
