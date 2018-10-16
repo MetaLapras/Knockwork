@@ -16,7 +16,7 @@ import java.util.List;
 
 public class LancerListAdapter extends RecyclerView.Adapter<ViewHolderFreeLancerList> {
 
-    Context mContext;
+    public Context mContext;
     List<LancerListModel> lancerArraylist ;
 
 

@@ -135,6 +135,12 @@
     <string name="title_activity_freelancer_jobs">FreelancerJobsActivity</string>
     <string name="title_activity_freelancer_job_description">FreelancerJobDescriptionActivity
     </string>
+    <string name="chattingmessage">Your Chatting Message..</string>
+    <string name="chatting_text">Write here</string>
+    <string name="timeline" >Timeline of Projects</string>
+    <string name="amount" >Amount : </string>
+    <string name="hiredamount">- $200</string>
+    <string name="web" >Web development</string>
 
 
     <string-array name="milestones">

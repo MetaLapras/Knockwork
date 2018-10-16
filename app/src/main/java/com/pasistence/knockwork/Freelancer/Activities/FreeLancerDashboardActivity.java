@@ -35,6 +35,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mancj.materialsearchbar.MaterialSearchBar;
+import com.pasistence.knockwork.Client.Activities.InboxActivity;
 import com.pasistence.knockwork.Common.Common;
 
 import com.pasistence.knockwork.Client.Activities.LancerListActivity;
@@ -287,7 +288,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
     }
 
     private void mInit() {
-        mContext = FreeLancerDashboard.this;
+        mContext = FreeLancerDashboardActivity.this;
 
         refreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
 

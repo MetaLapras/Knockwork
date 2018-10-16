@@ -76,11 +76,14 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".Client.Activities.ManageJobPostActivity"
-            android:label="@string/title_activity_manage_job_post"/>
+            android:label="@string/title_activity_manage_job_post" />
         <activity
             android:name=".Freelancer.Activities.FreelancerSettingActivity"
             android:label="@string/title_activity_freelancer_setting"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Client.Activities.ChattingActivity" />
+        <activity android:name=".Client.Activities.ChattingMessageActivity" />
+        <activity android:name=".Client.Activities.ClientJobRequest"></activity>
     </application>
 
 </manifest>

@@ -114,6 +114,7 @@ public class ManageJobPostActivity extends AppCompatActivity
                     isScrolling = false;
                     fetchData();
                 }
+              //  isScrolling = true;
             }
         });
 
