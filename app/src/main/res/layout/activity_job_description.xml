@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/job_description_freelancer"
+    tools:context=".Freelancer.Activities.JobDescriptionActivity">
+
+   <android.support.v7.widget.CardView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_margin="10dp">
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical"
+       android:layout_margin="10dp">
+      <TextView
+          android:id="@+id/txt_job_name"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/JobName"
+          android:textSize="19dp"
+          android:layout_margin="5dp"
+          android:textColor="@color/fbutton_color_belize_hole"/>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+         <TextView
+             android:id="@+id/txt_job_posted"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/poasted"
+             android:textSize="13dp"
+             android:layout_marginLeft="5dp"
+             android:layout_marginTop="10dp"/>
+         <View
+             android:layout_width="2dp"
+             android:layout_height="18dp"
+             android:layout_gravity="center"
+             android:layout_marginTop="8sp"
+             android:layout_marginLeft="10dp"
+             android:background="#31acf4" />
+         <TextView
+             android:id="@+id/txt_quotes"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/quotesfreelancer"
+             android:textSize="13dp"
+             android:layout_marginLeft="10dp"
+             android:layout_marginTop="10dp"/>
+      </LinearLayout>
+
+      <View
+          android:layout_width="350dp"
+          android:layout_height="2dp"
+          android:layout_gravity="center"
+          android:layout_marginTop="12sp"
+          android:foregroundGravity="center"
+          android:background="#78858c" />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:orientation="horizontal">
+         <LinearLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_margin="10dp"
+             android:gravity="center"
+             android:orientation="vertical">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_duration"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_watch_later_black_24dp"/>
+            <TextView
+                android:id="@+id/txt_dutation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/duration"
+                android:textColor="@color/fbutton_color_peter_river"
+                android:textSize="17dp"/>
+
+            <TextView
+                android:id="@+id/txt_duration_range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/durationinmonths"
+                android:textSize="15dp"
+                android:textColor="@color/black"/>
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_margin="10dp"
+             android:gravity="center"
+             android:orientation="vertical">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_budget"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:src="@drawable/curr"/>
+            <TextView
+                android:id="@+id/txt_budget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/budget"
+                android:textColor="@color/fbutton_color_peter_river"
+                android:textSize="17dp"/>
+
+            <TextView
+                android:id="@+id/txt_budget_range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rangeprice"
+                android:textSize="15dp"
+                android:textColor="@color/black"/>
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_margin="10dp"
+             android:gravity="center"
+             android:orientation="vertical">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_jobtype"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:src="@drawable/jobtype"/>
+            <TextView
+                android:id="@+id/txt_job_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/jobtype"
+                android:textColor="@color/fbutton_color_peter_river"
+                android:textSize="17dp"/>
+
+            <TextView
+                android:id="@+id/txt_job_project_based"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/projectBased"
+                android:textSize="15dp"
+                android:textColor="@color/black"/>
+         </LinearLayout>
+      </LinearLayout>
+
+      <TextView
+          android:id="@+id/txt_description"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="2dp"
+          android:text="@string/description"/>
+
+      <TextView
+          android:id="@+id/txt_description1"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="30dp"
+          android:layout_marginRight="7dp"
+          android:text="@string/description1"/>
+      <TextView
+          android:id="@+id/txt_description2"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:text="@string/description1"/>
+      <TextView
+          android:id="@+id/txt_description3"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:text="@string/description1"/>
+      <TextView
+          android:id="@+id/txt_description4"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:text="@string/description1"/>
+
+
+      <TextView
+          android:id="@+id/txt_required_skill"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/requird_skills"
+          android:layout_marginTop="10dp"
+          android:textSize="18dp"
+          android:textColor="@color/fbutton_color_peter_river"/>
+
+      <LinearLayout
+          android:layout_marginTop="10dp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+         <TextView
+             android:id="@+id/txt_skill1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/Photoshop"
+             android:textColor="@color/white"
+             android:background="#878c91"/>
+
+          <TextView
+              android:id="@+id/txt_skill2"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="10dp"
+              android:background="#878c91"
+              android:text="@string/illustrator"
+              android:textColor="@color/white" />
+         <TextView
+             android:id="@+id/txt_skill3"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/Editor"
+             android:layout_marginLeft="10dp"
+             android:textColor="@color/white"
+             android:background="#878c91"/>
+
+         <TextView
+             android:id="@+id/txt_skill4"
+             android:layout_width="wrap_content"
+             android:layout_height="match_parent"
+             android:layout_marginLeft="10dp"
+             android:background="#878c91"
+             android:textColor="@color/white"
+             android:text="@string/Designer" />
+      </LinearLayout>
+
+      <View
+          android:layout_width="350dp"
+          android:layout_height="2dp"
+          android:layout_gravity="center"
+          android:layout_marginTop="12sp"
+          android:foregroundGravity="center"
+          android:background="#78858c" />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:layout_marginBottom="10dp"
+          android:orientation="horizontal">
+
+         <de.hdodenhof.circleimageview.CircleImageView
+             android:id="@+id/circularImage_profile"
+             android:layout_width="40dp"
+             android:layout_height="50dp"
+             android:layout_margin="7dp"
+             android:src="@drawable/person" />
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="2dp"
+             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_name_lancer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Jaime Lindsey"
+                android:textColor="@color/fbutton_color_belize_hole"
+                android:textSize="19dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+               <TextView
+                   android:id="@+id/txt_lancer_state"
+                   android:layout_width="wrap_content"
+                   android:layout_height="18dp"
+                   android:layout_marginTop="6dp"
+                   android:text="@string/country"
+                   android:textColor="@color/black"
+                   android:textSize="13dp" />
+
+               <View
+                   android:layout_width="2dp"
+                   android:layout_height="18dp"
+                   android:layout_gravity="center"
+                   android:layout_marginLeft="10dp"
+                   android:layout_marginTop="4sp"
+                   android:background="#31acf4" />
+
+               <TextView
+                   android:id="@+id/txt_lancer_earing"
+                   android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:layout_marginLeft="10dp"
+                   android:layout_marginTop="6dp"
+                   android:text="@string/moneyearned"
+                   android:textColor="@color/black"
+                   android:textSize="13dp" />
+
+               <View
+                   android:layout_width="2dp"
+                   android:layout_height="match_parent"
+                   android:layout_gravity="center"
+                   android:layout_marginLeft="10dp"
+                   android:layout_marginTop="4sp"
+                   android:background="#31acf4" />
+
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center"
+                   android:layout_marginLeft="10dp"
+                   android:layout_marginTop="4dp"
+                   android:background="@color/fbutton_color_peter_river"
+                   android:orientation="horizontal">
+                   <ImageView
+                      android:layout_width="16dp"
+                      android:layout_height="20dp"
+                      android:src="@drawable/ic_thumb_up_black_24dp" />
+
+                  <TextView
+                      android:id="@+id/txt_lancer_per"
+                      android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:layout_marginLeft="5dp"
+                     android:gravity="center"
+                      android:text="@string/feedback"
+                      android:textColor="@color/white"
+                      android:textSize="13dp" />
+<!--
+                  android:drawableStart="@drawable/ic_thumb_up_black_24dp"
+-->
+               </LinearLayout>
+            </LinearLayout>
+         </LinearLayout>
+      </LinearLayout>
+
+
+
+   </LinearLayout>
+   </android.support.v7.widget.CardView>
+</ScrollView>

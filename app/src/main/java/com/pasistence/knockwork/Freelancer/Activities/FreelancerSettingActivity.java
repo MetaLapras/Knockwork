@@ -1,0 +1,138 @@
+package com.pasistence.knockwork.Freelancer.Activities;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.view.View;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.pasistence.knockwork.R;
+
+public class FreelancerSettingActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
+    public TextView txtPaymentSetting,txtManageCashAccount,txtTransactionFee,txtPaymentMethod,txtGeneral,txtNotification,txtAbout,txtAboutUs,txtTermsOfServices,txtVersion;
+    Context mContext;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_freelancer_setting);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });*/
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+
+
+        mInit();
+    }
+
+    private void mInit() {
+        mContext             = (FreelancerSettingActivity.this);
+        txtPaymentSetting    = (TextView)findViewById(R.id.setting_payment);
+        txtManageCashAccount = (TextView)findViewById(R.id.setting_manage_cash);
+        txtTransactionFee    = (TextView)findViewById(R.id.setting_transaction);
+        txtPaymentMethod     = (TextView)findViewById(R.id.setting_addEdit_payment);
+        txtGeneral           = (TextView)findViewById(R.id.setting_general);
+        txtNotification      = (TextView)findViewById(R.id.setting_notification);
+        txtAbout             = (TextView)findViewById(R.id.setting_about);
+        txtAboutUs           = (TextView)findViewById(R.id.setting_aboutus);
+        txtTermsOfServices   = (TextView)findViewById(R.id.setting_termsofServices);
+        txtVersion           = (TextView)findViewById(R.id.setting_version);
+    }
+
+
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.freelancer_setting, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_home) {
+            startActivity(new Intent(mContext,FreeLancerDashboardActivity.class));
+
+        } else if (id == R.id.nav_inbox) {
+            startActivity(new Intent(mContext,FreelancerInboxActivity.class));
+
+
+        } else if (id == R.id.nav_notification) {
+
+        } else if (id == R.id.nav_manage) {
+            startActivity(new Intent(mContext,ManageBidsActivity.class));
+
+        } else if (id == R.id.nav_active) {
+
+        } else if (id == R.id.nav_manage_jobs) {
+            startActivity(new Intent(mContext,JobPoastingActivity.class));
+
+        } else if (id == R.id.nav_proposal) {
+
+        }else if (id == R.id.nav_settings) {
+
+        }else if (id == R.id.nav_support) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+}

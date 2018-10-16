@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.pasistence.knockwork.Employeer.Activities.DashboardActivity;
+import com.pasistence.knockwork.Client.Activities.DashboardActivity;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.rey.material.widget.CheckBox;
 

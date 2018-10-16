@@ -6,9 +6,19 @@ import android.net.NetworkInfo;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.pasistence.knockwork.Remote.MyApi;
+import com.pasistence.knockwork.Remote.RetrofitClient;
 
 
 public class Common {
+   // private static final String BASE_URL = "http://192.168.0.151/mantra/public/index.php/api/";
+    //private static final String BASE_URL = "http://ip.jsontest.com/";
+
+    public static final String BASE_URL = "http://192.168.0.100/";
+
+    public static MyApi getApi(){
+        return RetrofitClient.getClient(BASE_URL).create(MyApi.class);
+    }
 
     public static FirebaseDatabase database;
     public static DatabaseReference databaseReference ;

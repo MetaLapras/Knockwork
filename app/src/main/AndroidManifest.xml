@@ -4,6 +4,8 @@
     package="com.pasistence.knockwork">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!-- for facebook application id -->
     <meta-data
@@ -12,13 +14,14 @@
         tools:replace="android:value" />
 
     <application
+        android:name=".ChatBox.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Employeer.Activities.SplashActivity">
+        <activity android:name=".Client.Activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,44 +29,57 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Employeer.Activities.DashboardActivity"
+            android:name=".Client.Activities.DashboardActivity"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Employeer.Activities.MemberListActivity" />
+        <activity android:name=".Client.Activities.MemberListActivity" />
         <activity
-            android:name=".Employeer.Activities.InboxActivity"
+            android:name=".Client.Activities.InboxActivity"
             android:label="@string/title_activity_inbox"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Employeer.Activities.LancerListActivity" />
+        <activity android:name=".Client.Activities.LancerListActivity" />
         <activity
-            android:name=".Employeer.Activities.SettingActivity"
+            android:name=".Client.Activities.SettingActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Employeer.Activities.ManageJobPostingActivity" />
+        <activity android:name=".Client.Activities.ManageJobPostingActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".PhonNumberSignInActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".SignUpEmailActivity" />
+        <!-- <activity -->
+        <!-- android:name=".Freelancer.Activities.SearchPageFreelancerActivity" -->
+        <!-- android:label="@string/title_activity_search_page_freelancer" -->
+        <!-- android:theme="@style/AppTheme" /> -->
         <activity
-            android:name=".Freelancer.Activities.SearchPageFreelancerActivity"
-            android:label="@string/title_activity_search_page_freelancer"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".Freelancer.Activities.FreeLancerDashboard"
+            android:name=".Freelancer.Activities.FreeLancerDashboardActivity"
             android:label="@string/title_activity_free_lancer_dashboard"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".Freelancer.Activities.ManageBidsActivity"
             android:label="@string/title_activity_manage_bids"
             android:theme="@style/AppTheme" />
+        <activity android:name=".ChatBox.ChatActivity" />
+        <activity android:name=".Freelancer.Activities.JobDescriptionActivity" />
         <activity
-            android:name=".Freelancer.Activities.FreelancerJobsActivity"
-            android:label="@string/title_activity_freelancer_jobs"
+            android:name=".Freelancer.Activities.SearchFreelancerActivity"
+            android:label="@string/title_activity_search_freelancer"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Freelancer.Activities.SettingFreelancerActivity" />
+        <activity android:name=".Freelancer.Activities.JobPoastingActivity" />
+        <activity
+            android:name=".Freelancer.Activities.FreelancerInboxActivity"
+            android:label="@string/title_activity_freelancer_inbox"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Freelancer.Activities.FreelancerJobDescriptionActivity"
-            android:label="@string/title_activity_freelancer_job_description"
+            android:name=".Client.Activities.LancersActivity"
+            android:label="@string/title_activity_lancers"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Freelancer.Activities.SubmitProposalActivity"
+        <activity
+            android:name=".Client.Activities.ManageJobPostActivity"
+            android:label="@string/title_activity_manage_job_post"/>
+        <activity
+            android:name=".Freelancer.Activities.FreelancerSettingActivity"
+            android:label="@string/title_activity_freelancer_setting"
             android:theme="@style/AppTheme"></activity>
     </application>
 

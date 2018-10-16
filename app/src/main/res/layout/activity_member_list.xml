@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/member_list"
-    tools:context=".Employeer.Activities.MemberListActivity">
+    tools:context=".Client.Activities.MemberListActivity">
 
     <com.mancj.materialsearchbar.MaterialSearchBar
         android:layout_width="match_parent"

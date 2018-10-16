@@ -1,5 +1,6 @@
 package com.pasistence.knockwork.Freelancer.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +18,9 @@ import com.pasistence.knockwork.R;
 
 public class SearchPageFreelancerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public SearchPageFreelancerActivity(String web_designing, String fixed_price, String s, String s1, String s2, String s3, String s4, String jimey_lindsy, String united_state, String s5, String s6) {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,7 @@ public class SearchPageFreelancerActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
+            startActivity(new Intent(SearchPageFreelancerActivity.this,JobDescriptionActivity.class));
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 

@@ -22,8 +22,8 @@ public class SignUpEmailActivity extends AppCompatActivity implements View.OnCli
 
     private static String aaa;
     private static final String TAG =aaa ;
-    TextView txt_email,txt_status,txt_uid;
-    Button btn_send,btn_refresh,btn_Signout;
+    TextView textViewEmail,textViewStatus,textViewUID;
+    Button buttonSend,buttonRefresh,buttonSignOut;
     ImageView imageView;
     private FirebaseAuth firebaseAuth;
 
@@ -32,56 +32,53 @@ public class SignUpEmailActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_email);
-
         firebaseAuth = FirebaseAuth.getInstance();
         mInit();
         setInfo();
-        monClick();
+        mOnClick();
     }
 
 
     private void mInit() {
 
 
-            txt_email    = (TextView) findViewById(R.id.txt_email);
-            txt_status   = (TextView) findViewById(R.id.txt_status);
-            txt_uid      = (TextView) findViewById(R.id.txt_uid);
-            btn_send     = (Button) findViewById(R.id.btn_send);
-            btn_refresh  = (Button) findViewById(R.id.btn_refresh);
-            imageView    = (ImageView) findViewById(R.id.img);
-            btn_Signout  = (Button) findViewById(R.id.btn_logout);
-        }
+            textViewEmail    = (TextView) findViewById(R.id.txt_email);
+            textViewStatus   = (TextView) findViewById(R.id.txt_status);
+            textViewUID      = (TextView) findViewById(R.id.txt_uid);
+            buttonSend       = (Button) findViewById(R.id.btn_send);
+            buttonRefresh    = (Button) findViewById(R.id.btn_refresh);
+            buttonSignOut    = (Button) findViewById(R.id.btn_logout);
+            imageView        = (ImageView) findViewById(R.id.img);
+            }
 
-    private void monClick() {
-        btn_send.setOnClickListener(this);
-        btn_refresh.setOnClickListener(this);
-        btn_Signout.setOnClickListener(this);
+    private void mOnClick() {
+        buttonSignOut.setOnClickListener(this);
+        buttonSend.setOnClickListener(this);
+        buttonRefresh.setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View v) {
-        if (v == btn_send) {
-            btn_send.setEnabled(false);
+        if (v == buttonSend) {
+            buttonSend.setEnabled(false);
 
             FirebaseAuth.getInstance().getCurrentUser()
                     .sendEmailVerification()
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            btn_send.setEnabled(true);
+                            buttonSend.setEnabled(true);
 
                             if (task.isSuccessful())
                                 Toast.makeText(SignUpEmailActivity.this, "Verification email sent to : " + FirebaseAuth.getInstance().getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
-                                //Toast.makeText(Status.this, "task complete", Toast.LENGTH_SHORT).show();
-
                             else
                                 Toast.makeText(SignUpEmailActivity.this, "Failed to send verification email", Toast.LENGTH_SHORT).show();
                         }
                     });
         }
 
-        if (v == btn_refresh) {
+        if (v == buttonRefresh) {
             FirebaseAuth.getInstance().getCurrentUser()
                     .reload()
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -92,63 +89,11 @@ public class SignUpEmailActivity extends AppCompatActivity implements View.OnCli
                     });
         }
 
-        if (v==btn_Signout)
+        if (v==buttonSignOut)
         {
             signOut();
         }
     }
-
-
-
-
-
-      /*  btn_Signout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
-            }
-        });*/
-
-        //Set Event
-      /*  btn_send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btn_send.setEnabled(false);
-
-                FirebaseAuth.getInstance().getCurrentUser()
-                        .sendEmailVerification()
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                btn_send.setEnabled(true);
-
-                                if (task.isSuccessful())
-                                    Toast.makeText(SignUpEmailActivity.this, "Verification email sent to : "+FirebaseAuth.getInstance().getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
-                                    //Toast.makeText(Status.this, "task complete", Toast.LENGTH_SHORT).show();
-
-                                else
-                                    Toast.makeText(SignUpEmailActivity.this, "Failed to send verification email", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            }
-        });*/
-
-       /* btn_refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().getCurrentUser()
-                        .reload()
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                setInfo();
-                            }
-                        });
-            }
-        });
-    }*/
-
-
 
     public void signOut() {
         AuthUI.getInstance().signOut(this)
@@ -178,21 +123,13 @@ public class SignUpEmailActivity extends AppCompatActivity implements View.OnCli
             }
             if (user.getDisplayName() !=null)
             {
-                //txt_uid.setText(user.getDisplayName());
-                txt_email.setText(new StringBuilder("EMAIL : ").append(user.getEmail()));
-                txt_uid.setText(new StringBuilder("UID : ").append(user.getUid()));
-                txt_status.setText(new StringBuilder("STATUS : ").append(String.valueOf(user.isEmailVerified())));
+                textViewEmail.setText(new StringBuilder("EMAIL : ").append(user.getEmail()));
+                textViewUID.setText(new StringBuilder("UID : ").append(user.getUid()));
+                textViewStatus.setText(new StringBuilder("STATUS : ").append(String.valueOf(user.isEmailVerified())));
+
             }
 
         }
-
-
-      /*  Log.e("-->user", user.getPhotoUrl().getPath());
-        Log.e("-->user", user.getDisplayName());*/
-       /* Log.e("-->user", user.getProviderData().toString());
-        for (Iterator iterator = user.getProviderData().iterator(); iterator.hasNext(); ){
-            Log.e("-->as", iterator.next().toString());
-    }))));*/
 
     }
 
