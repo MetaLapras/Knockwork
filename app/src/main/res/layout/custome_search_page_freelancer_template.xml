@@ -213,16 +213,21 @@
                         <info.hoang8f.widget.FButton
                             android:id="@+id/btn_apply"
                             android:layout_width="wrap_content"
-                           android:layout_height="30dp"
-                            android:layout_marginLeft="15dp"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
+                            android:layout_height="35dp"
+                            android:layout_marginLeft="8dp"
+                            android:background="@drawable/rectangle_border"
                             android:text="Apply"
-                            fbutton:buttonColor="@color/fbutton_color_belize_hole"
-                            fbutton:shadowColor="@color/black"
-                            fbutton:shadowEnabled="true"
-                            fbutton:shadowHeight="2dp"
-                            fbutton:cornerRadius="0dp" />
+                            android:textSize="17dp"
+                            android:textColor="@android:color/white"
+                            android:textAllCaps="false"
+                            android:shadowColor="@android:color/white"
+                            app:shadowEnabled="true"
+                            app:fButtonColor="@color/fbutton_color_peter_river"
+                            app:shadowHeight="2dp"
+                            app:cornerRadius="3dp"
+                            app:shadowColor="@android:color/black"
+                            android:layout_marginRight="5dp"
+                             />
 
                     </LinearLayout>
                 </LinearLayout>

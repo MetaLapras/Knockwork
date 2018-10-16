@@ -199,7 +199,7 @@ public class SearchFreelancerActivity extends AppCompatActivity implements Navig
         } else if (id == R.id.nav_active) {
 
         } else if (id == R.id.nav_manage_jobs) {
-            startActivity(new Intent(SearchFreelancerActivity.this,JobPoastingActivity.class));
+    //        startActivity(new Intent(SearchFreelancerActivity.this,JobPoastingActivity.class));
 
         } else if (id == R.id.nav_proposal) {
 

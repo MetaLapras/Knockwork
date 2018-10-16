@@ -141,28 +141,76 @@
                 android:gravity="center"
                 android:layout_margin="5dp">
 
-                <Button
-                    android:id="@+id/btn_message_lancer"
+                <!--<Button-->
+                    <!--android:id="@+id/btn_message_lancer"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/rectangle_border"-->
+                    <!--android:text="Message"-->
+                    <!--android:textAllCaps="false"-->
+                    <!--android:textSize="16dp" />-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <info.hoang8f.widget.FButton
+                        android:id="@+id/btn_message_lancer"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rectangle_border"
+                        android:text="Message"
+                        android:textSize="17dp"
+
+                        android:textColor="@android:color/black"
+                        android:textAllCaps="false"
+                        android:shadowColor="@android:color/black"
+                        app:shadowEnabled="true"
+                        app:fButtonColor="#fff"
+                        app:shadowHeight="3dp"
+                        app:cornerRadius="3dp"
+                        app:shadowColor="@android:color/black"
+                        android:layout_marginRight="5dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                <info.hoang8f.widget.FButton
+                    android:id="@+id/btn_hire_lancer"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:background="@drawable/rectangle_border"
-                    android:text="Message"
-                    android:textAllCaps="false"
-                    android:textSize="16dp" />
-
-
-                <Button
-                    android:id="@+id/btn_hire_lancer"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:background="@color/fbutton_color_peter_river"
                     android:text="Hire"
+                    android:textSize="17dp"
+                    android:textColor="@android:color/white"
                     android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="16dp" />
+                    android:shadowColor="@android:color/white"
+                    app:shadowEnabled="true"
+                    app:fButtonColor="@color/fbutton_color_peter_river"
+                    app:shadowHeight="3dp"
+                    app:cornerRadius="3dp"
+                    app:shadowColor="@android:color/black"
+                    android:layout_marginRight="5dp"
+                    />
+
+                </LinearLayout>
+
+
+                <!--<Button-->
+                    <!--android:id="@+id/btn_hire_lancer"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@color/fbutton_color_peter_river"-->
+                    <!--android:text="Hire"-->
+                    <!--android:textAllCaps="false"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="16dp" />-->
 
             </LinearLayout>
         </LinearLayout>

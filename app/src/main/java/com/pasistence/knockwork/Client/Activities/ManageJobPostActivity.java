@@ -3,6 +3,8 @@ package com.pasistence.knockwork.Client.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,9 +18,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AbsListView;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Adapter.ManageJobPostingAdapter;
+import com.pasistence.knockwork.Freelancer.Activities.JobPoastingActivity;
 import com.pasistence.knockwork.Model.ManageJobPostingModel;
 import com.pasistence.knockwork.R;
 
@@ -26,13 +33,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManageJobPostActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     Context mContext;
     MaterialSearchBar searchBar;
     RecyclerView recyclerLancer;
-    RecyclerView.LayoutManager layoutManager;
+   // RecyclerView.LayoutManager layoutManager;
+    LinearLayoutManager layoutManager;
     private static final String TAG = "search";
+    Button btnMore;
+    Boolean isScrolling = false;
+    int currentItems;
+    int totalItems;
+  int scrollOutItems;
+  ProgressBar progressBar;
+
 
     ArrayList<ManageJobPostingModel> manageJobPostingModels = new ArrayList<ManageJobPostingModel>();
     ManageJobPostingAdapter manageJobPostingAdapter;
@@ -50,13 +65,12 @@ public class ManageJobPostActivity extends AppCompatActivity
 
         /*--------------------------------------------------------------*/
 
-
         mInit();
+        // mOnclick();
 
-
-        ManageJobPostingModel jobModel1 = new ManageJobPostingModel("1","Web Development","Fixed Price","$5k - $7k","Posted 2 days ago","85 Quots","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
-        ManageJobPostingModel jobMoel2 = new ManageJobPostingModel("2","Professional Designer needed for Tshirt and other Products, WebProjects.","Fixed Price","$5k - $7k","Posted 2 days ago","85 Quots","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
-        ManageJobPostingModel jobModel3 = new ManageJobPostingModel("3","App Developer for creating a custome water sports application","Fixed Price","$5k - $7k","Posted 2 days ago","85 Quots","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
+        ManageJobPostingModel jobModel1 = new ManageJobPostingModel("1", "Web Development", "Fixed Price", "$5k - $7k", "Posted 2 days ago", "85 Quots", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
+        ManageJobPostingModel jobMoel2 = new ManageJobPostingModel("2", "Professional Designer needed for Tshirt and other Products, WebProjects.", "Fixed Price", "$5k - $7k", "Posted 2 days ago", "85 Quots", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
+        ManageJobPostingModel jobModel3 = new ManageJobPostingModel("3", "App Developer for creating a custome water sports application", "Fixed Price", "$5k - $7k", "Posted 2 days ago", "85 Quots", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
 
         manageJobPostingModels.add(jobModel1);
         manageJobPostingModels.add(jobMoel2);
@@ -77,7 +91,35 @@ public class ManageJobPostActivity extends AppCompatActivity
 
         manageJobPostingAdapter = new ManageJobPostingAdapter(mContext, manageJobPostingModels);
         recyclerLancer.setAdapter(manageJobPostingAdapter);
-        manageJobPostingAdapter.notifyDataSetChanged();
+        recyclerLancer.setLayoutManager(layoutManager);
+        // manageJobPostingAdapter.notifyDataSetChanged();
+
+        recyclerLancer.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                    isScrolling = true;
+                }
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                currentItems = layoutManager.getChildCount();
+                totalItems = layoutManager.getItemCount();
+                scrollOutItems = layoutManager.findFirstCompletelyVisibleItemPosition();
+
+                if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
+                    isScrolling = false;
+                    fetchData();
+                }
+            }
+        });
+
+
+
+
 
         /*--------------------------------------------------------------*/
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -99,6 +141,10 @@ public class ManageJobPostActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+   /* private void mOnclick() {
+        btnMore.setOnClickListener(this);
+    }
+*/
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -161,6 +207,7 @@ public class ManageJobPostActivity extends AppCompatActivity
         } else if (id == R.id.nav_posting) {
 //            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Posting", Snackbar.LENGTH_LONG)
 //                    .setAction("Action", null).show();
+            startActivity(new Intent(mContext,JobPoastingActivity.class));
 
         } else if (id == R.id.nav_contest) {
 //            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Contest", Snackbar.LENGTH_LONG)
@@ -191,6 +238,85 @@ public class ManageJobPostActivity extends AppCompatActivity
         recyclerLancer.setHasFixedSize(false);
         layoutManager = new LinearLayoutManager(this);
         recyclerLancer.setLayoutManager(layoutManager);
+        progressBar = (ProgressBar)findViewById(R.id.progress);
+
+
+        //btnMore = (Button)findViewById(R.id.btn_more);
+     /*   btnMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v==btnMore) {
+                    btnMore.setVisibility(View.INVISIBLE);
+                    progressBar.setVisibility(View.VISIBLE);
+                    recyclerLancer.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                        @Override
+                        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                            super.onScrollStateChanged(recyclerView, newState);
+                            if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                                isScrolling = true;
+                            }
+                        }
+
+                        @Override
+                        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                            super.onScrolled(recyclerView, dx, dy);
+                            currentItems = layoutManager.getChildCount();
+                            totalItems = layoutManager.getItemCount();
+                            scrollOutItems = layoutManager.findFirstCompletelyVisibleItemPosition();
+
+                            if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
+                                isScrolling = false;
+                                fetchData();
+                            }
+                        }
+                    });
+                    progressBar.setVisibility(View.INVISIBLE);
+
+                }
+
+            }
+        });*/
+
+
+
     }
 
-}
+    private void fetchData() {
+        progressBar.setVisibility(View.VISIBLE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+              // progressBar.setVisibility(View.VISIBLE);
+                for (int i=0; i<1; i++)
+                {
+                    ManageJobPostingModel jobModel4 = new ManageJobPostingModel("1","logo designing Development","Fixed Price","$5k - $7k","Posted 2 days ago","85 Quots","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
+                    ManageJobPostingModel jobMoel5 = new ManageJobPostingModel("2","Creating the Landing Page for Wix website which id alerady developed ","Fixed Price","$5k - $7k","Posted 2 days ago","85 Quots","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
+                    ManageJobPostingModel jobModel6 = new ManageJobPostingModel("3","I want the Content Writer for my Website","Fixed Price","$5k - $7k","Posted 2 days ago","85 Quots","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
+
+                    manageJobPostingModels.add(jobModel4);
+                    manageJobPostingModels.add(jobMoel5);
+                    manageJobPostingModels.add(jobModel6);
+                    manageJobPostingModels.add(jobModel4);
+                    manageJobPostingModels.add(jobMoel5);
+                    manageJobPostingModels.add(jobModel6);
+                    manageJobPostingModels.add(jobModel4);
+                    manageJobPostingModels.add(jobMoel5);
+                    manageJobPostingModels.add(jobModel6);
+                    manageJobPostingModels.add(jobModel4);
+                    manageJobPostingModels.add(jobMoel5);
+                    manageJobPostingModels.add(jobModel6);
+                    manageJobPostingModels.add(jobModel4);
+                    manageJobPostingModels.add(jobMoel5);
+                    manageJobPostingModels.add(jobModel6);
+
+
+                    manageJobPostingAdapter.notifyDataSetChanged();
+                    progressBar.setVisibility(View.GONE);
+                }
+
+            }
+        }, 5000);
+    }
+
+    }
+

@@ -165,7 +165,7 @@ public class FreelancerInboxActivity extends AppCompatActivity
         } else if (id == R.id.nav_active) {
 
         } else if (id == R.id.nav_manage_jobs) {
-            startActivity(new Intent(FreelancerInboxActivity.this,JobPoastingActivity.class));
+        //    startActivity(new Intent(FreelancerInboxActivity.this,JobPoastingActivity.class));
 
         } else if (id == R.id.nav_proposal) {
 

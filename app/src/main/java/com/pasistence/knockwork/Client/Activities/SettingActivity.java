@@ -20,6 +20,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
+import com.pasistence.knockwork.Freelancer.Activities.JobPoastingActivity;
 import com.pasistence.knockwork.R;
 
 public class SettingActivity extends AppCompatActivity
@@ -132,6 +133,7 @@ public class SettingActivity extends AppCompatActivity
         } else if (id == R.id.nav_posting) {
 //            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Posting", Snackbar.LENGTH_LONG)
 //                    .setAction("Action", null).show();
+            startActivity(new Intent(mContext,JobPoastingActivity.class));
 
         } else if (id == R.id.nav_contest) {
 //            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Contest", Snackbar.LENGTH_LONG)

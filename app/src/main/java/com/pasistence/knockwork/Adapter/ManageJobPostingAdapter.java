@@ -1,6 +1,5 @@
 package com.pasistence.knockwork.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +15,7 @@ import java.util.List;
 
 public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnageJobPosting> {
 
+
     Context mContext;
     List<ManageJobPostingModel> manageJobPostingModels ;
 
@@ -24,6 +24,7 @@ public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnag
         this.mContext = mContext;
         this.manageJobPostingModels = workerList;
     }
+
 
     @NonNull
     @Override

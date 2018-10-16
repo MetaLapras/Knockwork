@@ -22,6 +22,7 @@ import android.view.MenuItem;
 
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Adapter.LancerListAdapter;
+import com.pasistence.knockwork.Freelancer.Activities.JobPoastingActivity;
 import com.pasistence.knockwork.Model.LancerListModel;
 import com.pasistence.knockwork.R;
 
@@ -213,6 +214,7 @@ public class LancersActivity extends AppCompatActivity
         } else if (id == R.id.nav_posting) {
 //            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Posting", Snackbar.LENGTH_LONG)
 //                    .setAction("Action", null).show();
+            startActivity(new Intent(mContext,JobPoastingActivity.class));
 
         } else if (id == R.id.nav_contest) {
 //            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Contest", Snackbar.LENGTH_LONG)

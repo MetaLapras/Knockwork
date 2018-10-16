@@ -25,7 +25,7 @@
     <string name="nav_header_title_lancer">Sample Lancer</string>
     <string name="nav_header_subtitle">Pasistence pvt ltd</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Logout</string>
     <string name="signPhoneNumber">Sign Up with Number</string>
     <string name="pServices">Popular Services</string>
     <string name="category">Top Categories</string>
@@ -130,6 +130,7 @@
     <string name="title_activity_manage_job_post">ManageJobPostActivity</string>
 
     <string name="title_activity_freelancer_setting">FreelancerSettingActivity</string>
+    <string name="more">More</string>
 
 
 </resources>

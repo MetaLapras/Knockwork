@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.mancj.materialsearchbar.MaterialSearchBar;
 
@@ -15,7 +18,7 @@ import com.pasistence.knockwork.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManageJobPostingActivity extends AppCompatActivity {
+public class ManageJobPostingActivity extends AppCompatActivity  {
 
     Context mContext;
     MaterialSearchBar searchBar;
@@ -27,6 +30,7 @@ public class ManageJobPostingActivity extends AppCompatActivity {
     ManageJobPostingAdapter manageJobPostingAdapter;
     ManageJobPostingAdapter searchAdapter;
     List<String> suggestList = new ArrayList<>();
+    Button btnMore;
 
 
     @Override
@@ -34,7 +38,7 @@ public class ManageJobPostingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_job_posting);
         mInit();
-
+       // mOnclick();
 
         ManageJobPostingModel jobModel1 = new ManageJobPostingModel("1","Web Development","Fixed Price","$5k - $7k","Posted 2 days ago","85 Quots","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
         ManageJobPostingModel jobMoel2 = new ManageJobPostingModel("2","Professional Designer needed for Tshirt and other Products, WebProjects.","Fixed Price","$5k - $7k","Posted 2 days ago","85 Quots","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
@@ -115,6 +119,10 @@ public class ManageJobPostingActivity extends AppCompatActivity {
 
     }
 
+   /* private void mOnclick() {
+        btnMore.setOnClickListener(this);
+    }*/
+
     private void mInit() {
         mContext = ManageJobPostingActivity.this;
 
@@ -123,7 +131,25 @@ public class ManageJobPostingActivity extends AppCompatActivity {
         recyclerLancer.setHasFixedSize(false);
         layoutManager = new LinearLayoutManager(this);
         recyclerLancer.setLayoutManager(layoutManager);
+        //btnMore = (Button)findViewById(R.id.btn_more);
     }
+
+   // @Override
+   /* public void onClick(View v) {
+        if(v==btnMore)
+        {
+            btnMore.setVisibility(View.INVISIBLE);
+            Toast.makeText(mContext, "More button is invisible", Toast.LENGTH_SHORT).show();
+
+        }
+
+        if (v!=btnMore)
+        {
+            btnMore.setVisibility(View.VISIBLE);
+            Toast.makeText(mContext, "More button is visible", Toast.LENGTH_SHORT).show();
+        }
+
+    }*/
 
     /*private void startSearch(CharSequence text) {
         ArrayList<ManageJobPostingModel> searchLancer = new ArrayList<ManageJobPostingModel>();

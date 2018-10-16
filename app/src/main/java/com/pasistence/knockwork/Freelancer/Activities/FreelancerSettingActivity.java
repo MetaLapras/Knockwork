@@ -121,7 +121,6 @@ public class FreelancerSettingActivity extends AppCompatActivity
         } else if (id == R.id.nav_active) {
 
         } else if (id == R.id.nav_manage_jobs) {
-            startActivity(new Intent(mContext,JobPoastingActivity.class));
 
         } else if (id == R.id.nav_proposal) {
 

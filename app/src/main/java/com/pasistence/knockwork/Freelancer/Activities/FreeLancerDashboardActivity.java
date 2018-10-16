@@ -363,7 +363,6 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
             /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Active Jobs", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();*/
         } else if (id == R.id.nav_manage_jobs) {
-            startActivity(new Intent(FreeLancerDashboardActivity.this,JobPoastingActivity.class));
            /* Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Job Posting", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();*/
 
