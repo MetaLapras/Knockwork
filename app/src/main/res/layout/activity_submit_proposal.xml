@@ -21,7 +21,8 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
-<ScrollView
+
+    <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@id/app_bar_layout">
@@ -94,11 +95,11 @@
             android:layout_margin="10dp"
             android:padding="10dp">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_budget"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/ic_monetization_on"
-                android:tint="@color/colorPrimary"/>
+                android:src="@drawable/currencyone"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -149,6 +150,132 @@
 
     </LinearLayout>
 
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_xlarge"
+            android:textAlignment="center"
+            android:text="Mile Stones" />
+
+        <Spinner
+            android:id="@+id/spn_milestones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:entries="@array/milestones">
+        </Spinner>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="Milestones"
+                    android:layout_weight="3"
+                    android:gravity="center_horizontal|center_vertical"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="Durations"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal|center_vertical"
+                    />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_add"
+                    android:layout_weight="1"
+                    android:tint="@color/colorPrimary"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/edt_milstone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"/>
+
+
+                <EditText
+                    android:id="@+id/edt_price"
+                    android:layout_width="0dp"
+                    android:hint="Rupees"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"/>
+
+                <TextView
+                    android:id="@+id/edt_duration"
+                    android:layout_width="0dp"
+                    android:text="Time"
+                    android:textSize="@dimen/text_size_medium"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:hint="Rupees"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Time"
+                    android:textSize="@dimen/text_size_medium"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+        </TableLayout>
+
+    </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -162,91 +289,65 @@
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:textStyle="bold"
+                android:textSize="@dimen/text_size_large"
                 android:textAlignment="center"
-                android:text="Mile Stones" />
+                android:text="Add Cover letter" />
 
             <Spinner
-                android:id="@+id/spn_milestones"
+                android:id="@+id/spn_sample"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/milestones">
+                android:padding="10dp"
+                android:layout_margin="5dp"
+                android:entries="@array/sample">
             </Spinner>
 
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+           <EditText
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:inputType="textMultiLine"
+               android:lines="8"
+               android:gravity="top|left"
+               android:text="cover letter"
+               android:maxLines="10"
+               android:minLines="6"
+               android:scrollbars="vertical"/>
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-               <TextView
-                   android:layout_width="0dp"
-                   android:layout_height="match_parent"
-                   android:text="Milestones"
-                   android:layout_weight="3"
-                   android:gravity="center_horizontal|center_vertical"
-                   />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:text="Milestones"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal|center_vertical"
-                    />
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_add"
-                    android:layout_weight="1"
-                    android:tint="@color/colorPrimary"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:id="@+id/edt_milstone"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"/>
-
-                    <TextView
-                        android:id="@+id/edt_duration"
-                        android:layout_width="0dp"
-                        android:text="Duration"
-                        android:textSize="@dimen/text_size_medium"
-                        android:editable="false"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"/>
-
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:editable="false"
-                        android:text="Duration"
-                        android:textSize="@dimen/text_size_medium"
-                        android:layout_weight="2"/>
-
-                </TableRow>
-
-            </TableLayout>
 
         </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/btn_attach_work"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Attach Work"
+            android:background="@drawable/rectangle_border"
+            android:textSize="17dp"
+            android:textColor="@android:color/black"
+            android:textAllCaps="false"
+            android:shadowColor="@android:color/black"
+            app:shadowEnabled="true"
+            app:fButtonColor="#fff"
+            app:shadowHeight="3dp"
+            app:cornerRadius="3dp"
+            android:layout_margin="10dp"
+            app:shadowColor="@android:color/black"
+            android:layout_marginRight="5dp"
+            />
+
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/btn_submit_proposal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit Proposal"
+            android:textColor="@color/white"
+            android:layout_alignParentBottom="true"/>
 
     </LinearLayout>
 

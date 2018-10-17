@@ -10,10 +10,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface MyApi {
-
     @GET("knockwork/public/index.php/api/jobdescriptions/lancer/page/{pageNo}")
     Call<SearchPageListModel> getIP(@Query("pageNo") String pageNo);
-
-
 }
 

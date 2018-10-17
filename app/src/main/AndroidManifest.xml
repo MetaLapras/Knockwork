@@ -20,7 +20,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".Client.Activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -76,7 +77,7 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".Client.Activities.ManageJobPostActivity"
-            android:label="@string/title_activity_manage_job_post" />
+            android:label="@string/title_activity_manage_job_post"/>
         <activity
             android:name=".Freelancer.Activities.FreelancerSettingActivity"
             android:label="@string/title_activity_freelancer_setting"
@@ -84,6 +85,25 @@
         <activity android:name=".Client.Activities.ChattingActivity" />
         <activity android:name=".Client.Activities.ChattingMessageActivity" />
         <activity android:name=".Client.Activities.ClientJobRequest"></activity>
+            android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".Freelancer.Activities.FreelancerJobsActivity"
+            android:label="@string/title_activity_freelancer_jobs"
+            android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".Freelancer.Activities.FreelancerJobDescriptionActivity"
+            android:label="@string/title_activity_freelancer_job_description"
+            android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".Freelancer.Activities.SubmitProposalActivity"
+            android:label="Submit Proposal"
+            android:theme="@style/AppTheme"/>
+
+
+
     </application>
 
 </manifest>

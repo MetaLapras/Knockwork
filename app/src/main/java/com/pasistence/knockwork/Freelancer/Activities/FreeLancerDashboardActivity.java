@@ -211,7 +211,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
                         Snackbar.make(view, ""+clickitem.getHead(), Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
 
-                        startActivity(new Intent(mContext,FreelancerJobsActivity.class));
+                        //startActivity(new Intent(mContext,FreelancerJobsActivity.class));
                     }
                 });
             }
@@ -476,7 +476,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         mslider.setPresetTransformer(SliderLayout.Transformer.Accordion);
         mslider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mslider.setCustomAnimation(new DescriptionAnimation());
-        mslider.setDuration(4000);
+        mslider.setDuration(3000);
 
     }
 

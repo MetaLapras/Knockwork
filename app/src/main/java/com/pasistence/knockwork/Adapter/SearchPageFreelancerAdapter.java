@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.pasistence.knockwork.Freelancer.Activities.JobDescriptionActivity;
+import com.pasistence.knockwork.Freelancer.Activities.SearchFreelancerActivity;
+import com.pasistence.knockwork.Freelancer.Activities.SubmitProposalActivity;
 import com.pasistence.knockwork.Model.SearchPageFreelancerModel;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.ViewHolder.ViewHolderSearchPageFreelancer;
@@ -50,7 +52,7 @@ public class SearchPageFreelancerAdapter  extends RecyclerView.Adapter<ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolderSearchPageFreelancer holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolderSearchPageFreelancer holder, int position) {
 
        /* final JobList lancers = jobLists.get(position);
 
@@ -122,6 +124,16 @@ public class SearchPageFreelancerAdapter  extends RecyclerView.Adapter<ViewHolde
         holder.txtfreelancerstate.setText(search.getState());
         holder.txtprojectrange.setText(search.getProjectrange());
         holder.txtfeedback.setText(search.getFeedback());
+
+        holder.btnapply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent  intent = new Intent(mContext,SubmitProposalActivity.class);
+                intent.putExtra("title",holder.txtjobName.getText());
+                mContext.startActivity(intent);
+            }
+        });
+
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

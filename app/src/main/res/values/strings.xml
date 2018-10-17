@@ -150,4 +150,11 @@
         <item>According to Hours</item>
     </string-array>
 
+    <string-array name="sample">
+        <item>Select</item>
+        <item>Sample web Development</item>
+        <item>Mobile development</item>
+        <item>logo design</item>
+    </string-array>
+
 </resources>

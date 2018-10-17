@@ -8,20 +8,20 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.pasistence.knockwork.Interface.ItemClickListener;
 import com.pasistence.knockwork.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ViewHolderSearchPageFreelancer    extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class ViewHolderSearchPageFreelancer  extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public TextView txtjobName,txtfixedPrice,txtpriceRange,txtpoastedDays,txtjobQuotes,txtjobDescription,txtnamefreelancer,txtfreelancerstate,txtprojectrange,txtfeedback;
     public Button btnapply;
     public CircleImageView img;
-   public LinearLayout linearLayout;
+    public LinearLayout linearLayout;
 
     public ViewHolderSearchPageFreelancer(@NonNull View itemView) {
         super(itemView);
-
 
         txtjobName           = (TextView)itemView.findViewById(R.id.freelancer_job_name);
         txtfixedPrice        = (TextView)itemView.findViewById(R.id.txt_freelancer_fixed_price);
