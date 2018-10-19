@@ -9,10 +9,28 @@
     tools:context=".Freelancer.Activities.SearchFreelancerActivity"
     tools:showIn="@layout/app_bar_search_freelancer">
 
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <com.mancj.materialsearchbar.MaterialSearchBar
+            android:id="@+id/search_bar_lancer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            app:mt_speechMode="false"
+            app:mt_borderlessRippleEnabled="true"
+            app:mt_placeholder=""/>
+
+    </android.support.v7.widget.CardView>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_search">
 
     </android.support.v7.widget.RecyclerView>
 

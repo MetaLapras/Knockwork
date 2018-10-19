@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Adapter.LancerListAdapter;
@@ -40,7 +41,9 @@ public class LancersActivity extends AppCompatActivity
     ArrayList<LancerListModel> lancerList = new ArrayList<LancerListModel>();
     LancerListAdapter lancerListAdapter;
     LancerListAdapter searchAdapter;
-    List<String> suggestList = new ArrayList<>();
+    List<String> suggestList = new ArrayList<String>();
+    String CatId,subCatId;
+    ListView listSuggestions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +52,8 @@ public class LancersActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         /*----------------------------------------------------------------------------*/
-
         mInit();
-
-
-
 
         LancerListModel lancers = new LancerListModel("1","Lorem Ipsum","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.","United State"," $ 25","80%","https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg","Web Developer");
         LancerListModel lancers2 = new LancerListModel("2","Cupcake","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.","United State"," $ 55","70%","https://cdn.cultofmac.com/wp-content/uploads/2011/10/97571564a70014ca5658b67f64f2ce23_1253524914.jpeg","Android Developer");
@@ -77,11 +75,11 @@ public class LancersActivity extends AppCompatActivity
         lancerList.add(lancers2);
         lancerList.add(lancers3);
 
-        loadSuggestList();
+        //loadSuggestList();
 
         //Setup search bar
         searchBar.setHint("Search");
-        searchBar.setLastSuggestions(suggestList);
+        //searchBar.setLastSuggestions(suggestList);
         searchBar.setCardViewElevation(10);
         searchBar.addTextChangeListener(new TextWatcher() {
             @Override
@@ -117,7 +115,7 @@ public class LancersActivity extends AppCompatActivity
 
             @Override
             public void onSearchConfirmed(CharSequence text) {
-                startSearch(text);
+              //  startSearch(text);
             }
 
             @Override
@@ -132,8 +130,8 @@ public class LancersActivity extends AppCompatActivity
         lancerListAdapter.notifyDataSetChanged();
 
 
-
         /*----------------------------------------------------------------------------*/
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,8 +236,6 @@ public class LancersActivity extends AppCompatActivity
     }
 
 
-
-
     private void mInit() {
         mContext = LancersActivity.this;
 
@@ -248,6 +244,20 @@ public class LancersActivity extends AppCompatActivity
         recyclerLancer.setHasFixedSize(false);
         layoutManager = new LinearLayoutManager(this);
         recyclerLancer.setLayoutManager(layoutManager);
+
+        try{
+
+            if(getIntent()!=null){
+
+                CatId = getIntent().getStringExtra("catId");
+                subCatId = getIntent().getStringExtra("subcatId") ;
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
     }
 
     private void startSearch(CharSequence text) {
@@ -267,12 +277,17 @@ public class LancersActivity extends AppCompatActivity
 
     private void loadSuggestList() {
         //get Data into the list
-        /*for(LancerListModel list : lancerList){
-            suggestList.add(list.getCategory());
-        }*/
-        suggestList.add("Software Developer");
-        suggestList.add("Web Developer");
-        suggestList.add("Android Developer");
+
+        suggestList.add("");
+
+        try{
+            if(getIntent()!=null){
+                suggestList = getIntent().getStringArrayListExtra("suggestion");
+                searchBar.setLastSuggestions(suggestList);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         searchBar.setLastSuggestions(suggestList);
     }
 

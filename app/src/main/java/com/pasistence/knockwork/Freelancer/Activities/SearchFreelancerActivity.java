@@ -134,8 +134,10 @@ public class SearchFreelancerActivity extends AppCompatActivity implements Navig
     }
 
     private void loadSuggestList() {
-        // suggestList = database.getNames();
-        // materialSearchBar.setLastSuggestions(suggestList);
+
+         //suggestList = database.getNames();
+         //materialSearchBar.setLastSuggestions(suggestList);
+
     }
 //}
 

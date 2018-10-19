@@ -3,12 +3,14 @@ package com.pasistence.knockwork.Model;
 import java.io.Serializable;
 
 public class PopularServicesModel implements Serializable {
-    public String id,name,image;
+    public String id ;
+    public String title ;
+    public String image_url ;
 
-    public PopularServicesModel(String id, String name, String image) {
+    public PopularServicesModel(String id, String title, String image_url) {
         this.id = id;
-        this.name = name;
-        this.image = image;
+        this.title = title;
+        this.image_url = image_url;
     }
 
     public PopularServicesModel() {
@@ -18,8 +20,8 @@ public class PopularServicesModel implements Serializable {
     public String toString() {
         return "PopularServicesModel{" +
                 "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", image='" + image + '\'' +
+                ", title='" + title + '\'' +
+                ", image_url='" + image_url + '\'' +
                 '}';
     }
 
@@ -31,19 +33,19 @@ public class PopularServicesModel implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getImage() {
-        return image;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 }

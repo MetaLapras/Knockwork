@@ -14,7 +14,8 @@ public class Common {
    // private static final String BASE_URL = "http://192.168.0.151/mantra/public/index.php/api/";
     //private static final String BASE_URL = "http://ip.jsontest.com/";
 
-    public static final String BASE_URL = "http://192.168.0.100/";
+    public static final String BASE_URL = "http://192.168.0.152/knockwork/public/index.php/";
+    //public static final String BASE_URL = "http://192.168.0.150/mantra/";
 
     public static MyApi getApi(){
         return RetrofitClient.getClient(BASE_URL).create(MyApi.class);
@@ -41,8 +42,6 @@ public class Common {
         }
         return false;
     }
-
-
 
     public static void InitFirebase(String datareference){
         //init Fire base

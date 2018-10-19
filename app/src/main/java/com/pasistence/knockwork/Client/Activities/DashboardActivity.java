@@ -3,13 +3,12 @@ package com.pasistence.knockwork.Client.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,52 +18,55 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.mancj.materialsearchbar.MaterialSearchBar;
+import com.pasistence.knockwork.Adapter.ClientPopularServiceAdapter;
+import com.pasistence.knockwork.Adapter.ClientTopServiceAdapter;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Freelancer.Activities.JobPoastingActivity;
-import com.pasistence.knockwork.Freelancer.Activities.SearchFreelancerActivity;
-import com.pasistence.knockwork.Interface.ItemClickListener;
 import com.pasistence.knockwork.Model.PopularServicesModel;
-import com.pasistence.knockwork.Model.TopServicesModel;
+import com.pasistence.knockwork.Model.ResponseTopService;
 import com.pasistence.knockwork.R;
-import com.pasistence.knockwork.ViewHolder.ViewHolderTopServices;
-import com.squareup.picasso.Picasso;
+import com.pasistence.knockwork.Remote.MyApi;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
+    private static final String TAG = "cdash-->";
     Boolean isLancer=false;
     Boolean isClient=false;
 
     Context mContext;
     RecyclerView recyclerPopularServices,recyclerTopServices;
-    RecyclerView.LayoutManager GridlayoutManager,LinearLayoutManager ;
+    RecyclerView.LayoutManager GridlayoutManager,LinearlayoutManager ;
     SwipeRefreshLayout refreshLayout;
+    CardView SearchBar;
 
-    public FirebaseDatabase database;
-    public DatabaseReference popular_dataReference ;
-    public DatabaseReference Top_dataReference ;
-    public MaterialSearchBar SearchBar;
+    //set up popular services adapter
+    MyApi mService;
+    ClientPopularServiceAdapter popularServiceAdapter;
+    ClientTopServiceAdapter topServiceAdapter;
+    List<PopularServicesModel> popularServicesModelList = new ArrayList<PopularServicesModel>();
+    List<ResponseTopService> topServicesModelList = new ArrayList<ResponseTopService>();
 
-    FirebaseRecyclerAdapter<TopServicesModel,ViewHolderTopServices> TopServiceAdapter;
+//    public FirebaseDatabase database;
+//    public DatabaseReference popular_dataReference ;
+//    public DatabaseReference Top_dataReference ;
+
+
+//    FirebaseRecyclerAdapter<TopServicesModel,ViewHolderTopServices> TopServiceAdapter;
 
     //Sliders
     HashMap<String,String> image_list;
@@ -76,12 +78,13 @@ public class DashboardActivity extends AppCompatActivity
         setContentView(R.layout.activity_dashboard);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         mInit();
+
       //  isLancer=getIntent().getBooleanExtra("isLancer",false);
         //isClient=getIntent().getBooleanExtra("isClient",false);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -91,10 +94,13 @@ public class DashboardActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //init Fire base
-        database = FirebaseDatabase.getInstance();
-        popular_dataReference = database.getReference("popular");
-        Top_dataReference = database.getReference("top");
+//        database = FirebaseDatabase.getInstance();
+//        popular_dataReference = database.getReference("popular");
+//        Top_dataReference = database.getReference("top");
 
+
+        //loadTopServices();
+        loadPopularServices();
 
         refreshLayout.setColorSchemeResources(R.color.colorPrimary,
                 android.R.color.holo_green_light,
@@ -106,7 +112,7 @@ public class DashboardActivity extends AppCompatActivity
                 //to Load menu from Firebase
                 if(Common.isConnectedToInterNet(getBaseContext())) {
                     loadPopularServices();
-                    loadTopServices();
+                    //loadTopServices();
                 }else
                 {
                     Toast.makeText(getBaseContext(), "Check Your Internet Connection ! ", Toast.LENGTH_SHORT).show();
@@ -120,7 +126,7 @@ public class DashboardActivity extends AppCompatActivity
             public void run() {
                 if(Common.isConnectedToInterNet(getBaseContext())) {
                     loadPopularServices();
-                    loadTopServices();
+                    //loadTopServices();
                 }else
                 {
                     Toast.makeText(getBaseContext(), "Check Your Internet Connection ! ", Toast.LENGTH_SHORT).show();
@@ -132,7 +138,7 @@ public class DashboardActivity extends AppCompatActivity
 
 
 
-        FirebaseRecyclerOptions<TopServicesModel> topOptions = new FirebaseRecyclerOptions.Builder<TopServicesModel>()
+     /*   FirebaseRecyclerOptions<TopServicesModel> topOptions = new FirebaseRecyclerOptions.Builder<TopServicesModel>()
                 .setQuery(Top_dataReference,TopServicesModel.class)
                 .build();
 
@@ -177,12 +183,10 @@ public class DashboardActivity extends AppCompatActivity
         recyclerTopServices.scheduleLayoutAnimation();
         TopServiceAdapter.notifyDataSetChanged();
 
-        TopServiceAdapter.startListening();
+        TopServiceAdapter.startListening();*/
 
 
-          loadTopServices();
-
-        refreshLayout.setColorSchemeResources(R.color.colorPrimary,
+       /* refreshLayout.setColorSchemeResources(R.color.colorPrimary,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_dark,
                 android.R.color.holo_blue_dark);
@@ -216,9 +220,9 @@ public class DashboardActivity extends AppCompatActivity
 
             }
         });
-
+*/
         //Slider setup
-        setupSlider();
+       // setupSlider();
 
 
         SearchBar.setOnClickListener(new View.OnClickListener() {
@@ -231,11 +235,56 @@ public class DashboardActivity extends AppCompatActivity
 
     }
 
+    private void mInit() {
+
+        mContext                = DashboardActivity.this;
+        refreshLayout           = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
+      //  mslider                 = (SliderLayout)findViewById(R.id.slider);
+
+        SearchBar               = (CardView) findViewById(R.id.search_bar);
+
+        recyclerTopServices     = (RecyclerView)findViewById(R.id.recycler_top_services);
+        GridlayoutManager       =  new GridLayoutManager(this,2);
+        recyclerTopServices.setHasFixedSize(false);
+        recyclerTopServices.setLayoutManager(GridlayoutManager);
+        recyclerTopServices.setNestedScrollingEnabled(false);
+
+
+        recyclerPopularServices =(RecyclerView)findViewById(R.id.recycler_popular_services);
+        recyclerPopularServices.setHasFixedSize(true);
+        LinearlayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        recyclerPopularServices.setLayoutManager(LinearlayoutManager);
+        recyclerPopularServices.setNestedScrollingEnabled(false);
+
+
+        //Init Service
+        mService = Common.getApi();
+    }
+
     private void loadTopServices() {
-        TopServiceAdapter.startListening();
+      /*  TopServiceAdapter.startListening();
         recyclerTopServices.setAdapter(TopServiceAdapter);
         recyclerTopServices.scheduleLayoutAnimation();
-        refreshLayout.setRefreshing(false);
+        refreshLayout.setRefreshing(false);*/
+
+       /* mService.getTopServices().enqueue(new Callback<List<ResponseTopService>>() {
+            @Override
+            public void onResponse(Call<List<ResponseTopService>> call, Response<List<ResponseTopService>> response) {
+                Log.e(TAG, response.body().toString());
+
+                topServiceAdapter = new ClientTopServiceAdapter(DashboardActivity.this,topServicesModelList);
+                recyclerTopServices.setAdapter(topServiceAdapter);
+                recyclerTopServices.scheduleLayoutAnimation();
+
+                refreshLayout.setRefreshing(false);
+            }
+
+            @Override
+            public void onFailure(Call<List<ResponseTopService>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });*/
+
     }
 
     private void loadPopularServices() {
@@ -244,18 +293,45 @@ public class DashboardActivity extends AppCompatActivity
         recyclerPopularServices.setAdapter(popularAdapter);
         recyclerPopularServices.scheduleLayoutAnimation();
         refreshLayout.setRefreshing(false);*/
-    }
 
-    private void mInit() {
+      mService.getTopServices().enqueue(new Callback<List<ResponseTopService>>() {
+            @Override
+            public void onResponse(Call<List<ResponseTopService>> call, Response<List<ResponseTopService>> response) {
+                Log.e(TAG, response.body().toString());
 
-        mContext                = DashboardActivity.this;
-        refreshLayout           = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
-        mslider                 = (SliderLayout)findViewById(R.id.slider);
-        SearchBar               = (MaterialSearchBar)findViewById(R.id.search_bar);
-        recyclerTopServices     = (RecyclerView)findViewById(R.id.recycler_top_services);
-        GridlayoutManager       =  new GridLayoutManager(this,2);
-        recyclerTopServices.setHasFixedSize(false);
-        recyclerTopServices.setLayoutManager(GridlayoutManager);
+                topServicesModelList = response.body();
+                topServiceAdapter = new ClientTopServiceAdapter(DashboardActivity.this,topServicesModelList);
+                recyclerTopServices.setAdapter(topServiceAdapter);
+                topServiceAdapter.notifyDataSetChanged();
+
+                refreshLayout.setRefreshing(false);
+            }
+
+            @Override
+            public void onFailure(Call<List<ResponseTopService>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+      mService.getPopularServices().enqueue(new Callback<List<PopularServicesModel>>() {
+            @Override
+            public void onResponse(Call<List<PopularServicesModel>> call, Response<List<PopularServicesModel>> response) {
+                //Log.e(TAG, response.body().toString());
+
+                popularServicesModelList = response.body();
+                popularServiceAdapter = new ClientPopularServiceAdapter(DashboardActivity.this,popularServicesModelList);
+                recyclerPopularServices.setAdapter(popularServiceAdapter);
+                popularServiceAdapter.notifyDataSetChanged();
+
+                refreshLayout.setRefreshing(false);
+            }
+
+            @Override
+            public void onFailure(Call<List<PopularServicesModel>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
     }
 
     @Override
@@ -340,24 +416,22 @@ public class DashboardActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        if(TopServiceAdapter!=null)
-            TopServiceAdapter.startListening();
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        TopServiceAdapter.stopListening();
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if(TopServiceAdapter!=null)
-            TopServiceAdapter.startListening();
+
     }
 
-    private void setupSlider() {
+/*    private void setupSlider() {
         image_list = new HashMap<>();
         final DatabaseReference Fbanner = database.getReference("popular");
         Fbanner.addValueEventListener(new ValueEventListener() {
@@ -413,6 +487,6 @@ public class DashboardActivity extends AppCompatActivity
         mslider.setCustomAnimation(new DescriptionAnimation());
         mslider.setDuration(4000);
 
-    }
+    }*/
 
 }

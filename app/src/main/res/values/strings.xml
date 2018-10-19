@@ -137,10 +137,11 @@
     </string>
     <string name="chattingmessage">Your Chatting Message..</string>
     <string name="chatting_text">Write here</string>
-    <string name="timeline" >Timeline of Projects</string>
-    <string name="amount" >Amount : </string>
+    <string name="timeline">Timeline of Projects</string>
+    <string name="amount">Amount : </string>
     <string name="hiredamount">- $200</string>
-    <string name="web" >Web development</string>
+    <string name="web">Web development</string>
+    <string name="search">What are you Looking for ?</string>
 
 
     <string-array name="milestones">

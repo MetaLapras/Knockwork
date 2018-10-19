@@ -7,7 +7,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,36 +37,59 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mancj.materialsearchbar.MaterialSearchBar;
+import com.pasistence.knockwork.Adapter.ClientPopularServiceAdapter;
+import com.pasistence.knockwork.Adapter.ClientTopServiceAdapter;
+import com.pasistence.knockwork.Client.Activities.DashboardActivity;
 import com.pasistence.knockwork.Client.Activities.InboxActivity;
 import com.pasistence.knockwork.Common.Common;
 
 import com.pasistence.knockwork.Client.Activities.LancerListActivity;
 import com.pasistence.knockwork.Interface.ItemClickListener;
 import com.pasistence.knockwork.Model.PopularServicesModel;
+import com.pasistence.knockwork.Model.ResponseTopService;
 import com.pasistence.knockwork.Model.TopServicesModel;
 import com.pasistence.knockwork.R;
+import com.pasistence.knockwork.Remote.MyApi;
 import com.pasistence.knockwork.ViewHolder.ViewHolderTopServices;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FreeLancerDashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final String TAG = "cdash-->";
+    Boolean isLancer=false;
+    Boolean isClient=false;
+
     Context mContext;
 
     RecyclerView recyclerPopularServices,recyclerTopServices;
-    RecyclerView.LayoutManager GridlayoutManager,LinearLayoutManager ;
+    RecyclerView.LayoutManager GridlayoutManager,LinearlayoutManager ;
     SwipeRefreshLayout refreshLayout;
+    CardView SearchBar;
 
-    public FirebaseDatabase database;
-    public DatabaseReference popular_dataReference ;
-    public DatabaseReference Top_dataReference ;
-    public MaterialSearchBar SearchBar;
+   // public FirebaseDatabase database;
+   // public DatabaseReference popular_dataReference ;
+   // public DatabaseReference Top_dataReference ;
+ //   public MaterialSearchBar SearchBar;
+
+    MyApi mService;
+    ClientPopularServiceAdapter popularServiceAdapter;
+    ClientTopServiceAdapter topServiceAdapter;
+    List<PopularServicesModel> popularServicesModelList = new ArrayList<PopularServicesModel>();
+    List<ResponseTopService> topServicesModelList = new ArrayList<ResponseTopService>();
 
 
 
     // FirebaseRecyclerAdapter<PopularServicesModel,ViewHolderPopularServices> popularAdapter;
-    FirebaseRecyclerAdapter<TopServicesModel,ViewHolderTopServices> TopServiceAdapter;
+    //FirebaseRecyclerAdapter<TopServicesModel,ViewHolderTopServices> TopServiceAdapter;
 
     //Sliders
     HashMap<String,String> image_list;
@@ -78,7 +103,6 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mInit();
-
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -102,9 +126,12 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
 
 
         //init Fire base
-        database = FirebaseDatabase.getInstance();
-        popular_dataReference = database.getReference("popular");
-        Top_dataReference = database.getReference("top");
+        //database = FirebaseDatabase.getInstance();
+        //popular_dataReference = database.getReference("popular");
+        //Top_dataReference = database.getReference("top");
+
+        //loadTopServices();
+        loadPopularServices();
 
 
         refreshLayout.setColorSchemeResources(R.color.colorPrimary,
@@ -116,8 +143,8 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
             public void onRefresh() {
                 //to Load menu from Firebase
                 if(Common.isConnectedToInterNet(getBaseContext())) {
-                    //loadPopularServices();
-                    loadTopServices();
+                    loadPopularServices();
+                    //loadTopServices();
                 }else
                 {
                     Toast.makeText(getBaseContext(), "Check Your Internet Connection ! ", Toast.LENGTH_SHORT).show();
@@ -131,8 +158,8 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
             public void run() {
                 //to Load menu from Firebase
                 if(Common.isConnectedToInterNet(getBaseContext())) {
-                    //loadPopularServices();
-                    loadTopServices();
+                    loadPopularServices();
+                    //loadTopServices();
                 }else
                 {
                     Toast.makeText(getBaseContext(), "Check Your Internet Connection ! ", Toast.LENGTH_SHORT).show();
@@ -177,7 +204,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         };*/
 
 
-        FirebaseRecyclerOptions<TopServicesModel> topOptions = new FirebaseRecyclerOptions.Builder<TopServicesModel>()
+        /*FirebaseRecyclerOptions<TopServicesModel> topOptions = new FirebaseRecyclerOptions.Builder<TopServicesModel>()
                 .setQuery(Top_dataReference,TopServicesModel.class)
                 .build();
 
@@ -200,9 +227,9 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                       /* Intent intent = new Intent(Home.this, FoodMenu.class);
+                       *//* Intent intent = new Intent(Home.this, FoodMenu.class);
                         intent.putExtra("CategoryId",adapter.getRef(position).getKey());
-                        startActivity(intent);*/
+                        startActivity(intent);*//*
                         // Toast.makeText(mContext,""+clickitem.getHead(),Toast.LENGTH_LONG).show();
                        // Snackbar.make(view, ""+clickitem.getHead(), Snackbar.LENGTH_LONG)
                          //       .setAction("Action", null).show();
@@ -231,48 +258,10 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         TopServiceAdapter.notifyDataSetChanged();
 
         TopServiceAdapter.startListening();
-
-
-        //  loadPopularServices();
-        loadTopServices();
-
-        refreshLayout.setColorSchemeResources(R.color.colorPrimary,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_dark,
-                android.R.color.holo_blue_dark);
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                //to Load menu from Firebase
-                if(Common.isConnectedToInterNet(getBaseContext())) {
-                    //loadPopularServices();
-                    loadTopServices();
-                }else
-                {
-                    Toast.makeText(getBaseContext(), "Check Your Internet Connection ! ", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            }
-        });
-        //Default Load
-        refreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                //to Load menu from Firebase
-                if(Common.isConnectedToInterNet(getBaseContext())) {
-                    //loadPopularServices();
-                    loadTopServices();
-                }else
-                {
-                    Toast.makeText(getBaseContext(), "Check Your Internet Connection ! ", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-            }
-        });
+*/
 
         //Slider setup
-        setupSlider();
+        //setupSlider();
 
 
         SearchBar.setOnClickListener(new View.OnClickListener() {
@@ -287,15 +276,17 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
 
     }
 
+
     private void mInit() {
         mContext = FreeLancerDashboardActivity.this;
 
         refreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
 
-        // recyclerPopularServices =(RecyclerView)findViewById(R.id.recycler_popular_services);
-        //  recyclerPopularServices.setHasFixedSize(true);
-        //LinearLayoutManager     = new LinearLayoutManager(this).HORIZONTAL;
-        // recyclerPopularServices.setLayoutManager(new LinearLayoutManager(this, android.support.v7.widget.LinearLayoutManager.HORIZONTAL, false));
+         recyclerPopularServices =(RecyclerView)findViewById(R.id.recycler_popular_services);
+         recyclerPopularServices.setHasFixedSize(true);
+         recyclerPopularServices.setLayoutManager(new LinearLayoutManager(this, android.support.v7.widget.LinearLayoutManager.HORIZONTAL, false));
+         recyclerPopularServices.setNestedScrollingEnabled(false);
+
 
         // recyclerPopularServices.setLayoutManager(LinearLayoutManager);
 
@@ -303,12 +294,17 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         recyclerTopServices.setHasFixedSize(false);
         GridlayoutManager       = new GridLayoutManager(this,2);
         recyclerTopServices.setLayoutManager(GridlayoutManager);
+        recyclerTopServices.setNestedScrollingEnabled(false);
 
-        mslider = (SliderLayout)findViewById(R.id.slider);
+        //mslider = (SliderLayout)findViewById(R.id.slider);
 
-        SearchBar = (MaterialSearchBar)findViewById(R.id.search_bar);
+        SearchBar = (CardView) findViewById(R.id.search_bar);
 
+        //Init Service
+        mService = Common.getApi();
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -408,14 +404,62 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         return true;
     }
 
-    private void loadTopServices() {
-        TopServiceAdapter.startListening();
-        recyclerTopServices.setAdapter(TopServiceAdapter);
-        recyclerTopServices.scheduleLayoutAnimation();
-        refreshLayout.setRefreshing(false);
+    private void loadPopularServices() {
+      /*  popularAdapter.notifyDataSetChanged();
+        popularAdapter.startListening();
+        recyclerPopularServices.setAdapter(popularAdapter);
+        recyclerPopularServices.scheduleLayoutAnimation();
+        refreshLayout.setRefreshing(false);*/
+
+        mService.getTopServices().enqueue(new Callback<List<ResponseTopService>>() {
+            @Override
+            public void onResponse(Call<List<ResponseTopService>> call, Response<List<ResponseTopService>> response) {
+                Log.e(TAG, response.body().toString());
+
+                topServicesModelList = response.body();
+                topServiceAdapter = new ClientTopServiceAdapter(FreeLancerDashboardActivity.this,topServicesModelList);
+                recyclerTopServices.setAdapter(topServiceAdapter);
+                topServiceAdapter.notifyDataSetChanged();
+
+                refreshLayout.setRefreshing(false);
+            }
+
+            @Override
+            public void onFailure(Call<List<ResponseTopService>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+        mService.getPopularServices().enqueue(new Callback<List<PopularServicesModel>>() {
+            @Override
+            public void onResponse(Call<List<PopularServicesModel>> call, Response<List<PopularServicesModel>> response) {
+                //Log.e(TAG, response.body().toString());
+
+                popularServicesModelList = response.body();
+                popularServiceAdapter = new ClientPopularServiceAdapter(FreeLancerDashboardActivity.this,popularServicesModelList);
+                recyclerPopularServices.setAdapter(popularServiceAdapter);
+                popularServiceAdapter.notifyDataSetChanged();
+
+                refreshLayout.setRefreshing(false);
+            }
+
+            @Override
+            public void onFailure(Call<List<PopularServicesModel>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
     }
 
-    private void setupSlider() {
+    private void loadTopServices() {
+       /* TopServiceAdapter.startListening();
+        recyclerTopServices.setAdapter(TopServiceAdapter);
+        recyclerTopServices.scheduleLayoutAnimation();
+        refreshLayout.setRefreshing(false);*/
+
+    }
+
+  /*  private void setupSlider() {
         image_list = new HashMap<>();
         final DatabaseReference Fbanner = database.getReference("popular");
         Fbanner.addValueEventListener(new ValueEventListener() {
@@ -446,10 +490,10 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
                             .setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
                                 @Override
                                 public void onSliderClick(BaseSliderView slider) {
-                                   /* Intent intent = new Intent(DashboardActivity.this,FoodDetails.class);
+                                   *//* Intent intent = new Intent(DashboardActivity.this,FoodDetails.class);
                                     //send food id to food details
                                     intent.putExtras(textSliderView.getBundle());
-                                    startActivity(intent);*/
+                                    startActivity(intent);*//*
 
                                     Snackbar.make(findViewById(R.id.swipe_refresh_layout), ""+NameofFood, Snackbar.LENGTH_LONG)
                                             .setAction("Action", null).show();
@@ -478,7 +522,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         mslider.setCustomAnimation(new DescriptionAnimation());
         mslider.setDuration(3000);
 
-    }
+    }*/
 
 
 }
