@@ -33,13 +33,14 @@ public class RetrofitClient {
 
         }
         return retrofit;
+
     }
 
 
-    /*public static OkHttpClient okHttpClient = new OkHttpClient.Builder()
+    public static OkHttpClient okHttpClient = new OkHttpClient.Builder()
             .readTimeout(120, TimeUnit.SECONDS)
             .connectTimeout(120, TimeUnit.SECONDS)
-            .build();*/
+            .build();
 
    /* private static OkHttpClient okClient() {
         return new OkHttpClient.Builder()
