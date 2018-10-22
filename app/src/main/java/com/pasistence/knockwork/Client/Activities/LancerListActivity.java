@@ -104,8 +104,7 @@ public class LancerListActivity extends AppCompatActivity {
             @Override
             public void onButtonClicked(int buttonCode) {
 
-            }
-        });
+            }        });
 
 
         lancerListAdapter = new LancerListAdapter(LancerListActivity.this, lancerList);

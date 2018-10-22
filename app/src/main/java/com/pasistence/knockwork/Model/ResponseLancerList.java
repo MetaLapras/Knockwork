@@ -1,23 +1,27 @@
 package com.pasistence.knockwork.Model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.List;
 
 public class ResponseLancerList implements Serializable {
-    public boolean error;
-    public String pageno ;
-    public String totalcount ;
-    public List<LancerListModel> result ;
-
-    public ResponseLancerList(Boolean error, String pageno, String totalcount, List<LancerListModel> result) {
-        this.error = error;
-        this.pageno = pageno;
-        this.totalcount = totalcount;
-        this.result = result;
-    }
-
-    public ResponseLancerList() {
-    }
+    @SerializedName("Error")
+    @Expose
+    private Boolean error;
+    @SerializedName("success")
+    @Expose
+    private Integer success;
+    @SerializedName("pageno")
+    @Expose
+    private String pageno;
+    @SerializedName("totalcount")
+    @Expose
+    private String totalcount;
+    @SerializedName("LancerListModel")
+    @Expose
+    private List<LancerListModel> lancerListModel = null;
 
     public Boolean getError() {
         return error;
@@ -25,6 +29,14 @@ public class ResponseLancerList implements Serializable {
 
     public void setError(Boolean error) {
         this.error = error;
+    }
+
+    public Integer getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Integer success) {
+        this.success = success;
     }
 
     public String getPageno() {
@@ -43,11 +55,11 @@ public class ResponseLancerList implements Serializable {
         this.totalcount = totalcount;
     }
 
-    public List<LancerListModel> getResult() {
-        return result;
+    public List<LancerListModel> getLancerListModel() {
+        return lancerListModel;
     }
 
-    public void setResult(List<LancerListModel> result) {
-        this.result = result;
+    public void setLancerListModel(List<LancerListModel> lancerListModel) {
+        this.lancerListModel = lancerListModel;
     }
 }

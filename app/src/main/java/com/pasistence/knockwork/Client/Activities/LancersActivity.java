@@ -140,6 +140,19 @@ public class LancersActivity extends AppCompatActivity
         lancerListAdapter.notifyDataSetChanged();
 
 
+        mService.getLancers("1")
+                .enqueue(new Callback<List<LancerListModel>>() {
+                    @Override
+                    public void onResponse(Call<List<LancerListModel>> call, Response<List<LancerListModel>> response) {
+                        Log.e(TAG, response.body().toString() );
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<LancerListModel>> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+
         /*----------------------------------------------------------------------------*/
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -285,7 +298,7 @@ public class LancersActivity extends AppCompatActivity
             }
         }*/
 
-        mService.LancerSearch(
+       /* mService.LancerSearch(
                 "1",
                 text
         ).enqueue(new Callback<ResponseLancerList>() {
@@ -300,7 +313,7 @@ public class LancersActivity extends AppCompatActivity
                 Log.e(TAG, t.getMessage());
                 t.printStackTrace();
             }
-        });
+        });*/
 
     }
 

@@ -19,6 +19,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface MyApi {
+
     @GET("knockwork/public/index.php/api/jobdescriptions/lancer/page/{pageNo}")
     Call<SearchPageListModel> getIP(@Query("pageNo") String pageNo);
 
@@ -34,9 +35,12 @@ public interface MyApi {
     @GET("suggestionlist")
     Call<List<ResponseSuggestionList>>getSuggestionList();
 
+    @GET("client/lancers/{pageNo}")
+    Call<List<LancerListModel>>getLancers(@Query("pageNo") String pageNo);
+
     @FormUrlEncoded
     @POST("lancersearch")
-    Call<ResponseLancerList>LancerSearch(@Field("pageNo") String pageNo, @Field("title") CharSequence Title);
+    Call<List<ResponseLancerList>>LancerSearch(@Field("pageNo") String pageNo, @Field("title") CharSequence Title);
 
 }
 
