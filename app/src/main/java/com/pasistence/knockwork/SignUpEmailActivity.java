@@ -55,6 +55,7 @@ public class SignUpEmailActivity extends AppCompatActivity implements View.OnCli
         buttonSignOut.setOnClickListener(this);
         buttonSend.setOnClickListener(this);
         buttonRefresh.setOnClickListener(this);
+
     }
 
 
