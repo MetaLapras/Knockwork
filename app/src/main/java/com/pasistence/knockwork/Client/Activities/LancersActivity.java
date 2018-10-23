@@ -23,12 +23,20 @@ import android.widget.ListView;
 
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Adapter.LancerListAdapter;
+import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Freelancer.Activities.JobPoastingActivity;
 import com.pasistence.knockwork.Model.LancerListModel;
+import com.pasistence.knockwork.Model.ResponseLancerList;
+import com.pasistence.knockwork.Model.ResponseSuggestionList;
 import com.pasistence.knockwork.R;
+import com.pasistence.knockwork.Remote.MyApi;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LancersActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -44,6 +52,8 @@ public class LancersActivity extends AppCompatActivity
     List<String> suggestList = new ArrayList<String>();
     String CatId,subCatId;
     ListView listSuggestions;
+    MyApi mService;
+    List<ResponseSuggestionList> suggestionLists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +85,7 @@ public class LancersActivity extends AppCompatActivity
         lancerList.add(lancers2);
         lancerList.add(lancers3);
 
-        //loadSuggestList();
+        loadSuggestList();
 
         //Setup search bar
         searchBar.setHint("Search");
@@ -115,7 +125,7 @@ public class LancersActivity extends AppCompatActivity
 
             @Override
             public void onSearchConfirmed(CharSequence text) {
-              //  startSearch(text);
+              startSearch(text);
             }
 
             @Override
@@ -129,6 +139,19 @@ public class LancersActivity extends AppCompatActivity
         recyclerLancer.setAdapter(lancerListAdapter);
         lancerListAdapter.notifyDataSetChanged();
 
+
+        mService.getLancers("1")
+                .enqueue(new Callback<ResponseLancerList>() {
+                    @Override
+                    public void onResponse(Call<ResponseLancerList> call, Response<ResponseLancerList> response) {
+                        Log.e(TAG, response.body().toString() );
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseLancerList> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
 
         /*----------------------------------------------------------------------------*/
 
@@ -257,11 +280,13 @@ public class LancersActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
+        //Init Api
+        mService = Common.getApi();
 
     }
 
     private void startSearch(CharSequence text) {
-        ArrayList<LancerListModel> searchLancer = new ArrayList<LancerListModel>();
+        /*ArrayList<LancerListModel> searchLancer = new ArrayList<LancerListModel>();
         for(LancerListModel list : lancerList){
             if(list.getCategory().equals(text.toString())){
 
@@ -271,25 +296,59 @@ public class LancersActivity extends AppCompatActivity
                 searchAdapter = new LancerListAdapter(mContext,searchLancer);
                 recyclerLancer.setAdapter(searchAdapter);
             }
-        }
+        }*/
+
+       /* mService.LancerSearch(
+                "1",
+                text
+        ).enqueue(new Callback<ResponseLancerList>() {
+            @Override
+            public void onResponse(Call<ResponseLancerList> call, Response<ResponseLancerList> response) {
+                ResponseLancerList result = response.body();
+                Log.e(TAG, result.toString() );
+            }
+
+            @Override
+            public void onFailure(Call<ResponseLancerList> call, Throwable t) {
+                Log.e(TAG, t.getMessage());
+                t.printStackTrace();
+            }
+        });*/
 
     }
 
     private void loadSuggestList() {
         //get Data into the list
-
-        suggestList.add("");
-
         try{
-            if(getIntent()!=null){
-                suggestList = getIntent().getStringArrayListExtra("suggestion");
-                searchBar.setLastSuggestions(suggestList);
-            }
+                mService.getSuggestionList()
+                        .enqueue(new Callback<List<ResponseSuggestionList>>() {
+                            @Override
+                            public void onResponse(Call<List<ResponseSuggestionList>> call, Response<List<ResponseSuggestionList>> response) {
+                                Log.e(TAG, response.body().toString());
+                                suggestionLists = response.body();
+
+                                //final List<String> labels = new ArrayList<String>();
+                                for(int i = 0; i<suggestionLists.size(); i++)
+                                {
+                                    suggestList.add(suggestionLists.get(i).getTitle());
+                                }
+                                searchBar.setLastSuggestions(suggestList);
+                            }
+
+                            @Override
+                            public void onFailure(Call<List<ResponseSuggestionList>> call, Throwable t) {
+                                t.printStackTrace();
+                            }
+                        });
+
         }catch (Exception e){
             e.printStackTrace();
         }
-        searchBar.setLastSuggestions(suggestList);
+        //searchBar.setLastSuggestions(suggestList);
     }
 
+    private void performPagination(){
+        //perform call statment
+    }
 
 }

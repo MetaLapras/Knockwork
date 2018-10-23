@@ -39,13 +39,13 @@ public class LancerListAdapter extends RecyclerView.Adapter<ViewHolderFreeLancer
 
         final LancerListModel lancers = lancerArraylist.get(position);
 
-        Picasso.with(mContext).load(lancers.getImage())
+        Picasso.with(mContext).load(lancers.getImage_url())
                 .into(holder.CircularImageViewProfile);
 
-        holder.txtLancerName.setText(lancers.getName());
+        holder.txtLancerName.setText(lancers.getFirst_name());
         holder.txtLancerState.setText(lancers.getCountry());
         holder.txtLancerDescription.setText(lancers.getDescription());
-        holder.txtLancerLike.setText(lancers.getLike());
+     //   holder.txtLancerLike.setText(lancers.getLike());
         holder.txtLancerEarned.setText(lancers.getEarning());
 
     }

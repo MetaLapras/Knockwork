@@ -104,8 +104,7 @@ public class LancerListActivity extends AppCompatActivity {
             @Override
             public void onButtonClicked(int buttonCode) {
 
-            }
-        });
+            }        });
 
 
         lancerListAdapter = new LancerListAdapter(LancerListActivity.this, lancerList);
@@ -127,7 +126,7 @@ public class LancerListActivity extends AppCompatActivity {
 
    private void startSearch(CharSequence text) {
        ArrayList<LancerListModel> searchLancer = new ArrayList<LancerListModel>();
-        for(LancerListModel list : lancerList){
+        /*for(LancerListModel list : lancerList){
             if(list.getCategory().equals(text.toString())){
 
                 searchLancer.add(list);
@@ -136,7 +135,7 @@ public class LancerListActivity extends AppCompatActivity {
                 searchAdapter = new LancerListAdapter(LancerListActivity.this,searchLancer);
                 recyclerLancer.setAdapter(searchAdapter);
             }
-        }
+        }*/
 
     }
 

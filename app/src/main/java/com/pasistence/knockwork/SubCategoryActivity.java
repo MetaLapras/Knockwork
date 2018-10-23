@@ -84,7 +84,7 @@ public class SubCategoryActivity extends AppCompatActivity {
                                 Intent intent = new Intent(mContext,LancersActivity.class);
                                 intent.putExtra("catId",CatId);
                                 intent.putExtra("subcatId",subCategoryList.get(position).getSub_categories_id());
-                                intent.putStringArrayListExtra("suggestion", (ArrayList<String>) labels);
+                               // intent.putStringArrayListExtra("suggestion", (ArrayList<String>) labels);
 
                                 startActivity(intent);
                             }

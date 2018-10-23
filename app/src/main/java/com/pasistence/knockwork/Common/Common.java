@@ -14,7 +14,10 @@ public class Common {
    // private static final String BASE_URL = "http://192.168.0.151/mantra/public/index.php/api/";
     //private static final String BASE_URL = "http://ip.jsontest.com/";
 
-    public static final String BASE_URL = "http://192.168.0.152/knockwork/public/index.php/";
+    //localhost
+    //public static final String BASE_URL = "http://192.168.0.152/knockwork/";
+    //Server
+    public static final String BASE_URL = "http://52.172.221.235:8985/knockwork/public/index.php/api/";
     //public static final String BASE_URL = "http://192.168.0.150/mantra/";
 
     public static MyApi getApi(){
@@ -47,7 +50,6 @@ public class Common {
         //init Fire base
         database = FirebaseDatabase.getInstance();
 
-
         switch (datareference){
             case "popular":
                 databaseReference = database.getReference("popular");
@@ -56,7 +58,5 @@ public class Common {
                 databaseReference = database.getReference("top");
                 break;
         }
-
     }
-
 }
