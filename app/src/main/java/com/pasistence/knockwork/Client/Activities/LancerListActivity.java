@@ -107,9 +107,9 @@ public class LancerListActivity extends AppCompatActivity {
             }        });
 
 
-        lancerListAdapter = new LancerListAdapter(LancerListActivity.this, lancerList);
+      /*  lancerListAdapter = new LancerListAdapter(LancerListActivity.this, lancerList);
         recyclerLancer.setAdapter(lancerListAdapter);
-        lancerListAdapter.notifyDataSetChanged();
+        lancerListAdapter.notifyDataSetChanged();*/
 
 
     }

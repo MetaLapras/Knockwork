@@ -27,6 +27,7 @@ import com.pasistence.knockwork.Adapter.ClientPopularServiceAdapter;
 import com.pasistence.knockwork.Adapter.ClientTopServiceAdapter;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Freelancer.Activities.JobPoastingActivity;
+import com.pasistence.knockwork.Model.ApiResponse.ApiResponseLancer;
 import com.pasistence.knockwork.Model.PopularServicesModel;
 import com.pasistence.knockwork.Model.ResponseTopService;
 import com.pasistence.knockwork.R;
@@ -297,7 +298,7 @@ public class DashboardActivity extends AppCompatActivity
       mService.getTopServices().enqueue(new Callback<List<ResponseTopService>>() {
             @Override
             public void onResponse(Call<List<ResponseTopService>> call, Response<List<ResponseTopService>> response) {
-                Log.e(TAG, response.body().toString());
+                //Log.e(TAG, response.body().toString());
 
                 topServicesModelList = response.body();
                 topServiceAdapter = new ClientTopServiceAdapter(DashboardActivity.this,topServicesModelList);
