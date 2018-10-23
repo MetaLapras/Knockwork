@@ -25,8 +25,8 @@ import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Adapter.LancerListAdapter;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Freelancer.Activities.JobPoastingActivity;
+import com.pasistence.knockwork.Model.ApiResponse.ApiResponseLancer;
 import com.pasistence.knockwork.Model.LancerListModel;
-import com.pasistence.knockwork.Model.ResponseLancerList;
 import com.pasistence.knockwork.Model.ResponseSuggestionList;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.Remote.MyApi;
@@ -47,6 +47,7 @@ public class LancersActivity extends AppCompatActivity
     RecyclerView.LayoutManager layoutManager;
 
     ArrayList<LancerListModel> lancerList = new ArrayList<LancerListModel>();
+    List<ApiResponseLancer.Result> resultList = new ArrayList<ApiResponseLancer.Result>();
     LancerListAdapter lancerListAdapter;
     LancerListAdapter searchAdapter;
     List<String> suggestList = new ArrayList<String>();
@@ -65,28 +66,8 @@ public class LancersActivity extends AppCompatActivity
         /*----------------------------------------------------------------------------*/
         mInit();
 
-        LancerListModel lancers = new LancerListModel("1","Lorem Ipsum","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.","United State"," $ 25","80%","https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg","Web Developer");
-        LancerListModel lancers2 = new LancerListModel("2","Cupcake","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.","United State"," $ 55","70%","https://cdn.cultofmac.com/wp-content/uploads/2011/10/97571564a70014ca5658b67f64f2ce23_1253524914.jpeg","Android Developer");
-        LancerListModel lancers3 = new LancerListModel("3","Jelly Bean","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ","United State"," $ 55","70%","https://i.cricketcb.com/stats/img/faceImages/8364.jpg","Software Developer");
-
-        lancerList.add(lancers);
-        lancerList.add(lancers2);
-        lancerList.add(lancers3);
-        lancerList.add(lancers);
-        lancerList.add(lancers2);
-        lancerList.add(lancers3);
-        lancerList.add(lancers);
-        lancerList.add(lancers2);
-        lancerList.add(lancers3);
-        lancerList.add(lancers);
-        lancerList.add(lancers2);
-        lancerList.add(lancers3);
-        lancerList.add(lancers);
-        lancerList.add(lancers2);
-        lancerList.add(lancers3);
-
         loadSuggestList();
-
+        getAllLancers();
         //Setup search bar
         searchBar.setHint("Search");
         //searchBar.setLastSuggestions(suggestList);
@@ -135,23 +116,6 @@ public class LancersActivity extends AppCompatActivity
         });
 
 
-        lancerListAdapter = new LancerListAdapter(mContext, lancerList);
-        recyclerLancer.setAdapter(lancerListAdapter);
-        lancerListAdapter.notifyDataSetChanged();
-
-
-        mService.getLancers("1")
-                .enqueue(new Callback<List<LancerListModel>>() {
-                    @Override
-                    public void onResponse(Call<List<LancerListModel>> call, Response<List<LancerListModel>> response) {
-                        Log.e(TAG, response.body().toString() );
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<LancerListModel>> call, Throwable t) {
-                        t.printStackTrace();
-                    }
-                });
 
         /*----------------------------------------------------------------------------*/
 
@@ -172,6 +136,31 @@ public class LancersActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void getAllLancers() {
+
+        mService.getLancers(1).enqueue(new Callback<ApiResponseLancer>() {
+            @Override
+            public void onResponse(Call<ApiResponseLancer> call, Response<ApiResponseLancer> response) {
+                response.message();
+                ApiResponseLancer result = response.body();
+                Log.e(TAG, result.toString());
+
+                resultList = result.getResult();
+
+                lancerListAdapter = new LancerListAdapter(mContext, resultList);
+                recyclerLancer.setAdapter(lancerListAdapter);
+                lancerListAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponseLancer> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+         /* */
     }
 
     @Override
@@ -258,7 +247,6 @@ public class LancersActivity extends AppCompatActivity
         return true;
     }
 
-
     private void mInit() {
         mContext = LancersActivity.this;
 
@@ -286,34 +274,27 @@ public class LancersActivity extends AppCompatActivity
     }
 
     private void startSearch(CharSequence text) {
-        /*ArrayList<LancerListModel> searchLancer = new ArrayList<LancerListModel>();
-        for(LancerListModel list : lancerList){
-            if(list.getCategory().equals(text.toString())){
+        mService.LancerSearch(1,text).enqueue(new Callback<ApiResponseLancer>() {
+            @Override
+            public void onResponse(Call<ApiResponseLancer> call, Response<ApiResponseLancer> response) {
+                response.message();
+                ApiResponseLancer result = response.body();
+              // Log.e(TAG, result.toString());
 
-                searchLancer.add(list);
-                Log.e(TAG, searchLancer.toString());
+                resultList = result.getResult();
 
-                searchAdapter = new LancerListAdapter(mContext,searchLancer);
+                searchAdapter = new LancerListAdapter(mContext,resultList);
                 recyclerLancer.setAdapter(searchAdapter);
-            }
-        }*/
+                searchAdapter.notifyDataSetChanged();
 
-       /* mService.LancerSearch(
-                "1",
-                text
-        ).enqueue(new Callback<ResponseLancerList>() {
-            @Override
-            public void onResponse(Call<ResponseLancerList> call, Response<ResponseLancerList> response) {
-                ResponseLancerList result = response.body();
-                Log.e(TAG, result.toString() );
             }
 
             @Override
-            public void onFailure(Call<ResponseLancerList> call, Throwable t) {
-                Log.e(TAG, t.getMessage());
+            public void onFailure(Call<ApiResponseLancer> call, Throwable t) {
                 t.printStackTrace();
             }
-        });*/
+
+        });
 
     }
 

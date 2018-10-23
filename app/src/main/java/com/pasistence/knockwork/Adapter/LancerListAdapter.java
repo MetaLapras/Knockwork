@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.pasistence.knockwork.Model.ApiResponse.ApiResponseLancer;
 import com.pasistence.knockwork.Model.LancerListModel;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.ViewHolder.ViewHolderFreeLancerList;
@@ -17,10 +18,10 @@ import java.util.List;
 public class LancerListAdapter extends RecyclerView.Adapter<ViewHolderFreeLancerList> {
 
     public Context mContext;
-    List<LancerListModel> lancerArraylist ;
+    List<ApiResponseLancer.Result> lancerArraylist ;
 
 
-    public LancerListAdapter(Context mContext, List<LancerListModel> workerList) {
+    public LancerListAdapter(Context mContext, List<ApiResponseLancer.Result> workerList) {
         this.mContext = mContext;
         this.lancerArraylist = workerList;
     }
@@ -37,12 +38,12 @@ public class LancerListAdapter extends RecyclerView.Adapter<ViewHolderFreeLancer
     @Override
     public void onBindViewHolder(@NonNull ViewHolderFreeLancerList holder, int position) {
 
-        final LancerListModel lancers = lancerArraylist.get(position);
+        final ApiResponseLancer.Result lancers = lancerArraylist.get(position);
 
-        Picasso.with(mContext).load(lancers.getImage_url())
+        Picasso.with(mContext).load(lancers.getImageUrl())
                 .into(holder.CircularImageViewProfile);
 
-        holder.txtLancerName.setText(lancers.getFirst_name());
+        holder.txtLancerName.setText(lancers.getFirstName()+lancers.getLastName());
         holder.txtLancerState.setText(lancers.getCountry());
         holder.txtLancerDescription.setText(lancers.getDescription());
      //   holder.txtLancerLike.setText(lancers.getLike());

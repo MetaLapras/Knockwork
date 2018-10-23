@@ -1,8 +1,7 @@
 package com.pasistence.knockwork.Remote;
 
-import com.pasistence.knockwork.Model.LancerListModel;
+import com.pasistence.knockwork.Model.ApiResponse.ApiResponseLancer;
 import com.pasistence.knockwork.Model.PopularServicesModel;
-import com.pasistence.knockwork.Model.ResponseLancerList;
 import com.pasistence.knockwork.Model.ResponseSubCategory;
 import com.pasistence.knockwork.Model.ResponseSuggestionList;
 import com.pasistence.knockwork.Model.ResponseTopService;
@@ -35,12 +34,12 @@ public interface MyApi {
     @GET("suggestionlist")
     Call<List<ResponseSuggestionList>>getSuggestionList();
 
-    @GET("client/lancers/{pageNo}")
-    Call<List<LancerListModel>>getLancers(@Query("pageNo") String pageNo);
+    @GET("lancers/{pageNo}")
+    Call<ApiResponseLancer>getLancers(@Path("pageNo") int pageNo);
 
     @FormUrlEncoded
     @POST("lancersearch")
-    Call<List<ResponseLancerList>>LancerSearch(@Field("pageNo") String pageNo, @Field("title") CharSequence Title);
+    Call<ApiResponseLancer>LancerSearch(@Field("pageNo") int pageNo, @Field("title") CharSequence Title);
 
 }
 
