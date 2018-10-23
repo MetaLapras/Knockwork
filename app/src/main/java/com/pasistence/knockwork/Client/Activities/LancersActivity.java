@@ -141,14 +141,14 @@ public class LancersActivity extends AppCompatActivity
 
 
         mService.getLancers("1")
-                .enqueue(new Callback<List<LancerListModel>>() {
+                .enqueue(new Callback<ResponseLancerList>() {
                     @Override
-                    public void onResponse(Call<List<LancerListModel>> call, Response<List<LancerListModel>> response) {
+                    public void onResponse(Call<ResponseLancerList> call, Response<ResponseLancerList> response) {
                         Log.e(TAG, response.body().toString() );
                     }
 
                     @Override
-                    public void onFailure(Call<List<LancerListModel>> call, Throwable t) {
+                    public void onFailure(Call<ResponseLancerList> call, Throwable t) {
                         t.printStackTrace();
                     }
                 });
