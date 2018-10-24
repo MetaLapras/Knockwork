@@ -3,6 +3,7 @@ package com.pasistence.knockwork.Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import java.util.List;
 
 public class LancerListAdapter extends RecyclerView.Adapter<ViewHolderFreeLancerList> {
 
+    private static final String TAG = "lanceradapter";
     public Context mContext;
     List<ApiResponseLancer.Result> lancerArraylist ;
 
@@ -40,6 +42,8 @@ public class LancerListAdapter extends RecyclerView.Adapter<ViewHolderFreeLancer
 
         final ApiResponseLancer.Result lancers = lancerArraylist.get(position);
 
+
+
         Picasso.with(mContext).load(lancers.getImageUrl())
                 .into(holder.CircularImageViewProfile);
 
@@ -54,5 +58,13 @@ public class LancerListAdapter extends RecyclerView.Adapter<ViewHolderFreeLancer
     @Override
     public int getItemCount() {
         return lancerArraylist.size();
+    }
+
+
+    public void addLancers(List<ApiResponseLancer.Result>Arraylist){
+        for(ApiResponseLancer.Result lanlist : Arraylist){
+           lancerArraylist.add(lanlist);
+        }
+        notifyDataSetChanged();
     }
 }

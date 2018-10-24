@@ -67,7 +67,7 @@ public class LancersActivity extends AppCompatActivity
         mInit();
 
         loadSuggestList();
-        getAllLancers();
+        getAllLancers(1);
         //Setup search bar
         searchBar.setHint("Search");
         //searchBar.setLastSuggestions(suggestList);
@@ -138,16 +138,17 @@ public class LancersActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    private void getAllLancers() {
+    private void getAllLancers(int PageNo) {
 
-        mService.getLancers(1).enqueue(new Callback<ApiResponseLancer>() {
+        mService.getLancers(PageNo).enqueue(new Callback<ApiResponseLancer>() {
             @Override
             public void onResponse(Call<ApiResponseLancer> call, Response<ApiResponseLancer> response) {
                 response.message();
                 ApiResponseLancer result = response.body();
-                Log.e(TAG, result.toString());
+               // Log.e(TAG+"++all", result.toString());
 
                 resultList = result.getResult();
+                Log.e(TAG+"++all", resultList.toString());
 
                 lancerListAdapter = new LancerListAdapter(mContext, resultList);
                 recyclerLancer.setAdapter(lancerListAdapter);

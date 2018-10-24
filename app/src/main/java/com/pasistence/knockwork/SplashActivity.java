@@ -1,18 +1,19 @@
-package com.pasistence.knockwork.Client.Activities;
+package com.pasistence.knockwork;
 
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.media.Image;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import com.crashlytics.android.Crashlytics;
-import com.pasistence.knockwork.LoginActivity;
-import com.pasistence.knockwork.R;
 
 import io.fabric.sdk.android.Fabric;
 import java.security.MessageDigest;
@@ -23,17 +24,21 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
+      //  Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_spash);
-        printkeyhash();
+        //printkeyhash();
+
+        final ImageView imgProfile = (ImageView)findViewById(R.id.img_profile);
 
         new Handler().postDelayed(new Runnable() {
-
-
             @Override
             public void run() {
+
+               // imgProfile.setAnimation(AnimationUtils.loadAnimation(SplashActivity.this,R.anim.zoom_in_animation));
+
+
                 // This method will be executed once the timer is over
-                Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+                Intent i = new Intent(SplashActivity.this, SelectionActivity.class);
                 startActivity(i);
                 finish();
             }

@@ -17,26 +17,31 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.pasistence.knockwork.Client.Activities.DashboardActivity;
+import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboardActivity;
 
 
 import com.pasistence.knockwork.Client.Activities.DashboardActivity;
 import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboardActivity;
+import com.pasistence.knockwork.Model.UserData;
+
 import java.util.Arrays;
 
 import info.hoang8f.widget.FButton;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String TAG = "loginActivity" ;
     Context mContext;
     FButton buttonEmail,buttonGmail,buttonFacebook,buttonPhone;
     TextView txtSignIn,txtSkip;
     LoginButton fbLoginButton, emailLoginButton;
 
     RadioGroup radioGroupWH;
-    RadioButton radioButton;
+    RadioButton radiobtnWork,radiobtnHire;
 
 
     private static final int EMAIL_LOGIN      = 1000;
@@ -46,7 +51,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public FirebaseAuth firebaseAuth;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +71,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         txtSkip        = (TextView)findViewById(R.id.txt_skip);
         buttonPhone      = (FButton)findViewById(R.id.btn_SignUp_Number);
         radioGroupWH    =(RadioGroup)findViewById(R.id.radio_group);
+        radiobtnWork = (RadioButton)findViewById(R.id.radio_button_work);
+        radiobtnHire = (RadioButton)findViewById(R.id.radio_button_hire);
     }
 
     private void mOnClick() {
@@ -77,7 +83,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         txtSkip.setOnClickListener(this);
         txtSignIn.setOnClickListener(this);
     }
-
 
     @Override
     public void onClick(View v) {
@@ -135,7 +140,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == EMAIL_LOGIN) {
@@ -144,17 +148,34 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         if (requestCode == GMAIL_LOGIN) {
             handleSignInResponse(resultCode, data);
+             FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+            Log.e(TAG, currentUser.getUid());
+            Log.e(TAG, currentUser.getDisplayName());
+            Log.e(TAG, currentUser.getEmail());
+            Log.e(TAG, currentUser.getPhotoUrl().toString());
+           // Log.e(TAG, currentUser.getPhoneNumber());
+
+            UserData userData = new UserData(currentUser.getDisplayName(),currentUser.getUid(),currentUser.getEmail(),currentUser.getPhotoUrl());
+            new Common().setUserData(userData);
+
             return;
         }
         if (requestCode == FACEBOOK_LOGIN) {
             handleSignInResponse(resultCode, data);
+           /* FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+            Log.e(TAG, currentUser.getUid());
+            Log.e(TAG, currentUser.getDisplayName());
+            Log.e(TAG, currentUser.getEmail());
+            Log.e(TAG, currentUser.getPhotoUrl().toString());
+            Log.e(TAG, currentUser.getPhoneNumber());*/
             return;
         }
         if (requestCode == PHONE_LOGIN){
             phoneNumberSignInResponse(resultCode, data);
             return;
         }
-
     }
 
     private void handleSignInResponse(int resultCode, Intent data) {
@@ -177,7 +198,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         else
             Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show();
     }
-
 
     private void phoneNumberSignInResponse(int resultCode, Intent data) {
         IdpResponse response =  IdpResponse.fromResultIntent(data);
