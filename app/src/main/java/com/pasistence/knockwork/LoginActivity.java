@@ -88,7 +88,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
 
         if (v == buttonEmail) {
-            startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), EMAIL_LOGIN);
+           // startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), EMAIL_LOGIN);
+           startActivity(new Intent(LoginActivity.this,EmailActivity.class));
         }
 
         if (v == buttonGmail) {
@@ -144,6 +145,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == EMAIL_LOGIN) {
             handleSignInResponse(resultCode, data);
+            //startActivity(new Intent(LoginActivity.this,SignUpEmailActivity.class));
+
             return;
         }
         if (requestCode == GMAIL_LOGIN) {
