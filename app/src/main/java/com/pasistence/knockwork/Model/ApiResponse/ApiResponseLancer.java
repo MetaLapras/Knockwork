@@ -3,6 +3,7 @@ package com.pasistence.knockwork.Model.ApiResponse;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ApiResponseLancer {
@@ -20,7 +21,7 @@ public class ApiResponseLancer {
     private String status;
     @SerializedName("result")
     @Expose
-    private List<Result> result = null;
+    private ArrayList<Result> result = null;
 
     @Override
     public String toString() {
@@ -65,11 +66,11 @@ public class ApiResponseLancer {
         this.status = status;
     }
 
-    public List<Result> getResult() {
+    public ArrayList<Result> getResult() {
         return result;
     }
 
-    public void setResult(List<Result> result) {
+    public void setResult(ArrayList<Result> result) {
         this.result = result;
     }
 
