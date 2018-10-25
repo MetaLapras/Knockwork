@@ -257,6 +257,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     RegisterClientUser(FirebaseAuth.getInstance().getCurrentUser());
                 }else
                 {
+                    Common.commonDialog(mContext,"Please Check Your Internet Connection !");
+                    Common.showDialog();
 
                 }
                 /*switch (radioGroupWH.getCheckedRadioButtonId()){
