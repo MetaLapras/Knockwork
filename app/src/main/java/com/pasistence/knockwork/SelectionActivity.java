@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.pasistence.knockwork.Common.PreferenceUtils;
+
 import info.hoang8f.widget.FButton;
 
 public class SelectionActivity extends AppCompatActivity
@@ -32,12 +34,14 @@ public class SelectionActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(mContext,LoginActivity.class));
+                PreferenceUtils.setUserType(mContext,"Lancer");
             }
         });
         btnHire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(mContext,LoginActivity.class));
+                PreferenceUtils.setUserType(mContext,"Client");
             }
         });
     }

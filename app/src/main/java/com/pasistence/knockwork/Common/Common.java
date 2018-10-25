@@ -1,6 +1,8 @@
 package com.pasistence.knockwork.Common;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
@@ -19,6 +21,7 @@ public class Common {
     //private static final String BASE_URL = "http://ip.jsontest.com/";
 
     public UserData userData;
+    public static AlertDialog alertDialog;
 
     public UserData getUserData() {
         return userData;
@@ -73,6 +76,27 @@ public class Common {
                 databaseReference = database.getReference("top");
                 break;
         }
+    }
+
+    public static void commonDialog(Context mContext,String message){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+        alertDialogBuilder.setMessage(message);
+        alertDialogBuilder.setNegativeButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        arg0.dismiss();
+                    }
+                });
+
+        //AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog = alertDialogBuilder.create();
+    }
+    public static void showDialog(){
+        alertDialog.show();
+    }
+    public static void hideDialog(){
+        alertDialog.dismiss();
     }
 
 }
