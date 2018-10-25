@@ -25,7 +25,7 @@
         android:layout_centerHorizontal="true"
         android:orientation="vertical">
 
-        <RadioGroup
+     <!--   <RadioGroup
             android:id="@+id/radio_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:text="@string/hire" />
-        </RadioGroup>
+        </RadioGroup>-->
 
         <info.hoang8f.widget.FButton
             android:id="@+id/btn_SignUp_Email"

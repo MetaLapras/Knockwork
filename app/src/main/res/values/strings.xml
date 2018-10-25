@@ -150,7 +150,18 @@
     <item>07</item>
     <item>08</item>
     <item>09</item>
-    <item>10</item><item>11</item></string-array>
+    <item>10</item>
+        <item>11</item></string-array>
+
+
+    <string-array name="spinner_availability">
+        <item>Full-time : 30+ hrs/week</item>
+        <item>Part-time : 10-30 hrs/week</item>
+        <item>As needed : Less than 10 hrs/week</item>
+        <item>Not sure at this time</item>
+        <item>Currently on leave</item>
+        <item>Not Available to hire</item>
+    </string-array>
 
     <string-array name="array_jobCategory">
         <item>Select Category</item>
@@ -191,6 +202,7 @@
         <item>As per Place holder Bid</item>
         <item>As per Daily Basis</item>
         <item>According to Hours</item></string>
+    <string name="dd_mm_yy" >dd-mm-yy</string>
 
 
     <string-array name="milestones">
