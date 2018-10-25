@@ -23,6 +23,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -62,7 +64,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FreeLancerDashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     private static final String TAG = "cdash-->";
     Boolean isLancer=false;
@@ -74,6 +76,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
     RecyclerView.LayoutManager GridlayoutManager,LinearlayoutManager ;
     SwipeRefreshLayout refreshLayout;
     CardView SearchBar;
+    LinearLayout navlinearlayout;
 
    // public FirebaseDatabase database;
    // public DatabaseReference popular_dataReference ;
@@ -103,6 +106,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mInit();
+
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -279,6 +283,28 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
 
     private void mInit() {
         mContext = FreeLancerDashboardActivity.this;
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerview = navigationView.getHeaderView(0);
+       /* TextView profilename = (TextView) headerview.findViewById(R.id.profile_name);
+        profilename.setText("your name");*/
+
+        LinearLayout header = (LinearLayout) headerview.findViewById(R.id.nav_head_freelancer);
+        header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(FreeLancerDashboardActivity.this, "clicked", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(FreeLancerDashboardActivity.this,FreelancerProfileActivity.class));
+            }
+        });
+        /*navlinearlayout = (LinearLayout)findViewById(R.id.nav_head_freelancer);
+        navlinearlayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FreeLancerDashboardActivity.this,FreelancerProfileActivity.class));
+            }
+        });
+*/
 
         refreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
 
@@ -458,6 +484,8 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         refreshLayout.setRefreshing(false);*/
 
     }
+
+
 
   /*  private void setupSlider() {
         image_list = new HashMap<>();

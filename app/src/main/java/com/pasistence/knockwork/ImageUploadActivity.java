@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -97,8 +98,18 @@ public class ImageUploadActivity extends AppCompatActivity implements View.OnCli
             progressDialog.setTitle("Uploading");
             progressDialog.show();
 
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            StorageReference storageRef = storage.getReference();
 
-            StorageReference riversRef = storageReference.child("images/pic.jpg");
+         /*   // Create a reference to "mountains.jpg"
+            StorageReference mountainsRef = storageRef.child("mountains.jpg");
+
+            // Create a reference to 'images/mountains.jpg'
+            StorageReference mountainImagesRef = storageRef.child("images/mountains.jpg");*/
+
+
+
+            StorageReference riversRef = storageRef.child("images/");
             riversRef.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override

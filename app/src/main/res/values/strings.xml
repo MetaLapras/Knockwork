@@ -23,7 +23,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Sample Employeer</string>
     <string name="nav_header_title_lancer">Sample Lancer</string>
-    <string name="nav_header_subtitle">Pasistence pvt ltd</string>
+    <string name="nav_header_subtitle">sample@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Logout</string>
     <string name="signPhoneNumber">Sign Up with Number</string>
@@ -114,6 +114,44 @@
     <string name="paybyeveryotherweek">- Pay by Every other Week</string>
     <string name="postajob">Post a Job</string>
 
+
+    <string-array name="spinner_years">
+        <item>00 </item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+    </string-array>
+
+    <string-array name="spinner_months">
+    <item>00 </item>
+    <item>01</item>
+    <item>02</item>
+    <item>03</item>
+    <item>04</item>
+    <item>05</item>
+    <item>06</item>
+    <item>07</item>
+    <item>08</item>
+    <item>09</item>
+    <item>10</item><item>11</item></string-array>
+
     <string-array name="array_jobCategory">
         <item>Select Category</item>
         <item>Art and Design</item>
@@ -142,6 +180,17 @@
     <string name="hiredamount">- $200</string>
     <string name="web">Web development</string>
     <string name="search">What are you Looking for ?</string>
+    <string name="profile_name" >Sample name</string>
+    <string name="professional_title" >Professional Title</string>
+    <string name="example">Eg: Graphic Designer</string>
+    <string name="min_hour_rate" >Min. Hour Rate: </string>
+    <string name="work_experience">Work Experience
+    </string>
+    <string name="spinner_years">
+        <item>Select</item>
+        <item>As per Place holder Bid</item>
+        <item>As per Daily Basis</item>
+        <item>According to Hours</item></string>
 
 
     <string-array name="milestones">
