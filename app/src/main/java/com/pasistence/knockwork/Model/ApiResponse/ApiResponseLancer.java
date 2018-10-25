@@ -3,6 +3,7 @@ package com.pasistence.knockwork.Model.ApiResponse;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ApiResponseLancer {
@@ -15,10 +16,12 @@ public class ApiResponseLancer {
     @SerializedName("TotalCount")
     @Expose
     private String totalCount;
+    @SerializedName("status")
+    @Expose
+    private String status;
     @SerializedName("result")
     @Expose
-    private List<Result> result = null;
-
+    private ArrayList<Result> result = null;
 
     @Override
     public String toString() {
@@ -26,6 +29,7 @@ public class ApiResponseLancer {
                 "error=" + error +
                 ", pageNo='" + pageNo + '\'' +
                 ", totalCount='" + totalCount + '\'' +
+                ", status='" + status + '\'' +
                 ", result=" + result +
                 '}';
     }
@@ -54,11 +58,19 @@ public class ApiResponseLancer {
         this.totalCount = totalCount;
     }
 
-    public List<Result> getResult() {
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public ArrayList<Result> getResult() {
         return result;
     }
 
-    public void setResult(List<Result> result) {
+    public void setResult(ArrayList<Result> result) {
         this.result = result;
     }
 
@@ -94,6 +106,9 @@ public class ApiResponseLancer {
         @SerializedName("earning")
         @Expose
         private String earning;
+        @SerializedName("feedback")
+        @Expose
+        private String feedback;
 
 
         @Override
@@ -109,6 +124,7 @@ public class ApiResponseLancer {
                     ", country='" + country + '\'' +
                     ", description='" + description + '\'' +
                     ", earning='" + earning + '\'' +
+                    ", feedback='" + feedback + '\'' +
                     '}';
         }
 
@@ -191,6 +207,15 @@ public class ApiResponseLancer {
         public void setEarning(String earning) {
             this.earning = earning;
         }
+
+        public String getFeedback() {
+            return feedback;
+        }
+
+        public void setFeedback(String feedback) {
+            this.feedback = feedback;
+        }
+
 
     }
 }

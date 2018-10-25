@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Client.Activities.SplashActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -98,6 +98,8 @@
             android:name=".Freelancer.Activities.SubmitProposalActivity"
             android:label="Submit Proposal"
             android:theme="@style/AppTheme" />
+        <activity android:name=".SubCategoryActivity" />
+        <activity android:name=".SelectionActivity"></activity>
         <activity android:name=".SubCategoryActivity" />
         <activity android:name=".EmailActivity" />
         <activity android:name=".ImageUploadActivity" />

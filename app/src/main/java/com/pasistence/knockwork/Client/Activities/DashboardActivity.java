@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
@@ -30,13 +31,16 @@ import com.pasistence.knockwork.Freelancer.Activities.JobPoastingActivity;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseLancer;
 import com.pasistence.knockwork.Model.PopularServicesModel;
 import com.pasistence.knockwork.Model.ResponseTopService;
+import com.pasistence.knockwork.Model.UserData;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.Remote.MyApi;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -62,11 +66,12 @@ public class DashboardActivity extends AppCompatActivity
     List<PopularServicesModel> popularServicesModelList = new ArrayList<PopularServicesModel>();
     List<ResponseTopService> topServicesModelList = new ArrayList<ResponseTopService>();
 
+    TextView txtUserName,txtUserEmail;
+    CircleImageView imgUserProfile;
+
 //    public FirebaseDatabase database;
 //    public DatabaseReference popular_dataReference ;
 //    public DatabaseReference Top_dataReference ;
-
-
 //    FirebaseRecyclerAdapter<TopServicesModel,ViewHolderTopServices> TopServiceAdapter;
 
     //Sliders
@@ -93,6 +98,21 @@ public class DashboardActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        txtUserName = (TextView)navigationView.findViewById(R.id.txt_user_name);
+        txtUserEmail = (TextView)navigationView.findViewById(R.id.txt_user_emailid);
+        imgUserProfile = (CircleImageView)navigationView.findViewById(R.id.user_profile_image) ;
+
+        UserData data = new Common().getUserData();
+
+        if(data!=null){
+            txtUserEmail.setText(data.getEmail());
+            txtUserName.setText(data.getDisplayName());
+
+            Picasso.with(mContext).load(data.getPhotoUrl()).into(imgUserProfile);
+        }
+
+
+
 
         //init Fire base
 //        database = FirebaseDatabase.getInstance();
