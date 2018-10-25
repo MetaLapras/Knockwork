@@ -222,7 +222,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void handleSignInResponse(int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
-            switch (radioGroupWH.getCheckedRadioButtonId()){
+           /* switch (radioGroupWH.getCheckedRadioButtonId()){
                 case R.id.radio_button_hire:
                     Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
                     startActivity(intent1);
@@ -235,7 +235,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     finish();
                     break;
             }
-
+*/
         }
         else
             Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show();
