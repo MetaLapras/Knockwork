@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/lancer_activity"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Client.Activities.LancersActivity"
     tools:showIn="@layout/app_bar_lancers">
@@ -34,19 +36,39 @@
 
     </ListView>
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="10dp"
-        android:id="@+id/card_Top_services">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_lancer_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="450dp"
             android:isScrollContainer="false"
-            android:layout_margin="5dp" />
+            android:layout_margin="5dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_large"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:text="@string/more"
+            android:id="@+id/txt_more"
+            android:layout_marginBottom="20dp"
+            />
 
-    </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+   <!-- <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/card_Top_services">
+
+    </android.support.v7.widget.CardView>-->
 </LinearLayout>
 </android.support.constraint.ConstraintLayout>

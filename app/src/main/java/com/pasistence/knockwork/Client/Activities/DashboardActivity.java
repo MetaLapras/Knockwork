@@ -104,7 +104,7 @@ public class DashboardActivity extends AppCompatActivity
 
         UserData data = new Common().getUserData();
 
-        if(!data.getUid().equals(null)){
+        if(data!=null){
             txtUserEmail.setText(data.getEmail());
             txtUserName.setText(data.getDisplayName());
 

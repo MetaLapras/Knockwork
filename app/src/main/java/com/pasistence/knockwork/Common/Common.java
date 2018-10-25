@@ -29,9 +29,9 @@ public class Common {
     }
 
     //localhost
-    //public static final String BASE_URL = "http://192.168.0.152/knockwork/";
+    public static final String BASE_URL = "http://10.0.2.2/knockwork/public/index.php/api/";
     //Server
-    public static final String BASE_URL = "http://52.172.221.235:8985/knockwork/public/index.php/api/";
+    //public static final String BASE_URL = "http://52.172.221.235:8985/knockwork/public/index.php/api/";
     private static final String TAG = "common";
     //public static final String BASE_URL = "http://192.168.0.150/mantra/";
 

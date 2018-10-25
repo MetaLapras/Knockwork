@@ -15,10 +15,12 @@ public class ApiResponseLancer {
     @SerializedName("TotalCount")
     @Expose
     private String totalCount;
+    @SerializedName("status")
+    @Expose
+    private String status;
     @SerializedName("result")
     @Expose
     private List<Result> result = null;
-
 
     @Override
     public String toString() {
@@ -26,6 +28,7 @@ public class ApiResponseLancer {
                 "error=" + error +
                 ", pageNo='" + pageNo + '\'' +
                 ", totalCount='" + totalCount + '\'' +
+                ", status='" + status + '\'' +
                 ", result=" + result +
                 '}';
     }
@@ -52,6 +55,14 @@ public class ApiResponseLancer {
 
     public void setTotalCount(String totalCount) {
         this.totalCount = totalCount;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public List<Result> getResult() {
@@ -94,6 +105,9 @@ public class ApiResponseLancer {
         @SerializedName("earning")
         @Expose
         private String earning;
+        @SerializedName("feedback")
+        @Expose
+        private String feedback;
 
 
         @Override
@@ -109,6 +123,7 @@ public class ApiResponseLancer {
                     ", country='" + country + '\'' +
                     ", description='" + description + '\'' +
                     ", earning='" + earning + '\'' +
+                    ", feedback='" + feedback + '\'' +
                     '}';
         }
 
@@ -191,6 +206,15 @@ public class ApiResponseLancer {
         public void setEarning(String earning) {
             this.earning = earning;
         }
+
+        public String getFeedback() {
+            return feedback;
+        }
+
+        public void setFeedback(String feedback) {
+            this.feedback = feedback;
+        }
+
 
     }
 }
