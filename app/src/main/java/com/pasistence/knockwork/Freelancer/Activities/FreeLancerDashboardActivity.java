@@ -86,6 +86,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
     SwipeRefreshLayout refreshLayout;
     CardView SearchBar;
     LinearLayout navlinearlayout;
+    ImageView imgEdit;
 
    // public FirebaseDatabase database;
    // public DatabaseReference popular_dataReference ;
@@ -100,7 +101,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
 
     TextView txtUserName,txtUserEmail;
     CircleImageView imgUserProfile;
-    ImageView imgEdit;
+
 
     // FirebaseRecyclerAdapter<PopularServicesModel,ViewHolderPopularServices> popularAdapter;
     //FirebaseRecyclerAdapter<TopServicesModel,ViewHolderTopServices> TopServiceAdapter;
@@ -144,6 +145,13 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         txtUserName = (TextView)header.findViewById(R.id.txt_user_name);
         txtUserEmail = (TextView)header.findViewById(R.id.txt_user_emailid);
         imgUserProfile = (CircleImageView)header.findViewById(R.id.user_profile_image) ;
+        imgEdit=(ImageView)header.findViewById(R.id.img_edit);
+        imgEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FreeLancerDashboardActivity.this,FreelancerProfileActivity.class));
+            }
+        });
 
        /* UserData data = new Common().getUserData();
 
