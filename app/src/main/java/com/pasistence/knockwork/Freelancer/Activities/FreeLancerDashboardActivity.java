@@ -1,12 +1,14 @@
 package com.pasistence.knockwork.Freelancer.Activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,8 +33,10 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.facebook.login.Login;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -72,6 +76,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
     private static final String TAG = "cdash-->";
     Boolean isLancer=false;
     Boolean isClient=false;
+    public FirebaseAuth mAuth;
 
     Context mContext;
 
@@ -132,19 +137,11 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.free_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View header=navigationView.getHeaderView(0);
+
         txtUserName = (TextView)header.findViewById(R.id.txt_user_name);
         txtUserEmail = (TextView)header.findViewById(R.id.txt_user_emailid);
         imgUserProfile = (CircleImageView)header.findViewById(R.id.user_profile_image) ;
 
-       /* UserData data = new Common().getUserData();
-
-        if(data!=null){
-            txtUserEmail.setText(data.getEmail());
-            txtUserName.setText(data.getDisplayName());
-
-            Picasso.with(mContext).load(data.getPhotoUrl()).into(imgUserProfile);
-        }
-*/
 
         txtUserName.setText(Common.UserName);
         txtUserEmail.setText(Common.UserEmail);
@@ -302,7 +299,6 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
 
     }
 
-
     private void mInit() {
         mContext = FreeLancerDashboardActivity.this;
 
@@ -352,6 +348,9 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         mService = Common.getApi();
         //Init Preference Values for Navigation Drawer
         Common.getUserPreference(mContext);
+
+        //initFirebase
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -380,7 +379,40 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
-            startActivity(new Intent(FreeLancerDashboardActivity.this,LoginActivity.class));
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+            alertDialogBuilder.setMessage("Are you Sure Want to Logout")
+                    .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // FIRE ZE MISSILES!
+
+                            //Clear Saved Password and Users
+                            PreferenceUtils.setSignIn(mContext,false);
+
+                            //FirebaseAuth LogOut
+                            mAuth.signOut();
+
+                            Intent signin = new Intent(mContext,Login.class);
+                            signin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(signin);
+                            finish();
+
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User cancelled the dialog
+                            dialog.dismiss();
+                        }
+                    });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+
+
+
+
+
             return true;
         }
 
@@ -507,8 +539,6 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         refreshLayout.setRefreshing(false);*/
 
     }
-
-
 
   /*  private void setupSlider() {
         image_list = new HashMap<>();

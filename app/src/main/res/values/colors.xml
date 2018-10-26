@@ -33,5 +33,6 @@
     <color name="black">#FF00070D</color>
     <color name="gray">#FF5C6268</color>
     <color name="red">#FFE71A21</color>
+    <color name="green">#00FF00</color>
 
 </resources>

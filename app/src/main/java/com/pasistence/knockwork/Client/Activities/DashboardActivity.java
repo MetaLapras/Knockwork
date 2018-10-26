@@ -1,9 +1,11 @@
 package com.pasistence.knockwork.Client.Activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,7 +25,9 @@ import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
 
+import com.facebook.login.Login;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Adapter.ClientPopularServiceAdapter;
 import com.pasistence.knockwork.Adapter.ClientTopServiceAdapter;
@@ -80,6 +84,7 @@ public class DashboardActivity extends AppCompatActivity
     //Sliders
     HashMap<String,String> image_list;
     SliderLayout mslider;
+    public FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,9 +121,25 @@ public class DashboardActivity extends AppCompatActivity
         }
 */
 
-       txtUserName.setText(Common.UserName);
-       txtUserEmail.setText(Common.UserEmail);
-       Picasso.with(mContext).load(Common.UserPhoto).into(imgUserProfile);
+    try {
+       /* FirebaseUser auth = FirebaseAuth.getInstance().getCurrentUser();
+        Log.e(TAG,auth.getDisplayName());
+
+        Log.e(TAG, auth.getDisplayName()+"");
+        Log.e(TAG, auth.getUid()+"");
+        Log.e(TAG, auth.getEmail()+"");
+        Log.e(TAG, auth.getPhotoUrl().toString());
+        Log.e(TAG, auth.getProviders().toString()+"");
+        Log.e(TAG, auth.getPhoneNumber()+"");*/
+
+        txtUserName.setText(Common.UserName);
+        txtUserEmail.setText(Common.UserEmail);
+        Picasso.with(mContext).load(Common.UserPhoto).into(imgUserProfile);
+
+
+    }catch (Exception e){
+        e.printStackTrace();
+    }
 
 
         //init Fire base
@@ -288,6 +309,8 @@ public class DashboardActivity extends AppCompatActivity
         //Init Preference Values for Navigation Drawer
         Common.getUserPreference(mContext);
 
+        mAuth = FirebaseAuth.getInstance();
+
     }
 
     private void loadTopServices() {
@@ -385,7 +408,39 @@ public class DashboardActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.action_logout) {
-            startActivity(new Intent(DashboardActivity.this,LoginActivity.class));
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+            alertDialogBuilder.setMessage("Are you Sure Want to Logout")
+                    .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // FIRE ZE MISSILES!
+
+                            //Clear Saved Password and Users
+                            PreferenceUtils.setSignIn(mContext,false);
+
+                            //FirebaseAuth LogOut
+                            mAuth.signOut();
+
+                            Intent signin = new Intent(mContext,Login.class);
+                            signin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(signin);
+                            finish();
+
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User cancelled the dialog
+                            dialog.dismiss();
+                        }
+                    });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+
+
+
+
             return true;
         }
 

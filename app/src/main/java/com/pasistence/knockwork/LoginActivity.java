@@ -48,7 +48,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     RadioButton radiobtnWork,radiobtnHire;
     MyApi mService;
 
-
     private static final int EMAIL_LOGIN      = 1000;
     private static final int GMAIL_LOGIN      = 2000;
     private static final int FACEBOOK_LOGIN   = 3000;
@@ -82,7 +81,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //Init retrofit
         mService = Common.getApi();
     }
-
     private void mOnClick() {
         buttonEmail.setOnClickListener(this);
         buttonGmail.setOnClickListener(this);
@@ -91,13 +89,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         txtSkip.setOnClickListener(this);
         txtSignIn.setOnClickListener(this);
     }
-
     @Override
     public void onClick(View v) {
 
         if (v == buttonEmail) {
            // startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), EMAIL_LOGIN);
            startActivity(new Intent(LoginActivity.this,EmailActivity.class));
+           finish();
         }
 
         if (v == buttonGmail) {
@@ -150,14 +148,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (v == txtSignIn) {
             startActivity(new Intent(mContext, SignInActivity.class));
+            finish();
         }
 
         if (v == txtSkip) {
             startActivity(new Intent(mContext, DashboardActivity.class));
+            finish();
         }
 
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == EMAIL_LOGIN) {
@@ -218,7 +217,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
     }
-
 
     private void handleSignInResponse(int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
@@ -371,7 +369,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 ApiResponseRegisterLancer result = response.body();
                 Log.e(TAG, result.toString());
 
-
+                Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
+                startActivity(intent1);
+                finish();
 
             }
 
@@ -400,6 +400,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     }
+
     private void RegisterClientUser(FirebaseUser currentUser, String type) {
 
         String  displayname = null,
@@ -467,10 +468,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 ApiResponseRegisterClient result = response.body();
                 Log.e(TAG, result.toString());
 
-
-
                 Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
                 startActivity(intent1);
+                finish();
 
             }
 

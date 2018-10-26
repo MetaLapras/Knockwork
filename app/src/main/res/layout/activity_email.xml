@@ -41,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:text="Sample"
             android:hint="Enter User Name"
             android:textColor="@color/white"
             android:textSize="15dp"
@@ -66,6 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:hint="Enter Email"
+                android:text="Sample@gmail.com"
                 android:textSize="15dp"
                 android:textColor="@color/white"
                 android:inputType="textEmailAddress" />
@@ -88,6 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:hint="Enter Number"
+                android:text="9211420420"
                 android:textSize="15dp"
                 android:textColor="@color/white"
                 android:inputType="number" />
@@ -110,6 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:hint="Enter password"
+                android:text="123456"
                 android:textSize="15dp"
                 android:textColor="@color/white"
                 android:inputType="textPassword" />
@@ -131,13 +135,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:text="123456"
                 android:textColor="@color/white"
                 android:textSize="15dp"
                 android:hint="Enter Re-type password"
                 android:inputType="textPassword" />
         </LinearLayout>
 
-        <Button
+        <info.hoang8f.widget.FButton
             android:id="@+id/buttonSignup"
             android:layout_width="match_parent"
             android:layout_height="50dp"
