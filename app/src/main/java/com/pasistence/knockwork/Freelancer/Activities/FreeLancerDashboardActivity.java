@@ -146,9 +146,9 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         }
 */
 
-        txtUserName.setText(PreferenceUtils.getDisplayName(mContext));
-        txtUserEmail.setText(PreferenceUtils.getEmail(mContext));
-        Picasso.with(mContext).load(PreferenceUtils.getPhotoUrl(mContext)).into(imgUserProfile);
+        txtUserName.setText(Common.UserName);
+        txtUserEmail.setText(Common.UserEmail);
+        Picasso.with(mContext).load(Common.UserPhoto).into(imgUserProfile);
 
 
         //init Fire base
@@ -350,6 +350,8 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
 
         //Init Service
         mService = Common.getApi();
+        //Init Preference Values for Navigation Drawer
+        Common.getUserPreference(mContext);
     }
 
     @Override
