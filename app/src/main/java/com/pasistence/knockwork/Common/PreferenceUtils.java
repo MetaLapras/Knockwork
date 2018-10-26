@@ -17,6 +17,7 @@ public class PreferenceUtils {
     public static final String isClient = "isclient";
     public static final String PREFERENCE_KEY_SIGN_IN ="signIn";
     public static final String photourl = "photourl";
+    public static final String userId = "UserId";
 
 
     //prevent instantiation
@@ -106,6 +107,15 @@ public class PreferenceUtils {
         return getSharedPreferences(context).getString(photourl,"");
     }
 
+    //User Id
+    public static String getUserId(Context context) {
+        return getSharedPreferences(context).getString(userId,"");
+    }
+
+    public static void setUserId(Context context, String Details){
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        editor.putString(userId,Details).apply();
+    }
 
 
 

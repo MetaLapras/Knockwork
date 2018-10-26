@@ -369,8 +369,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onResponse(Call<ApiResponseRegisterLancer> call, Response<ApiResponseRegisterLancer> response) {
 
                 ApiResponseRegisterLancer result = response.body();
-
                 Log.e(TAG, result.toString());
+
+
 
             }
 
@@ -466,8 +467,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 ApiResponseRegisterClient result = response.body();
                 Log.e(TAG, result.toString());
 
-                //Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
-               //startActivity(intent1);
+
+
+                Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
+                startActivity(intent1);
+
             }
 
             @Override
