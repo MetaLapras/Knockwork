@@ -9,6 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/ic_background"
     tools:context=".EmailActivity">
 
     <LinearLayout
@@ -33,6 +34,7 @@
             android:layout_width="30dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
+            android:tint="@color/white"
             android:src="@drawable/ic_account_box_black_24dp"/>
         <EditText
             android:id="@+id/editTextusername"
@@ -40,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:hint="Enter User Name"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15dp"
             android:inputType="text" />
         </LinearLayout>
@@ -56,6 +58,7 @@
                 android:layout_width="30dp"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
+                android:tint="@color/white"
                 android:src="@drawable/ic_local_post_office_black_24dp"/>
             <EditText
                 android:id="@+id/editTextEmail"
@@ -64,7 +67,7 @@
                 android:layout_margin="10dp"
                 android:hint="Enter Email"
                 android:textSize="15dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
 
@@ -77,6 +80,7 @@
                 android:layout_width="30dp"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
+                android:tint="@color/white"
                 android:src="@drawable/ic_settings_phone_black_24dp"/>
             <EditText
                 android:id="@+id/editTextNumber"
@@ -85,7 +89,7 @@
                 android:layout_margin="10dp"
                 android:hint="Enter Number"
                 android:textSize="15dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:inputType="number" />
         </LinearLayout>
 
@@ -98,6 +102,7 @@
                 android:layout_width="30dp"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
+                android:tint="@color/white"
                 android:src="@drawable/ic_lock_outline_black_24dp"/>
             <EditText
                 android:id="@+id/editTextPassword"
@@ -106,7 +111,7 @@
                 android:layout_margin="10dp"
                 android:hint="Enter password"
                 android:textSize="15dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:inputType="textPassword" />
         </LinearLayout>
 
@@ -119,13 +124,14 @@
                 android:layout_width="30dp"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
+                android:tint="@color/white"
                 android:src="@drawable/ic_lock_outline_black_24dp"/>
             <EditText
                 android:id="@+id/editTextRePassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="15dp"
                 android:hint="Enter Re-type password"
                 android:inputType="textPassword" />

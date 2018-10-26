@@ -116,51 +116,51 @@
 
 
     <string-array name="spinner_years">
-        <item>00 </item>
-        <item>01</item>
-        <item>02</item>
-        <item>03</item>
-        <item>04</item>
-        <item>05</item>
-        <item>06</item>
-        <item>07</item>
-        <item>08</item>
-        <item>09</item>
-        <item>10</item>
-        <item>11</item>
-        <item>12</item>
-        <item>13</item>
-        <item>14</item>
-        <item>15</item>
-        <item>16</item>
-        <item>17</item>
-        <item>18</item>
-        <item>19</item>
-        <item>20</item>
+        <item> 00  </item>
+        <item> 01 </item>
+        <item> 02 </item>
+        <item> 03 </item>
+        <item> 04 </item>
+        <item> 05 </item>
+        <item> 06 </item>
+        <item> 07 </item>
+        <item> 08 </item>
+        <item> 09 </item>
+        <item> 10 </item>
+        <item> 11 </item>
+        <item> 12 </item>
+        <item> 13 </item>
+        <item> 14 </item>
+        <item> 15 </item>
+        <item> 16 </item>
+        <item> 17 </item>
+        <item> 18 </item>
+        <item> 19 </item>
+        <item> 20 </item>
     </string-array>
 
     <string-array name="spinner_months">
-    <item>00 </item>
-    <item>01</item>
-    <item>02</item>
-    <item>03</item>
-    <item>04</item>
-    <item>05</item>
-    <item>06</item>
-    <item>07</item>
-    <item>08</item>
-    <item>09</item>
-    <item>10</item>
-        <item>11</item></string-array>
+    <item> 00 </item>
+    <item> 01 </item>
+    <item> 02 </item>
+    <item> 03 </item>
+    <item> 04 </item>
+    <item> 05 </item>
+    <item> 06 </item>
+    <item> 07 </item>
+    <item> 08 </item>
+    <item> 09 </item>
+    <item> 10 </item>
+        <item> 11 </item></string-array>
 
 
     <string-array name="spinner_availability">
-        <item>Full-time : 30+ hrs/week</item>
-        <item>Part-time : 10-30 hrs/week</item>
-        <item>As needed : Less than 10 hrs/week</item>
-        <item>Not sure at this time</item>
-        <item>Currently on leave</item>
-        <item>Not Available to hire</item>
+        <item> Full-time : 30+ hrs/week </item>
+        <item> Part-time : 10-30 hrs/week </item>
+        <item> As needed : Less than 10 hrs/week </item>
+        <item> Not sure at this time </item>
+        <item> Currently on leave </item>
+        <item> Not Available to hire </item>
     </string-array>
 
     <string-array name="array_jobCategory">

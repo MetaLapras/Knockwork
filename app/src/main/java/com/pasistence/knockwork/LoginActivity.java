@@ -147,7 +147,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         if (v == txtSignIn) {
-            startActivity(new Intent(mContext, FreeLancerDashboardActivity.class));
+            startActivity(new Intent(mContext, SignInActivity.class));
         }
 
         if (v == txtSkip) {

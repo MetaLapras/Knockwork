@@ -361,7 +361,7 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
         // Set Custom Title
         TextView title = new TextView(this);
         // Title Properties
-        title.setText("Custom Dialog Box");
+        title.setText("Add Photo");
         title.setPadding(10, 10, 10, 10);   // Set Position
         title.setGravity(Gravity.CENTER);
         title.setTextColor(Color.BLACK);
@@ -377,11 +377,11 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"Upload", new DialogInterface.OnClickListener() {
+       /* alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"Upload", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 // Perform Action on Button
             }
-        });
+        });*/
 
         //new Dialog(getApplicationContext());
         alertDialog.show();

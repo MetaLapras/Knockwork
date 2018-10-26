@@ -5,13 +5,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#d4d5de"
     tools:context=".Freelancer.Activities.FreelancerProfileActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_margin="15dp">
+        android:background="#d4d5de">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/freelancer_profile_toolbar"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Freelancer Edit Profile"
+            app:titleTextColor="@android:color/white"
+            android:background="?attr/colorPrimary">
+        </android.support.v7.widget.Toolbar>
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,12 +29,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@drawable/gradient_freelancerprofile">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/freelancer_profile_img"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_margin="10dp"
@@ -38,22 +50,25 @@
                 android:gravity="center_horizontal|center_vertical"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/freelancer_profile_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/profile_name"
                 android:textSize="15dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 />
                 <TextView
+                    android:id="@+id/freelancer_profile_state"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="India"
                     android:textSize="15dp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
     <TextView
+        android:id="@+id/freelancer_profile_info"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="Profile Information"
@@ -64,200 +79,384 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="10dp"
        >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_margin="10dp"
-            >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/professional_title"
-                android:textSize="15dp"
-                android:textColor="@color/fbutton_color_peter_river"/>
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:hint="@string/example"/>
+                <TextView
+                    android:id="@+id/freelancer_profile_imgtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/professional_title"
+                    android:textColor="@color/fbutton_color_peter_river"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/freelancer_profile_edittitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/example" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:gravity="center_horizontal|center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
                 android:weightSum="10">
+
                 <TextView
+                    android:id="@+id/freelancer_profile_hrate"
                     android:layout_width="0dp"
-                    android:layout_weight="6"
                     android:layout_height="wrap_content"
+                    android:layout_weight="6"
                     android:text="@string/min_hour_rate"
                     android:textAllCaps="false"
-                    android:textSize="15dp"
-                    android:textColor="@color/fbutton_color_peter_river"/>
+                    android:textColor="@color/fbutton_color_peter_river"
+                    android:textSize="15dp" />
 
                 <EditText
+                    android:id="@+id/freelancer_profile_edtrate"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
                     android:layout_height="wrap_content"
+                    android:layout_weight="2"
                     android:background="@drawable/border_corner"
                     android:hint="0"
+                    android:inputType="number"
                     android:textAlignment="center"
-                    android:textSize="25dp"/>
+                    android:textSize="25dp" />
 
                 <TextView
+                    android:id="@+id/freelancer_profile_inr"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
                     android:layout_height="wrap_content"
+                    android:layout_weight="2"
                     android:text="INR"
                     android:textAlignment="center"
                     android:textAllCaps="false"
-                    android:textSize="18dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
             </LinearLayout>
-            
+
             <TextView
+                android:id="@+id/freelancer_profile_education"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" 
-                android:text="@string/work_experience"
+                android:layout_height="wrap_content"
+                android:text="Education"
                 android:textSize="15dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/fbutton_color_peter_river"/>
+
+            <EditText
+                android:id="@+id/freelancer_profile_editeducation"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@drawable/border_corner"
+                android:gravity="top|left"
+                android:textSize="15dp"
+                android:hint="Enter Education"
+                android:padding="5dp" />
+
+            <TextView
+                android:id="@+id/freelancer_profile_workexperience"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/work_experience"
+                android:textColor="@color/fbutton_color_peter_river"
+                android:textSize="15dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal|center_vertical"
-                android:weightSum="20"
-                android:layout_marginBottom="10dp">
+                android:orientation="horizontal"
+                android:weightSum="20">
+
                 <Spinner
+                    android:id="@+id/freelancer_profile_spnyears"
                     android:layout_width="0dp"
-                    android:layout_weight="6"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:layout_weight="6"
+                    android:background="@drawable/border_corner"
                     android:entries="@array/spinner_years"
-                    android:spinnerMode="dropdown"></Spinner>
+                    android:spinnerMode="dropdown"
+                    android:textAlignment="center"></Spinner>
 
                 <TextView
+                    android:id="@+id/freelancer_profile_years"
                     android:layout_width="0dp"
-                    android:layout_weight="4"
                     android:layout_height="wrap_content"
+                    android:layout_weight="4"
                     android:text="Years"
                     android:textAllCaps="false"
-                    android:textSize="18dp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
 
                 <Spinner
+                    android:id="@+id/freelancer_profile_spnmonths"
                     android:layout_width="0dp"
-                    android:layout_weight="6"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dropdown"
                     android:layout_marginLeft="10dp"
-                    android:entries="@array/spinner_months"></Spinner>
+                    android:layout_weight="6"
+                    android:background="@drawable/border_corner"
+                    android:entries="@array/spinner_months"
+                    android:spinnerMode="dropdown"
+                    android:textAlignment="center"></Spinner>
 
                 <TextView
+                    android:id="@+id/freelancer_profile_months"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:gravity="center"
                     android:text="Months"
-                    android:textSize="18dp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
             </LinearLayout>
 
             <TextView
+                android:id="@+id/freelancer_profile_experienceHistory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Availability"
-                android:textSize="15dp"
                 android:layout_marginBottom="10dp"
-                android:textColor="@color/fbutton_color_peter_river"/>
+                android:text="Experience History"
+                android:textColor="@color/fbutton_color_peter_river"
+                android:textSize="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/freelancer_profile_companyname"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3.5"
+                        android:text="Company Name: "
+                        android:textColor="@color/fbutton_color_peter_river"
+                        android:textSize="15dp" />
+
+                    <EditText
+                        android:id="@+id/freelancer_profile_editcompanyName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6.5"
+                        android:background="@drawable/border_corner"
+                        android:gravity="top|left"
+                        android:textSize="15dp"
+                        android:hint="Enter Company Name"
+                        android:padding="5dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/freelancer_profile_profile"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3.5"
+                        android:text="Profile: "
+                        android:textColor="@color/fbutton_color_peter_river"
+                        android:textSize="15dp" />
+
+                    <EditText
+                        android:id="@+id/freelancer_profile_editprofile"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6.5"
+                        android:background="@drawable/border_corner"
+                        android:gravity="top|left"
+                        android:textSize="15dp"
+                        android:hint="Enter Profile"
+                        android:padding="5dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="20">
+
+                    <TextView
+                        android:id="@+id/freelancer_profile_workfrom"
+                        android:layout_width="0dp"
+                        android:layout_height="23dp"
+                        android:layout_weight="6"
+                        android:text="dd_mm_yy"
+                        android:textColor="@color/black"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/freelancer_profile_from"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="From"
+                        android:textColor="@color/fbutton_color_peter_river"
+                        android:textSize="17dp" />
+
+
+                    <TextView
+                        android:id="@+id/freelancer_profile_workTo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:text="dd_mm_yy"
+                        android:textColor="@color/black"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/freelancer_profile_To"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="To"
+                        android:textColor="@color/fbutton_color_peter_river"
+                        android:textSize="17dp" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/freelancer_profile_availability"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Availability"
+                android:textColor="@color/fbutton_color_peter_river"
+                android:textSize="15dp" />
 
             <Spinner
+                android:id="@+id/freelancer_profile_spn_avalibility"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:entries="@array/spinner_availability"
                 android:background="@drawable/border_corner"
+                android:entries="@array/spinner_availability"
                 android:spinnerMode="dropdown"></Spinner>
 
             <TextView
+                android:id="@+id/freelancer_profile_selfintroduction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Self Introduction"
-                android:textSize="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:textColor="@color/fbutton_color_peter_river"/>
+                android:text="Self Introduction"
+                android:textColor="@color/fbutton_color_peter_river"
+                android:textSize="15dp" />
 
             <EditText
+                android:id="@+id/freelancer_profile_editselfintroduction"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:background="@drawable/border_corner"/>
+                android:background="@drawable/border_corner"
+                android:gravity="top|left"
+                android:textSize="15dp"
+                android:hint="write about you in brif"
+                android:padding="5dp" />
 
             <TextView
+                android:id="@+id/freelancer_profile_skills"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Skills"
-                android:textSize="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:textColor="@color/fbutton_color_peter_river"/>
+                android:text="Skills"
+                android:textColor="@color/fbutton_color_peter_river"
+                android:textSize="15dp" />
 
             <EditText
+                android:id="@+id/freelancer_profile_editSkills"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:background="@drawable/border_corner"/>
+                android:background="@drawable/border_corner"
+                android:gravity="top|left"
+                android:textSize="15dp"
+                android:hint="Enter Skills"
+                android:padding="5dp" />
 
             <TextView
+                android:id="@+id/freelancer_profile_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Contact Number"
-                android:textSize="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:textColor="@color/fbutton_color_peter_river"/>
+                android:text="Contact Number"
+                android:textColor="@color/fbutton_color_peter_river"
+                android:textSize="15dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
+                    android:id="@+id/freelancer_profile_MNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:gravity="center"
-                    android:textColor="@color/black"
-                    android:text="+91-1234567890"/>
+                    android:text="+91-1234567890"
+                    android:textColor="@color/black" />
+
                 <ImageView
+                    android:id="@+id/freelancer_profile_imgright"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="20dp"
-                    android:src="@drawable/ic_check_circle_black_24dp"/>
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/ic_check_circle_black_24dp" />
+
                 <ImageView
+                    android:id="@+id/freelancer_profile_imgedit"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_edit_black_24dp"/>
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/ic_edit_black_24dp" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Date of Birth"
-                android:textSize="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:textColor="@color/fbutton_color_peter_river"/>
+                android:text="Date of Birth"
+                android:textColor="@color/fbutton_color_peter_river"
+                android:textSize="15dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -270,25 +469,28 @@
                     android:src="@drawable/callender" />
 
                 <TextView
+                    android:id="@+id/freelancer_profile_DOB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="15dp"
                     android:layout_marginLeft="10dp"
-                    android:text="@string/dd_mm_yy"/>
+                    android:text="@string/dd_mm_yy"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="Gender: "
-                    android:textSize="15dp"
-                    android:textColor="@color/fbutton_color_peter_river"/>
+                    android:textColor="@color/fbutton_color_peter_river"
+                    android:textSize="15dp" />
 
 
                 <RadioGroup
@@ -298,25 +500,42 @@
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:id="@+id/freelancer_profile_radiomale"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15dp"
-                        android:checked="true"
-                        android:text="Male" />
+                        android:text="Male"
+                        android:textSize="15dp" />
 
 
                     <Space
                         android:layout_width="25dp"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
 
                     <RadioButton
+                        android:id="@+id/freelancer_profile_radioFemale"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:checked="true"
                         android:text="Female"
                         android:textSize="15sp" />
                 </RadioGroup>
             </LinearLayout>
+
+            <info.hoang8f.widget.FButton
+                android:id="@+id/freelancer_profile_btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:text="Submit"
+                android:textSize="17dp"
+                android:textColor="@android:color/white"
+                android:textAllCaps="true"
+                android:shadowColor="@android:color/white"
+                app:shadowEnabled="true"
+                app:fButtonColor="@color/fbutton_color_peter_river"
+                app:shadowHeight="2dp"
+                app:cornerRadius="3dp"
+                app:shadowColor="@android:color/black"
+                android:layout_marginRight="5dp"
+                />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

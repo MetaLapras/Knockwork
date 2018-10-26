@@ -47,7 +47,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.txt_signuphere:
-                startActivity(new Intent(mContext,LoginActivity.class));
+                startActivity(new Intent(mContext,EmailActivity.class));
                 break;
             case R.id.btn_login:
                 startActivity(new Intent(mContext,DashboardActivity.class));
