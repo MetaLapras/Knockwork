@@ -140,18 +140,47 @@
     </string-array>
 
     <string-array name="spinner_months">
-    <item> 00 </item>
-    <item> 01 </item>
-    <item> 02 </item>
-    <item> 03 </item>
-    <item> 04 </item>
-    <item> 05 </item>
-    <item> 06 </item>
-    <item> 07 </item>
-    <item> 08 </item>
-    <item> 09 </item>
-    <item> 10 </item>
-        <item> 11 </item></string-array>
+        <item> 00 </item>
+        <item> 01 </item>
+        <item> 02 </item>
+        <item> 03 </item>
+        <item> 04 </item>
+        <item> 05 </item>
+        <item> 06 </item>
+        <item> 07 </item>
+        <item> 08 </item>
+        <item> 09 </item>
+        <item> 10 </item>
+        <item> 11 </item>
+    </string-array>
+
+    <string-array name="spinner_type_of_work">
+        <item> IT and Programming </item>
+        <item> Mobile Application </item>
+        <item> Graphics Design and Muiltimedia </item>
+        <item> Writting, Content and Translation </item>
+        <item> Social Media, SEO and SEM </item>
+        <item> Sales and Marketing </item>
+        <item> Dat Entry and Admin </item>
+        <item> Finance and Accounting </item>
+        <item> Customer Support and Services </item>
+        <item> music and Audio </item>
+        <item> Others </item>
+    </string-array>
+
+    <string-array name ="spinner_belong_to">
+        <item> Application Interface Design </item>
+        <item> Desktop Application </item>
+        <item> Ecommerce </item>
+        <item> Game Development </item>
+        <item> Web Development </item>
+        <item> Scripts and Utilities </item>
+        <item> Software Project Management </item>
+        <item> Website Project Management </item>
+        <item> Website Testing </item>
+        <item> QA and testing </item>
+        <item> Others </item>
+    </string-array>
 
 
     <string-array name="spinner_availability">
@@ -161,6 +190,20 @@
         <item> Not sure at this time </item>
         <item> Currently on leave </item>
         <item> Not Available to hire </item>
+    </string-array>
+
+    <string-array name="spinner_week">
+        <item> 10 days </item>
+        <item> 2 week </item>
+        <item> 3 week </item>
+        <item> 1 Month </item>
+        <item> 2 Months </item>
+        <item> 3 Months </item>
+        <item> 4 Months </item>
+        <item> 5 Months </item>
+        <item> 6 Months </item>
+        <item> 1 Year </item>
+        <item> Not Sure </item>
     </string-array>
 
     <string-array name="array_jobCategory">
@@ -191,10 +234,10 @@
     <string name="hiredamount">- $200</string>
     <string name="web">Web development</string>
     <string name="search">What are you Looking for ?</string>
-    <string name="profile_name" >Sample name</string>
-    <string name="professional_title" >Professional Title</string>
+    <string name="profile_name">Sample name</string>
+    <string name="professional_title">Professional Title</string>
     <string name="example">Eg: Graphic Designer</string>
-    <string name="min_hour_rate" >Min. Hour Rate: </string>
+    <string name="min_hour_rate">Min. Hour Rate: </string>
     <string name="work_experience">Work Experience
     </string>
     <string name="spinner_years">
@@ -202,7 +245,14 @@
         <item>As per Place holder Bid</item>
         <item>As per Daily Basis</item>
         <item>According to Hours</item></string>
-    <string name="dd_mm_yy" >dd-mm-yy</string>
+    <string name="dd_mm_yy">dd-mm-yy</string>
+    <string name="txt_job_posting">Get your project done Quickly!</string>
+    <string name="txt_job_posting1" >Post a Project for free and start receiving proposals within minutes</string>
+    <string name="txt_featured">Featured projects attract more, better-quality bids and are displayed eminently in the Featured Jobs section.</string>
+    <string name="txt_recruters" >Our hands-on PRIME Recruitment service ensures you get the best freelancer for your project. Our recruiters personally review all the proposals saving you time screening freelancers proposals.</string>
+    <string name="txt_NDA" >Freelancers must sign a Non-disclosure Agreement to work on your project. Freelancers agree to keep details discussed through private messages and files/documents/code confidential.</string>
+    <string name="txt_urgent">Receive faster responses from freelancers and get your Project started within a day!</string>
+    <string name="txt_private" >Hide project details from search engines and users that are not logged in. This feature is recommended for projects where confidentiality is a priority.</string>
 
 
     <string-array name="milestones">

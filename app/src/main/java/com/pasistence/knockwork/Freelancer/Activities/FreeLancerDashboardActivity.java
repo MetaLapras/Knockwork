@@ -25,6 +25,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -99,6 +100,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
 
     TextView txtUserName,txtUserEmail;
     CircleImageView imgUserProfile;
+    ImageView imgEdit;
 
     // FirebaseRecyclerAdapter<PopularServicesModel,ViewHolderPopularServices> popularAdapter;
     //FirebaseRecyclerAdapter<TopServicesModel,ViewHolderTopServices> TopServiceAdapter;
@@ -134,7 +136,8 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.free_nav_view);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View header=navigationView.getHeaderView(0);
 
@@ -142,6 +145,15 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         txtUserEmail = (TextView)header.findViewById(R.id.txt_user_emailid);
         imgUserProfile = (CircleImageView)header.findViewById(R.id.user_profile_image) ;
 
+       /* UserData data = new Common().getUserData();
+
+        if(data!=null){
+            txtUserEmail.setText(data.getEmail());
+            txtUserName.setText(data.getDisplayName());
+
+            Picasso.with(mContext).load(data.getPhotoUrl()).into(imgUserProfile);
+        }
+*/
 
         txtUserName.setText(Common.UserName);
         txtUserEmail.setText(Common.UserEmail);
@@ -298,6 +310,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
 
 
     }
+
 
     private void mInit() {
         mContext = FreeLancerDashboardActivity.this;
@@ -539,6 +552,8 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         refreshLayout.setRefreshing(false);*/
 
     }
+
+
 
   /*  private void setupSlider() {
         image_list = new HashMap<>();

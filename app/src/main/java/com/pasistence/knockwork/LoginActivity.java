@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     RadioButton radiobtnWork,radiobtnHire;
     MyApi mService;
 
+
     private static final int EMAIL_LOGIN      = 1000;
     private static final int GMAIL_LOGIN      = 2000;
     private static final int FACEBOOK_LOGIN   = 3000;
@@ -157,6 +158,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == EMAIL_LOGIN) {

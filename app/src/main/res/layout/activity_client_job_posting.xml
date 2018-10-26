@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Client.Activities.ClientJobPostingActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_job_posting"
+            android:textSize="18dp"
+            android:textColor="@color/fbutton_color_peter_river"
+            android:gravity="center"/>
+
+        <View
+            android:layout_width="240dp"
+            android:layout_height="1.2dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:background="#00168e" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_job_posting1"
+            android:textSize="15dp"
+            android:layout_marginBottom="10dp"
+            android:textStyle="italic"
+            android:textColor="@color/transparentBlack"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/txt_work"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Type of work you need to get done"
+            android:textSize="15dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/fbutton_color_peter_river"
+            android:gravity="center"/>
+        <Spinner
+            android:id="@+id/spn_work"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/border_corner"
+            android:entries="@array/spinner_type_of_work"
+            android:spinnerMode="dropdown"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"></Spinner>
+
+        <TextView
+            android:id="@+id/txt_specility"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Specifically belongs to"
+            android:textSize="15dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/fbutton_color_peter_river"
+            android:gravity="center"/>
+        <Spinner
+            android:id="@+id/spn_specility"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/border_corner"
+            android:entries="@array/spinner_belong_to"
+            android:spinnerMode="dropdown"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"></Spinner>
+
+        <TextView
+            android:id="@+id/txt_project_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="What is your project about?"
+            android:textSize="15dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/fbutton_color_peter_river"
+            android:gravity="center"/>
+        <EditText
+            android:id="@+id/edt_project_about"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="I need...."
+            android:background="@drawable/border_corner"
+            android:textSize="15dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="top|left"
+            />
+
+        <TextView
+            android:id="@+id/txt_explain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please explain in detail "
+            android:textSize="15dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/fbutton_color_peter_river"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/edt_explain"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@drawable/border_corner"
+            android:gravity="top|left"
+            android:hint="Describe...."
+            android:layout_marginBottom="10dp"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txt_skil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Skill Required "
+            android:textSize="15dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/fbutton_color_peter_river"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/edit_skil"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/border_corner"
+            android:gravity="top|left"
+            android:hint="Select Skills"
+            android:layout_marginBottom="10dp"
+            android:textSize="15dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Project Type :  "
+                android:textSize="15dp"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/fbutton_color_peter_river" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radio_fixed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fixed"
+                    android:textSize="15dp" />
+
+
+                <Space
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:id="@+id/radio_hourly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Hourly"
+                    android:textSize="15sp" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            android:weightSum="10">
+
+            <TextView
+                android:id="@+id/freelancer_profile_hrate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:text="How much can you spend? "
+                android:textAllCaps="false"
+                android:textColor="@color/fbutton_color_peter_river"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edit_inr"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@drawable/border_corner"
+                android:hint="0"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="INR"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="6"
+                android:layout_height="wrap_content"
+                android:text="Listing of project till "
+                android:textSize="15dp"
+                android:textColor="@color/fbutton_color_peter_river" />
+
+            <Spinner
+                android:id="@+id/spn_spend"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="4"
+                android:background="@drawable/border_corner"
+                android:entries="@array/spinner_week"
+                android:spinnerMode="dropdown"
+                android:textAlignment="center"></Spinner>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" Project Visibility "
+            android:textSize="15dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/fbutton_color_peter_river" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/radio_public"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Public (All Freelancer) - Recommended"
+                android:textSize="15dp" />
+
+            <RadioButton
+                android:id="@+id/radio_private"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Private (only to freelancers invited by you)"
+                android:textSize="15dp" />
+        </RadioGroup>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_margin="7dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/chk_feature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/txt_chk_feature"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_featured"
+                    android:textSize="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/com_facebook_device_auth_text" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                android:gravity="end">
+                <TextView
+                    android:id="@+id/txt_feature"
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="match_parent"
+                    android:text=" Featured "
+                    android:textSize="15dp"
+                    android:gravity="center"
+                    android:background="#ce1bda"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/txt_feature_INR"
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="match_parent"
+                    android:text=" 500 INR "
+                    android:textSize="13dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_margin="7dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/chk_recruiter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/txt_chk_recuiter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_recruters"
+                    android:textSize="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/com_facebook_device_auth_text" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                android:gravity="end">
+                <TextView
+                    android:id="@+id/txt_recuiter"
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="match_parent"
+                    android:text=" Recruiter "
+                    android:textSize="15dp"
+                    android:gravity="center"
+                    android:background="#edf72f"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/txt_recuiter_inr"
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="match_parent"
+                    android:text=" 2000 INR "
+                    android:textSize="13dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_margin="7dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/chk_nda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/txt_chk_nda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_NDA"
+                    android:textSize="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/com_facebook_device_auth_text" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                android:gravity="end">
+                <TextView
+                    android:id="@+id/txt_nda"
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="match_parent"
+                    android:text="  NDA "
+                    android:textSize="15dp"
+                    android:gravity="center"
+                    android:background="#0cd5f4"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/txt_nda_inr"
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="match_parent"
+                    android:text=" 1000 INR "
+                    android:textSize="13dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_margin="7dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/chk_urgent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/txt_chk_urgent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_urgent"
+                    android:textSize="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/com_facebook_device_auth_text" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                android:gravity="end">
+                <TextView
+                    android:id="@+id/txt_urgent"
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="match_parent"
+                    android:text="  Urgent "
+                    android:textSize="15dp"
+                    android:gravity="center"
+                    android:background="#17b102"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/txt_uregent_inr"
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="match_parent"
+                    android:text=" 300 INR "
+                    android:textSize="13dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_margin="7dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/chk_private"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/txt_chk_private"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_private"
+                    android:textSize="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/com_facebook_device_auth_text" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                android:gravity="end">
+                <TextView
+                    android:id="@+id/txt_private"
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="match_parent"
+                    android:text="  Private "
+                    android:textSize="15dp"
+                    android:gravity="center"
+                    android:background="#fa1e1e"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/txt_private_inr"
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="match_parent"
+                    android:text=" 300 INR "
+                    android:textSize="13dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" Total: 0 INR "
+            android:textSize="15dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="end"
+            android:textColor="@color/com_facebook_device_auth_text" />
+
+        <CheckBox
+            android:id="@+id/chk_agree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#6c7373"
+            android:textSize="13dp"
+            android:layout_marginBottom="10dp"
+            android:text="I confirm i have read Knockwork's Terms and Conditions. See T and Cs"/>
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/btn_submit_project"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="Submit Project"
+            android:layout_marginBottom="10dp"
+            android:textSize="17dp"
+            android:textColor="@android:color/white"
+            android:textAllCaps="true"
+            android:shadowColor="@android:color/white"
+            app:shadowEnabled="true"
+            app:fButtonColor="@color/fbutton_color_peter_river"
+            app:shadowHeight="2dp"
+            app:cornerRadius="3dp"
+            app:shadowColor="@android:color/black"
+            android:layout_marginRight="5dp"
+            />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+    </LinearLayout>
+</ScrollView>

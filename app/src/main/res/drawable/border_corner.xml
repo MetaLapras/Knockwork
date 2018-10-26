@@ -3,7 +3,7 @@
 
     <!-- we define border color and thick -->
     <stroke
-        android:width="2dp"
+        android:width="1dp"
         android:color="#3498db" />
 
     <!-- add some padding for text inside -->
