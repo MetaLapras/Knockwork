@@ -23,6 +23,12 @@ public class Common {
     public UserData userData;
     public static AlertDialog alertDialog;
 
+    public static final String Lancer = "Lancer";
+    public static final String Client = "Client";
+    public static final String phone = "phone";
+    public static final String gmail = "gmail";
+    public static final String facebook = "facebook";
+
     public UserData getUserData() {
         return userData;
     }
@@ -32,9 +38,9 @@ public class Common {
     }
 
     //localhost
-    public static final String BASE_URL = "http://10.0.2.2/knockwork/public/index.php/api/";
+    //public static final String BASE_URL = "http://10.0.2.2/knockwork/public/index.php/api/";
     //Server
-    //public static final String BASE_URL = "http://52.172.221.235:8985/knockwork/public/index.php/api/";
+    public static final String BASE_URL = "http://52.172.221.235:8985/knockwork/public/index.php/api/";
     private static final String TAG = "common";
     //public static final String BASE_URL = "http://192.168.0.150/mantra/";
 

@@ -175,7 +175,7 @@ public class LancersActivity extends AppCompatActivity
 
                     if(isLoading&&(visibleItemCount+pastVisiblesItems) >= totalItemCount){
                         PageNo++;
-                        performPagination(PageNo);
+                       // performPagination(PageNo);
                         isLoading=false;
                     }
                 }

@@ -25,14 +25,16 @@ import com.pasistence.knockwork.Common.PreferenceUtils;
 import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboardActivity;
 
 
-import com.pasistence.knockwork.Client.Activities.DashboardActivity;
-import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboardActivity;
-import com.pasistence.knockwork.Model.UserData;
+import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterClient;
+import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
 import com.pasistence.knockwork.Remote.MyApi;
 
 import java.util.Arrays;
 
 import info.hoang8f.widget.FButton;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -176,9 +178,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Log.v(TAG, currentUser.getPhotoUrl().toString());
            // Log.e(TAG, currentUser.getPhoneNumber());
             if(PreferenceUtils.getUserType(mContext).equals("Lancer")){
-                RegisterLancerUser(currentUser);
+                RegisterLancerUser(currentUser,Common.gmail);
             }else if(PreferenceUtils.getUserType(mContext).equals("Client")){
-                RegisterClientUser(currentUser);
+                RegisterClientUser(currentUser,Common.gmail);
             }else
             {
 
@@ -201,9 +203,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Log.v(TAG, currentUser.getPhotoUrl().toString());
 
             if(PreferenceUtils.getUserType(mContext).equals("Lancer")){
-                RegisterLancerUser(currentUser);
+                RegisterLancerUser(currentUser, Common.facebook);
             }else if(PreferenceUtils.getUserType(mContext).equals("Client")){
-                RegisterClientUser(currentUser);
+                RegisterClientUser(currentUser, Common.facebook);
             }else
             {
 
@@ -218,24 +220,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-
-
     private void handleSignInResponse(int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
-           /* switch (radioGroupWH.getCheckedRadioButtonId()){
-                case R.id.radio_button_hire:
+            switch (PreferenceUtils.getUserType(mContext)){
+                case Common.Client:
                     Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
                     startActivity(intent1);
                     finish();
                     break;
 
-                case R.id.radio_button_work:
+                case Common.Lancer:
                     Intent intent2 = new Intent(LoginActivity.this, FreeLancerDashboardActivity.class);
                     startActivity(intent2);
                     finish();
                     break;
             }
-*/
         }
         else
             Toast.makeText(this, "Login Failed!", Toast.LENGTH_SHORT).show();
@@ -251,13 +250,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if(!FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber().isEmpty())
             {
 
+                Log.e(TAG, FirebaseAuth.getInstance().getCurrentUser().getUid());
+                Log.e(TAG, FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber());
+
                 if(PreferenceUtils.getUserType(mContext).equals("Lancer")){
-                    RegisterLancerUser(FirebaseAuth.getInstance().getCurrentUser());
+
+                    RegisterLancerUser(FirebaseAuth.getInstance().getCurrentUser(), Common.phone);
+
                 }else if(PreferenceUtils.getUserType(mContext).equals("Client")){
-                    RegisterClientUser(FirebaseAuth.getInstance().getCurrentUser());
+                    RegisterClientUser(FirebaseAuth.getInstance().getCurrentUser(), Common.phone);
                 }else
                 {
-                    Common.commonDialog(mContext,"Please Check Your Internet Connection !");
+                    Common.commonDialog(mContext,"Server Not Found!");
                     Common.showDialog();
 
                 }
@@ -306,19 +310,77 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void RegisterLancerUser(FirebaseUser currentUser) {
+    private void RegisterLancerUser(FirebaseUser currentUser, String type) {
+        String  displayname = null,
+                uid = null,
+                email = null ,
+                photo = null  ,
+                provider = null,
+                phoneNo = null;
+
+        switch (type){
+            case Common.gmail:
+                        displayname = currentUser.getDisplayName();
+                        uid         = currentUser.getUid();
+                        email       = currentUser.getEmail();
+                        photo       = currentUser.getPhotoUrl().toString();
+                        provider    = currentUser.getProviders().toString();
+                        // phoneNo     = currentUser.getPhoneNumber();
+                break;
+            case Common.facebook:
+                        displayname = currentUser.getDisplayName();
+                        uid         = currentUser.getUid();
+                        email       = currentUser.getEmail();
+                        photo       = currentUser.getPhotoUrl().toString();
+                        provider    = currentUser.getProviders().toString();
+                        //phoneNo     = currentUser.getPhoneNumber();
+                break;
+
+            case Common.phone:
+                        displayname = "";
+                        uid         = currentUser.getUid();
+                        email       = "";
+                        photo       = "";
+                        provider    = "";
+                        phoneNo     = currentUser.getPhoneNumber();
+                break;
+
+        }
         //Retrofit services
-        String
+       /* String
                 displayname = currentUser.getDisplayName(),
                 uid         = currentUser.getUid(),
                 email       = currentUser.getEmail(),
                 photo       = currentUser.getPhotoUrl().toString(),
-                provider    = currentUser.getProviders().toString(),
-                phoneNo     = currentUser.getPhoneNumber();
+                provider    = currentUser.getProviders().toString();
+               // phoneNo     = currentUser.getPhoneNumber();*/
 
-        if(phoneNo.equals(null)){
-            phoneNo = "";
-        }
+
+        //If registered by Gmail OR Facebook
+        mService.RegisterLancer(
+                uid,
+                displayname,
+                email,
+                photo,
+                provider,
+                phoneNo
+                ).enqueue(new Callback<ApiResponseRegisterLancer>() {
+            @Override
+            public void onResponse(Call<ApiResponseRegisterLancer> call, Response<ApiResponseRegisterLancer> response) {
+
+                ApiResponseRegisterLancer result = response.body();
+                Log.e(TAG, result.toString());
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponseRegisterLancer> call, Throwable t) {
+                t.printStackTrace();
+                Log.e(TAG, t.getMessage());
+            }
+        });
 
         //Setting Shared Preference
         PreferenceUtils.setDisplayName(mContext,currentUser.getDisplayName());
@@ -326,22 +388,99 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         PreferenceUtils.setEmail(mContext,currentUser.getEmail());
         PreferenceUtils.setPhotoUrl(mContext,currentUser.getPhotoUrl().toString());
         PreferenceUtils.setProvider(mContext,currentUser.getProviders().toString());
-        PreferenceUtils.setPhoneNumber(mContext,phoneNo);
+        //PreferenceUtils.setPhoneNumber(mContext,phoneNo);
+
+        Log.v(TAG, PreferenceUtils.getDisplayName(mContext));
+        Log.v(TAG, PreferenceUtils.getUid(mContext));
+        Log.v(TAG, PreferenceUtils.getEmail(mContext));
+        Log.v(TAG, PreferenceUtils.getPhotoUrl(mContext));
+        Log.v(TAG, PreferenceUtils.getProvider(mContext));
+
+
+
 
     }
-    private void RegisterClientUser(FirebaseUser currentUser) {
-        //Retrofit services
+    private void RegisterClientUser(FirebaseUser currentUser, String type) {
+
+        String  displayname = null,
+                uid = null,
+                email = null ,
+                photo = null  ,
+                provider = null,
+                phoneNo = null;
+
+        switch (type){
+            case Common.gmail:
+                displayname = currentUser.getDisplayName();
+                uid         = currentUser.getUid();
+                email       = currentUser.getEmail();
+                photo       = currentUser.getPhotoUrl().toString();
+                provider    = currentUser.getProviders().toString();
+                // phoneNo     = currentUser.getPhoneNumber();
+                break;
+            case Common.facebook:
+                displayname = currentUser.getDisplayName();
+                uid         = currentUser.getUid();
+                email       = currentUser.getEmail();
+                photo       = currentUser.getPhotoUrl().toString();
+                provider    = currentUser.getProviders().toString();
+                //phoneNo     = currentUser.getPhoneNumber();
+                break;
+
+            case Common.phone:
+                displayname = "";
+                uid         = currentUser.getUid();
+                email       = "";
+                photo       = "";
+                provider    = "";
+                phoneNo     = currentUser.getPhoneNumber();
+                break;
+
+        }
+
+           //Retrofit services
+     /*
         String
                 displayname = currentUser.getDisplayName(),
                 uid         = currentUser.getUid(),
                 email       = currentUser.getEmail(),
                 photo       = currentUser.getPhotoUrl().toString(),
-                provider    = currentUser.getProviders().toString(),
-                phoneNo     = currentUser.getPhoneNumber();
+                provider    = currentUser.getProviders().toString();
+                //phoneNo     = currentUser.getPhoneNumber();*/
 
-        if(phoneNo.equals(null)){
+      /*  if(phoneNo.equals(null)){
             phoneNo = "";
         }
+*/
+        //If registered by Gmail OR Facebook
+        mService.RegisterClient(
+                uid,
+                displayname,
+                email,
+                photo,
+                provider,
+                phoneNo
+        ).enqueue(new Callback<ApiResponseRegisterClient>() {
+            @Override
+            public void onResponse(Call<ApiResponseRegisterClient> call, Response<ApiResponseRegisterClient> response) {
+
+                ApiResponseRegisterClient result = response.body();
+                Log.e(TAG, result.toString());
+
+
+
+                Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
+                startActivity(intent1);
+
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponseRegisterClient> call, Throwable t) {
+
+                t.printStackTrace();
+                Log.e(TAG, t.getMessage() );
+            }
+        });
 
         //Setting Shared Preference
         PreferenceUtils.setDisplayName(mContext,currentUser.getDisplayName());
@@ -349,7 +488,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         PreferenceUtils.setEmail(mContext,currentUser.getEmail());
         PreferenceUtils.setPhotoUrl(mContext,currentUser.getPhotoUrl().toString());
         PreferenceUtils.setProvider(mContext,currentUser.getProviders().toString());
-        PreferenceUtils.setPhoneNumber(mContext,phoneNo);
+        //PreferenceUtils.setPhoneNumber(mContext,phoneNo);
+
+
+        Log.e(TAG,"pre"+ PreferenceUtils.getDisplayName(mContext));
+        Log.e(TAG,"pre"+ PreferenceUtils.getUid(mContext));
+        Log.e(TAG,"pre"+ PreferenceUtils.getEmail(mContext));
+        Log.v(TAG,"pre"+ PreferenceUtils.getPhotoUrl(mContext));
+        Log.v(TAG,"pre"+ PreferenceUtils.getProvider(mContext));
 
     }
 

@@ -1,6 +1,8 @@
 package com.pasistence.knockwork.Remote;
 
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseLancer;
+import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterClient;
+import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
 import com.pasistence.knockwork.Model.PopularServicesModel;
 import com.pasistence.knockwork.Model.ResponseSubCategory;
 import com.pasistence.knockwork.Model.ResponseSuggestionList;
@@ -40,6 +42,28 @@ public interface MyApi {
     @FormUrlEncoded
     @POST("lancersearch")
     Call<ApiResponseLancer>LancerSearch(@Field("pageNo") int pageNo, @Field("title") CharSequence Title);
+
+    @FormUrlEncoded
+    @POST("lancerRegistration")
+    Call<ApiResponseRegisterLancer>RegisterLancer(
+            @Field("uid") String Uid,
+            @Field("user_name")  String name,
+            @Field("user_email")  String email,
+            @Field("user_image")  String image,
+            @Field("user_provider")  String provide,
+            @Field("user_phone_no")  String phoneNo);
+
+    @FormUrlEncoded
+    @POST("clientRegistration")
+    Call<ApiResponseRegisterClient>RegisterClient(
+            @Field("uid") String Uid,
+            @Field("user_name")  String name,
+            @Field("user_email")  String email,
+            @Field("user_image")  String image,
+            @Field("user_provider")  String provide,
+            @Field("user_phone_no")  String phoneNo);
+
+
 
 }
 
