@@ -2,6 +2,7 @@ package com.pasistence.knockwork;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -37,6 +38,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.pasistence.knockwork.Client.Activities.DashboardActivity;
+import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Model.SignUpEmailModel;
 import com.rey.material.widget.LinearLayout;
 
@@ -48,6 +50,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EmailActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "abc";
+    Context mContext;
     //defining view objects
     EditText editTextEmail, editTextUserName, editTextNumber, EditTextRetypePassword;
     EditText editTextPassword;
@@ -71,7 +74,14 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email);
+        mInit();
 
+
+    }
+
+    private void mInit() {
+
+        mContext = EmailActivity.this;
         //firebase databse
         database = FirebaseDatabase.getInstance();
         signupemaildatabase = database.getReference("Users");
@@ -199,6 +209,7 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
 
         if (view == buttonSignup) {
 
+            if(Common.isConnectedToInterNet(mContext)){
 
             if (registerUser()) {
                 signupnow();
@@ -218,6 +229,11 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
 
             else {
                 Toast.makeText(this, "something is missing", Toast.LENGTH_SHORT).show();
+            }
+
+            }else {
+                Common.commonDialog(mContext,"Please Check Your Internet Connection !");
+                Common.showDialog();
             }
 
 

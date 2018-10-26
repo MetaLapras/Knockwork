@@ -46,7 +46,9 @@ import com.pasistence.knockwork.Client.Activities.InboxActivity;
 import com.pasistence.knockwork.Common.Common;
 
 import com.pasistence.knockwork.Client.Activities.LancerListActivity;
+import com.pasistence.knockwork.Common.PreferenceUtils;
 import com.pasistence.knockwork.Interface.ItemClickListener;
+import com.pasistence.knockwork.LoginActivity;
 import com.pasistence.knockwork.Model.PopularServicesModel;
 import com.pasistence.knockwork.Model.ResponseTopService;
 import com.pasistence.knockwork.Model.TopServicesModel;
@@ -59,6 +61,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -89,7 +92,8 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
     List<PopularServicesModel> popularServicesModelList = new ArrayList<PopularServicesModel>();
     List<ResponseTopService> topServicesModelList = new ArrayList<ResponseTopService>();
 
-
+    TextView txtUserName,txtUserEmail;
+    CircleImageView imgUserProfile;
 
     // FirebaseRecyclerAdapter<PopularServicesModel,ViewHolderPopularServices> popularAdapter;
     //FirebaseRecyclerAdapter<TopServicesModel,ViewHolderTopServices> TopServiceAdapter;
@@ -125,8 +129,26 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.free_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View header=navigationView.getHeaderView(0);
+        txtUserName = (TextView)header.findViewById(R.id.txt_user_name);
+        txtUserEmail = (TextView)header.findViewById(R.id.txt_user_emailid);
+        imgUserProfile = (CircleImageView)header.findViewById(R.id.user_profile_image) ;
+
+       /* UserData data = new Common().getUserData();
+
+        if(data!=null){
+            txtUserEmail.setText(data.getEmail());
+            txtUserName.setText(data.getDisplayName());
+
+            Picasso.with(mContext).load(data.getPhotoUrl()).into(imgUserProfile);
+        }
+*/
+
+        txtUserName.setText(PreferenceUtils.getDisplayName(mContext));
+        txtUserEmail.setText(PreferenceUtils.getEmail(mContext));
+        Picasso.with(mContext).load(PreferenceUtils.getPhotoUrl(mContext)).into(imgUserProfile);
 
 
         //init Fire base
@@ -284,19 +306,19 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
     private void mInit() {
         mContext = FreeLancerDashboardActivity.this;
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        View headerview = navigationView.getHeaderView(0);
+      /*  NavigationView navigationView = (NavigationView) findViewById(R.id.free_nav_view);
+        View headerview = navigationView.getHeaderView(0);*/
        /* TextView profilename = (TextView) headerview.findViewById(R.id.profile_name);
         profilename.setText("your name");*/
 
-        LinearLayout header = (LinearLayout) headerview.findViewById(R.id.nav_head_freelancer);
+      /*  LinearLayout header = (LinearLayout) headerview.findViewById(R.id.nav_head_freelancer);
         header.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(FreeLancerDashboardActivity.this, "clicked", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(FreeLancerDashboardActivity.this,FreelancerProfileActivity.class));
             }
-        });
+        });*/
         /*navlinearlayout = (LinearLayout)findViewById(R.id.nav_head_freelancer);
         navlinearlayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -330,8 +352,6 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         mService = Common.getApi();
     }
 
-
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -345,7 +365,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.free_lancer_dashboard, menu);
+        getMenuInflater().inflate(R.menu.dashboard, menu);
         return true;
     }
 
@@ -357,7 +377,8 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
+            startActivity(new Intent(FreeLancerDashboardActivity.this,LoginActivity.class));
             return true;
         }
 

@@ -23,11 +23,14 @@ import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Adapter.ClientPopularServiceAdapter;
 import com.pasistence.knockwork.Adapter.ClientTopServiceAdapter;
 import com.pasistence.knockwork.Common.Common;
+import com.pasistence.knockwork.Common.PreferenceUtils;
 import com.pasistence.knockwork.Freelancer.Activities.JobPoastingActivity;
+import com.pasistence.knockwork.LoginActivity;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseLancer;
 import com.pasistence.knockwork.Model.PopularServicesModel;
 import com.pasistence.knockwork.Model.ResponseTopService;
@@ -98,11 +101,12 @@ public class DashboardActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        txtUserName = (TextView)navigationView.findViewById(R.id.txt_user_name);
-        txtUserEmail = (TextView)navigationView.findViewById(R.id.txt_user_emailid);
-        imgUserProfile = (CircleImageView)navigationView.findViewById(R.id.user_profile_image) ;
+        View header=navigationView.getHeaderView(0);
+        txtUserName = (TextView)header.findViewById(R.id.txt_user_name);
+        txtUserEmail = (TextView)header.findViewById(R.id.txt_user_emailid);
+        imgUserProfile = (CircleImageView)header.findViewById(R.id.user_profile_image) ;
 
-        UserData data = new Common().getUserData();
+       /* UserData data = new Common().getUserData();
 
         if(data!=null){
             txtUserEmail.setText(data.getEmail());
@@ -110,8 +114,10 @@ public class DashboardActivity extends AppCompatActivity
 
             Picasso.with(mContext).load(data.getPhotoUrl()).into(imgUserProfile);
         }
-
-
+*/
+       txtUserName.setText(PreferenceUtils.getDisplayName(mContext));
+       txtUserEmail.setText(PreferenceUtils.getEmail(mContext));
+       Picasso.with(mContext).load(PreferenceUtils.getPhotoUrl(mContext)).into(imgUserProfile);
 
 
         //init Fire base
@@ -136,12 +142,12 @@ public class DashboardActivity extends AppCompatActivity
                     //loadTopServices();
                 }else
                 {
-                    Toast.makeText(getBaseContext(), "Check Your Internet Connection ! ", Toast.LENGTH_SHORT).show();
+                    Common.commonDialog(mContext,"Please Check Your Internet Connection !");
+                    Common.showDialog();
                     return;
                 }
             }
         });
-
         refreshLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -150,7 +156,8 @@ public class DashboardActivity extends AppCompatActivity
                     //loadTopServices();
                 }else
                 {
-                    Toast.makeText(getBaseContext(), "Check Your Internet Connection ! ", Toast.LENGTH_SHORT).show();
+                    Common.commonDialog(mContext,"Please Check Your Internet Connection !");
+                    Common.showDialog();
                     return;
                 }
 
@@ -244,8 +251,6 @@ public class DashboardActivity extends AppCompatActivity
 */
         //Slider setup
        // setupSlider();
-
-
         SearchBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -253,7 +258,6 @@ public class DashboardActivity extends AppCompatActivity
                 overridePendingTransition(R.anim.fade_in_left,R.anim.fade_in_right);
             }
         });
-
     }
 
     private void mInit() {
@@ -376,7 +380,8 @@ public class DashboardActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
+            startActivity(new Intent(DashboardActivity.this,LoginActivity.class));
             return true;
         }
 
