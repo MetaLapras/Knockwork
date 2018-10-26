@@ -28,14 +28,11 @@ public class Common {
     public static final String phone = "phone";
     public static final String gmail = "gmail";
     public static final String facebook = "facebook";
+    public static String UserName;
+    public static String UserEmail ;
+    public static String UserPhoto;
 
-    public UserData getUserData() {
-        return userData;
-    }
 
-    public void setUserData(UserData userData) {
-        this.userData = userData;
-    }
 
     //localhost
     //public static final String BASE_URL = "http://10.0.2.2/knockwork/public/index.php/api/";
@@ -104,5 +101,24 @@ public class Common {
     public static void hideDialog(){
         alertDialog.dismiss();
     }
+
+    public static void getUserPreference(Context mContext){
+        if(!PreferenceUtils.getDisplayName(mContext).equals("")||
+                !PreferenceUtils.getEmail(mContext).equals("")||
+                !PreferenceUtils.getPhotoUrl(mContext).equals("")){
+
+            UserName = PreferenceUtils.getDisplayName(mContext);
+            UserEmail = PreferenceUtils.getEmail(mContext);
+            UserPhoto = PreferenceUtils.getPhotoUrl(mContext);
+
+        }else {
+            UserName = "Guest User";
+            UserEmail = "";
+            UserPhoto = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5l5MBmXRwD_2mFUZsSHhw9YmBP4m_8Vg7YZZxXDZ17SfE3bZy2w";
+        }
+
+    }
+
+
 
 }

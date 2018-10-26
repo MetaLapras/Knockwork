@@ -107,15 +107,7 @@ public class PreferenceUtils {
         return getSharedPreferences(context).getString(photourl,"");
     }
 
-    //User Id
-    public static String getUserId(Context context) {
-        return getSharedPreferences(context).getString(userId,"");
-    }
 
-    public static void setUserId(Context context, String Details){
-        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
-        editor.putString(userId,Details).apply();
-    }
 
 
 
