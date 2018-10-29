@@ -105,7 +105,9 @@
                     android:layout_height="50dp"
                     android:background="@drawable/border_corner"
                     android:entries="@array/spinner_availability"
-                    android:spinnerMode="dropdown"></Spinner>
+                    android:spinnerMode="dropdown">
+
+                </Spinner>
 
                 <TextView
                     android:id="@+id/freelancer_profile_number"
@@ -205,6 +207,7 @@
 
 
                     <RadioGroup
+                        android:id="@+id/rdg_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -40,6 +41,7 @@ public class FreeLancerProfileFragment extends Fragment {
     public TextView txtContactNo,txtDateofBirth;
     RadioButton rdMale,rdFemale;
     RadioGroup rdgGender;
+    ImageView imgCorrect,imgEdit;
 
     private OnFragmentInteractionListener mListener;
 
@@ -93,11 +95,15 @@ public class FreeLancerProfileFragment extends Fragment {
         edtTitle = (EditText)view.findViewById(R.id.freelancer_profile_edittitle);
 
         spnAvability = (Spinner)view.findViewById(R.id.freelancer_profile_spn_avalibility);
-        txtContactNo = (TextView)view.findViewById(R.id.);
-        txtDateofBirth = (TextView)view.findViewById(R.id.);
-        rdFemale =(RadioButton)view.findViewById(R.id.);
-        rdMale=(RadioButton)view.findViewById(R.id.) ;
-        rdgGender =(RadioGroup)view.findViewById(R.id.)
+        txtContactNo = (TextView)view.findViewById(R.id.freelancer_profile_MNumber);
+
+        imgCorrect=(ImageView)view.findViewById(R.id.freelancer_profile_imgright);
+        imgEdit=(ImageView)view.findViewById(R.id.freelancer_profile_imgedit);
+
+        txtDateofBirth = (TextView)view.findViewById(R.id.freelancer_profile_DOB);
+        rdFemale =(RadioButton)view.findViewById(R.id.freelancer_profile_radiomale);
+        rdMale=(RadioButton)view.findViewById(R.id.freelancer_profile_radioFemale) ;
+        rdgGender =(RadioGroup)view.findViewById(R.id.rdg_group);
 
     }
 
