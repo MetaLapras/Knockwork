@@ -100,7 +100,6 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".SubCategoryActivity" />
         <activity android:name=".SelectionActivity" />
-        <activity android:name=".SubCategoryActivity" />
         <activity android:name=".EmailActivity" />
         <activity android:name=".ImageUploadActivity" />
         <activity android:name=".Freelancer.Activities.FreelancerProfileActivity" />

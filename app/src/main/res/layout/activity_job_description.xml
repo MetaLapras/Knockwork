@@ -110,7 +110,7 @@
                 android:id="@+id/img_budget"
                 android:layout_width="40dp"
                 android:layout_height="50dp"
-                android:src="@drawable/currencyone"/>
+                android:src="@drawable/currency"/>
             <TextView
                 android:id="@+id/txt_budget"
                 android:layout_width="wrap_content"
@@ -260,7 +260,7 @@
              android:layout_width="40dp"
              android:layout_height="50dp"
              android:layout_margin="7dp"
-             android:src="@drawable/person" />
+             android:src="@drawable/profile" />
 
          <LinearLayout
              android:layout_width="match_parent"

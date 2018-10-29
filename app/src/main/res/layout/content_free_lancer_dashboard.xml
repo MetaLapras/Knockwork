@@ -22,6 +22,29 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/profilestatus"
+            android:textSize="@dimen/text_size_medium"
+            android:textColor="@color/colorAccent"/>
+
+
+        <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+            android:id="@+id/progressbar_profile"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            app:rcProgress="30"
+            app:rcSecondaryProgress="50"
+            android:layout_margin="8dp"
+            app:rcRadius="6dp"
+            app:rcBackgroundPadding="5dp"
+            app:rcReverse="false"
+            app:rcProgressColor="@color/red"
+            app:rcSecondaryProgressColor="@color/green"
+            app:rcBackgroundColor="@color/fbutton_color_asbestos" />
+
         <android.support.v7.widget.CardView
             android:id="@+id/search_bar"
             android:layout_width="match_parent"

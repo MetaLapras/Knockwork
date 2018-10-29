@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Freelancer.Fragments.FreeLancerProfileFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#d4d5de">
+
+         <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/freelancer_profile_imgtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/professional_title"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/text_size_large" />
+
+                    <EditText
+                        android:id="@+id/freelancer_profile_edittitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textSize="15dp"
+                        android:layout_marginBottom="10dp"
+                        android:hint="@string/example" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/freelancer_profile_hrate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:text="@string/min_hour_rate"
+                        android:textAllCaps="false"
+                        android:textColor="@color/fbutton_color_peter_river"
+                        android:textSize="15dp" />
+
+                    <EditText
+                        android:id="@+id/freelancer_profile_edtrate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:background="@drawable/border_corner"
+                        android:hint="0"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:textSize="25dp" />
+
+                    <TextView
+                        android:id="@+id/freelancer_profile_inr"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="INR"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/freelancer_profile_availability"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Availability"
+                    android:textColor="@color/fbutton_color_peter_river"
+                    android:textSize="15dp" />
+
+                <Spinner
+                    android:id="@+id/freelancer_profile_spn_avalibility"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/border_corner"
+                    android:entries="@array/spinner_availability"
+                    android:spinnerMode="dropdown"></Spinner>
+
+                <TextView
+                    android:id="@+id/freelancer_profile_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Contact Number"
+                    android:textColor="@color/fbutton_color_peter_river"
+                    android:textSize="15dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/freelancer_profile_MNumber"
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_size_medium"
+                        android:text="+91-1234567890"
+                        android:textColor="@color/black" />
+
+                    <ImageView
+                        android:id="@+id/freelancer_profile_imgright"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/ic_check_circle_black_24dp" />
+
+                    <ImageView
+                        android:id="@+id/freelancer_profile_imgedit"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/ic_edit_black_24dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Date of Birth"
+                    android:textColor="@color/fbutton_color_peter_river"
+                    android:textSize="15dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="3"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="40dp"
+                        android:src="@drawable/callender" />
+
+                    <TextView
+                        android:id="@+id/freelancer_profile_DOB"
+                        android:layout_width="0dp"
+                        android:layout_weight="3.5"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/dd_mm_yy"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_large" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="5"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Gender: "
+                        android:textColor="@color/fbutton_color_peter_river"
+                        android:textSize="15dp" />
+
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_weight="3"
+                        android:weightSum="2"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/freelancer_profile_radiomale"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Male"
+                            android:layout_weight="1"
+                            android:textSize="15dp" />
+
+
+                        <RadioButton
+                            android:id="@+id/freelancer_profile_radioFemale"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:text="Female"
+                            android:layout_weight="1"
+                            android:textSize="15sp" />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <info.hoang8f.widget.FButton
+                    android:id="@+id/freelancer_profile_btnSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:text="Submit"
+                    android:textSize="17dp"
+                    android:textColor="@android:color/white"
+                    android:textAllCaps="true"
+                    android:shadowColor="@android:color/white"
+                    app:shadowEnabled="true"
+                    app:fButtonColor="@color/fbutton_color_peter_river"
+                    app:shadowHeight="2dp"
+                    app:cornerRadius="3dp"
+                    app:shadowColor="@android:color/black"
+                    android:layout_marginRight="5dp"
+                    />
+
+            </LinearLayout>
+
+
+
+
+        </android.support.v7.widget.CardView>
+
+        <!--////////////////////////////////////////////////-->
+
+
+
+    </LinearLayout>
+
+</FrameLayout>

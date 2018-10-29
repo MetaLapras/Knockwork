@@ -13,9 +13,12 @@ apply plugin: 'io.fabric'
 repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
-
-
 android {
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.pasistence.knockwork"
@@ -126,6 +129,19 @@ dependencies {
     // implementation 'com.google.firebase:firebase-auth:16.0.1:15.0.0'
     implementation 'com.google.firebase:firebase-storage:16.0.1'
     implementation 'com.google.firebase:firebase-auth:16.0.1'
+
+    //spot dialogue
+    // implementation 'com.github.d-max:spots-dialog:1.1@aar'
+    implementation 'com.github.d-max:spots-dialog:0.7@aar'
+    implementation 'com.akexorcist:RoundCornerProgressBar:2.0.3'
+
+    //Fragment Manager
+    implementation 'com.massivedisaster:activity-fragment-manager:0.4.5'
+
+    // of course, do not write x.x.x but the version number
+
+
 }
+
 
 apply plugin: 'com.google.gms.google-services'

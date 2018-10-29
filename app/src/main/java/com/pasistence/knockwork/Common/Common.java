@@ -32,8 +32,6 @@ public class Common {
     public static String UserEmail ;
     public static String UserPhoto;
 
-
-
     //localhost
     //public static final String BASE_URL = "http://10.0.2.2/knockwork/public/index.php/api/";
     //Server
@@ -94,12 +92,7 @@ public class Common {
 
         //AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog = alertDialogBuilder.create();
-    }
-    public static void showDialog(){
         alertDialog.show();
-    }
-    public static void hideDialog(){
-        alertDialog.dismiss();
     }
 
     public static void getUserPreference(Context mContext){

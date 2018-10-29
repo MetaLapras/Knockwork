@@ -30,6 +30,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
+import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -52,6 +54,7 @@ import com.pasistence.knockwork.Common.Common;
 
 import com.pasistence.knockwork.Client.Activities.LancerListActivity;
 import com.pasistence.knockwork.Common.PreferenceUtils;
+import com.pasistence.knockwork.Database.DatabseHandler;
 import com.pasistence.knockwork.Interface.ItemClickListener;
 import com.pasistence.knockwork.LoginActivity;
 import com.pasistence.knockwork.Model.PopularServicesModel;
@@ -102,6 +105,10 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
     TextView txtUserName,txtUserEmail;
     CircleImageView imgUserProfile;
 
+    RoundCornerProgressBar progressBar;
+    //Database Helper
+    DatabseHandler databasHandler;
+
 
     // FirebaseRecyclerAdapter<PopularServicesModel,ViewHolderPopularServices> popularAdapter;
     //FirebaseRecyclerAdapter<TopServicesModel,ViewHolderTopServices> TopServiceAdapter;
@@ -109,6 +116,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
     //Sliders
     HashMap<String,String> image_list;
     SliderLayout mslider;
+    Float ProfileCount;
 
 
     @Override
@@ -119,6 +127,8 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         mInit();
 
+
+        ProfileCount = databasHandler.getProfileCount();
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -187,6 +197,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
                 //to Load menu from Firebase
                 if(Common.isConnectedToInterNet(getBaseContext())) {
                     loadPopularServices();
+                    checkProfile();
                     //loadTopServices();
                 }else
                 {
@@ -201,6 +212,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
             public void run() {
                 //to Load menu from Firebase
                 if(Common.isConnectedToInterNet(getBaseContext())) {
+                    checkProfile();
                     loadPopularServices();
                     //loadTopServices();
                 }else
@@ -315,10 +327,37 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
             }
         });
 
-
+  //     checkProfile();
 
     }
 
+    private void checkProfile() {
+        if(ProfileCount*10 < 100){
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+            alertDialogBuilder.setMessage("Please Complete Your Profile! First");
+            alertDialogBuilder.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            startActivity(new Intent(mContext,FreelancerProfileActivity.class));
+                        }
+                    });
+
+            alertDialogBuilder.setNegativeButton("Cancel",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            arg0.dismiss();
+                        }
+                    });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            //AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }
+
+        progressBar.setProgress(ProfileCount*10);
+    }
 
     private void mInit() {
         mContext = FreeLancerDashboardActivity.this;
@@ -372,6 +411,13 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
 
         //initFirebase
         mAuth = FirebaseAuth.getInstance();
+
+        //Progress Bar
+        progressBar = (RoundCornerProgressBar)findViewById(R.id.progressbar_profile);
+        //Init DatabaseHandler
+        databasHandler = new DatabseHandler(mContext);
+
+
     }
 
     @Override
@@ -409,11 +455,17 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
 
                             //Clear Saved Password and Users
                             PreferenceUtils.setSignIn(mContext,false);
+                            PreferenceUtils.setDisplayName(mContext,"");
+                            PreferenceUtils.setUid(mContext,"");
+                            PreferenceUtils.setEmail(mContext,"");
+                            PreferenceUtils.setPhotoUrl(mContext,"");
+                            PreferenceUtils.setProvider(mContext,"");
+                            PreferenceUtils.setPhoneNumber(mContext,"");
 
                             //FirebaseAuth LogOut
                             mAuth.signOut();
 
-                            Intent signin = new Intent(mContext,Login.class);
+                            Intent signin = new Intent(mContext,LoginActivity.class);
                             signin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(signin);
                             finish();
@@ -629,4 +681,9 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
     }*/
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkProfile();
+    }
 }

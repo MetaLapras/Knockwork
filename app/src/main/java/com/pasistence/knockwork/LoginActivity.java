@@ -12,6 +12,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
 import com.facebook.login.widget.LoginButton;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
@@ -82,6 +83,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //Init retrofit
         mService = Common.getApi();
     }
+
     private void mOnClick() {
         buttonEmail.setOnClickListener(this);
         buttonGmail.setOnClickListener(this);
@@ -111,7 +113,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             }else {
                 Common.commonDialog(mContext,"Please Check Your Internet Connection !");
-                Common.showDialog();
             }
 
         }
@@ -127,10 +128,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         .createSignInIntentBuilder()
                         .setAvailableProviders(Arrays.asList(facebookIdp))
                         .build(), FACEBOOK_LOGIN);
-
             }else {
                 Common.commonDialog(mContext,"Please Check Your Internet Connection !");
-                Common.showDialog();
             }
 
 
@@ -162,61 +161,85 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == EMAIL_LOGIN) {
-            handleSignInResponse(resultCode, data);
-            //startActivity(new Intent(LoginActivity.this,SignUpEmailActivity.class));
-            return;
+            try{
+                handleSignInResponse(resultCode, data);
+                //startActivity(new Intent(LoginActivity.this,SignUpEmailActivity.class));
+                return;
+            }catch (Exception e){
+                e.printStackTrace();
+                return;
+            }
+
         }
         if (requestCode == GMAIL_LOGIN) {
-            handleSignInResponse(resultCode, data);
-             FirebaseAuth mAuth = FirebaseAuth.getInstance();
-            FirebaseUser currentUser = mAuth.getCurrentUser();
-            Log.v(TAG, currentUser.getUid());
-            Log.v(TAG, currentUser.getDisplayName());
-            Log.v(TAG, currentUser.getEmail());
-            Log.v(TAG, currentUser.getPhotoUrl().toString());
-            Log.v(TAG, currentUser.getProviderId());
-            Log.v(TAG, currentUser.getProviders().toString());
-            Log.v(TAG, currentUser.getPhotoUrl().toString());
-           // Log.e(TAG, currentUser.getPhoneNumber());
-            if(PreferenceUtils.getUserType(mContext).equals("Lancer")){
-                RegisterLancerUser(currentUser,Common.gmail);
-            }else if(PreferenceUtils.getUserType(mContext).equals("Client")){
-                RegisterClientUser(currentUser,Common.gmail);
-            }else
-            {
-
+            try{
+                //handleSignInResponse(resultCode, data);
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                FirebaseUser currentUser = mAuth.getCurrentUser();
+                Log.v(TAG, currentUser.getUid());
+                Log.v(TAG, currentUser.getDisplayName());
+                Log.v(TAG, currentUser.getEmail());
+                Log.v(TAG, currentUser.getPhotoUrl().toString());
+                Log.v(TAG, currentUser.getProviderId());
+                Log.v(TAG, currentUser.getProviders().toString());
+                Log.v(TAG, currentUser.getPhotoUrl().toString());
+                // Log.e(TAG, currentUser.getPhoneNumber());
+                if(PreferenceUtils.getUserType(mContext).equals("Lancer")){
+                    RegisterLancerUser(currentUser,Common.gmail);
+                }else if(PreferenceUtils.getUserType(mContext).equals("Client")){
+                    RegisterClientUser(currentUser,Common.gmail);
+                }else
+                {
+                    Common.commonDialog(mContext,"Something Went wrong Please Try Again!" +
+                            "Or Check Your Internet Connection!");
+                }
+                return;
+            }catch (Exception e){
+                e.printStackTrace();
+                return;
             }
 
-
-            return;
         }
         if (requestCode == FACEBOOK_LOGIN) {
-            handleSignInResponse(resultCode, data);
-            FirebaseAuth mAuth = FirebaseAuth.getInstance();
-            FirebaseUser currentUser = mAuth.getCurrentUser();
-            Log.v(TAG, currentUser.getUid());
-            Log.v(TAG, currentUser.getDisplayName());
-            Log.v(TAG, currentUser.getEmail());
-            Log.v(TAG, currentUser.getPhotoUrl().toString());
-           // Log.v(TAG, currentUser.getPhoneNumber());
-            Log.v(TAG, currentUser.getProviderId());
-            Log.v(TAG, currentUser.getProviders().toString());
-            Log.v(TAG, currentUser.getPhotoUrl().toString());
+            try{
+                //handleSignInResponse(resultCode, data);
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                FirebaseUser currentUser = mAuth.getCurrentUser();
 
-            if(PreferenceUtils.getUserType(mContext).equals("Lancer")){
-                RegisterLancerUser(currentUser, Common.facebook);
-            }else if(PreferenceUtils.getUserType(mContext).equals("Client")){
-                RegisterClientUser(currentUser, Common.facebook);
-            }else
-            {
+                Log.v(TAG, currentUser.getUid());
+                Log.v(TAG, currentUser.getDisplayName());
+                Log.v(TAG, currentUser.getEmail());
+                Log.v(TAG, currentUser.getPhotoUrl().toString());
+                // Log.v(TAG, currentUser.getPhoneNumber());
+                Log.v(TAG, currentUser.getProviderId());
+                Log.v(TAG, currentUser.getProviders().toString());
+                Log.v(TAG, currentUser.getPhotoUrl().toString());
 
+                if(PreferenceUtils.getUserType(mContext).equals("Lancer")){
+                    RegisterLancerUser(currentUser, Common.facebook);
+                }else if(PreferenceUtils.getUserType(mContext).equals("Client")){
+                    RegisterClientUser(currentUser, Common.facebook);
+                }else
+                {
+                    Common.commonDialog(mContext,"Something Went wrong Please Try Again!" +
+                            "Or Check Your Internet Connection!");
+                }
+                return;
+            }catch (Exception e){
+                e.printStackTrace();
+                return;
             }
 
-            return;
         }
         if (requestCode == PHONE_LOGIN){
-            phoneNumberSignInResponse(resultCode, data);
-            return;
+            try{
+                phoneNumberSignInResponse(resultCode, data);
+                return;
+            }catch (Exception e){
+                e.printStackTrace();
+                return;
+            }
+
         }
     }
 
@@ -258,11 +281,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     RegisterLancerUser(FirebaseAuth.getInstance().getCurrentUser(), Common.phone);
 
                 }else if(PreferenceUtils.getUserType(mContext).equals("Client")){
+
                     RegisterClientUser(FirebaseAuth.getInstance().getCurrentUser(), Common.phone);
+
                 }else
                 {
                     Common.commonDialog(mContext,"Server Not Found!");
-                    Common.showDialog();
 
                 }
                 /*switch (radioGroupWH.getCheckedRadioButtonId()){
@@ -311,6 +335,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void RegisterLancerUser(FirebaseUser currentUser, String type) {
+        try{
+
         String  displayname = null,
                 uid = null,
                 email = null ,
@@ -370,10 +396,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 ApiResponseRegisterLancer result = response.body();
                 Log.e(TAG, result.toString());
+                if(!result.getError()){
+                    Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
+                    startActivity(intent1);
+                    finish();
+                }else if(result.getError()){
+                    Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
+                    startActivity(intent1);
+                    finish();
+                }else {
+                    Common.commonDialog(mContext,"Server Not Found!");
+                }
 
-                Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
-                startActivity(intent1);
-                finish();
 
             }
 
@@ -398,13 +432,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Log.v(TAG, PreferenceUtils.getPhotoUrl(mContext));
         Log.v(TAG, PreferenceUtils.getProvider(mContext));
 
-
-
+        }catch (Exception e){
+            Common.commonDialog(mContext,"Server Not Found!");
+            e.printStackTrace();
+            Log.e(TAG, e.getMessage() );
+        }
 
     }
 
     private void RegisterClientUser(FirebaseUser currentUser, String type) {
 
+
+        try{
         String  displayname = null,
                 uid = null,
                 email = null ,
@@ -470,9 +509,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 ApiResponseRegisterClient result = response.body();
                 Log.e(TAG, result.toString());
 
-                Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
-                startActivity(intent1);
-                finish();
+                if(!result.getError()){
+                    Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
+                    startActivity(intent1);
+                    finish();
+                }else if(result.getError()){
+                    Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
+                    startActivity(intent1);
+                    finish();
+                }else {
+                    Common.commonDialog(mContext,"Server Not Found");
+                }
 
             }
 
@@ -492,12 +539,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         PreferenceUtils.setProvider(mContext,currentUser.getProviders().toString());
         //PreferenceUtils.setPhoneNumber(mContext,phoneNo);
 
-
         Log.e(TAG,"pre"+ PreferenceUtils.getDisplayName(mContext));
         Log.e(TAG,"pre"+ PreferenceUtils.getUid(mContext));
         Log.e(TAG,"pre"+ PreferenceUtils.getEmail(mContext));
         Log.v(TAG,"pre"+ PreferenceUtils.getPhotoUrl(mContext));
         Log.v(TAG,"pre"+ PreferenceUtils.getProvider(mContext));
+
+    }catch (Exception e){
+        Common.commonDialog(mContext,"Server Not Found!");
+        e.printStackTrace();
+        Log.e(TAG, e.getMessage() );
+    }
 
     }
 
