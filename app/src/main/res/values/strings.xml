@@ -255,6 +255,7 @@
     <string name="txt_urgent">Receive faster responses from freelancers and get your Project started within a day!</string>
     <string name="txt_private">Hide project details from search engines and users that are not logged in. This feature is recommended for projects where confidentiality is a priority.</string>
     <string name="contest_description">The more freelancer know about your project the more accuretely they can submit their entries </string>
+    <string name="havework">Do you Have Any work Expericence</string>
 
 
     <string-array name="milestones">

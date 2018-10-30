@@ -6,30 +6,46 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.pasistence.knockwork.Common.Common;
+import com.pasistence.knockwork.Model.ApiResponse.ApiResponseUpdateLancer;
 import com.pasistence.knockwork.R;
+import com.pasistence.knockwork.Remote.MyApi;
 
 import org.w3c.dom.Text;
 
 import java.util.Calendar;
 
 import info.hoang8f.widget.FButton;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static java.lang.Compiler.disable;
 
 public class FreelancerWorkExperienceFragment extends Fragment {
 
+    private static final String TAG = "workexp";
     public FButton btnSubmit,btnAdd;
     public Spinner spnYears,spnMonths;
     public EditText edtCompanyName,edtProfile;
     public TextView txtWorkfrom,txtWorkto;
+    public CheckBox chkExperience;
+    MyApi mService;
 
     private int mYear, mMonth, mDay;
+    String Uid,Lid,companyname,profile,startdate,endate;
+
 
     public FreelancerWorkExperienceFragment() {
         // Required empty public constructor
@@ -44,6 +60,21 @@ public class FreelancerWorkExperienceFragment extends Fragment {
         View view =  lf.inflate(R.layout.fragment_freelancer_work_experience, container, false);
 
         mInit(view);
+
+        if(!chkExperience.isChecked()){
+            disableComponent();
+        }
+
+        chkExperience.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    enableComponent();
+                }else if(!isChecked){
+                    disableComponent();
+                }
+            }
+        });
 
 
         txtWorkto.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +95,45 @@ public class FreelancerWorkExperienceFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(!check()){
+                    if(Common.isConnectedToInterNet(getContext())){
 
+                        companyname = edtCompanyName.getText().toString();
+                        profile = edtProfile.getText().toString();
+                        startdate = txtWorkfrom.getText().toString();
+                        endate = txtWorkto.getText().toString();
+
+                        try{
+
+                            mService.LancerProfileExperience(
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "")
+                                    .enqueue(new Callback<ApiResponseUpdateLancer>() {
+                                        @Override
+                                        public void onResponse(Call<ApiResponseUpdateLancer> call, Response<ApiResponseUpdateLancer> response) {
+
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<ApiResponseUpdateLancer> call, Throwable t) {
+
+                                        }
+                                    });
+
+                        }catch (Exception e)
+                        {
+                            e.printStackTrace();
+                            Log.e(TAG, e.getMessage());
+                        }
+
+
+
+                    }else {
+                        Common.commonDialog(getContext(),"Please Check Your Internet Connection!");
+                    }
                 }
             }
         });
@@ -120,6 +189,7 @@ public class FreelancerWorkExperienceFragment extends Fragment {
         btnSubmit =(FButton)view.findViewById(R.id.btn_submit) ;
         //btnBack =(FButton)view.findViewById(R.id.btn_back) ;
         btnAdd =(FButton)view.findViewById(R.id.btn_addWorkExp) ;
+
         edtCompanyName = (EditText)view.findViewById(R.id.freelancer_profile_editcompanyName);
         edtProfile = (EditText)view.findViewById(R.id.freelancer_profile_editprofile);
 
@@ -129,6 +199,34 @@ public class FreelancerWorkExperienceFragment extends Fragment {
         txtWorkfrom = (TextView)view.findViewById(R.id.freelancer_profile_workfrom);
         txtWorkto = (TextView)view.findViewById(R.id.freelancer_profile_workTo);
 
+        chkExperience = (CheckBox)view.findViewById(R.id.chk_haveExperience);
+
+        disableComponent();
+
+        mService = Common.getApi();
+
+    }
+
+    private void disableComponent() {
+
+        btnAdd.setEnabled(false);
+        edtCompanyName.setEnabled(false);
+        edtProfile.setEnabled(false);
+        spnMonths.setEnabled(false);
+        spnYears.setEnabled(false);
+        txtWorkfrom.setEnabled(false);
+        txtWorkto.setEnabled(false);
+    }
+
+    private void enableComponent() {
+
+        btnAdd.setEnabled(true);
+        edtCompanyName.setEnabled(true);
+        edtProfile.setEnabled(true);
+        spnMonths.setEnabled(true);
+        spnYears.setEnabled(true);
+        txtWorkfrom.setEnabled(true);
+        txtWorkto.setEnabled(true);
     }
 
     private void dateDialog(final TextView txt){
