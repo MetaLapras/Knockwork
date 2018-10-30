@@ -6,12 +6,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Freelancer.Fragments.FreeLancerProfileFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="#d4d5de">
+
+        <TextView
+            android:id="@+id/freelancer_profile_info"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:text="Profile Information"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_size_xlarge"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"/>
 
          <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -121,7 +139,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="4"
                     android:orientation="horizontal">
 
@@ -133,7 +151,7 @@
                         android:gravity="center"
                         android:textStyle="bold"
                         android:textSize="@dimen/text_size_medium"
-                        android:text="+91-1234567890"
+                        android:text="+91-Mobile Number"
                         android:textColor="@color/black" />
 
                     <ImageView
@@ -141,8 +159,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_margin="5dp"
                         android:src="@drawable/ic_check_circle_black_24dp" />
 
                     <ImageView
@@ -150,8 +167,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_margin="5dp"
                         android:src="@drawable/ic_edit_black_24dp" />
                 </LinearLayout>
 
@@ -187,6 +203,7 @@
                         android:text="@string/dd_mm_yy"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_large" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -232,16 +249,59 @@
                             android:layout_weight="1"
                             android:textSize="15sp" />
                     </RadioGroup>
+
                 </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/freelancer_profile_selfintroduction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Self Introduction"
+                    android:textColor="@color/fbutton_color_peter_river"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/freelancer_profile_editselfintroduction"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@drawable/border_corner"
+                    android:gravity="top|left"
+                    android:textSize="15dp"
+                    android:hint="write about you in brif"
+                    android:padding="5dp" />
+                <TextView
+                    android:id="@+id/freelancer_profile_skills"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Skills"
+                    android:textColor="@color/fbutton_color_peter_river"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/freelancer_profile_editSkills"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/border_corner"
+                    android:gravity="top|left"
+                    android:textSize="15dp"
+                    android:hint="Java,Android"
+                    android:padding="5dp" />
+
 
                 <info.hoang8f.widget.FButton
                     android:id="@+id/freelancer_profile_btnSubmit"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:text="Submit"
+                    android:text="Next"
                     android:textSize="17dp"
+                    android:layout_gravity="right"
                     android:textColor="@android:color/white"
-                    android:textAllCaps="true"
+                    android:textAllCaps="false"
                     android:shadowColor="@android:color/white"
                     app:shadowEnabled="true"
                     app:fButtonColor="@color/fbutton_color_peter_river"
@@ -249,6 +309,7 @@
                     app:cornerRadius="3dp"
                     app:shadowColor="@android:color/black"
                     android:layout_marginRight="5dp"
+                    android:layout_marginBottom="30dp"
                     />
 
             </LinearLayout>
@@ -263,5 +324,7 @@
 
 
     </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>

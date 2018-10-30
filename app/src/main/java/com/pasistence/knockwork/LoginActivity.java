@@ -30,6 +30,7 @@ import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterClient;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
 import com.pasistence.knockwork.Remote.MyApi;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import info.hoang8f.widget.FButton;
@@ -397,6 +398,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 ApiResponseRegisterLancer result = response.body();
                 Log.e(TAG, result.toString());
                 if(!result.getError()){
+
+                    ArrayList<ApiResponseRegisterLancer.Lancer> lancers = (ArrayList<ApiResponseRegisterLancer.Lancer>) result.getLancer();
+
+                    for(ApiResponseRegisterLancer.Lancer lan : lancers){
+                        PreferenceUtils.setLid(mContext,lan.getLancerId());
+                    }
+
                     Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
                     startActivity(intent1);
                     finish();
