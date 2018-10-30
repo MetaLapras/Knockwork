@@ -38,21 +38,21 @@ public class ClientJobPostingActivity extends AppCompatActivity {
         txtExplain =(TextView)findViewById(R.id.txt_explain);
         txtSkill =(TextView)findViewById(R.id.txt_skil);
         txtChkFeatured =(TextView)findViewById(R.id.txt_chk_feature);
-        txtChkRecruiter =(TextView)findViewById(R.id.txt_chk_recuiter);
+        /*txtChkRecruiter =(TextView)findViewById(R.id.txt_chk_recuiter);
         txtChkNDA =(TextView)findViewById(R.id.txt_chk_nda);
         txtChkUrgent =(TextView)findViewById(R.id.txt_chk_urgent);
-        txtChkPrivate =(TextView)findViewById(R.id.txt_chk_private);
+        txtChkPrivate =(TextView)findViewById(R.id.txt_chk_private);*/
         txtFeatured =(TextView)findViewById(R.id.txt_feature);
-        txtRecruiter =(TextView)findViewById(R.id.txt_recuiter);
+       /* txtRecruiter =(TextView)findViewById(R.id.txt_recuiter);
         txtNDA =(TextView)findViewById(R.id.txt_nda);
         txtUrgent =(TextView)findViewById(R.id.txt_urgent);
-        txtPrivate =(TextView)findViewById(R.id.txt_private);
+        txtPrivate =(TextView)findViewById(R.id.txt_private);*/
         txtFINR =(TextView)findViewById(R.id.txt_feature_INR);
-        txtRINr =(TextView)findViewById(R.id.txt_recuiter_inr);
+       /* txtRINr =(TextView)findViewById(R.id.txt_recuiter_inr);
         txtNINR =(TextView)findViewById(R.id.txt_nda_inr);
         txtUINr =(TextView)findViewById(R.id.txt_uregent_inr);
         txtPINr =(TextView)findViewById(R.id.txt_private_inr);
-
+*/
 
 
         editAbout = (EditText)findViewById(R.id.edt_project_about);
@@ -71,10 +71,10 @@ public class ClientJobPostingActivity extends AppCompatActivity {
 
         checkBox =(CheckBox)findViewById(R.id.chk_agree);
         chkFeatured =(CheckBox)findViewById(R.id.chk_feature);
-        chkRecruiter =(CheckBox)findViewById(R.id.chk_recruiter);
+       /* chkRecruiter =(CheckBox)findViewById(R.id.chk_recruiter);
         chkNDA =(CheckBox)findViewById(R.id.chk_nda);
         chkUrgent =(CheckBox)findViewById(R.id.chk_urgent);
-        chkPrivate =(CheckBox)findViewById(R.id.chk_private);
+        chkPrivate =(CheckBox)findViewById(R.id.chk_private);*/
 
         btnSubmit = (Button)findViewById(R.id.btn_submit_project);
 

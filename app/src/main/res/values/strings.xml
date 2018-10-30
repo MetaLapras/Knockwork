@@ -168,7 +168,7 @@
         <item> Others </item>
     </string-array>
 
-    <string-array name ="spinner_belong_to">
+    <string-array name="spinner_belong_to">
         <item> Application Interface Design </item>
         <item> Desktop Application </item>
         <item> Ecommerce </item>
@@ -247,12 +247,12 @@
         <item>According to Hours</item></string>
     <string name="dd_mm_yy">dd-mm-yy</string>
     <string name="txt_job_posting">Get your project done Quickly!</string>
-    <string name="txt_job_posting1" >Post a Project for free and start receiving proposals within minutes</string>
+    <string name="txt_job_posting1">Post a Project for free and start receiving proposals within minutes</string>
     <string name="txt_featured">Featured projects attract more, better-quality bids and are displayed eminently in the Featured Jobs section.</string>
-    <string name="txt_recruters" >Our hands-on PRIME Recruitment service ensures you get the best freelancer for your project. Our recruiters personally review all the proposals saving you time screening freelancers proposals.</string>
-    <string name="txt_NDA" >Freelancers must sign a Non-disclosure Agreement to work on your project. Freelancers agree to keep details discussed through private messages and files/documents/code confidential.</string>
+    <string name="txt_recruters">Our hands-on PRIME Recruitment service ensures you get the best freelancer for your project. Our recruiters personally review all the proposals saving you time screening freelancers proposals.</string>
+    <string name="txt_NDA">Freelancers must sign a Non-disclosure Agreement to work on your project. Freelancers agree to keep details discussed through private messages and files/documents/code confidential.</string>
     <string name="txt_urgent">Receive faster responses from freelancers and get your Project started within a day!</string>
-    <string name="txt_private" >Hide project details from search engines and users that are not logged in. This feature is recommended for projects where confidentiality is a priority.</string>
+    <string name="txt_private">Hide project details from search engines and users that are not logged in. This feature is recommended for projects where confidentiality is a priority.</string>
 
 
     <string-array name="milestones">

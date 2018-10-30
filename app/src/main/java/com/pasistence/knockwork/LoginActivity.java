@@ -153,7 +153,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         if (v == txtSkip) {
-            startActivity(new Intent(mContext, DashboardActivity.class));
+            startActivity(new Intent(mContext, FreeLancerDashboardActivity.class));
             finish();
         }
 
