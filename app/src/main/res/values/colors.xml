@@ -34,5 +34,7 @@
     <color name="gray">#FF5C6268</color>
     <color name="red">#FFE71A21</color>
     <color name="green">#00FF00</color>
+    <color name="river">#b5e5ff</color>
+
 
 </resources>

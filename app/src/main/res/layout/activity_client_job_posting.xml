@@ -127,16 +127,16 @@
             android:layout_marginBottom="5dp"
             android:textColor="@color/fbutton_color_peter_river"
             android:gravity="center"/>
-
-        <EditText
+        <MultiAutoCompleteTextView
             android:id="@+id/edit_skil"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/border_corner"
             android:gravity="top|left"
             android:hint="Select Skills"
             android:paddingLeft="10dp"
-            android:layout_marginBottom="10dp"
+            android:completionThreshold="1"
             android:textSize="15dp" />
 
         <LinearLayout
