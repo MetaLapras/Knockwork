@@ -287,6 +287,8 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
     public void onClick(View v) {
         if (!isCheck())
         {
+
+
          /*   String input = MSkills.getText().toString().trim();
             String[] singleInputs = input.split("\\s*,\\s*");
 
@@ -323,11 +325,11 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
             cancel=true;
         }
 
-        if (TextUtils.isEmpty(editINR.getText())){
+       /* if (TextUtils.isEmpty(editINR.getText())){
             editINR.setError("Please enter min 5 Skills* ");
             focusView=editINR;
             cancel=true;
-        }
+        }*/
 
         if(spnDone.getSelectedItemPosition() == 0)
         {
@@ -342,6 +344,15 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
             focusView=spnBelong;
             cancel=true;
         }
+
+        String input = MSkills.getText().toString().trim();
+            String[] singleInputs = input.split("\\s*,\\s*");
+
+            if(singleInputs.length<5){
+                MSkills.setError("Please enter min 5 Skills* ");
+                cancel=true;
+            }
+
 
        /* if (!radioFixed.isChecked() && !radioHourly.isChecked())
         {
