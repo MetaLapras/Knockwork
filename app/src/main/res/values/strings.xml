@@ -254,6 +254,7 @@
     <string name="txt_NDA">Freelancers must sign a Non-disclosure Agreement to work on your project. Freelancers agree to keep details discussed through private messages and files/documents/code confidential.</string>
     <string name="txt_urgent">Receive faster responses from freelancers and get your Project started within a day!</string>
     <string name="txt_private">Hide project details from search engines and users that are not logged in. This feature is recommended for projects where confidentiality is a priority.</string>
+    <string name="contest_description">The more freelancer know about your project the more accuretely they can submit their entries </string>
 
 
     <string-array name="milestones">
