@@ -28,6 +28,7 @@
     <string name="action_settings">Logout</string>
     <string name="signPhoneNumber">Sign Up with Number</string>
     <string name="pServices">Popular Services</string>
+    <string name="profilestatus">Profile Completions</string>
     <string name="category">Top Categories</string>
     <string name="country">United States</string>
     <string name="moneyearned">25k earned</string>
@@ -245,7 +246,7 @@
         <item>As per Place holder Bid</item>
         <item>As per Daily Basis</item>
         <item>According to Hours</item></string>
-    <string name="dd_mm_yy">dd-mm-yy</string>
+    <string name="dd_mm_yy">dd-mm-yyyy</string>
     <string name="txt_job_posting">Get your project done Quickly!</string>
     <string name="txt_job_posting1">Post a Project for free and start receiving proposals within minutes</string>
     <string name="txt_featured">Featured projects attract more, better-quality bids and are displayed eminently in the Featured Jobs section.</string>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Freelancer.Fragments.FreelanceEducationFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#d4d5de">
+
+        <TextView
+            android:id="@+id/freelancer_profile_info"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:text="Educational Details"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_size_xlarge"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"/>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/freelancer_profile_education"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="Education"
+                    android:paddingLeft="@dimen/padding_small"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_large"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/colorAccent"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Degree/Course"
+                    android:textColor="@color/fbutton_color_peter_river"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/edt_freelancer_profile_Degree"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@drawable/border_corner"
+                    android:gravity="top|left"
+                    android:paddingLeft="@dimen/padding_small"
+                    android:textSize="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:hint="Degree/Course Done"
+                    android:padding="5dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="University/Institutions"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/fbutton_color_peter_river"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/edt_freelancer_profile_Univeristy"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@drawable/border_corner"
+                    android:gravity="top|left"
+                    android:layout_marginBottom="10dp"
+                    android:paddingLeft="@dimen/padding_small"
+                    android:textSize="15dp"
+                    android:hint="Degree/Course Done"
+                    android:padding="5dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Percentage/CGPA"
+                    android:textColor="@color/fbutton_color_peter_river"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/edt_freelancer_profile_percentage"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@drawable/border_corner"
+                    android:gravity="top|left"
+                    android:inputType="number"
+                    android:paddingLeft="@dimen/padding_small"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="15dp"
+                    android:hint="Degree/Course Done"
+                    android:padding="5dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:text="Passing year"
+                    android:textColor="@color/fbutton_color_peter_river"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/edt_freelancer_profile_yearofpassing"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@drawable/border_corner"
+                    android:gravity="top|left"
+                    android:paddingLeft="@dimen/padding_small"
+                    android:textSize="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:hint="Year of Passing"
+                    android:padding="5dp" />
+
+
+                <info.hoang8f.widget.FButton
+                android:id="@+id/btn_AddEducation"
+                android:text="Add"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_weight="2"
+                android:layout_gravity="center"
+                android:textSize="@dimen/text_size_medium"
+                android:textAllCaps="false"
+                android:layout_height="wrap_content"
+                android:shadowColor="@android:color/black"
+                app:shadowEnabled="true"
+                app:fButtonColor="@color/fbutton_color_peter_river"
+                app:shadowHeight="5dp"
+                app:cornerRadius="16dp"
+                app:shadowColor="@android:color/black"
+                />
+
+                <ListView
+                    android:id="@+id/list_Educations"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="30dp"
+                    android:visibility="gone"
+                    />
+
+                <info.hoang8f.widget.FButton
+                    android:id="@+id/btn_next"
+                    android:text="Next"
+                    android:textColor="@android:color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textAllCaps="false"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@android:color/black"
+                    app:shadowEnabled="true"
+                    app:fButtonColor="@color/fbutton_color_peter_river"
+                    app:shadowHeight="5dp"
+                    app:cornerRadius="6dp"
+                    android:layout_gravity="right"
+                    app:shadowColor="@android:color/black"
+                    />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <!--////////////////////////////////////////////////-->
+
+    </LinearLayout>
+
+    </ScrollView>
+</FrameLayout>

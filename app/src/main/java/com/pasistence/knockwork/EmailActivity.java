@@ -203,7 +203,6 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
 
             }else {
                 Common.commonDialog(mContext,"Please Check Your Internet Connection !");
-                Common.showDialog();
             }
 
         }

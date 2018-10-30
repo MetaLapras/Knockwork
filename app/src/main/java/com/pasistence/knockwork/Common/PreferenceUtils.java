@@ -8,6 +8,8 @@ public class PreferenceUtils {
     public static final String PREFERENCE_KEY = "KNOCKWORK";
     public static final String displayName ="displayname";
     public static final String Uid = "uid";
+    public static final String Lid = "Lid";
+    public static final String Cid = "Cid";
     public static final String email = "email";
     public static final String phoneNumber = "phoneno";
     public static final String provider = "provider";
@@ -62,6 +64,15 @@ public class PreferenceUtils {
     public static void setUid(Context context, String Details){
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.putString(Uid,Details).apply();
+    }
+
+    public static String getLid(Context context) {
+        return getSharedPreferences(context).getString(Lid,"");
+    }
+
+    public static void setLid(Context context, String Details){
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        editor.putString(Lid,Details).apply();
     }
 
     public static String getEmail(Context context) {

@@ -165,7 +165,6 @@ public class DashboardActivity extends AppCompatActivity
                 }else
                 {
                     Common.commonDialog(mContext,"Please Check Your Internet Connection !");
-                    Common.showDialog();
                     return;
                 }
             }
@@ -179,7 +178,6 @@ public class DashboardActivity extends AppCompatActivity
                 }else
                 {
                     Common.commonDialog(mContext,"Please Check Your Internet Connection !");
-                    Common.showDialog();
                     return;
                 }
 
@@ -414,14 +412,19 @@ public class DashboardActivity extends AppCompatActivity
                     .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             // FIRE ZE MISSILES!
-
-                            //Clear Saved Password and Users
                             PreferenceUtils.setSignIn(mContext,false);
+                            //Setting Shared Preference
+                            PreferenceUtils.setDisplayName(mContext,"");
+                            PreferenceUtils.setUid(mContext,"");
+                            PreferenceUtils.setEmail(mContext,"");
+                            PreferenceUtils.setPhotoUrl(mContext,"");
+                            PreferenceUtils.setProvider(mContext,"");
+                            PreferenceUtils.setPhoneNumber(mContext,"");
 
                             //FirebaseAuth LogOut
                             mAuth.signOut();
 
-                            Intent signin = new Intent(mContext,Login.class);
+                            Intent signin = new Intent(mContext,LoginActivity.class);
                             signin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(signin);
                             finish();

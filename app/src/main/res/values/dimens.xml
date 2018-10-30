@@ -15,4 +15,11 @@
     <dimen name="text_size_xlarge">28sp</dimen>
     <dimen name="text_size_xxlarge">48sp</dimen>
 
+
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">18dp</dimen>
+    <dimen name="padding_large">28dp</dimen>
+
+
+
 </resources>
