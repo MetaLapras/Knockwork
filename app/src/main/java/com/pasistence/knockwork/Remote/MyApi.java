@@ -29,7 +29,11 @@ public interface MyApi {
     @GET("categories")
     Call<List<ResponseTopService>> getTopServices();
 
-   @GET("popularservices")
+    @GET("subcategories")
+    Call<List<ResponseSubCategory>> getSubCategories();
+
+
+ @GET("popularservices")
     Call<List<PopularServicesModel>> getPopularServices();
 
     @GET("subcategories/{id}")

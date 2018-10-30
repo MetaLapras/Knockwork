@@ -194,6 +194,7 @@
     </string-array>
 
     <string-array name="spinner_week">
+        <item> Select </item>
         <item> 10 days </item>
         <item> 2 week </item>
         <item> 3 week </item>
