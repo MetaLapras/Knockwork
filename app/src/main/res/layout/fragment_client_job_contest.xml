@@ -3,12 +3,83 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Client.Fragments.ClientJobContestFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+            android:layout_marginBottom="10dp"
+        android:textColor="@color/fbutton_color_belize_hole"
+        android:text="Please give a little more information about your Contest" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/black"
+            android:text="@string/contest_description" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/black"
+            android:text="Contest Title" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Enter Cotest Title"
+            android:textSize="15dp"
+            android:padding="10dp"
+            android:gravity="start|left"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/border_corner"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/black"
+            android:text="Contest Description" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:hint="Enter Cotest Title"
+            android:textSize="15dp"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="start|left"
+            android:background="@drawable/border_corner"/>
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/btn_submit_project"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="50dp"
+            android:shadowColor="@android:color/white"
+            android:text="Continue"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="17dp"
+            app:cornerRadius="3dp"
+            app:fButtonColor="@color/fbutton_color_peter_river"
+            app:shadowColor="@android:color/black"
+            app:shadowEnabled="true"
+            app:shadowHeight="2dp" />
+    </LinearLayout>
 </FrameLayout>
