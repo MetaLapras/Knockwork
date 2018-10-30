@@ -129,11 +129,10 @@
                     android:layout_height="30dp"
                     android:background="@drawable/border_corner"
                     android:gravity="top|left"
-                    android:inputType="date"
                     android:paddingLeft="@dimen/padding_small"
                     android:textSize="15dp"
                     android:layout_marginBottom="10dp"
-                    android:hint="Degree/Course Done"
+                    android:hint="Year of Passing"
                     android:padding="5dp" />
 
 
@@ -158,10 +157,10 @@
                 <ListView
                     android:id="@+id/list_Educations"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="match_parent"
                     android:layout_marginBottom="30dp"
                     android:visibility="gone"
-                    ></ListView>
+                    />
 
                 <info.hoang8f.widget.FButton
                     android:id="@+id/btn_next"
@@ -180,7 +179,6 @@
                     android:layout_gravity="right"
                     app:shadowColor="@android:color/black"
                     />
-
 
             </LinearLayout>
 
