@@ -95,6 +95,8 @@ public class Common {
         alertDialog.show();
     }
 
+
+
     public static void getUserPreference(Context mContext){
         if(!PreferenceUtils.getDisplayName(mContext).equals("")||
                 !PreferenceUtils.getEmail(mContext).equals("")||

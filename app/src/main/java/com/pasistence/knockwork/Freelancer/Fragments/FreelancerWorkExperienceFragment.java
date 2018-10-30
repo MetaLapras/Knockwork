@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,75 @@ public class FreelancerWorkExperienceFragment extends Fragment {
         View view =  lf.inflate(R.layout.fragment_freelancer_work_experience, container, false);
 
         mInit(view);
+
+
+        txtWorkto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dateDialog(txtWorkto);
+            }
+        });
+
+        txtWorkfrom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dateDialog(txtWorkfrom);
+            }
+        });
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!check()){
+
+                }
+            }
+        });
+
+
+
+
         return view;
+    }
+
+    private boolean check() {
+        boolean cancel = false;
+        View focusView = null;
+
+        if (TextUtils.isEmpty(edtProfile.getText())){
+            edtProfile.setError("Please enter Degree * ");
+            focusView=edtProfile;
+            cancel=true;
+        }
+        if (TextUtils.isEmpty(edtCompanyName.getText())){
+            edtCompanyName.setError("Please enter University * ");
+            focusView=edtCompanyName;
+            cancel=true;
+        }
+
+        if (txtWorkfrom.getText().equals(getResources().getString(R.string.dd_mm_yy))||txtWorkfrom.getText().equals("")){
+            txtWorkfrom.setError("Please enter Valid Percentage * ");
+            focusView=txtWorkfrom;
+            cancel=true;
+        }
+
+        if (txtWorkto.getText().equals(getResources().getString(R.string.dd_mm_yy))||txtWorkto.getText().equals("")){
+            txtWorkto.setError("Please enter Passing Year ");
+            focusView=txtWorkto;
+            cancel=true;
+        }
+/*
+        if (TextUtils.isEmpty(edtPhoneNo.getText())){
+            edtPhoneNo.setError("Please enter Valid Mobile No* ");
+            focusView=edtPhoneNo;
+            cancel=true;
+        }*/
+
+       /* if(( Uid.equals(null)||Uid.equals(""))&&(Lid.equals(null)||Lid.equals(""))){
+            Common.commonDialog(getContext(),"You Need to Complete your Registration First");
+            cancel=true;
+        }*/
+        return cancel;
     }
 
     private void mInit(View view) {
@@ -59,6 +128,7 @@ public class FreelancerWorkExperienceFragment extends Fragment {
 
         txtWorkfrom = (TextView)view.findViewById(R.id.freelancer_profile_workfrom);
         txtWorkto = (TextView)view.findViewById(R.id.freelancer_profile_workTo);
+
     }
 
     private void dateDialog(final TextView txt){

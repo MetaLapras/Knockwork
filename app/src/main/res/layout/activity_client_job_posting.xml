@@ -91,7 +91,8 @@
             android:layout_height="40dp"
             android:hint="I need...."
             android:background="@drawable/border_corner"
-            android:textSize="15dp"
+            android:textSize="@dimen/text_size_medium"
+            android:padding ="10dp"
             android:layout_marginBottom="10dp"
             android:gravity="top|left"
             />
@@ -112,6 +113,7 @@
             android:layout_height="90dp"
             android:background="@drawable/border_corner"
             android:gravity="top|left"
+            android:padding="10dp"
             android:hint="Describe...."
             android:layout_marginBottom="10dp"
             android:textSize="15dp" />
@@ -133,6 +135,7 @@
             android:background="@drawable/border_corner"
             android:gravity="top|left"
             android:hint="Select Skills"
+            android:paddingLeft="10dp"
             android:layout_marginBottom="10dp"
             android:textSize="15dp" />
 
