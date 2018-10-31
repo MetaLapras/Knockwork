@@ -20,7 +20,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pasistence.knockwork.Common.Common;
+import com.pasistence.knockwork.Common.PreferenceUtils;
 import com.pasistence.knockwork.LoginActivity;
+import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
+import com.pasistence.knockwork.Model.ApiResponse.ApiSkillsResponse;
 import com.pasistence.knockwork.Model.ResponseSubCategory;
 import com.pasistence.knockwork.Model.ResponseTopService;
 import com.pasistence.knockwork.R;
@@ -80,34 +83,7 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
             {
                 allCategories();
                 AllSubCategories();
-
-            /*    mServices.getSubCategories().enqueue(new Callback<List<ResponseSubCategory>>() {
-                    @Override
-                    public void onResponse(Call<List<ResponseSubCategory>> call, Response<List<ResponseSubCategory>> response) {
-                        List<ResponseSubCategory> list = response.body();
-                        Log.e(TAG, response.body().toString());
-
-                        if (list != null)
-                        {
-                            for(int i=0; i<list.size(); i++)
-                            {
-                                Skills.add(list.get(i).getSub_categories_title().toString());
-                            }
-
-                        }else
-                        {
-                            Common.commonDialog(mContext,"Something went, wrong please try again");
-                        }
-
-
-                    }
-                    @Override
-                    public void onFailure(Call<List<ResponseSubCategory>> call, Throwable t) {
-                        Log.e(TAG, t.getMessage() );
-                        t.printStackTrace();
-                        Common.commonDialog(mContext,"Something went, wrong please try again");
-                    }
-                });*/
+                allSkill();
 
             }catch (Exception e)
             {
@@ -125,12 +101,54 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
        // ArrayAdapter<String> adapter = new ArrayAdapter<> (this,R.layout.cusome_simple_autocomplete_textview,Skills);
         MSkills.setAdapter(adapter);
         MSkills.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-        MSkills.setValidator(new Validator());
-        MSkills.setOnFocusChangeListener(new FocusListener());
+
+
+    }
+
+    private void allSkill() {
+
+        try
+        {
+            mServices.getAllSkills().enqueue(new Callback<List<ApiSkillsResponse>>() {
+                @Override
+                public void onResponse(Call<List<ApiSkillsResponse>> call, Response<List<ApiSkillsResponse>> response) {
+                    List<ApiSkillsResponse> list = response.body();
+                    Log.e(TAG, response.body().toString());
+
+                    if (list != null)
+                    {
+                        for(int i=0; i<list.size(); i++)
+                        {
+                            Skills.add(list.get(i).getName());
+                        }
+
+                    }else
+                    {
+                        Common.commonDialog(mContext,"Something went, wrong please try again");
+                    }
+
+
+                }
+                @Override
+                public void onFailure(Call<List<ApiSkillsResponse>> call, Throwable t) {
+                    Log.e(TAG, t.getMessage() );
+                    t.printStackTrace();
+                    Common.commonDialog(mContext,"Something went, wrong please try again");
+                }
+            });
+        }catch (Exception e)
+        {
+            Log.e(TAG, e.getMessage() );
+            e.printStackTrace();
+            Common.commonDialog(mContext,"Sever not found..");
+
+        }
 
     }
 
     private void allCategories() {
+        try
+        {
         mServices.getTopServices().enqueue(new Callback<List<ResponseTopService>>() {
             @Override
             public void onResponse(Call<List<ResponseTopService>> call, Response<List<ResponseTopService>> response) {
@@ -166,9 +184,18 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
                 Common.commonDialog(mContext,"Something went, wrong please try again");
             }
         });
+        }catch (Exception e)
+        {
+            Log.e(TAG, e.getMessage() );
+            e.printStackTrace();
+            Common.commonDialog(mContext,"Sever not found..");
+
+        }
     }
 
     private void AllSubCategories() {
+        try
+        {
         mServices.getSubCategories().enqueue(new Callback<List<ResponseSubCategory>>() {
             @Override
             public void onResponse(Call<List<ResponseSubCategory>> call, Response<List<ResponseSubCategory>> response) {
@@ -205,6 +232,13 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
                 Common.commonDialog(mContext,"Something went, wrong please try again");
             }
         });
+        }catch (Exception e)
+        {
+            Log.e(TAG, e.getMessage() );
+            e.printStackTrace();
+            Common.commonDialog(mContext,"Sever not found..");
+
+        }
     }
 
     private void mOnClick() {
@@ -273,21 +307,84 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
     public void onClick(View v) {
         if (!isCheck())
         {
-
-
-
-         /*   String input = MSkills.getText().toString().trim();
-            String[] singleInputs = input.split("\\s*,\\s*");
-
-            String toastText = "";
-
-            //  for(int i = 0; i<singleInputs.length; i++)
-            for(int i = 0; i<5; i++)
-            {
-                toastText += "Item "  + i + ": " + singleInputs[i] + "\n";
-            }
-            Toast.makeText(mContext, toastText, Toast.LENGTH_SHORT).show();*/
+            postJobServer();
         }
+
+    }
+
+    private void postJobServer() {
+
+        Common.showSpotDialogue(mContext);
+
+        //Uid = PreferenceUtils.getUid(mContext);
+        //Cid = PreferenceUtils.getCid(mContext);
+        category = spnDone.getSelectedItem().toString().trim();
+        subcategory = spnBelong.getSelectedItem().toString().trim();
+        title = editAbout.getText().toString();
+        details = editExplain.getText().toString();
+        skills  = getSkillValues();
+        if(radioFixed.isChecked()){
+            type = radioFixed.getText().toString();
+        }else {
+            type = radioHourly.getText().toString();
+        }
+
+        if(radioPrivate.isChecked()){
+            visibility = radioPrivate.getText().toString();
+        }else {
+            visibility = radioPublic.getText().toString();
+        }
+        rate = editINR.getText().toString();
+        duration = spnSpend.getSelectedItem().toString().trim();
+        if(chkFeatured.isChecked()){
+            featured = chkFeatured.getText().toString();
+        }
+        try
+        {
+            mServices.ClientPostAJob("",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "","").enqueue(new Callback<ApiPostJobResponse>() {
+                @Override
+                public void onResponse(Call<ApiPostJobResponse> call, Response<ApiPostJobResponse> response) {
+
+                }
+
+                @Override
+                public void onFailure(Call<ApiPostJobResponse> call, Throwable t) {
+
+                }
+            });
+        }catch (Exception e){
+            Log.e(TAG, e.getMessage() );
+            e.printStackTrace();
+            Common.commonDialog(mContext,"Sever not found..");
+        }
+
+
+
+
+    }
+
+    private String getSkillValues() {
+        String input = MSkills.getText().toString().trim();
+        String[] singleInputs = input.split("\\s*,\\s*");
+
+        String toastText = "";
+
+        //  for(int i = 0; i<singleInputs.length; i++)
+        for(int i = 0; i<5; i++)
+        {
+            toastText += singleInputs[i] + "@@";
+        }
+        return toastText;
 
     }
 
@@ -332,15 +429,6 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
             cancel=true;
         }
 
-        String input = MSkills.getText().toString().trim();
-            String[] singleInputs = input.split("\\s*,\\s*");
-
-            if(singleInputs.length<5){
-                MSkills.setError("Please enter min 5 Skills* ");
-                cancel=true;
-            }
-
-
        /* if (!radioFixed.isChecked() && !radioHourly.isChecked())
         {
             radioHourly.setError("select one ");
@@ -366,41 +454,5 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
         }
 
       return cancel;
-    }
-
-    class Validator implements AutoCompleteTextView.Validator {
-
-        @Override
-        public boolean isValid(CharSequence text) {
-            Log.v("Test", "Checking if valid: "+ text);
-            if (Skills.size() > 0) {
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public CharSequence fixText(CharSequence invalidText) {
-            Log.v("Test", "Returning fixed text");
-
-            /* I'm just returning an empty string here, so the field will be blanked,
-             * but you could put any kind of action here, like popping up a dialog?
-             *
-             * Whatever value you return here must be in the list of valid words.
-             */
-            return "";
-        }
-    }
-
-    class FocusListener implements View.OnFocusChangeListener {
-
-        @Override
-        public void onFocusChange(View v, boolean hasFocus) {
-            Log.v("Test", "Focus changed");
-            if (v.getId() == R.id.edit_skil && !hasFocus) {
-                Log.v("Test", "Performing validation");
-                ((AutoCompleteTextView)v).performValidation();
-            }
-        }
     }
 }

@@ -41,6 +41,7 @@ public class SelectionActivity extends AppCompatActivity
             FirebaseUser auth = FirebaseAuth.getInstance().getCurrentUser();
 
             if(auth!=null){
+
                 final AlertDialog watingDialog = new SpotsDialog(this);
                 watingDialog.show();
                 watingDialog.setMessage("Please Wait");

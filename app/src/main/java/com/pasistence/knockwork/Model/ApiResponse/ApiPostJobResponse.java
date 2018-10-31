@@ -16,6 +16,11 @@ public class ApiPostJobResponse {
     @SerializedName("totalcount")
     @Expose
     private String totalcount;
+
+    @SerializedName("message")
+    @Expose
+    private String message;
+
     @SerializedName("Result")
     @Expose
     private ArrayList<Result> result = null;
@@ -26,6 +31,7 @@ public class ApiPostJobResponse {
                 "error=" + error +
                 ", pageno='" + pageno + '\'' +
                 ", totalcount='" + totalcount + '\'' +
+                ", message='" + message + '\'' +
                 ", result=" + result +
                 '}';
     }
@@ -60,6 +66,14 @@ public class ApiPostJobResponse {
 
     public void setResult(ArrayList<Result> result) {
         this.result = result;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public class Result {

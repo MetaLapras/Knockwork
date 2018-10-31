@@ -74,7 +74,7 @@ public class FreelanceEducationFragment extends Fragment {
                         percentage = edtPercentage.getText().toString();
                         passingyear = edtPassingYear.getText().toString();
                         try{
-                            mService.LancerProfileEducation("abcd123458","7",degree,percentage,passingyear,university)
+                            mService.LancerProfileEducation(Uid,Lid,degree,percentage,passingyear,university)
                                     .enqueue(new Callback<ApiEducationResponse>() {
                                         @Override
                                         public void onResponse(Call<ApiEducationResponse> call, Response<ApiEducationResponse> response) {
@@ -84,6 +84,7 @@ public class FreelanceEducationFragment extends Fragment {
                                                 //Add Item into Listview
                                                 Log.e(TAG, result.getLancerEducation().toString());
                                                 ArrayList<ApiEducationResponse.LancerEducation> list = result.getLancerEducation();
+
                                                 lstEducations.setVisibility(View.VISIBLE);
                                                 adapter = new FreeLancerEducationAdapter(getContext(),list);
                                                 lstEducations.setAdapter(adapter);
@@ -175,17 +176,11 @@ public class FreelanceEducationFragment extends Fragment {
             focusView=edtPassingYear;
             cancel=true;
         }
-/*
-        if (TextUtils.isEmpty(edtPhoneNo.getText())){
-            edtPhoneNo.setError("Please enter Valid Mobile No* ");
-            focusView=edtPhoneNo;
-            cancel=true;
-        }*/
 
-       /* if(( Uid.equals(null)||Uid.equals(""))&&(Lid.equals(null)||Lid.equals(""))){
+        if(( Uid.equals(null)||Uid.equals(""))&&(Lid.equals(null)||Lid.equals(""))){
             Common.commonDialog(getContext(),"You Need to Complete your Registration First");
             cancel=true;
-        }*/
+        }
 
         return cancel;
     }

@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.pasistence.knockwork.Adapter.FreeLancerExperienceAdapter;
 import com.pasistence.knockwork.Common.Common;
+import com.pasistence.knockwork.Common.PreferenceUtils;
 import com.pasistence.knockwork.Model.ApiResponse.ApiExperienceResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseUpdateLancer;
 import com.pasistence.knockwork.R;
@@ -101,6 +102,7 @@ public class FreelancerWorkExperienceFragment extends Fragment {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(!check()){
                     if(Common.isConnectedToInterNet(getContext())){
 
@@ -110,10 +112,10 @@ public class FreelancerWorkExperienceFragment extends Fragment {
                         endate = txtWorkto.getText().toString();
 
                         try{
-
                             mService.LancerProfileExperience(
-                                    "abc123456789",
-                                    "1",companyname,
+                                    Uid,
+                                    Lid,
+                                    companyname,
                                     profile,
                                     startdate,
                                     endate)
@@ -194,17 +196,12 @@ public class FreelancerWorkExperienceFragment extends Fragment {
             focusView=txtWorkto;
             cancel=true;
         }
-/*
-        if (TextUtils.isEmpty(edtPhoneNo.getText())){
-            edtPhoneNo.setError("Please enter Valid Mobile No* ");
-            focusView=edtPhoneNo;
-            cancel=true;
-        }*/
 
-       /* if(( Uid.equals(null)||Uid.equals(""))&&(Lid.equals(null)||Lid.equals(""))){
+
+        if((Uid.equals(null)||Uid.equals(""))&&(Lid.equals(null)||Lid.equals(""))){
             Common.commonDialog(getContext(),"You Need to Complete your Registration First");
             cancel=true;
-        }*/
+        }
         return cancel;
     }
 
@@ -231,6 +228,9 @@ public class FreelancerWorkExperienceFragment extends Fragment {
         disableComponent();
 
         mService = Common.getApi();
+
+        Uid = PreferenceUtils.getUid(getContext());
+        Lid = PreferenceUtils.getLid(getContext());
 
     }
 
