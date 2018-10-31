@@ -32,6 +32,7 @@
     <color name="com_facebook_green">#FF027B08</color >
     <color name="black">#FF00070D</color>
     <color name="gray">#FF5C6268</color>
+    <color name="gray_transparent">#a6efefef</color>
     <color name="red">#FFE71A21</color>
     <color name="green">#00FF00</color>
 

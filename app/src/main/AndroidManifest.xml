@@ -103,13 +103,13 @@
         <activity android:name=".EmailActivity" />
         <activity android:name=".ImageUploadActivity" />
 
-      <!--  <activity android:name=".Freelancer.Activities.FreelancerProfileActivity" />-->
+        <!-- <activity android:name=".Freelancer.Activities.FreelancerProfileActivity" /> -->
         <activity android:name=".Client.Activities.ClientJobPostingActivity" />
-        <activity android:name=".Client.Activities.ClientJobContestActivity"></activity>
-
+        <activity android:name=".Client.Activities.ClientJobContestActivity" />
         <activity android:name=".SplashActivity" />
-       <!-- <activity android:name=".Client.Activities.ClientJobPostingActivity"></activity>-->
+        <!-- <activity android:name=".Client.Activities.ClientJobPostingActivity"></activity> -->
 
+        <activity android:name=".ChatBox.DemoDialogsActivity"></activity>
     </application>
 
 </manifest>
