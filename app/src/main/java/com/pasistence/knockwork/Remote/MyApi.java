@@ -1,6 +1,8 @@
 package com.pasistence.knockwork.Remote;
 
 import com.pasistence.knockwork.Model.ApiResponse.ApiEducationResponse;
+import com.pasistence.knockwork.Model.ApiResponse.ApiExperienceResponse;
+import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseLancer;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterClient;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
@@ -33,7 +35,7 @@ public interface MyApi {
     Call<List<ResponseSubCategory>> getSubCategories();
 
 
- @GET("popularservices")
+    @GET("popularservices")
     Call<List<PopularServicesModel>> getPopularServices();
 
     @GET("subcategories/{id}")
@@ -96,13 +98,47 @@ public interface MyApi {
 
     @FormUrlEncoded
     @POST("lancerExperience")
-    Call<ApiResponseUpdateLancer>LancerProfileExperience(
+    Call<ApiExperienceResponse>LancerProfileExperience(
             @Field("uid") String Uid,
             @Field("l_id")  String Lid,
             @Field("company_name")  String companyName,
             @Field("job_description")  String description,
             @Field("start_date")  String startDate,
             @Field("end_date")  String endDate);
+
+// JOB POSTING-------------------------------------------------------/
+    //Post New Job
+    @FormUrlEncoded
+    @POST("postjob")
+    Call<ApiPostJobResponse>ClientPostAJob(
+            @Field("uid") String Uid,
+            @Field("cid")  String cid,
+            @Field("category")  String category,
+            @Field("subcategory")  String subcategory,
+            @Field("title")  String title,
+            @Field("details")  String details,
+            @Field("skills")  String skills,
+            @Field("types")  String types,
+            @Field("rate")  String rate,
+            @Field("duration")  String duration,
+            @Field("visibility")  String visibility,
+            @Field("featured")  String featured
+    );
+
+    //getAll Posted Jobs
+    @GET("allpostjobs/{pageNo}")
+    Call<ApiPostJobResponse>getAllJobs(@Path("pageNo") int pageNo);
+
+    //Update Posted Job
+
+
+    //Delete Posted Job
+
+
+
+
+
+
 
 
 

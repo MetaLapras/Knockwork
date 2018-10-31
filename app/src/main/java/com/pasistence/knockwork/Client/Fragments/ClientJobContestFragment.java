@@ -45,15 +45,14 @@ public class ClientJobContestFragment extends Fragment {
 
     private void mInit(View view) {
         txtContestTitle        = (TextView)view.findViewById(R.id.contest_title);
-        txtContestDescription  =(TextView)view.findViewById(R.id.contest_description);
-        txtContestOptional     =(TextView)view.findViewById(R.id.contest_optional);
+        txtContestDescription  = (TextView)view.findViewById(R.id.contest_description);
+        txtContestOptional     = (TextView)view.findViewById(R.id.contest_optional);
 
         editContestTitle       = (EditText)view.findViewById(R.id.edt_contest_title);
-        editContestDesription  =(EditText)view.findViewById(R.id.edit_contest_description);
+        editContestDesription  = (EditText)view.findViewById(R.id.edit_contest_description);
 
         btnContinue            = (Button)view.findViewById(R.id.contest_btnContinue);
-
-        optionalImag           =  (ImageView)view.findViewById(R.id.contest_img);
+        optionalImag           = (ImageView)view.findViewById(R.id.contest_img);
 
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override

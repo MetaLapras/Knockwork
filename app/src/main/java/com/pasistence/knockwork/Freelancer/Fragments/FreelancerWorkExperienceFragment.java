@@ -14,16 +14,20 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.pasistence.knockwork.Adapter.FreeLancerExperienceAdapter;
 import com.pasistence.knockwork.Common.Common;
+import com.pasistence.knockwork.Model.ApiResponse.ApiExperienceResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseUpdateLancer;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.Remote.MyApi;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import info.hoang8f.widget.FButton;
@@ -42,6 +46,9 @@ public class FreelancerWorkExperienceFragment extends Fragment {
     public TextView txtWorkfrom,txtWorkto;
     public CheckBox chkExperience;
     MyApi mService;
+    ListView lstExperience;
+    ArrayList<ApiExperienceResponse.LancerExperience> lancerExperiences ;
+    FreeLancerExperienceAdapter adapter;
 
     private int mYear, mMonth, mDay;
     String Uid,Lid,companyname,profile,startdate,endate;
@@ -105,21 +112,38 @@ public class FreelancerWorkExperienceFragment extends Fragment {
                         try{
 
                             mService.LancerProfileExperience(
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "")
-                                    .enqueue(new Callback<ApiResponseUpdateLancer>() {
+                                    "abc123456789",
+                                    "1",companyname,
+                                    profile,
+                                    startdate,
+                                    endate)
+                                    .enqueue(new Callback<ApiExperienceResponse>() {
                                         @Override
-                                        public void onResponse(Call<ApiResponseUpdateLancer> call, Response<ApiResponseUpdateLancer> response) {
+                                        public void onResponse(Call<ApiExperienceResponse> call, Response<ApiExperienceResponse> response) {
+
+                                            ApiExperienceResponse result = response.body();
+                                            Log.e(TAG, result.toString() );
+                                            if(!result.getError()){
+                                                //Add Adapter
+                                                ArrayList<ApiExperienceResponse.LancerExperience> list = result.getLancerExperience();
+                                                adapter = new FreeLancerExperienceAdapter(getContext(),list);
+                                                lstExperience.setVisibility(View.VISIBLE);
+                                                lstExperience.setAdapter(adapter);
+                                                adapter.notifyDataSetChanged();
+
+                                            }else if(result.getError()){
+                                                Log.e(TAG, result.getMessage());
+                                                Common.commonDialog(getContext(),"Something went Wrong please try after sometime");
+                                            }else {
+                                                Common.commonDialog(getContext(),"Server Not Found!");
+                                            }
 
                                         }
-
                                         @Override
-                                        public void onFailure(Call<ApiResponseUpdateLancer> call, Throwable t) {
-
+                                        public void onFailure(Call<ApiExperienceResponse> call, Throwable t) {
+                                            Log.e(TAG, t.getMessage());
+                                            t.printStackTrace();
+                                            Common.commonDialog(getContext(),"Server Not Found!");
                                         }
                                     });
 
@@ -200,6 +224,9 @@ public class FreelancerWorkExperienceFragment extends Fragment {
         txtWorkto = (TextView)view.findViewById(R.id.freelancer_profile_workTo);
 
         chkExperience = (CheckBox)view.findViewById(R.id.chk_haveExperience);
+
+
+        lstExperience = (ListView)view.findViewById(R.id.list_Experience);
 
         disableComponent();
 

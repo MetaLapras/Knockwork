@@ -59,9 +59,9 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
     CardView cardFeatured;
 
     Context mContext;
+    String Uid,Cid,category,subcategory,title,details,skills,type,rate,duration,visibility,featured;
 
      ArrayList<String> Skills = new ArrayList<String>();
-
             /*{
                     "java","Android","JavaScript","Pythan","Objective C","Swift","Angular","Angular jS","Ajax","Jquery"
                     ,"C++","C","Wordpress","HTML","CSS","Web design","web Development","logo Design","Graphics"
@@ -219,21 +219,10 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
         txtExplain          =(TextView)findViewById(R.id.txt_explain);
         txtSkill            =(TextView)findViewById(R.id.txt_skil);
         txtChkFeatured      =(TextView)findViewById(R.id.txt_chk_feature);
-        /*txtChkRecruiter =(TextView)findViewById(R.id.txt_chk_recuiter);
-        txtChkNDA =(TextView)findViewById(R.id.txt_chk_nda);
-        txtChkUrgent =(TextView)findViewById(R.id.txt_chk_urgent);
-        txtChkPrivate =(TextView)findViewById(R.id.txt_chk_private);*/
         txtFeatured         =(TextView)findViewById(R.id.txt_feature);
-       /* txtRecruiter =(TextView)findViewById(R.id.txt_recuiter);
-        txtNDA =(TextView)findViewById(R.id.txt_nda);
-        txtUrgent =(TextView)findViewById(R.id.txt_urgent);
-        txtPrivate =(TextView)findViewById(R.id.txt_private);*/
+
         txtFINR            =(TextView)findViewById(R.id.txt_feature_INR);
-       /* txtRINr =(TextView)findViewById(R.id.txt_recuiter_inr);
-        txtNINR =(TextView)findViewById(R.id.txt_nda_inr);
-        txtUINr =(TextView)findViewById(R.id.txt_uregent_inr);
-        txtPINr =(TextView)findViewById(R.id.txt_private_inr);
-*/
+
 
 
         editAbout         = (EditText)findViewById(R.id.edt_project_about);
@@ -259,10 +248,7 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
         chkFeatured       =(CheckBox)findViewById(R.id.chk_feature);
 
         cardFeatured = (CardView)findViewById(R.id.card_featured) ;
-       /* chkRecruiter =(CheckBox)findViewById(R.id.chk_recruiter);
-        chkNDA =(CheckBox)findViewById(R.id.chk_nda);
-        chkUrgent =(CheckBox)findViewById(R.id.chk_urgent);
-        chkPrivate =(CheckBox)findViewById(R.id.chk_private);*/
+
        MSkills          = (MultiAutoCompleteTextView)findViewById(R.id.edit_skil);
 
         btnSubmit       = (Button)findViewById(R.id.btn_submit_project);
@@ -287,6 +273,7 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
     public void onClick(View v) {
         if (!isCheck())
         {
+
 
 
          /*   String input = MSkills.getText().toString().trim();

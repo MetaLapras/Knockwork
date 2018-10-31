@@ -14,9 +14,9 @@
         android:orientation="vertical">
         <TextView
             android:id="@+id/contest_txt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
             android:layout_marginBottom="10dp"
         android:textColor="@color/fbutton_color_belize_hole"
         android:text="Please give a little more information about your Contest" />
@@ -90,8 +90,9 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-          android:gravity="center_vertical"
-            android:text="@string/contest_optional"/></LinearLayout>
+            android:gravity="center_vertical"
+            android:text="@string/contest_optional"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_below="@+id/contest_lin"
