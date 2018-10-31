@@ -341,25 +341,38 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
         }
         try
         {
-            mServices.ClientPostAJob("",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "","").enqueue(new Callback<ApiPostJobResponse>() {
+            mServices.ClientPostAJob(
+                    "EXSYrhgNDZPrRRyRgZPvy3agVJR2",
+                    "44",
+                    category,
+                    subcategory,
+                    title,
+                    details,
+                    skills,
+                    type,
+                    rate,
+                    duration,
+                    visibility,
+                    featured).enqueue(new Callback<ApiPostJobResponse>() {
                 @Override
                 public void onResponse(Call<ApiPostJobResponse> call, Response<ApiPostJobResponse> response) {
-
+                    ApiPostJobResponse result = response.body();
+                    Log.e(TAG, result.toString());
+                    if(!result.getError()){
+                        Common.dismissSpotDilogue();
+                    }else if(result.getError()){
+                        Common.commonDialog(mContext,result.getMessage());
+                    }else {
+                        Common.commonDialog(mContext,"Sever not found..");
+                    }
                 }
 
                 @Override
                 public void onFailure(Call<ApiPostJobResponse> call, Throwable t) {
-
+                    Log.e(TAG, t.getMessage());
+                    t.printStackTrace();
+                    Common.dismissSpotDilogue();
+                    Common.commonDialog(mContext,t.getMessage());
                 }
             });
         }catch (Exception e){
@@ -380,7 +393,7 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
         String toastText = "";
 
         //  for(int i = 0; i<singleInputs.length; i++)
-        for(int i = 0; i<5; i++)
+        for(int i = 0; i<singleInputs.length; i++)
         {
             toastText += singleInputs[i] + "@@";
         }

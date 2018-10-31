@@ -7,9 +7,19 @@ public class ApiSkillsResponse {
     @SerializedName("id")
     @Expose
     private String id;
+
     @SerializedName("name")
     @Expose
     private String name;
+
+    @Override
+    public String toString() {
+        return "ApiSkillsResponse{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
 
     public String getId() {
         return id;
