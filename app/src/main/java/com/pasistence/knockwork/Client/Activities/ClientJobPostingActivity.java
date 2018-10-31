@@ -409,11 +409,11 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
             cancel=true;
         }
 
-       /* if (TextUtils.isEmpty(editINR.getText())){
+        if (TextUtils.isEmpty(editINR.getText())){
             editINR.setError("Please enter min 5 Skills* ");
             focusView=editINR;
             cancel=true;
-        }*/
+        }
 
         if(spnDone.getSelectedItemPosition() == 0)
         {
