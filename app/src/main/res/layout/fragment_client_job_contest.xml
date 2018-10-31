@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Client.Fragments.ClientJobContestFragment">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
@@ -84,18 +87,39 @@
                 android:id="@+id/contest_img"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_plus_one_black_24dp"/>
         <TextView
             android:id="@+id/contest_optional"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
             android:text="@string/contest_optional"/>
+
+            <Button
+                android:id="@+id/btn_upload"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Upload"
+                android:layout_marginLeft="50dp"
+                android:textSize="@dimen/text_size_medium"
+                />
         </LinearLayout>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/txt_upload"
             android:layout_below="@+id/contest_lin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/no_file"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="@dimen/text_size_medium"
+            android:textColor="@color/black"/>
+
+        <LinearLayout
+            android:layout_below="@+id/txt_upload"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="bottom"
@@ -117,4 +141,5 @@
                 app:shadowHeight="2dp" />
         </LinearLayout>
     </RelativeLayout>
-</FrameLayout>
+    </FrameLayout>
+</ScrollView>
