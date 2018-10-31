@@ -111,10 +111,12 @@ public class ManageJobPostingActivity extends AppCompatActivity  {
             }
         });*/
 
+/*
 
         manageJobPostingAdapter = new ManageJobPostingAdapter(ManageJobPostingActivity.this, manageJobPostingModels);
         recyclerLancer.setAdapter(manageJobPostingAdapter);
         manageJobPostingAdapter.notifyDataSetChanged();
+*/
 
 
     }

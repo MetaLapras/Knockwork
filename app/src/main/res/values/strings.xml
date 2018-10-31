@@ -194,6 +194,7 @@
     </string-array>
 
     <string-array name="spinner_week">
+        <item> Select </item>
         <item> 10 days </item>
         <item> 2 week </item>
         <item> 3 week </item>
@@ -255,6 +256,13 @@
     <string name="txt_urgent">Receive faster responses from freelancers and get your Project started within a day!</string>
     <string name="txt_private">Hide project details from search engines and users that are not logged in. This feature is recommended for projects where confidentiality is a priority.</string>
     <string name="contest_description">The more freelancer know about your project the more accuretely they can submit their entries </string>
+    <string name="havework">Do you Have Any work Expericence</string>
+    <string name="contest_terms1">(a) In these terms and conditions (the Terms and Conditions), "we", "our" or "us" means Tourism Australia.</string>
+
+    <string name="contest_terms2">(b) Please read the Terms and Conditions carefully as they apply to your use of the internet site  or any other Tourism Australia owned and operated internet site, including but not limited to  (the Site(s)). By using the Site(s) you agree to be bound by the Terms and Conditions including those revisions referred to in (c).</string>
+    <string name="contest_terms3" >(c) We may revise the Terms and Conditions from time to time by updating this posting. The revised terms will take effect when they are posted.</string>
+    <string name="contest_optional" >Add Related File(Optional)</string>
+    <string name="no_file" >No file is Selected </string>
 
 
     <string-array name="milestones">

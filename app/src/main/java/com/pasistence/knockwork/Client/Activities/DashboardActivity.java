@@ -481,6 +481,7 @@ public class DashboardActivity extends AppCompatActivity
             startActivity(new Intent(mContext,ClientJobPostingActivity.class));
 
         } else if (id == R.id.nav_contest) {
+            startActivity(new Intent(DashboardActivity.this,ClientJobContestActivity.class));
 //            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Contest", Snackbar.LENGTH_LONG)
 //                    .setAction("Action", null).show();
 

@@ -78,9 +78,7 @@ public class FreeLancerProfileFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              /* if(!check()){
-
-
+               if(!check()){
                    final android.app.AlertDialog watingDialog = new SpotsDialog(getActivity());
                    watingDialog.show();
                    watingDialog.setMessage("Please Wait");
@@ -109,8 +107,8 @@ public class FreeLancerProfileFragment extends Fragment {
 
                         try{
                         mService.updateLancerProfile(
-                                "abcd123456",
-                                "6",
+                                Uid,
+                                Lid,
                                 title,
                                 avaliblity,
                                 selfintro,
@@ -163,12 +161,12 @@ public class FreeLancerProfileFragment extends Fragment {
                     {
                         Common.commonDialog(getContext(),"Please Check your Internet Connection");
                     }
-               }*/
+               }
 
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                /*FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_profile,new FreelanceEducationFragment());
                 ft.addToBackStack(null);
-                ft.commit();
+                ft.commit();*/
 
             }
         });
@@ -235,11 +233,10 @@ public class FreeLancerProfileFragment extends Fragment {
             focusView=txtDateofBirth;
             cancel=true;
         }
-/*
         if(( Uid.equals(null)||Uid.equals(""))&&(Lid.equals(null)||Lid.equals(""))){
             Common.commonDialog(getContext(),"You Need to Complete your Registration First");
             cancel=true;
-        }*/
+        }
 
         return cancel;
     }

@@ -143,8 +143,17 @@ dependencies {
     //LoadingDots
     implementation 'com.eyalbira.loadingdots:loading-dots:1.0.2'
 
+<<<<<<< HEAD
     //chatkit
     implementation 'com.github.stfalcon:chatkit:0.3.3'
+=======
+    /* implementation 'com.google.firebase:firebase-storage:16.0.1:15.0.0'
+    implementation 'com.google.firebase:firebase-auth:16.0.1:15.0.0'
+*/
+    implementation 'com.google.firebase:firebase-storage:16.0.1'
+    implementation 'com.google.firebase:firebase-auth:16.0.1'
+
+>>>>>>> 39c8765572dfaa37adbb6bf073f366c191c89e13
 
 }
 

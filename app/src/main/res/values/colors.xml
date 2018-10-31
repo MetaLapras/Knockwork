@@ -35,5 +35,7 @@
     <color name="gray_transparent">#a6efefef</color>
     <color name="red">#FFE71A21</color>
     <color name="green">#00FF00</color>
+    <color name="river">#b5e5ff</color>
+
 
 </resources>

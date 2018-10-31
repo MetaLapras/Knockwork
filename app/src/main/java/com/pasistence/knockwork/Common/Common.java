@@ -15,6 +15,8 @@ import com.pasistence.knockwork.Model.UserData;
 import com.pasistence.knockwork.Remote.MyApi;
 import com.pasistence.knockwork.Remote.RetrofitClient;
 
+import dmax.dialog.SpotsDialog;
+
 
 public class Common {
    // private static final String BASE_URL = "http://192.168.0.151/mantra/public/index.php/api/";
@@ -31,6 +33,8 @@ public class Common {
     public static String UserName;
     public static String UserEmail ;
     public static String UserPhoto;
+
+    public static AlertDialog watingDialog;
 
     //localhost
     //public static final String BASE_URL = "http://10.0.2.2/knockwork/public/index.php/api/";
@@ -95,8 +99,6 @@ public class Common {
         alertDialog.show();
     }
 
-
-
     public static void getUserPreference(Context mContext){
         if(!PreferenceUtils.getDisplayName(mContext).equals("")||
                 !PreferenceUtils.getEmail(mContext).equals("")||
@@ -114,6 +116,16 @@ public class Common {
 
     }
 
+    public static void showSpotDialogue(Context mContext){
+        watingDialog = new SpotsDialog(mContext);
+        watingDialog.show();
+        watingDialog.setMessage("Please Wait");
+        watingDialog.setCancelable(false);
+    }
+
+    public static void dismissSpotDilogue(){
+        watingDialog.dismiss();
+    }
 
 
 }

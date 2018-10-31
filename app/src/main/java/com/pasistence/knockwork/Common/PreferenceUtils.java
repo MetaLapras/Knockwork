@@ -75,6 +75,15 @@ public class PreferenceUtils {
         editor.putString(Lid,Details).apply();
     }
 
+    public static String getCid(Context context) {
+        return getSharedPreferences(context).getString(Lid,"");
+    }
+
+    public static void setCid(Context context, String Details){
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        editor.putString(Lid,Details).apply();
+    }
+
     public static String getEmail(Context context) {
         return getSharedPreferences(context).getString(email,"");
     }

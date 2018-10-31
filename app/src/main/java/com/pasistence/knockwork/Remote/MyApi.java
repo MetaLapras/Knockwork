@@ -1,10 +1,13 @@
 package com.pasistence.knockwork.Remote;
 
 import com.pasistence.knockwork.Model.ApiResponse.ApiEducationResponse;
+import com.pasistence.knockwork.Model.ApiResponse.ApiExperienceResponse;
+import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseLancer;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterClient;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseUpdateLancer;
+import com.pasistence.knockwork.Model.ApiResponse.ApiSkillsResponse;
 import com.pasistence.knockwork.Model.PopularServicesModel;
 import com.pasistence.knockwork.Model.ResponseSubCategory;
 import com.pasistence.knockwork.Model.ResponseSuggestionList;
@@ -29,7 +32,11 @@ public interface MyApi {
     @GET("categories")
     Call<List<ResponseTopService>> getTopServices();
 
-   @GET("popularservices")
+    @GET("subcategories")
+    Call<List<ResponseSubCategory>> getSubCategories();
+
+
+    @GET("popularservices")
     Call<List<PopularServicesModel>> getPopularServices();
 
     @GET("subcategories/{id}")
@@ -92,7 +99,7 @@ public interface MyApi {
 
     @FormUrlEncoded
     @POST("lancerExperience")
-    Call<ApiResponseUpdateLancer>LancerProfileExperience(
+    Call<ApiExperienceResponse>LancerProfileExperience(
             @Field("uid") String Uid,
             @Field("l_id")  String Lid,
             @Field("company_name")  String companyName,
@@ -100,8 +107,106 @@ public interface MyApi {
             @Field("start_date")  String startDate,
             @Field("end_date")  String endDate);
 
+// JOB POSTING-------------------------------------------------------/
+    //Post New Job
+    @FormUrlEncoded
+    @POST("postjob")
+    Call<ApiPostJobResponse>ClientPostAJob(
+            @Field("uid") String Uid,
+            @Field("cid")  String cid,
+            @Field("category")  String category,
+            @Field("subcategory")  String subcategory,
+            @Field("title")  String title,
+            @Field("details")  String details,
+            @Field("skills")  String skills,
+            @Field("types")  String types,
+            @Field("rate")  String rate,
+            @Field("duration")  String duration,
+            @Field("visibility")  String visibility,
+            @Field("featured")  String featured
+    );
+
+    //Update Posted Job
+    @FormUrlEncoded
+    @POST("postjob")
+    Call<ApiPostJobResponse>ClientPostAJobUpdate(
+            @Field("pid") String Pid,
+            @Field("uid") String Uid,
+            @Field("cid")  String cid,
+            @Field("category")  String category,
+            @Field("subcategory")  String subcategory,
+            @Field("title")  String title,
+            @Field("details")  String details,
+            @Field("skills")  String skills,
+            @Field("types")  String types,
+            @Field("rate")  String rate,
+            @Field("duration")  String duration,
+            @Field("visibility")  String visibility,
+            @Field("featured")  String featured
+    );
 
 
+    //getAll Posted Jobs
+    @GET("allpostjobs/{pageNo}")
+    Call<ApiPostJobResponse>ClientPostAJobRead(@Path("pageNo") int pageNo);
+
+    //Delete Posted Job
+    @FormUrlEncoded
+    @POST("postjobdelete")
+    Call<ApiPostJobResponse>ClientPostAJobDelete(
+            @Field("pid") String Pid,
+            @Field("uid") String Uid,
+            @Field("cid")  String cid
+    );
+
+// POSTING CONTEST -------------------------------------------------------/
+
+    //Post New Contest
+    @FormUrlEncoded
+    @POST("postcontest")
+    Call<ApiPostJobResponse>ClientPostContest(
+            @Field("uid") String Uid,
+            @Field("cid")  String cid,
+            @Field("title")  String title,
+            @Field("description")  String description,
+            @Field("duration")  String duration,
+            @Field("prizemoney")  String prizemoney,
+            @Field("mode")  String mode,
+            @Field("types")  String types
+    );
+
+    //Update Posted Contest
+    @FormUrlEncoded
+    @POST("postcontestUpdate")
+    Call<ApiPostJobResponse>ClientPostContestUpdate(
+            @Field("pid") String Pid,
+            @Field("uid") String Uid,
+            @Field("cid")  String cid,
+            @Field("title")  String title,
+            @Field("description")  String description,
+            @Field("duration")  String duration,
+            @Field("prizemoney")  String prizemoney,
+            @Field("mode")  String mode,
+            @Field("types")  String types
+    );
+
+
+    //getAll Posted Contest
+    @GET("allpostcontest/{pageNo}")
+    Call<ApiPostJobResponse>ClientPostContestRead(@Path("pageNo") int pageNo);
+
+    //Delete Posted Contest
+    @FormUrlEncoded
+    @POST("postcontestdelete")
+    Call<ApiPostJobResponse>ClientPostContestDelete(
+            @Field("pid") String Pid,
+            @Field("uid") String Uid,
+            @Field("cid")  String cid
+    );
+
+    // SKILLS SET -------------------------------------------------------/
+    @GET("allSkills")
+    Call<List<ApiSkillsResponse>> getAllSkills();
 
 }
 

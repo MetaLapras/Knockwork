@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Freelancer.Activities.FreelancerProfileActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -105,9 +105,16 @@
 
         <!-- <activity android:name=".Freelancer.Activities.FreelancerProfileActivity" /> -->
         <activity android:name=".Client.Activities.ClientJobPostingActivity" />
+<<<<<<< HEAD
         <activity android:name=".Client.Activities.ClientJobContestActivity" />
         <activity android:name=".SplashActivity" />
         <!-- <activity android:name=".Client.Activities.ClientJobPostingActivity"></activity> -->
+=======
+        <activity android:name=".Client.Activities.ClientJobContestActivity"></activity>
+
+        <activity android:name=".Freelancer.Activities.FreelancerProfileActivity" />
+       <!-- <activity android:name=".Client.Activities.ClientJobPostingActivity"></activity>-->
+>>>>>>> 39c8765572dfaa37adbb6bf073f366c191c89e13
 
         <activity android:name=".ChatBox.DemoDialogsActivity"></activity>
     </application>
