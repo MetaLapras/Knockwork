@@ -362,8 +362,10 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
                         Common.dismissSpotDilogue();
                     }else if(result.getError()){
                         Common.commonDialog(mContext,result.getMessage());
+                        Common.dismissSpotDilogue();
                     }else {
                         Common.commonDialog(mContext,"Sever not found..");
+                        Common.dismissSpotDilogue();
                     }
                 }
 
