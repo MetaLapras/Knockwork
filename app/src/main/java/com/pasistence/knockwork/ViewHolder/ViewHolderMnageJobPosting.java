@@ -11,7 +11,8 @@ import android.widget.TextView;
 import com.pasistence.knockwork.R;
 
 public class ViewHolderMnageJobPosting
-        extends RecyclerView.ViewHolder {
+        extends RecyclerView.ViewHolder implements View.OnClickListener
+{
 
     public TextView txtjobName,txtfixedPrice,txtpriceRange,txtpoastedDays,txtjobQuotes,txtjobDescription;
     public Button btnJobEdit,btnJobRemove;
@@ -30,6 +31,11 @@ public class ViewHolderMnageJobPosting
         btnJobEdit           = (Button)itemView.findViewById(R.id.btn_job_edit);
         btnJobRemove         = (Button)itemView.findViewById(R.id.btn_job_remove);
 
+
+    }
+
+    @Override
+    public void onClick(View v) {
 
     }
 }

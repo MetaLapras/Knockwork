@@ -21,6 +21,7 @@ import com.pasistence.knockwork.Client.Activities.ClientJobPostingActivity;
 import com.pasistence.knockwork.Client.Activities.ManageJobPostActivity;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Common.PreferenceUtils;
+import com.pasistence.knockwork.Interface.ItemClickListener;
 import com.pasistence.knockwork.LoginActivity;
 import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
 import com.pasistence.knockwork.Model.ManageJobPostingModel;
@@ -39,7 +40,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnageJobPosting> {
+public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnageJobPosting> implements ItemClickListener {
 
 
     private static final String TAG = "managePostingAdapter";
@@ -113,9 +114,7 @@ public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnag
         holder.btnJobRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 removeAt(position);
-
             }
         });
     }
@@ -123,16 +122,12 @@ public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnag
     private void removeAt(final int position) {
         if(!job.getPId().equals(null) && !job.getCid().equals(null) && !job.getUid().equals(null))
         {
-
             try {
-
                 //Common.dismissSpotDilogue();
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
                 alertDialogBuilder.setMessage("Are you Sure Want to Delete")
                         .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-//                                                   notifyDataSetChanged();
-
                                 mServices.ClientPostAJobDelete(job.getPId(),job.getUid(),job.getCid()).enqueue(new Callback<ApiPostJobResponse>() {
                                     @Override
                                     public void onResponse(Call<ApiPostJobResponse> call, Response<ApiPostJobResponse> response) {
@@ -143,7 +138,7 @@ public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnag
                                             manageJobPostingModels.remove(position);
                                             notifyItemRemoved(position);
                                             notifyItemRangeChanged(position,manageJobPostingModels.size());
-
+                                            notifyDataSetChanged();
                                             //Intent intent = new Intent(mContext,ManageJobPostActivity.class);
                                             //ActivityOptions options = ActivityOptions.makeCustomAnimation(mContext,android.R.anim.fade_in,android.R.anim.fade_out);
                                             //mContext.startActivity(intent,options.toBundle());
@@ -199,4 +194,12 @@ public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnag
     }
 
 
+    @Override
+    public void onClick(View view, int position, boolean isLongClick) {
+      if (view.getId() == R.id.btn_job_remove){
+
+          Toast.makeText(mContext, "Removed,....", Toast.LENGTH_SHORT).show();
+
+      }
+    }
 }
