@@ -574,7 +574,7 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
         //  for(int i = 0; i<singleInputs.length; i++)
         for(int i = 0; i<singleInputs.length; i++)
         {
-            toastText += singleInputs[i] + "@@";
+            toastText += singleInputs[i] + ",";
         }
         return toastText;
 

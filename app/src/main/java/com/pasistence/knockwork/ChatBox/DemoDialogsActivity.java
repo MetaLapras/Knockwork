@@ -27,6 +27,7 @@ public class DemoDialogsActivity extends AppCompatActivity
             @Override
             public void loadImage(ImageView imageView, @Nullable String url, @Nullable Object payload) {
                 Picasso.with(DemoDialogsActivity.this).load(url).into(imageView);
+
             }
         };
     }
