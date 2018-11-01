@@ -76,6 +76,13 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
 
         mInit();
         mOnClick();
+        Bundle bu;
+        bu = getIntent().getExtras();
+
+        if(bu!=null){
+
+        }
+
 
         if (Common.isConnectedToInterNet(mContext))
         {
@@ -90,7 +97,6 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
                 Log.e(TAG, e.getMessage() );
                 e.printStackTrace();
                 Common.commonDialog(mContext,"Sever not found..");
-
             }
 
         }else {
@@ -467,7 +473,6 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
             checkBox.setError("please confirm terms & Condition");
             cancel=true;
         }
-
       return cancel;
     }
 }

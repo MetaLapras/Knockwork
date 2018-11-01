@@ -53,9 +53,9 @@ public class ManageJobPostActivity extends AppCompatActivity
     Boolean isScrolling = false;
     int currentItems;
     int totalItems;
-  int scrollOutItems;
-  ProgressBar progressBar;
-  MyApi mServices;
+    int scrollOutItems;
+    ProgressBar progressBar;
+    MyApi mServices;
 
 
     ArrayList<ApiPostJobResponse.Result> manageJobPostingModels = new ArrayList<ApiPostJobResponse.Result>();
@@ -225,7 +225,6 @@ public class ManageJobPostActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-
         if (id == R.id.nav_home) {
             //Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
               //      .setAction("Action", null).show();
@@ -272,7 +271,6 @@ public class ManageJobPostActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
     private void mInit() {
         mContext = ManageJobPostActivity.this;
