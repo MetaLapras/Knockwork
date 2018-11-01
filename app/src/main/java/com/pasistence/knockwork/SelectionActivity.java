@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.pasistence.knockwork.ChatBox.ChatActivity;
 import com.pasistence.knockwork.Client.Activities.DashboardActivity;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Common.PreferenceUtils;
@@ -116,7 +117,7 @@ public class SelectionActivity extends AppCompatActivity
         btnHire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mContext,LoginActivity.class));
+                startActivity(new Intent(mContext,ChatActivity.class));
                 //startActivity(new Intent(mContext,DashboardActivity.class));
                 PreferenceUtils.setUserType(mContext,Common.Client);
                 finish();
