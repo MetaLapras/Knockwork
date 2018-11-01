@@ -85,6 +85,7 @@ public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnag
             TimeAgo timeAgo = new TimeAgo();
             String result = timeAgo.getTimeAgo(d);
 
+
             holder.txtpoastedDays.setText(result);
 
         } catch (ParseException ex) {
