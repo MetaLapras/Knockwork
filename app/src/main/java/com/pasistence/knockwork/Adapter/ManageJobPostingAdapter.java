@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.choota.dev.ctimeago.TimeAgo;
 import com.pasistence.knockwork.Client.Activities.ClientJobPostingActivity;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
@@ -20,7 +21,10 @@ import com.pasistence.knockwork.Remote.MyApi;
 import com.pasistence.knockwork.ViewHolder.ViewHolderMnageJobPosting;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -64,7 +68,24 @@ public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnag
         holder.txtjobName.setText(job.getTitle());
         holder.txtfixedPrice.setText(job.getType());
         holder.txtpriceRange.setText(job.getRate());
-        holder.txtpoastedDays.setText(job.getUpdatedAt());
+        //holder.txtpoastedDays.setText(job.getUpdatedAt());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date d = sdf.parse("2018-11-01 10:31:30");
+
+            TimeAgo timeAgo = new TimeAgo();
+            String result = timeAgo.getTimeAgo(d);
+
+            holder.txtpoastedDays.setText(result);
+
+        } catch (ParseException ex) {
+            Log.v("Exception", ex.getLocalizedMessage());
+        }
+
+
+
+
         holder.txtjobQuotes.setText(job.getDuration());
         holder.txtjobDescription.setText(job.getDetails());
 
