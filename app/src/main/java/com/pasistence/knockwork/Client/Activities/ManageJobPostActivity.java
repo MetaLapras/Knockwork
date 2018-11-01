@@ -29,10 +29,12 @@ import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Adapter.ManageJobPostingAdapter;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Freelancer.Activities.JobPoastingActivity;
+import com.pasistence.knockwork.Interface.ItemClickListener;
 import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
 import com.pasistence.knockwork.Model.ManageJobPostingModel;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.Remote.MyApi;
+import com.pasistence.knockwork.ViewHolder.ViewHolderMnageJobPosting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +44,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ManageJobPostActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+        implements NavigationView.OnNavigationItemSelectedListener,ItemClickListener {
 
     Context mContext;
     MaterialSearchBar searchBar;
@@ -85,6 +87,8 @@ public class ManageJobPostActivity extends AppCompatActivity
         recyclerLancer.setLayoutManager(layoutManager);*/
         // manageJobPostingAdapter.notifyDataSetChanged();
 
+
+
         recyclerLancer.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -108,10 +112,6 @@ public class ManageJobPostActivity extends AppCompatActivity
               //  isScrolling = true;
             }
         });
-
-
-
-
 
         /*--------------------------------------------------------------*/
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -140,6 +140,7 @@ public class ManageJobPostActivity extends AppCompatActivity
                 public void onResponse(Call<ApiPostJobResponse> call, Response<ApiPostJobResponse> response) {
                     ApiPostJobResponse result = response.body();
                     Log.e(TAG, result.toString());
+
                     manageJobPostingModels = result.getResult();
                     manageJobPostingAdapter = new ManageJobPostingAdapter(mContext,ManageJobPostActivity.this, manageJobPostingModels);
                     recyclerLancer.setAdapter(manageJobPostingAdapter);
@@ -254,6 +255,7 @@ public class ManageJobPostActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+
     }
 
     private void mInit() {
@@ -263,7 +265,6 @@ public class ManageJobPostActivity extends AppCompatActivity
         layoutManager = new LinearLayoutManager(this);
         recyclerLancer.setLayoutManager(layoutManager);
         progressBar = (ProgressBar)findViewById(R.id.progress);
-
 
         //btnMore = (Button)findViewById(R.id.btn_more);
      /*   btnMore.setOnClickListener(new View.OnClickListener() {
@@ -342,5 +343,8 @@ public class ManageJobPostActivity extends AppCompatActivity
         }, 5000);
     }
 
+    @Override
+    public void onClick(View view, int position, boolean isLongClick) {
     }
+}
 
