@@ -1,5 +1,6 @@
 package com.pasistence.knockwork.Client.Activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -59,19 +60,19 @@ public class ManageJobPostActivity extends AppCompatActivity
 
 
     ArrayList<ApiPostJobResponse.Result> manageJobPostingModels = new ArrayList<ApiPostJobResponse.Result>();
-    ManageJobPostingAdapter manageJobPostingAdapter;
+    public ManageJobPostingAdapter manageJobPostingAdapter;
     ManageJobPostingAdapter searchAdapter;
     List<String> suggestList = new ArrayList<>();
 
 
-
+    Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_job_post);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        activity = ManageJobPostActivity.this;
         /*--------------------------------------------------------------*/
 
         mInit();
@@ -79,30 +80,9 @@ public class ManageJobPostActivity extends AppCompatActivity
         mServices = Common.getApi();
         readAllJobs();
 
-      /*  ManageJobPostingModel jobModel1 = new ManageJobPostingModel("1", "Web Development", "Fixed Price", "$5k - $7k", "Posted 2 days ago", "85 Quots", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
-        ManageJobPostingModel jobMoel2 = new ManageJobPostingModel("2", "Professional Designer needed for Tshirt and other Products, WebProjects.", "Fixed Price", "$5k - $7k", "Posted 2 days ago", "85 Quots", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
-        ManageJobPostingModel jobModel3 = new ManageJobPostingModel("3", "App Developer for creating a custome water sports application", "Fixed Price", "$5k - $7k", "Posted 2 days ago", "85 Quots", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
-
-        manageJobPostingModels.add(jobModel1);
-        manageJobPostingModels.add(jobMoel2);
-        manageJobPostingModels.add(jobModel3);
-        manageJobPostingModels.add(jobModel1);
-        manageJobPostingModels.add(jobMoel2);
-        manageJobPostingModels.add(jobModel3);
-        manageJobPostingModels.add(jobModel1);
-        manageJobPostingModels.add(jobMoel2);
-        manageJobPostingModels.add(jobModel3);
-        manageJobPostingModels.add(jobModel1);
-        manageJobPostingModels.add(jobMoel2);
-        manageJobPostingModels.add(jobModel3);
-        manageJobPostingModels.add(jobModel1);
-        manageJobPostingModels.add(jobMoel2);
-        manageJobPostingModels.add(jobModel3);*/
-
-
-        manageJobPostingAdapter = new ManageJobPostingAdapter(mContext, manageJobPostingModels);
+     /*   manageJobPostingAdapter = new ManageJobPostingAdapter(mContext,ManageJobPostActivity.this, manageJobPostingModels);
         recyclerLancer.setAdapter(manageJobPostingAdapter);
-        recyclerLancer.setLayoutManager(layoutManager);
+        recyclerLancer.setLayoutManager(layoutManager);*/
         // manageJobPostingAdapter.notifyDataSetChanged();
 
         recyclerLancer.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -161,11 +141,12 @@ public class ManageJobPostActivity extends AppCompatActivity
                     ApiPostJobResponse result = response.body();
                     Log.e(TAG, result.toString());
                     manageJobPostingModels = result.getResult();
-                    manageJobPostingAdapter = new ManageJobPostingAdapter(mContext, manageJobPostingModels);
+                    manageJobPostingAdapter = new ManageJobPostingAdapter(mContext,ManageJobPostActivity.this, manageJobPostingModels);
                     recyclerLancer.setAdapter(manageJobPostingAdapter);
                     recyclerLancer.setLayoutManager(layoutManager);
                     manageJobPostingAdapter.notifyDataSetChanged();
 
+                   // manageJobPostingAdapter.notifyDataSetChanged();
 
                 }
 
