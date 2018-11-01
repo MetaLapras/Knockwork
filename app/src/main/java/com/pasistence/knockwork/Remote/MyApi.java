@@ -128,7 +128,7 @@ public interface MyApi {
 
     //Update Posted Job
     @FormUrlEncoded
-    @POST("postjob")
+    @POST("postjobUpdate")
     Call<ApiPostJobResponse>ClientPostAJobUpdate(
             @Field("pid") String Pid,
             @Field("uid") String Uid,

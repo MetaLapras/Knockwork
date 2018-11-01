@@ -60,6 +60,10 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
     MultiAutoCompleteTextView MSkills;
     MyApi mServices;
     CardView cardFeatured;
+    String check = Common.register;
+    ApiPostJobResponse.Result clientJobs ;
+    List<String> labelsBelong = new ArrayList<String>();
+    List<String> labelsDone = new ArrayList<String>();
 
     Context mContext;
     String Uid,Cid,category,subcategory,title,details,skills,type,rate,duration,visibility,featured;
@@ -76,21 +80,37 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
 
         mInit();
         mOnClick();
+        Bundle bu;
+        bu = getIntent().getExtras();
+
+        if(getIntent().getStringExtra("type")!=null){
+
+            btnSubmit.setText("Update Job");
+            check = getIntent().getStringExtra("type");
+            loadAllDetails();
+
+        }else {
+            Log.e(TAG, "Failed Intent" );
+        }
 
         if (Common.isConnectedToInterNet(mContext))
         {
             try
             {
+
+                //loadAllDetails();
+
                 allCategories();
                 AllSubCategories();
                 allSkill();
+
+
 
             }catch (Exception e)
             {
                 Log.e(TAG, e.getMessage() );
                 e.printStackTrace();
                 Common.commonDialog(mContext,"Sever not found..");
-
             }
 
         }else {
@@ -101,6 +121,63 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
        // ArrayAdapter<String> adapter = new ArrayAdapter<> (this,R.layout.cusome_simple_autocomplete_textview,Skills);
         MSkills.setAdapter(adapter);
         MSkills.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+
+    }
+
+    private void loadAllDetails() {
+
+        clientJobs = (ApiPostJobResponse.Result) getIntent().getSerializableExtra("Jobs");
+        Log.e(TAG+"-Intent", clientJobs.toString());
+
+      /*  getSpnDone(clientJobs.getCategory());
+        getSpnBelong(clientJobs.getSubcategory());*/
+
+       /* if(!clientJobs.getSubcategory().equals(null)){
+            for(int i = 0; i<labelsBelong.size(); i++){
+                if(labelsBelong.get(i).equals(clientJobs.getSubcategory())) {
+                    spnBelong.setSelection(i+1);
+                }
+            }
+        }
+
+        if(!clientJobs.getCategory().equals(null)){
+            for(int i = 0; i<labelsDone.size(); i++){
+                if(labelsDone.get(i).equals(clientJobs.getCategory())) {
+                    spnDone.setSelection(i+1);
+                }
+            }
+        }*/
+
+
+        getSpntill(clientJobs.getDuration());
+
+        editAbout.setText(clientJobs.getTitle());
+        editExplain.setText(clientJobs.getDetails());
+        editSkill.setText(clientJobs.getSkills());
+
+        if(clientJobs.getType().equals("Fixed"))
+        {
+            radioFixed.setChecked(true);
+
+        }else if(clientJobs.getType().equals("Hourly")){
+
+            radioHourly.setChecked(true);
+        }
+
+        if(clientJobs.getType().equals(radioPrivate.getText().toString()))
+        {
+            radioPrivate.setChecked(true);
+
+        }else if(clientJobs.getType().equals(radioPublic.getText().toString())){
+            radioPublic.setChecked(true);
+
+        }
+
+        editINR.setText(clientJobs.getRate());
+
+        if(clientJobs.getFeatured().equals("yes")){
+            chkFeatured.setChecked(true);
+        }
 
 
     }
@@ -157,17 +234,27 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
 
                 if (list != null)
                 {
-                    List<String> labels = new ArrayList<String>();
-                    labels.add("Select");
+                    labelsDone = new ArrayList<String>();
+                    labelsDone.add("Select");
                     for(int i=0; i<list.size(); i++)
                     {
-                        labels.add(list.get(i).getCategories_title().toString());
+                        labelsDone.add(list.get(i).getCategories_title());
                     }
-                    ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(mContext,android.R.layout.simple_list_item_1,labels);
+
+                    ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(mContext,android.R.layout.simple_list_item_1,labelsDone);
                     adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     adapter1.notifyDataSetChanged();
 
                     spnDone.setAdapter(adapter1);
+
+
+                    if(check.equals(Common.update)){
+                          for(int i = 0; i<labelsDone.size(); i++){
+                                if(labelsDone.get(i).equals(clientJobs.getCategory())) {
+                                    spnDone.setSelection(i);
+                                }
+                            }
+                    }
 
 
                 }else
@@ -204,19 +291,26 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
 
                 if (list != null)
                 {
-                    List<String> labels = new ArrayList<String>();
-                    labels.add("Select");
+                    labelsBelong = new ArrayList<String>();
+                    labelsBelong.add("Select");
                     for(int i=0; i<list.size(); i++)
                     {
                         Skills.add(list.get(i).getSub_categories_title().toString());
-                        labels.add(list.get(i).getSub_categories_title().toString());
+                        labelsBelong.add(list.get(i).getSub_categories_title().toString());
                     }
-                    ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(mContext,android.R.layout.simple_list_item_1,labels);
+                    ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(mContext,android.R.layout.simple_list_item_1,labelsBelong);
                     adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     adapter1.notifyDataSetChanged();
 
                     spnBelong.setAdapter(adapter1);
 
+                    if(check.equals(Common.update)){
+                        for(int i = 0; i<labelsBelong.size(); i++){
+                            if(labelsBelong.get(i).equals(clientJobs.getSubcategory())) {
+                                spnBelong.setSelection(i);
+                            }
+                        }
+                    }
 
                 }else
                 {
@@ -283,7 +377,7 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
 
         cardFeatured = (CardView)findViewById(R.id.card_featured) ;
 
-       MSkills          = (MultiAutoCompleteTextView)findViewById(R.id.edit_skil);
+        MSkills          = (MultiAutoCompleteTextView)findViewById(R.id.edit_skil);
 
         btnSubmit       = (Button)findViewById(R.id.btn_submit_project);
 
@@ -307,8 +401,91 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
     public void onClick(View v) {
         if (!isCheck())
         {
-            postJobServer();
+            if(check.equals(Common.update)) {
+                updatePostJobServer();
+                Log.e("-->","Update job");
+            }else{
+                postJobServer();
+                Log.e("-->","RegisterJob");
+            }
         }
+
+    }
+
+    private void updatePostJobServer() {
+
+        Common.showSpotDialogue(mContext);
+
+        //Uid = PreferenceUtils.getUid(mContext);
+        //Cid = PreferenceUtils.getCid(mContext);
+        category = spnDone.getSelectedItem().toString().trim();
+        subcategory = spnBelong.getSelectedItem().toString().trim();
+
+        title = editAbout.getText().toString();
+        details = editExplain.getText().toString();
+
+        skills  = getSkillValues();
+        if(radioFixed.isChecked()){
+            type = radioFixed.getText().toString();
+        }else if(radioHourly.isChecked()) {
+            type = radioHourly.getText().toString();
+        }
+
+        if(radioPrivate.isChecked()){
+            visibility = radioPrivate.getText().toString();
+        }else if(radioPublic.isChecked()){
+            visibility = radioPublic.getText().toString();
+        }
+        rate = editINR.getText().toString();
+        duration = spnSpend.getSelectedItem().toString().trim();
+        if(chkFeatured.isChecked()){
+            featured = "yes";
+        }
+        try
+        {
+            mServices.ClientPostAJobUpdate(
+                    clientJobs.getPId(),
+                    clientJobs.getUid(),
+                    clientJobs.getCid(),
+                    category,
+                    subcategory,
+                    title,
+                    details,
+                    skills,
+                    type,
+                    rate,
+                    duration,
+                    visibility,
+                    featured).enqueue(new Callback<ApiPostJobResponse>() {
+                @Override
+                public void onResponse(Call<ApiPostJobResponse> call, Response<ApiPostJobResponse> response) {
+                    ApiPostJobResponse result = response.body();
+                    Log.e(TAG, result.toString());
+                    if(!result.getError()){
+                        Common.dismissSpotDilogue();
+                    }else if(result.getError()){
+                        Common.commonDialog(mContext,result.getMessage());
+                        Common.dismissSpotDilogue();
+                    }else {
+                        Common.commonDialog(mContext,"Sever not found..");
+                        Common.dismissSpotDilogue();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ApiPostJobResponse> call, Throwable t) {
+                    Log.e(TAG, t.getMessage());
+                    t.printStackTrace();
+                    Common.dismissSpotDilogue();
+                    Common.commonDialog(mContext,t.getMessage());
+                }
+            });
+        }catch (Exception e){
+            Log.e(TAG, e.getMessage() );
+            e.printStackTrace();
+            Common.commonDialog(mContext,"Sever not found..");
+        }
+
 
     }
 
@@ -337,7 +514,7 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
         rate = editINR.getText().toString();
         duration = spnSpend.getSelectedItem().toString().trim();
         if(chkFeatured.isChecked()){
-            featured = chkFeatured.getText().toString();
+            featured = "yes";
         }
         try
         {
@@ -467,7 +644,39 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
             checkBox.setError("please confirm terms & Condition");
             cancel=true;
         }
-
       return cancel;
     }
+
+    public void getSpnDone(String str) {
+
+        List<String> lables = labelsDone;
+        Log.e(TAG+"lab", labelsDone.toString() );
+        Log.e(TAG+"lab2", lables.toString() );
+
+       /* for(int i = 0; i<lables.size(); i++)
+        {
+            if(calendarArrayList.get(i).getCalendar_id().equals(calendarID)) {
+                spnCalendar.setSelection(i+1);
+            }
+        }*/
+    }
+
+    public void getSpnBelong(String str){
+        List<String> l = labelsBelong;
+        for (int i=0; i<l.size();i++){
+            if(l.get(i).toLowerCase().equals(str.toLowerCase())){
+                spnBelong.setSelection(i+1);
+            }
+        }
+    }
+
+    public void getSpntill(String str) {
+        List<String> l = Arrays.asList(getResources().getStringArray(R.array.spinner_week));
+        for (int i=0; i<l.size();i++){
+            if(l.get(i).toLowerCase().equals(str.toLowerCase())){
+                spnSpend.setSelection(i+1);
+            }
+        }
+    }
+
 }

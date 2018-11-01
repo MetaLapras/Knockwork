@@ -25,7 +25,6 @@
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -115,7 +114,12 @@
         <activity android:name=".Freelancer.Activities.FreelancerProfileActivity" />
        <!-- <activity android:name=".Client.Activities.ClientJobPostingActivity"></activity>-->
 
-        <activity android:name=".ChatBox.DemoDialogsActivity"></activity>
+        <activity android:name=".ChatBox.DemoDialogsActivity">
+          <!--  <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
     </application>
 
 </manifest>
