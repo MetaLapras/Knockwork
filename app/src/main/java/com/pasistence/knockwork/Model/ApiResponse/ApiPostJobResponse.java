@@ -1,5 +1,6 @@
 package com.pasistence.knockwork.Model.ApiResponse;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
@@ -76,7 +77,7 @@ public class ApiPostJobResponse {
         this.message = message;
     }
 
-    public class Result {
+    public class Result implements Serializable {
 
         @SerializedName("PId")
         @Expose

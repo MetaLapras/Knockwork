@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.pasistence.knockwork.Client.Activities.ClientJobPostingActivity;
+import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
 import com.pasistence.knockwork.Model.ManageJobPostingModel;
 import com.pasistence.knockwork.R;
@@ -25,6 +26,7 @@ public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnag
 
     Context mContext;
     ArrayList<ApiPostJobResponse.Result> manageJobPostingModels ;
+    ApiPostJobResponse.Result job;
 
 
     public ManageJobPostingAdapter(Context mContext, ArrayList<ApiPostJobResponse.Result> workerList) {
@@ -42,9 +44,9 @@ public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnag
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolderMnageJobPosting holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolderMnageJobPosting holder, final int position) {
 
-        final ApiPostJobResponse.Result job = manageJobPostingModels.get(position);
+        job = manageJobPostingModels.get(position);
 
        /* Picasso.with(mContext).load(lancers.getImage())
                 .into(holder.CircularImageViewProfile);*/
@@ -64,7 +66,8 @@ public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnag
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext,ClientJobPostingActivity.class);
-                intent.putExtra("Jobs", intentList);
+                intent.putExtra("type",Common.update);
+                intent.putExtra("Jobs",manageJobPostingModels.get(position));
                 mContext.startActivity(intent);
             }
         });

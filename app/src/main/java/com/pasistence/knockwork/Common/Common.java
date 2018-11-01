@@ -30,6 +30,8 @@ public class Common {
     public static final String phone = "phone";
     public static final String gmail = "gmail";
     public static final String facebook = "facebook";
+    public static final String update = "update";
+    public static final String register = "register";
     public static String UserName;
     public static String UserEmail ;
     public static String UserPhoto;
