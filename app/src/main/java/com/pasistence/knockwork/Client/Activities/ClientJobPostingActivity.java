@@ -61,7 +61,7 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
     MyApi mServices;
     CardView cardFeatured;
 
-    ApiPostJobResponse.Result clientJobs;
+    ArrayList<ApiPostJobResponse.Result>clientJobs = new ArrayList<ApiPostJobResponse.Result>();
 
     Context mContext;
     String Uid,Cid,category,subcategory,title,details,skills,type,rate,duration,visibility,featured;
@@ -81,8 +81,8 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
         Bundle bu;
         bu = getIntent().getExtras();
 
-        if(bu!=null){
-            clientJobs = (ApiPostJobResponse.Result) getIntent().getSerializableExtra("Jobs");
+        if(getIntent()!= null){
+            clientJobs = (ArrayList<ApiPostJobResponse.Result>) getIntent().getSerializableExtra("Jobs");
             Log.e(TAG+"-Intent", clientJobs.toString() );
         }else {
             Log.e(TAG, "Failed Intent" );

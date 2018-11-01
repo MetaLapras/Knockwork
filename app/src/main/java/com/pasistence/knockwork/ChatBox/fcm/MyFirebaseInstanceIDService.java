@@ -5,8 +5,8 @@ import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
-import com.sendbird.android.SendBird;
-import com.sendbird.android.SendBirdException;
+/*import com.sendbird.android.SendBird;
+import com.sendbird.android.SendBirdException;*/
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     private static final String TAG = "MyFirebaseIIDService";
@@ -16,10 +16,10 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         super.onTokenRefresh();
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d(TAG,"Refreshed Token: "+refreshedToken);
-        sendRegistrationToServer(refreshedToken);
+        //sendRegistrationToServer(refreshedToken);
     }
 
-    private void sendRegistrationToServer(String token){
+   /* private void sendRegistrationToServer(String token){
         SendBird.registerPushTokenForCurrentUser(token, new SendBird.RegisterPushTokenWithStatusHandler() {
             @Override
             public void onRegistered(SendBird.PushTokenRegistrationStatus pushTokenRegistrationStatus, SendBirdException e) {
@@ -33,5 +33,5 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
                 }
             }
         });
-    }
+    }*/
 }
