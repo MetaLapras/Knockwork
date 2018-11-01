@@ -1,6 +1,7 @@
 package com.pasistence.knockwork.Client.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -462,7 +463,10 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
                     ApiPostJobResponse result = response.body();
                     Log.e(TAG, result.toString());
                     if(!result.getError()){
+                        startActivity(new Intent(mContext,ManageJobPostActivity.class));
+                        finish();
                         Common.dismissSpotDilogue();
+
                     }else if(result.getError()){
                         Common.commonDialog(mContext,result.getMessage());
                         Common.dismissSpotDilogue();
@@ -536,6 +540,8 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
                     ApiPostJobResponse result = response.body();
                     Log.e(TAG, result.toString());
                     if(!result.getError()){
+                        startActivity(new Intent(mContext,ManageJobPostActivity.class));
+                        finish();
                         Common.dismissSpotDilogue();
                     }else if(result.getError()){
                         Common.commonDialog(mContext,result.getMessage());
