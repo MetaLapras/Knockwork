@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.pasistence.knockwork.ChatBox.ChatModel.Dialog;
+import com.pasistence.knockwork.ChatBox.DummyData.DialogsFixtures;
 import com.pasistence.knockwork.R;
 import com.stfalcon.chatkit.dialogs.DialogsList;
 import com.stfalcon.chatkit.dialogs.DialogsListAdapter;
@@ -37,6 +38,9 @@ public class ChatActivity extends DemoDialogsActivity {
 
     private void initAdapter() {
         super.dialogsAdapter=new DialogsListAdapter<>(R.layout.item_custom_chat_dialog,super.imageLoader);
-//        super.dialogsAdapter.setItems(DialogsF);
+        super.dialogsAdapter.setItems(DialogsFixtures.getDialogs());
+        super.dialogsAdapter.setOnDialogClickListener(this);
+        super.dialogsAdapter.setOnDialogLongClickListener(this);
+        dialogsList.setAdapter(super.dialogsAdapter);
     }
 }

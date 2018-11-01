@@ -2,7 +2,6 @@ package com.pasistence.knockwork.ChatBox;
 
 import android.app.Application;
 
-import com.sendbird.android.SendBird;
 
 public class BaseApplication extends Application {
     private static final String APP_ID = "8198AB3F-0720-4858-BA20-BB0305646B02";
@@ -12,6 +11,5 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        SendBird.init(APP_ID, getApplicationContext());
     }
 }

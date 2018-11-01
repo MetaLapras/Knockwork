@@ -33,8 +33,8 @@ public class FixturesData {
     static final ArrayList<String> names = new ArrayList<String>() {
         {
             add("Aashay Karekar");
-            add("Sanjay Kumar");
             add("Ambar Thute");
+            add("Sanjay Kumar");
             add("Achal Karekar");
             add("Sagar Channe");
             add("Ranjana Kantiyar");
