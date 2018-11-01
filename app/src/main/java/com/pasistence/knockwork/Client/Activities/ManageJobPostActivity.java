@@ -164,6 +164,9 @@ public class ManageJobPostActivity extends AppCompatActivity
                     manageJobPostingAdapter = new ManageJobPostingAdapter(mContext, manageJobPostingModels);
                     recyclerLancer.setAdapter(manageJobPostingAdapter);
                     recyclerLancer.setLayoutManager(layoutManager);
+                    manageJobPostingAdapter.notifyDataSetChanged();
+
+
                 }
 
                 @Override
