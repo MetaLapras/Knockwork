@@ -140,6 +140,7 @@ public class ManageJobPostActivity extends AppCompatActivity
                 public void onResponse(Call<ApiPostJobResponse> call, Response<ApiPostJobResponse> response) {
                     ApiPostJobResponse result = response.body();
                     Log.e(TAG, result.toString());
+
                     manageJobPostingModels = result.getResult();
                     manageJobPostingAdapter = new ManageJobPostingAdapter(mContext,ManageJobPostActivity.this, manageJobPostingModels);
                     recyclerLancer.setAdapter(manageJobPostingAdapter);

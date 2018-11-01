@@ -560,9 +560,6 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
             Common.commonDialog(mContext,"Sever not found..");
         }
 
-
-
-
     }
 
     private String getSkillValues() {

@@ -79,7 +79,7 @@ public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnag
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
-            Date d = sdf.parse("2018-11-01 10:31:30");
+            Date d = sdf.parse(job.getUpdatedAt());
 
             TimeAgo timeAgo = new TimeAgo();
             String result = timeAgo.getTimeAgo(d);
