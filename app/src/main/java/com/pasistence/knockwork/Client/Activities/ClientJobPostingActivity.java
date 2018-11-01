@@ -87,20 +87,18 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
 
             btnSubmit.setText("Update Job");
             check = getIntent().getStringExtra("type");
-            clientJobs = (ApiPostJobResponse.Result) getIntent().getSerializableExtra("Jobs");
-            Log.e(TAG+"-Intent", clientJobs.toString());
+            loadAllDetails();
 
         }else {
             Log.e(TAG, "Failed Intent" );
         }
-
 
         if (Common.isConnectedToInterNet(mContext))
         {
             try
             {
 
-                loadAllDetails(clientJobs);
+                //loadAllDetails();
 
                 allCategories();
                 AllSubCategories();
@@ -126,10 +124,31 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
 
     }
 
-    private void loadAllDetails(ApiPostJobResponse.Result clientJobs) {
+    private void loadAllDetails() {
+
+        clientJobs = (ApiPostJobResponse.Result) getIntent().getSerializableExtra("Jobs");
+        Log.e(TAG+"-Intent", clientJobs.toString());
 
       /*  getSpnDone(clientJobs.getCategory());
         getSpnBelong(clientJobs.getSubcategory());*/
+
+       /* if(!clientJobs.getSubcategory().equals(null)){
+            for(int i = 0; i<labelsBelong.size(); i++){
+                if(labelsBelong.get(i).equals(clientJobs.getSubcategory())) {
+                    spnBelong.setSelection(i+1);
+                }
+            }
+        }
+
+        if(!clientJobs.getCategory().equals(null)){
+            for(int i = 0; i<labelsDone.size(); i++){
+                if(labelsDone.get(i).equals(clientJobs.getCategory())) {
+                    spnDone.setSelection(i+1);
+                }
+            }
+        }*/
+
+
         getSpntill(clientJobs.getDuration());
 
         editAbout.setText(clientJobs.getTitle());
@@ -219,7 +238,7 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
                     labelsDone.add("Select");
                     for(int i=0; i<list.size(); i++)
                     {
-                        labelsDone.add(list.get(i).getCategories_title().toString());
+                        labelsDone.add(list.get(i).getCategories_title());
                     }
 
                     ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(mContext,android.R.layout.simple_list_item_1,labelsDone);
@@ -229,10 +248,10 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
                     spnDone.setAdapter(adapter1);
 
 
-                    if(!clientJobs.getCategory().equals(null)){
+                    if(check.equals(Common.update)){
                           for(int i = 0; i<labelsDone.size(); i++){
                                 if(labelsDone.get(i).equals(clientJobs.getCategory())) {
-                                    spnDone.setSelection(i+1);
+                                    spnDone.setSelection(i);
                                 }
                             }
                     }
@@ -285,14 +304,13 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
 
                     spnBelong.setAdapter(adapter1);
 
-                    if(!clientJobs.getSubcategory().equals(null)){
+                    if(check.equals(Common.update)){
                         for(int i = 0; i<labelsBelong.size(); i++){
                             if(labelsBelong.get(i).equals(clientJobs.getSubcategory())) {
-                                spnBelong.setSelection(i+1);
+                                spnBelong.setSelection(i);
                             }
                         }
                     }
-
 
                 }else
                 {
