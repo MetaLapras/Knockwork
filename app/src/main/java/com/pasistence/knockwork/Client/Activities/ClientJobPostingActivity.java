@@ -84,6 +84,7 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
         if(getIntent()!= null){
             clientJobs = (ArrayList<ApiPostJobResponse.Result>) getIntent().getSerializableExtra("Jobs");
             Log.e(TAG+"-Intent", clientJobs.toString() );
+
         }else {
             Log.e(TAG, "Failed Intent" );
         }
