@@ -153,7 +153,6 @@ public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnag
                                             Common.commonDialog(mContext,"Sever not found..");
                                             Common.dismissSpotDilogue();
                                         }
-                                        //  Common.dismissSpotDilogue();
                                     }
 
                                     @Override
