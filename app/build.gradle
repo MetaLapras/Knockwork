@@ -156,6 +156,15 @@ dependencies {
     implementation 'com.chootdev:timezago:1.1.8'
     //implementation 'com.github.marlonlom:timeago:3.0.1'
 
+
+
+    //Design Progress bar for Pagination
+
+    implementation 'com.github.castorflex.smoothprogressbar:library:1.0.1-SNAPSHOT@aar'
+
+
+
+
 }
 
 

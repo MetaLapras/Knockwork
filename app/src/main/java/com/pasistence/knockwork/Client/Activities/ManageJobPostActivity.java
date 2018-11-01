@@ -44,7 +44,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ManageJobPostActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,ItemClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     Context mContext;
     MaterialSearchBar searchBar;
@@ -59,9 +59,12 @@ public class ManageJobPostActivity extends AppCompatActivity
     int scrollOutItems;
     ProgressBar progressBar;
     MyApi mServices;
+    int PageNo =  1;
+    int TotalElementsCount=0;
 
 
     ArrayList<ApiPostJobResponse.Result> manageJobPostingModels = new ArrayList<ApiPostJobResponse.Result>();
+    ArrayList<ApiPostJobResponse.Result> tryout = new ArrayList<ApiPostJobResponse.Result>();
     public ManageJobPostingAdapter manageJobPostingAdapter;
     ManageJobPostingAdapter searchAdapter;
     List<String> suggestList = new ArrayList<>();
@@ -80,7 +83,7 @@ public class ManageJobPostActivity extends AppCompatActivity
         mInit();
         // mOnclick();
         mServices = Common.getApi();
-        readAllJobs();
+        readAllJobs(PageNo);
 
      /*   manageJobPostingAdapter = new ManageJobPostingAdapter(mContext,ManageJobPostActivity.this, manageJobPostingModels);
         recyclerLancer.setAdapter(manageJobPostingAdapter);
@@ -133,15 +136,26 @@ public class ManageJobPostActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    private void readAllJobs() {
+    private void readAllJobs(int PageNo) {
         try {
-            mServices.ClientPostAJobRead(1).enqueue(new Callback<ApiPostJobResponse>() {
+            mServices.ClientPostAJobRead(PageNo).enqueue(new Callback<ApiPostJobResponse>() {
                 @Override
                 public void onResponse(Call<ApiPostJobResponse> call, Response<ApiPostJobResponse> response) {
                     ApiPostJobResponse result = response.body();
                     Log.e(TAG, result.toString());
 
                     manageJobPostingModels = result.getResult();
+                    Log.e(TAG+"SizeM",manageJobPostingModels.size()+"");
+
+                    TotalElementsCount = Integer.parseInt(result.getTotalcount());
+
+                    for (ApiPostJobResponse.Result res : result.getResult()){
+                        tryout.add(res);
+                    }
+
+                    Log.e(TAG,tryout.toString());
+                    Log.e(TAG+"Size",tryout.size()+"");
+
                     manageJobPostingAdapter = new ManageJobPostingAdapter(mContext,ManageJobPostActivity.this, manageJobPostingModels);
                     recyclerLancer.setAdapter(manageJobPostingAdapter);
                     recyclerLancer.setLayoutManager(layoutManager);
@@ -314,27 +328,55 @@ public class ManageJobPostActivity extends AppCompatActivity
               // progressBar.setVisibility(View.VISIBLE);
                 for (int i=0; i<1; i++)
                 {
-                  /*  ManageJobPostingModel jobModel4 = new ManageJobPostingModel("1","logo designing Development","Fixed Price","$5k - $7k","Posted 2 days ago","85 Quots","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
-                    ManageJobPostingModel jobMoel5 = new ManageJobPostingModel("2","Creating the Landing Page for Wix website which id alerady developed ","Fixed Price","$5k - $7k","Posted 2 days ago","85 Quots","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
-                    ManageJobPostingModel jobModel6 = new ManageJobPostingModel("3","I want the Content Writer for my Website","Fixed Price","$5k - $7k","Posted 2 days ago","85 Quots","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
+                    try {
+                        if(TotalElementsCount!= manageJobPostingModels.size()){
+                            PageNo++;
+                            mServices.ClientPostAJobRead(PageNo).enqueue(new Callback<ApiPostJobResponse>() {
+                                @Override
+                                public void onResponse(Call<ApiPostJobResponse> call, Response<ApiPostJobResponse> response) {
+                                    ApiPostJobResponse result = response.body();
+                                    Log.e(TAG, result.toString());
 
-                    manageJobPostingModels.add(jobModel4);
-                    manageJobPostingModels.add(jobMoel5);
-                    manageJobPostingModels.add(jobModel6);
-                    manageJobPostingModels.add(jobModel4);
-                    manageJobPostingModels.add(jobMoel5);
-                    manageJobPostingModels.add(jobModel6);
-                    manageJobPostingModels.add(jobModel4);
-                    manageJobPostingModels.add(jobMoel5);
-                    manageJobPostingModels.add(jobModel6);
-                    manageJobPostingModels.add(jobModel4);
-                    manageJobPostingModels.add(jobMoel5);
-                    manageJobPostingModels.add(jobModel6);
-                    manageJobPostingModels.add(jobModel4);
-                    manageJobPostingModels.add(jobMoel5);
-                    manageJobPostingModels.add(jobModel6);
+                                    //manageJobPostingModels = result.getResult();
+                                    Log.e(TAG+"SizeM",manageJobPostingModels.size()+"");
+                                    for (ApiPostJobResponse.Result res : result.getResult()){
+                                        manageJobPostingModels.add(res);
+                                        tryout.add(res);
+                                    }
 
-*/
+
+                                    Log.e(TAG,tryout.toString());
+                                    Log.e(TAG+"Size",tryout.size()+"");
+
+                                    //manageJobPostingAdapter = new ManageJobPostingAdapter(mContext,ManageJobPostActivity.this, manageJobPostingModels);
+                                    //recyclerLancer.setAdapter(manageJobPostingAdapter);
+                                    //recyclerLancer.setLayoutManager(layoutManager);
+                                    manageJobPostingAdapter.notifyDataSetChanged();
+
+                                    // manageJobPostingAdapter.notifyDataSetChanged();
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<ApiPostJobResponse> call, Throwable t) {
+                                    Log.e(TAG, t.getMessage());
+                                    t.printStackTrace();
+
+                                }
+                            });
+                        }else
+                        {
+                            Toast.makeText(mContext, "Nothing to Display", Toast.LENGTH_SHORT).show();
+                        }
+
+
+
+                    }catch (Exception e)
+                    {
+                        Log.e(TAG, e.getMessage() );
+                        e.printStackTrace();
+                        Common.commonDialog(mContext,"Sever not found..");
+                    }
                     manageJobPostingAdapter.notifyDataSetChanged();
                     progressBar.setVisibility(View.GONE);
                 }
@@ -343,8 +385,5 @@ public class ManageJobPostActivity extends AppCompatActivity
         }, 5000);
     }
 
-    @Override
-    public void onClick(View view, int position, boolean isLongClick) {
-    }
 }
 
