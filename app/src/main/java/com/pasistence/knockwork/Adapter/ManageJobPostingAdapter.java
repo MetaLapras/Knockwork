@@ -1,17 +1,21 @@
 package com.pasistence.knockwork.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
+import com.pasistence.knockwork.Client.Activities.ClientJobPostingActivity;
 import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
 import com.pasistence.knockwork.Model.ManageJobPostingModel;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.ViewHolder.ViewHolderMnageJobPosting;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +55,15 @@ public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnag
         holder.txtjobQuotes.setText(job.getDuration());
         holder.txtjobDescription.setText(job.getDetails());
 
+
+        holder.btnJobEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext,ClientJobPostingActivity.class);
+                intent.putExtra("Jobs", (Serializable) job);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
