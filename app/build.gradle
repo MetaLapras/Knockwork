@@ -159,12 +159,6 @@ dependencies {
 
 
     //Design Progress bar for Pagination
-
-    implementation 'com.github.castorflex.smoothprogressbar:library:1.0.1-SNAPSHOT@aar'
-
-
-
-
 }
 
 

@@ -10,31 +10,28 @@ public class ApiResponseRegisterLancer {
     @SerializedName("error")
     @Expose
     private Boolean error;
+    @SerializedName("page_no")
+    @Expose
+    private String pageNo;
+    @SerializedName("TotalCount")
+    @Expose
+    private String totalCount;
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("lancer")
+    @SerializedName("Lancer")
     @Expose
     private ArrayList<Lancer> lancer = null;
-
-    public ApiResponseRegisterLancer() {
-    }
 
     @Override
     public String toString() {
         return "ApiResponseRegisterLancer{" +
                 "error=" + error +
+                ", pageNo='" + pageNo + '\'' +
+                ", totalCount='" + totalCount + '\'' +
                 ", message='" + message + '\'' +
                 ", lancer=" + lancer +
                 '}';
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public Boolean getError() {
@@ -45,14 +42,37 @@ public class ApiResponseRegisterLancer {
         this.error = error;
     }
 
-    public List<Lancer> getLancer() {
+    public String getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(String pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public String getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(String totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public ArrayList<Lancer> getLancer() {
         return lancer;
     }
 
     public void setLancer(ArrayList<Lancer> lancer) {
         this.lancer = lancer;
     }
-
 
     public class Lancer {
 
@@ -68,15 +88,45 @@ public class ApiResponseRegisterLancer {
         @SerializedName("lancer_email")
         @Expose
         private String lancerEmail;
-        @SerializedName("lancer_phone_no")
+        @SerializedName("lancer_mobile_no")
         @Expose
-        private String lancerPhoneNo;
-        @SerializedName("lancer_provider")
+        private String lancerMobileNo;
+        @SerializedName("lancer_address_id")
         @Expose
-        private String lancerProvider;
+        private String lancerAddressId;
+        @SerializedName("lancer_professionalTitle")
+        @Expose
+        private String lancerProfessionalTitle;
+        @SerializedName("lancer_availability")
+        @Expose
+        private String lancerAvailability;
+        @SerializedName("lancer_selfIntro")
+        @Expose
+        private String lancerSelfIntro;
+        @SerializedName("lancer_dob")
+        @Expose
+        private String lancerDob;
+        @SerializedName("lancer_gender")
+        @Expose
+        private String lancerGender;
+        @SerializedName("lancer_CreatedAt")
+        @Expose
+        private String lancerCreatedAt;
+        @SerializedName("lancer_UpdatedAt")
+        @Expose
+        private String lancerUpdatedAt;
         @SerializedName("lancer_image")
         @Expose
         private String lancerImage;
+        @SerializedName("lancer_provider")
+        @Expose
+        private String lancerProvider;
+        @SerializedName("lancer_minHourRate")
+        @Expose
+        private String lancerMinHourRate;
+        @SerializedName("lancer_skills")
+        @Expose
+        private String lancerSkills;
 
         @Override
         public String toString() {
@@ -85,9 +135,19 @@ public class ApiResponseRegisterLancer {
                     ", lancerId='" + lancerId + '\'' +
                     ", lancerName='" + lancerName + '\'' +
                     ", lancerEmail='" + lancerEmail + '\'' +
-                    ", lancerPhoneNo='" + lancerPhoneNo + '\'' +
-                    ", lancerProvider='" + lancerProvider + '\'' +
+                    ", lancerMobileNo='" + lancerMobileNo + '\'' +
+                    ", lancerAddressId='" + lancerAddressId + '\'' +
+                    ", lancerProfessionalTitle='" + lancerProfessionalTitle + '\'' +
+                    ", lancerAvailability='" + lancerAvailability + '\'' +
+                    ", lancerSelfIntro='" + lancerSelfIntro + '\'' +
+                    ", lancerDob='" + lancerDob + '\'' +
+                    ", lancerGender='" + lancerGender + '\'' +
+                    ", lancerCreatedAt='" + lancerCreatedAt + '\'' +
+                    ", lancerUpdatedAt='" + lancerUpdatedAt + '\'' +
                     ", lancerImage='" + lancerImage + '\'' +
+                    ", lancerProvider='" + lancerProvider + '\'' +
+                    ", lancerMinHourRate='" + lancerMinHourRate + '\'' +
+                    ", lancerSkills='" + lancerSkills + '\'' +
                     '}';
         }
 
@@ -123,20 +183,76 @@ public class ApiResponseRegisterLancer {
             this.lancerEmail = lancerEmail;
         }
 
-        public String getLancerPhoneNo() {
-            return lancerPhoneNo;
+        public String getLancerMobileNo() {
+            return lancerMobileNo;
         }
 
-        public void setLancerPhoneNo(String lancerPhoneNo) {
-            this.lancerPhoneNo = lancerPhoneNo;
+        public void setLancerMobileNo(String lancerMobileNo) {
+            this.lancerMobileNo = lancerMobileNo;
         }
 
-        public String getLancerProvider() {
-            return lancerProvider;
+        public String getLancerAddressId() {
+            return lancerAddressId;
         }
 
-        public void setLancerProvider(String lancerProvider) {
-            this.lancerProvider = lancerProvider;
+        public void setLancerAddressId(String lancerAddressId) {
+            this.lancerAddressId = lancerAddressId;
+        }
+
+        public String getLancerProfessionalTitle() {
+            return lancerProfessionalTitle;
+        }
+
+        public void setLancerProfessionalTitle(String lancerProfessionalTitle) {
+            this.lancerProfessionalTitle = lancerProfessionalTitle;
+        }
+
+        public String getLancerAvailability() {
+            return lancerAvailability;
+        }
+
+        public void setLancerAvailability(String lancerAvailability) {
+            this.lancerAvailability = lancerAvailability;
+        }
+
+        public String getLancerSelfIntro() {
+            return lancerSelfIntro;
+        }
+
+        public void setLancerSelfIntro(String lancerSelfIntro) {
+            this.lancerSelfIntro = lancerSelfIntro;
+        }
+
+        public String getLancerDob() {
+            return lancerDob;
+        }
+
+        public void setLancerDob(String lancerDob) {
+            this.lancerDob = lancerDob;
+        }
+
+        public String getLancerGender() {
+            return lancerGender;
+        }
+
+        public void setLancerGender(String lancerGender) {
+            this.lancerGender = lancerGender;
+        }
+
+        public String getLancerCreatedAt() {
+            return lancerCreatedAt;
+        }
+
+        public void setLancerCreatedAt(String lancerCreatedAt) {
+            this.lancerCreatedAt = lancerCreatedAt;
+        }
+
+        public String getLancerUpdatedAt() {
+            return lancerUpdatedAt;
+        }
+
+        public void setLancerUpdatedAt(String lancerUpdatedAt) {
+            this.lancerUpdatedAt = lancerUpdatedAt;
         }
 
         public String getLancerImage() {
@@ -147,6 +263,28 @@ public class ApiResponseRegisterLancer {
             this.lancerImage = lancerImage;
         }
 
+        public String getLancerProvider() {
+            return lancerProvider;
+        }
 
+        public void setLancerProvider(String lancerProvider) {
+            this.lancerProvider = lancerProvider;
+        }
+
+        public String getLancerMinHourRate() {
+            return lancerMinHourRate;
+        }
+
+        public void setLancerMinHourRate(String lancerMinHourRate) {
+            this.lancerMinHourRate = lancerMinHourRate;
+        }
+
+        public String getLancerSkills() {
+            return lancerSkills;
+        }
+
+        public void setLancerSkills(String lancerSkills) {
+            this.lancerSkills = lancerSkills;
+        }
     }
 }

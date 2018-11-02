@@ -23,6 +23,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +33,9 @@ import com.pasistence.knockwork.Adapter.LancerListAdapter;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Freelancer.Activities.JobPoastingActivity;
 import com.pasistence.knockwork.Interface.ILoadMore;
+import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseLancer;
+import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
 import com.pasistence.knockwork.Model.LancerListModel;
 import com.pasistence.knockwork.Model.ResponseSuggestionList;
 import com.pasistence.knockwork.R;
@@ -53,14 +57,18 @@ public class LancersActivity extends AppCompatActivity
     RecyclerView recyclerLancer;
     LinearLayoutManager layoutManager;
     //Variable for pagination
-    int PageNo = 1;
     private boolean isScrolling = false;
-    private int visibleItemCount,totalItemCount,pastVisiblesItems = 0;
-    int previous_total,view_threshold = 0;
-    TextView txtMore;
+    int PageNo =  1;
+    int TotalElementsCount=0;
+    int currentItems;
+    int totalItems;
+    int scrollOutItems;
+    ProgressBar progressBar;
+
+
 
     ArrayList<LancerListModel> lancerList = new ArrayList<LancerListModel>();
-    ArrayList<ApiResponseLancer.Result> resultList = new ArrayList<ApiResponseLancer.Result>();
+    ArrayList<ApiResponseRegisterLancer.Lancer> resultList = new ArrayList<ApiResponseRegisterLancer.Lancer>();
     LancerListAdapter lancerListAdapter;
     LancerListAdapter searchAdapter;
     List<String> suggestList = new ArrayList<String>();
@@ -68,7 +76,7 @@ public class LancersActivity extends AppCompatActivity
     ListView listSuggestions;
     MyApi mService;
     List<ResponseSuggestionList> suggestionLists;
-    private boolean isLoading = true;
+    RelativeLayout rootLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +117,7 @@ public class LancersActivity extends AppCompatActivity
 
             }
         });
-        searchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
+     /*   searchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
             @Override
             public void onSearchStateChanged(boolean enabled) {
                 if(!enabled)
@@ -127,7 +135,7 @@ public class LancersActivity extends AppCompatActivity
             public void onButtonClicked(int buttonCode) {
 
             }
-        });
+        });*/
 
         /*----------------------------------------------------------------------------*/
 
@@ -152,50 +160,43 @@ public class LancersActivity extends AppCompatActivity
 
         recyclerLancer.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                    isScrolling = true;
+                }
+            }
+
+            @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+                currentItems = layoutManager.getChildCount();
+                totalItems = layoutManager.getItemCount();
+                scrollOutItems = layoutManager.findFirstCompletelyVisibleItemPosition();
 
-                visibleItemCount=layoutManager.getChildCount();
-                totalItemCount= layoutManager.getItemCount();
-                pastVisiblesItems=layoutManager.findFirstVisibleItemPosition();
-
-                Log.e(TAG, "visible item"+visibleItemCount);
-                Log.e(TAG, "total item"+totalItemCount);
-                Log.e(TAG, "pastvis item"+pastVisiblesItems);
-
-                if(dy>0){
-
-                  /*  if(isLoading){
-
-                        if(totalItemCount>previous_total){
-                            isLoading = false;
-                            previous_total = totalItemCount;
-                        }
-                    }*/
-
-                    if(isLoading&&(visibleItemCount+pastVisiblesItems) >= totalItemCount){
-                        PageNo++;
-                       // performPagination(PageNo);
-                        isLoading=false;
-                    }
+                if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
+                    isScrolling = false;
+                    performPagination();
                 }
+                //  isScrolling = true;
             }
         });
     }
 
     private void getAllLancers(int PageNo) {
 
-        mService.getLancers(PageNo).enqueue(new Callback<ApiResponseLancer>() {
+        mService.getLancers(PageNo).enqueue(new Callback<ApiResponseRegisterLancer>() {
             @Override
-            public void onResponse(Call<ApiResponseLancer> call, Response<ApiResponseLancer> response) {
+            public void onResponse(Call<ApiResponseRegisterLancer> call, Response<ApiResponseRegisterLancer> response) {
 
                 response.message();
-                ApiResponseLancer result = response.body();
+                ApiResponseRegisterLancer result = response.body();
                 Log.e(TAG+"+", result.toString());
 
-                resultList = result.getResult();
+                resultList = result.getLancer();
                 Log.e(TAG+"++", resultList.toString());
-                //totalItemCount = Integer.parseInt(response.body().getTotalCount());
+                TotalElementsCount = Integer.parseInt(response.body().getTotalCount());
+
 
                 lancerListAdapter = new LancerListAdapter(mContext, resultList);
                 recyclerLancer.setAdapter(lancerListAdapter);
@@ -203,7 +204,7 @@ public class LancersActivity extends AppCompatActivity
             }
 
             @Override
-            public void onFailure(Call<ApiResponseLancer> call, Throwable t) {
+            public void onFailure(Call<ApiResponseRegisterLancer> call, Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -297,13 +298,14 @@ public class LancersActivity extends AppCompatActivity
 
     private void mInit() {
         mContext = LancersActivity.this;
+        progressBar = (ProgressBar)findViewById(R.id.progress);
 
+        rootLayout = (RelativeLayout)findViewById(R.id.lancer_activity);
         searchBar = (MaterialSearchBar)findViewById(R.id.search_bar_lancer);
         recyclerLancer = (RecyclerView)findViewById(R.id.recycler_lancer_list);
         recyclerLancer.setHasFixedSize(false);
         layoutManager = new LinearLayoutManager(this);
         recyclerLancer.setLayoutManager(layoutManager);
-        txtMore = (TextView)findViewById(R.id.txt_more);
 
         try{
 
@@ -330,7 +332,7 @@ public class LancersActivity extends AppCompatActivity
                 ApiResponseLancer result = response.body();
               // Log.e(TAG, result.toString());
 
-                resultList = result.getResult();
+               // resultList = result.getResult();
 
                 searchAdapter = new LancerListAdapter(mContext,resultList);
                 recyclerLancer.setAdapter(searchAdapter);
@@ -377,53 +379,58 @@ public class LancersActivity extends AppCompatActivity
         //searchBar.setLastSuggestions(suggestList);
     }
 
-    private void performPagination(int PageNo){
+    private void performPagination(){
         //perform call statment
-        mService.getLancers(PageNo).enqueue(new Callback<ApiResponseLancer>() {
-            @Override
-            public void onResponse(Call<ApiResponseLancer> call, Response<ApiResponseLancer> response) {
-                if(response.body().getStatus().equals("OK")){
-                    if(response.body().getResult()!= null || !response.body().getResult().equals("")){
 
-                        int oldsize = resultList.size();
-                        int newsize = 0;
-                        ArrayList<ApiResponseLancer.Result> results = response.body().getResult();
-                        lancerListAdapter.addLancers(results);
+        progressBar.setVisibility(View.VISIBLE);
+        new Handler().postDelayed(new Runnable() {
+        @Override
+        public void run() {
+            // progressBar.setVisibility(View.VISIBLE);
+            for (int i=0; i<1; i++)
+            {
+                try {
+                    if(TotalElementsCount == resultList.size()){
+                        //Toast.makeText(mContext, "Nothing to Display", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(findViewById(R.id.lancer_activity), "Nothing to Display", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    }else{
+                        PageNo++;
+                        mService.getLancers(PageNo).enqueue(new Callback<ApiResponseRegisterLancer>() {
+                            @Override
+                            public void onResponse(Call<ApiResponseRegisterLancer> call, Response<ApiResponseRegisterLancer> response) {
+                                ApiResponseRegisterLancer result = response.body();
+                                Log.e(TAG, result.toString());
 
-                       /* for(int i=0;i<results.size();i++){
-                            resultList.add(results.get(i));
-                            newsize = resultList.size();
-                        }
-                        lancerListAdapter = new LancerListAdapter(mContext, resultList);
-                        recyclerLancer.setAdapter(lancerListAdapter);
-                        lancerListAdapter.notifyItemInserted(newsize-oldsize+1);*/
-                       // lancerListAdapter.notifyDataSetChanged();
+                                Log.e(TAG+"SizeM",resultList.size()+"");
+                                for (ApiResponseRegisterLancer.Lancer res : result.getLancer()){
+                                    resultList.add(res);
+                                }
+
+                                lancerListAdapter.notifyDataSetChanged();
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<ApiResponseRegisterLancer> call, Throwable t) {
+                                Log.e(TAG, t.getMessage());
+                                t.printStackTrace();
+
+                            }
+                        });
                     }
-
-                }else {
-                    Snackbar.make(findViewById(R.id.lancer_activity), "End of List", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                }catch (Exception e)
+                {
+                    Log.e(TAG, e.getMessage() );
+                    e.printStackTrace();
+                    Common.commonDialog(mContext,"Sever not found..");
                 }
-
-                response.message();
-                ApiResponseLancer result = response.body();
-                Log.e(TAG+"+", result.toString());
-
-                resultList = result.getResult();
-                Log.e(TAG+"++", resultList.toString());
-
-                lancerListAdapter = new LancerListAdapter(mContext, resultList);
-                recyclerLancer.setAdapter(lancerListAdapter);
                 lancerListAdapter.notifyDataSetChanged();
+                progressBar.setVisibility(View.GONE);
             }
 
-            @Override
-            public void onFailure(Call<ApiResponseLancer> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+        }
+    }, 3000);
+}
 
-
-    }
 
 }

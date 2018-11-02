@@ -46,7 +46,7 @@ public interface MyApi {
     Call<List<ResponseSuggestionList>>getSuggestionList();
 
     @GET("lancers/{pageNo}")
-    Call<ApiResponseLancer>getLancers(@Path("pageNo") int pageNo);
+    Call<ApiResponseRegisterLancer>getLancers(@Path("pageNo") int pageNo);
 
     @FormUrlEncoded
     @POST("lancersearch")

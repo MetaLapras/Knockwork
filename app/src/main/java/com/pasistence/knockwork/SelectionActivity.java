@@ -117,8 +117,8 @@ public class SelectionActivity extends AppCompatActivity
         btnHire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mContext,ChatActivity.class));
-                //startActivity(new Intent(mContext,DashboardActivity.class));
+                //startActivity(new Intent(mContext,ChatActivity.class));
+                startActivity(new Intent(mContext,DashboardActivity.class));
                 PreferenceUtils.setUserType(mContext,Common.Client);
                 finish();
             }

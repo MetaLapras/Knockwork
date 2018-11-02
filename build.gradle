@@ -32,7 +32,6 @@ allprojects {
         maven { url "https://jitpack.io" }
         maven { url "https://maven.google.com" }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        maven { url "https://raw.githubusercontent.com/smilefam/SendBird-SDK-Android/master/" }
     }
 }
 

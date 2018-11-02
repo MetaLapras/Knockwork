@@ -17,6 +17,7 @@ import com.pasistence.knockwork.Client.Activities.ChattingActivity;
 import com.pasistence.knockwork.Client.Activities.ClientJobRequest;
 import com.pasistence.knockwork.Interface.ILoadMore;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseLancer;
+import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.ViewHolder.ViewHolderFreeLancerList;
 import com.squareup.picasso.Picasso;
@@ -26,59 +27,46 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class LancerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class LancerListAdapter extends RecyclerView.Adapter<ViewHolderFreeLancerList> {
 
     private static final String TAG = "lanceradapter";
     public Context mContext;
-    ArrayList<ApiResponseLancer.Result> lancerArraylist ;
+    ArrayList<ApiResponseRegisterLancer.Lancer> lancerArraylist ;
 
-    public LancerListAdapter(Context mContext, ArrayList<ApiResponseLancer.Result> workerList) {
+    public LancerListAdapter(Context mContext, ArrayList<ApiResponseRegisterLancer.Lancer> workerList) {
         this.mContext = mContext;
         this.lancerArraylist = workerList;
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+    public ViewHolderFreeLancerList onCreateViewHolder(@NonNull ViewGroup parent, int i) {
 
             View itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.custome_member_templets,parent,false);
-
             return new ViewHolderFreeLancerList(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolderFreeLancerList holder, int position) {
 
-            ViewHolderFreeLancerList viewHolder = (ViewHolderFreeLancerList) holder;
-            final ApiResponseLancer.Result lancers = lancerArraylist.get(position);
 
-            Picasso.with(mContext).load(lancers.getImageUrl())
-                    .into(viewHolder.CircularImageViewProfile);
+            final ApiResponseRegisterLancer.Lancer lancers = lancerArraylist.get(position);
 
-            viewHolder.txtLancerName.setText(lancers.getFirstName()+" "+lancers.getLastName());
-            viewHolder.txtLancerState.setText(lancers.getCountry());
-            viewHolder.txtLancerDescription.setText(lancers.getDescription());
-            //   holder.txtLancerLike.setText(lancers.getLike());
-            viewHolder.txtLancerEarned.setText(lancers.getEarning());
+            Picasso.with(mContext).load(lancers.getLancerImage())
+                    .into(holder.CircularImageViewProfile);
+
+            holder.txtLancerName.setText(lancers.getLancerName());
+            holder.txtLancerState.setText(lancers.getLancerGender());
+            holder.txtLancerDescription.setText(lancers.getLancerSelfIntro());
+                //   holder.txtLancerLike.setText(lancers.getLike());
+            holder.txtLancerEarned.setText(lancers.getLancerMinHourRate());
 
     }
 
     @Override
     public int getItemCount() {
         return lancerArraylist.size();
-    }
-
-    public void addLancers(ArrayList<ApiResponseLancer.Result>results){
-        int oldsize = lancerArraylist.size();
-        int newsize = 0;
-        for(int i=0;i<results.size();i++){
-            lancerArraylist.add(results.get(i));
-            newsize = lancerArraylist.size();
-        }
-        notifyItemInserted(newsize-oldsize+1);
-        Log.e(TAG, lancerArraylist.toString() );
-        Log.e(TAG, lancerArraylist.size()+"" );
     }
 
 }

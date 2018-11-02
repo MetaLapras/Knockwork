@@ -54,13 +54,14 @@ public class ManageJobPostActivity extends AppCompatActivity
     private static final String TAG = "search";
     Button btnMore;
     Boolean isScrolling = false;
-    int currentItems;
-    int totalItems;
-    int scrollOutItems;
+
     ProgressBar progressBar;
     MyApi mServices;
     int PageNo =  1;
     int TotalElementsCount=0;
+    int currentItems;
+    int totalItems;
+    int scrollOutItems;
 
 
     ArrayList<ApiPostJobResponse.Result> manageJobPostingModels = new ArrayList<ApiPostJobResponse.Result>();
