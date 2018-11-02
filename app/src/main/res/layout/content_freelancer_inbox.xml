@@ -6,12 +6,18 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Freelancer.Activities.FreelancerInboxActivity"
-    tools:showIn="@layout/app_bar_freelancer_inbox">
+    tools:showIn="@layout/app_bar_freelancer_inbox"
+    android:background="@color/white">
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_below="@id/toolBar"
+    <com.stfalcon.chatkit.dialogs.DialogsList
+        android:id="@+id/dialogsList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycler_inbox_freelancer"></android.support.v7.widget.RecyclerView>
+        app:dialogDividerLeftPadding="0dp"
+        app:dialogMessageTextSize="17sp"
+        app:dialogMessageTextStyle="bold"
+        app:dialogUnreadBubbleBackgroundColor="@color/red"
+        app:dialogUnreadItemBackground="@color/gray_transparent"
+        app:dialogUnreadTitleTextStyle="bold"/>
 
 </RelativeLayout>

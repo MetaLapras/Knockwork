@@ -132,15 +132,6 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -163,27 +154,11 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
             }
         });
 
-       /* UserData data = new Common().getUserData();
-
-        if(data!=null){
-            txtUserEmail.setText(data.getEmail());
-            txtUserName.setText(data.getDisplayName());
-
-            Picasso.with(mContext).load(data.getPhotoUrl()).into(imgUserProfile);
-        }
-*/
-
         txtUserName.setText(Common.UserName);
         txtUserEmail.setText(Common.UserEmail);
         Picasso.with(mContext).load(Common.UserPhoto).into(imgUserProfile);
 
 
-        //init Fire base
-        //database = FirebaseDatabase.getInstance();
-        //popular_dataReference = database.getReference("popular");
-        //Top_dataReference = database.getReference("top");
-
-        //loadTopServices();
         loadPopularServices();
 
 
@@ -225,95 +200,6 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         });
 
 
-       /* FirebaseRecyclerOptions<PopularServicesModel> options = new FirebaseRecyclerOptions.Builder<PopularServicesModel>()
-                .setQuery(popular_dataReference,PopularServicesModel.class)
-                .build();
-
-        popularAdapter = new FirebaseRecyclerAdapter<PopularServicesModel, ViewHolderPopularServices>(options) {
-            @Override
-            protected void onBindViewHolder( ViewHolderPopularServices viewHolder, int position, final PopularServicesModel model) {
-                viewHolder.txtPopularservice.setText(model.getName());
-                Picasso.with(getBaseContext()).load(model.getImage())
-                        .into(viewHolder.imgPopularservice);
-
-                final PopularServicesModel clickitem = model;
-                Log.e("popular", model.toString() );
-
-                viewHolder.setItemClickListener(new ItemClickListener() {
-                    @Override
-                    public void onClick(View view, int position, boolean isLongClick) {
-                        //Toast.makeText(DashboardActivity.this, "", Toast.LENGTH_SHORT).show();
-                        Snackbar.make(view, ""+clickitem.name, Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                        Log.e("popular", model.toString());
-                    }
-                });
-            }
-
-            @Override
-            public ViewHolderPopularServices onCreateViewHolder(ViewGroup parent, int viewType) {
-                View itemView = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.custome_template_popularservices,parent,false);
-                return new ViewHolderPopularServices(itemView);
-            }
-        };*/
-
-
-        /*FirebaseRecyclerOptions<TopServicesModel> topOptions = new FirebaseRecyclerOptions.Builder<TopServicesModel>()
-                .setQuery(Top_dataReference,TopServicesModel.class)
-                .build();
-
-        TopServiceAdapter = new FirebaseRecyclerAdapter<TopServicesModel, ViewHolderTopServices>(topOptions) {
-            @Override
-            protected void onBindViewHolder(@NonNull ViewHolderTopServices viewHolder, int position, @NonNull TopServicesModel model) {
-
-                viewHolder.txtHead.setText(model.getHead());
-                viewHolder.txtContent.setText(model.getContent());
-
-                Picasso.with(getBaseContext()).load(model.getImage())
-                        .into(viewHolder.imgTopServices);
-
-                Picasso.with(getBaseContext()).load(model.getLogo())
-                        .into(viewHolder.imgLogo);
-
-
-                final TopServicesModel clickitem = model;
-
-                viewHolder.setItemClickListener(new ItemClickListener() {
-                    @Override
-                    public void onClick(View view, int position, boolean isLongClick) {
-                       *//* Intent intent = new Intent(Home.this, FoodMenu.class);
-                        intent.putExtra("CategoryId",adapter.getRef(position).getKey());
-                        startActivity(intent);*//*
-                        // Toast.makeText(mContext,""+clickitem.getHead(),Toast.LENGTH_LONG).show();
-                       // Snackbar.make(view, ""+clickitem.getHead(), Snackbar.LENGTH_LONG)
-                         //       .setAction("Action", null).show();
-
-                        startActivity(new Intent(mContext,SearchFreelancerActivity.class));
-                        Snackbar.make(view, ""+clickitem.getHead(), Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-
-                        //startActivity(new Intent(mContext,FreelancerJobsActivity.class));
-                    }
-                });
-            }
-
-
-
-            @Override
-            public ViewHolderTopServices onCreateViewHolder(ViewGroup parent, int viewType) {
-                View itemView = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.custom_template_topservices,parent,false);
-                return new ViewHolderTopServices(itemView);
-
-            }
-        };
-        recyclerTopServices.setAdapter(TopServiceAdapter);
-        recyclerTopServices.scheduleLayoutAnimation();
-        TopServiceAdapter.notifyDataSetChanged();
-
-        TopServiceAdapter.startListening();
-*/
 
         //Slider setup
         //setupSlider();
@@ -439,12 +325,8 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
@@ -500,56 +382,27 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             startActivity(new Intent(FreeLancerDashboardActivity.this,SearchFreelancerActivity.class));
-            /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();*/
-            // Handle the camera action
         } else if (id == R.id.nav_inbox) {
             startActivity(new Intent(FreeLancerDashboardActivity.this,FreelancerInboxActivity.class));
-            /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();*/
-           // startActivity(new Intent(mContext,InboxActivity.class));
-
-            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-            startActivity(new Intent(mContext,InboxActivity.class));
 
         } else if (id == R.id.nav_notification) {
-            /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Notification", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-*/
+
         } else if (id == R.id.nav_manage) {
-            /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage Bids", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();*/
-//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage Bids", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show();
             startActivity(new Intent(mContext,ManageBidsActivity.class));
 
         } else if (id == R.id.nav_active) {
-            /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Active Jobs", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();*/
         } else if (id == R.id.nav_manage_jobs) {
-           /* Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Job Posting", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();*/
-//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Active Jobs", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show();
 
             startActivity(new Intent(mContext,FreelancerJobsActivity.class));
 
 
         } else if (id == R.id.nav_proposal) {
-            /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Submit a Proposal", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();*/
 
         }else if (id == R.id.nav_settings) {
             startActivity(new Intent(FreeLancerDashboardActivity.this,FreelancerSettingActivity.class));
 
-            /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Settings", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();*/
 
         }else if (id == R.id.nav_support) {
-
-            /*Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Support", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();*/
 
         }
 
@@ -559,11 +412,6 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
     }
 
     private void loadPopularServices() {
-      /*  popularAdapter.notifyDataSetChanged();
-        popularAdapter.startListening();
-        recyclerPopularServices.setAdapter(popularAdapter);
-        recyclerPopularServices.scheduleLayoutAnimation();
-        refreshLayout.setRefreshing(false);*/
 
         mService.getTopServices().enqueue(new Callback<List<ResponseTopService>>() {
             @Override

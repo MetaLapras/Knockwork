@@ -145,7 +145,7 @@ dependencies {
 
     //chatkit
     implementation 'com.github.stfalcon:chatkit:0.3.3'
-
+    implementation 'com.github.siyamed:android-shape-imageview:0.9.3'
     /* implementation 'com.google.firebase:firebase-storage:16.0.1:15.0.0'
     implementation 'com.google.firebase:firebase-auth:16.0.1:15.0.0'
 */
