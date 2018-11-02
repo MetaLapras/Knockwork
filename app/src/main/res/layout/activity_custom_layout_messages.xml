@@ -17,6 +17,7 @@
         app:incomingAvatarWidth="56dp"
         app:incomingBubbleDrawable="@drawable/bg_custom_incoming_message"
         app:outcomingBubbleDrawable="@drawable/bg_custom_outcoming_message"
+        app:outcomingDefaultBubbleColor="@color/blue"
         app:outcomingTimeTextColor="@color/gray_dark_transparent"/>
 
     <View
