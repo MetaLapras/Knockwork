@@ -208,5 +208,14 @@ public interface MyApi {
     @GET("allSkills")
     Call<List<ApiSkillsResponse>> getAllSkills();
 
+    //Getall Small suggestions when a category is searched
+    @FormUrlEncoded
+    @POST("getSmallSuggestions")
+    Call<List<ApiSkillsResponse>>getSmallSuggestion(
+            @Field("title") String Title);
+
+
+
+
 }
 

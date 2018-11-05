@@ -81,9 +81,6 @@
               android:isScrollContainer="false"
               >
 
-
-
-
           </ListView>
 
            <!-- <LinearLayout

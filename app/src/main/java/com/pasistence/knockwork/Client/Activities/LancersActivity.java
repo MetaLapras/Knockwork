@@ -30,12 +30,14 @@ import android.widget.Toast;
 
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Adapter.LancerListAdapter;
+import com.pasistence.knockwork.Adapter.SmallSuggestionAdapter;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Freelancer.Activities.JobPoastingActivity;
 import com.pasistence.knockwork.Interface.ILoadMore;
 import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseLancer;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
+import com.pasistence.knockwork.Model.ApiResponse.ApiSkillsResponse;
 import com.pasistence.knockwork.Model.LancerListModel;
 import com.pasistence.knockwork.Model.ResponseSuggestionList;
 import com.pasistence.knockwork.R;
@@ -65,19 +67,18 @@ public class LancersActivity extends AppCompatActivity
     int scrollOutItems;
     ProgressBar progressBar;
 
-
-
     ArrayList<LancerListModel> lancerList = new ArrayList<LancerListModel>();
     ArrayList<ApiResponseRegisterLancer.Lancer> resultList = new ArrayList<ApiResponseRegisterLancer.Lancer>();
     LancerListAdapter lancerListAdapter;
     LancerListAdapter searchAdapter;
     List<String> suggestList = new ArrayList<String>();
     String CatId,subCatId;
-    ListView listSuggestions;
     MyApi mService;
     List<ResponseSuggestionList> suggestionLists;
+    List<ApiSkillsResponse> smallSuggestions;
     RelativeLayout rootLayout;
-
+    RecyclerView lstSmallSugest;
+    SmallSuggestionAdapter smallSuggestionAdapter ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,12 +118,12 @@ public class LancersActivity extends AppCompatActivity
 
             }
         });
-     /*   searchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
+        searchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
             @Override
             public void onSearchStateChanged(boolean enabled) {
                 if(!enabled)
                 {
-                    recyclerLancer.setAdapter(lancerListAdapter);
+                   // recyclerLancer.setAdapter(lancerListAdapter);
                 }
             }
 
@@ -135,7 +136,7 @@ public class LancersActivity extends AppCompatActivity
             public void onButtonClicked(int buttonCode) {
 
             }
-        });*/
+        });
 
         /*----------------------------------------------------------------------------*/
 
@@ -181,6 +182,9 @@ public class LancersActivity extends AppCompatActivity
                 //  isScrolling = true;
             }
         });
+
+
+        getSmallSuggestion("Mobile");
     }
 
     private void getAllLancers(int PageNo) {
@@ -307,6 +311,11 @@ public class LancersActivity extends AppCompatActivity
         layoutManager = new LinearLayoutManager(this);
         recyclerLancer.setLayoutManager(layoutManager);
 
+        lstSmallSugest = (RecyclerView)findViewById(R.id.list_subcategory);
+        lstSmallSugest.setHasFixedSize(false);
+        LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
+        lstSmallSugest.setLayoutManager(layoutManager);
+
         try{
 
             if(getIntent()!=null){
@@ -325,7 +334,7 @@ public class LancersActivity extends AppCompatActivity
     }
 
     private void startSearch(CharSequence text) {
-        mService.LancerSearch(1,text).enqueue(new Callback<ApiResponseLancer>() {
+      /*  mService.LancerSearch(1,text).enqueue(new Callback<ApiResponseLancer>() {
             @Override
             public void onResponse(Call<ApiResponseLancer> call, Response<ApiResponseLancer> response) {
                 response.message();
@@ -346,6 +355,7 @@ public class LancersActivity extends AppCompatActivity
             }
 
         });
+*/
 
     }
 
@@ -432,5 +442,34 @@ public class LancersActivity extends AppCompatActivity
     }, 3000);
 }
 
+    private void getSmallSuggestion(CharSequence str) {
 
+        try {
+
+            mService.getSmallSuggestion("mobile").enqueue(new Callback<List<ApiSkillsResponse>>() {
+                @Override
+                public void onResponse(Call<List<ApiSkillsResponse>> call, Response<List<ApiSkillsResponse>> response) {
+
+                    Log.e(TAG, response.body().toString());
+                    smallSuggestions = response.body();
+
+                    smallSuggestionAdapter = new SmallSuggestionAdapter(LancersActivity.this,smallSuggestions);
+                    lstSmallSugest.setAdapter(smallSuggestionAdapter);
+                    smallSuggestionAdapter.notifyDataSetChanged();
+
+                }
+
+                @Override
+                public void onFailure(Call<List<ApiSkillsResponse>> call, Throwable t) {
+
+                }
+            });
+
+
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+            e.printStackTrace();
+            Common.commonDialog(mContext, "Sever not found..");
+        }
+    }
 }

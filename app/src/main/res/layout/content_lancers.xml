@@ -29,12 +29,12 @@
 
     </android.support.v7.widget.CardView>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/list_subcategory">
 
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
             android:id="@+id/recycler_lancer_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:isScrollContainer="false"
+            android:isScrollContainer="true"
             android:layout_margin="5dp"/>
 
 

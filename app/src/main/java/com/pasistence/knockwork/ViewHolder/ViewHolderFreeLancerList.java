@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.pasistence.knockwork.ChatBox.CustomLayoutMessagesActivity;
 import com.pasistence.knockwork.Client.Activities.ChattingActivity;
 import com.pasistence.knockwork.Client.Activities.ClientJobRequest;
 import com.pasistence.knockwork.Client.Activities.LancersActivity;
@@ -48,7 +49,7 @@ public class ViewHolderFreeLancerList extends RecyclerView.ViewHolder implements
         if(v == btnLancerMessage){
             /*Snackbar.make(v, "Message Lancer", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();*/
-            v.getContext().startActivity(new Intent(v.getContext(),ChattingActivity.class));
+            v.getContext().startActivity(new Intent(v.getContext(),CustomLayoutMessagesActivity.class));
         }
     }
 }

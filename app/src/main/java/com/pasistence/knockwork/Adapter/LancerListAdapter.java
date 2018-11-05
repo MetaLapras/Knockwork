@@ -53,8 +53,13 @@ public class LancerListAdapter extends RecyclerView.Adapter<ViewHolderFreeLancer
 
             final ApiResponseRegisterLancer.Lancer lancers = lancerArraylist.get(position);
 
-            Picasso.with(mContext).load(lancers.getLancerImage())
-                    .into(holder.CircularImageViewProfile);
+            if(lancers.getLancerImage().equals(null)||lancers.getLancerImage().equals("")){
+                Picasso.with(mContext).load("http://fboverlays.com/pages/assets/frontend/img/previewImage.png")
+                        .into(holder.CircularImageViewProfile);
+            }else {
+                Picasso.with(mContext).load(lancers.getLancerImage())
+                        .into(holder.CircularImageViewProfile);
+            }
 
             holder.txtLancerName.setText(lancers.getLancerName());
             holder.txtLancerState.setText(lancers.getLancerGender());

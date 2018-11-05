@@ -52,7 +52,6 @@ import com.pasistence.knockwork.Client.Activities.DashboardActivity;
 import com.pasistence.knockwork.Client.Activities.InboxActivity;
 import com.pasistence.knockwork.Common.Common;
 
-import com.pasistence.knockwork.Client.Activities.LancerListActivity;
 import com.pasistence.knockwork.Common.PreferenceUtils;
 import com.pasistence.knockwork.Database.DatabseHandler;
 import com.pasistence.knockwork.Interface.ItemClickListener;
