@@ -252,7 +252,7 @@
 
                 </LinearLayout>
 
-
+<!--
                 <TextView
                     android:id="@+id/freelancer_profile_selfintroduction"
                     android:layout_width="match_parent"
@@ -270,8 +270,8 @@
                     android:gravity="top|left"
                     android:textSize="15dp"
                     android:hint="write about you in brif"
-                    android:padding="5dp" />
-                <TextView
+                    android:padding="5dp" />-->
+               <!-- <TextView
                     android:id="@+id/freelancer_profile_skills"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -290,7 +290,7 @@
                     android:gravity="top|left"
                     android:textSize="15dp"
                     android:hint="Java,Android"
-                    android:padding="5dp" />
+                    android:padding="5dp" />-->
 
 
                 <info.hoang8f.widget.FButton

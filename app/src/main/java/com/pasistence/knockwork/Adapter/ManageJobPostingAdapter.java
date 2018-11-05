@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.choota.dev.ctimeago.TimeAgo;
+
 import com.pasistence.knockwork.Client.Activities.ClientJobPostingActivity;
 import com.pasistence.knockwork.Client.Activities.ManageJobPostActivity;
 import com.pasistence.knockwork.Common.Common;
@@ -82,11 +82,11 @@ public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnag
         try {
             Date d = sdf.parse(job.getUpdatedAt());
 
-            TimeAgo timeAgo = new TimeAgo();
-            String result = timeAgo.getTimeAgo(d);
+            /*TimeAgo timeAgo = new TimeAgo();
+            String result = timeAgo.getTimeAgo(d);*/
 
 
-            holder.txtpoastedDays.setText(result);
+           // holder.txtpoastedDays.setText(result);
 
         } catch (ParseException ex) {
             Log.v("Exception", ex.getLocalizedMessage());

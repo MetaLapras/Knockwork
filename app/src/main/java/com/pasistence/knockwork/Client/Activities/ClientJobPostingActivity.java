@@ -524,7 +524,9 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
         {
             mServices.ClientPostAJob(
                     "EXSYrhgNDZPrRRyRgZPvy3agVJR2",
+                    //Uid,
                     "44",
+                    //Cid,
                     category,
                     subcategory,
                     title,

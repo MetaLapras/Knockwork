@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Freelancer.Fragments.FreeLancerProfileFragment;
+import com.pasistence.knockwork.Freelancer.Fragments.FreelancerSkillsFragment;
 import com.pasistence.knockwork.R;
 import com.squareup.picasso.Picasso;
 
@@ -42,6 +43,10 @@ Context mContext;
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
+
+/*        fragmentTransaction.add(R.id.fragment_profile,new FreeLancerProfileFragment());
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit()*/;
 
         fragmentTransaction.add(R.id.fragment_profile,new FreeLancerProfileFragment());
         fragmentTransaction.addToBackStack(null);

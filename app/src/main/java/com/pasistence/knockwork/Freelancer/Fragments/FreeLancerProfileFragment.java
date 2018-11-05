@@ -99,24 +99,33 @@ public class FreeLancerProfileFragment extends Fragment {
                         gender = rdFemale.getText().toString();
                     }
 
-                    skills = edtSkills.getText().toString();
-                    selfintro = edtSelfIntro.getText().toString();
+                   /* skills = edtSkills.getText().toString();
+                    selfintro = edtSelfIntro.getText().toString();*/
 
 
                     if(Common.isConnectedToInterNet(getContext())){
 
                         try{
                         mService.updateLancerProfile(
-                                Uid,
-                                Lid,
-                                title,
+                              /* // Uid,
+                                //Lid,
                                 avaliblity,
                                 selfintro,
                                 dob,
                                 gender,
                                 minhrRate,
                                 skills,
-                                contactno
+                                contactno*/
+                                "abc12318",
+                                "17",
+                                "ttl",
+                                "aff",
+                                "bgc",
+                                "da",
+                                "cadc",
+                                "dsc",
+                                ",l",
+                                "2323"
                         ).enqueue(new Callback<ApiResponseUpdateLancer>() {
                             @Override
                             public void onResponse(Call<ApiResponseUpdateLancer> call, Response<ApiResponseUpdateLancer> response) {
@@ -126,7 +135,7 @@ public class FreeLancerProfileFragment extends Fragment {
                                 if(!result.getError()){
 
                                     FragmentTransaction ft = getFragmentManager().beginTransaction();
-                                    ft.replace(R.id.fragment_profile,new FreelanceEducationFragment());
+                                    ft.replace(R.id.fragment_profile,new FreelancerSkillsFragment());
                                     ft.addToBackStack(null);
                                     ft.commit();
 
@@ -204,7 +213,7 @@ public class FreeLancerProfileFragment extends Fragment {
             cancel=true;
         }
 
-        if (TextUtils.isEmpty(edtSelfIntro.getText())){
+       /* if (TextUtils.isEmpty(edtSelfIntro.getText())){
             edtSelfIntro.setError("Please enter 200 words descriptions * ");
             focusView=edtSelfIntro;
             cancel=true;
@@ -214,7 +223,7 @@ public class FreeLancerProfileFragment extends Fragment {
             edtSkills.setError("Please enter Min 5 skills ");
             focusView=edtSkills;
             cancel=true;
-        }
+        }*/
 /*
         if (TextUtils.isEmpty(edtPhoneNo.getText())){
             edtPhoneNo.setError("Please enter Valid Mobile No* ");
@@ -233,10 +242,10 @@ public class FreeLancerProfileFragment extends Fragment {
             focusView=txtDateofBirth;
             cancel=true;
         }
-        if(( Uid.equals(null)||Uid.equals(""))&&(Lid.equals(null)||Lid.equals(""))){
+       /* if(( Uid.equals(null)||Uid.equals(""))&&(Lid.equals(null)||Lid.equals(""))){
             Common.commonDialog(getContext(),"You Need to Complete your Registration First");
             cancel=true;
-        }
+        }*/
 
         return cancel;
     }
@@ -290,8 +299,8 @@ public class FreeLancerProfileFragment extends Fragment {
         edtMinhour = (EditText)view.findViewById(R.id.freelancer_profile_edtrate);
         edtTitle = (EditText)view.findViewById(R.id.freelancer_profile_edittitle);
 
-        edtSelfIntro = (EditText)view.findViewById(R.id.freelancer_profile_editselfintroduction);
-        edtSkills = (EditText)view.findViewById(R.id.freelancer_profile_editSkills);
+        //edtSelfIntro = (EditText)view.findViewById(R.id.freelancer_profile_editselfintroduction);
+        //edtSkills = (EditText)view.findViewById(R.id.freelancer_profile_editSkills);
 
         spnAvability = (Spinner)view.findViewById(R.id.freelancer_profile_spn_avalibility);
         txtContactNo = (TextView)view.findViewById(R.id.freelancer_profile_MNumber);

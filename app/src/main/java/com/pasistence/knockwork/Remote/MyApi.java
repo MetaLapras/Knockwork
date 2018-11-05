@@ -3,6 +3,7 @@ package com.pasistence.knockwork.Remote;
 import com.pasistence.knockwork.Model.ApiResponse.ApiEducationResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiExperienceResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
+import com.pasistence.knockwork.Model.ApiResponse.ApiResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseLancer;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterClient;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
@@ -205,8 +206,22 @@ public interface MyApi {
     );
 
     // SKILLS SET -------------------------------------------------------/
+    //get all Skills
     @GET("allSkills")
     Call<List<ApiSkillsResponse>> getAllSkills();
+
+    //Add Lancers Skills
+    @FormUrlEncoded
+    @POST("addLancerSkill")
+    Call<ApiResponse>ClientPostContestDelete(
+            @Field("uid") String uid,
+            @Field("lid") String lid,
+            @Field("category") String category,
+            @Field("subcategory") String subcategory,
+            @Field("skill") String skill,
+            @Field("selfintro")  String selfintro
+    );
+
 
     //Getall Small suggestions when a category is searched
     @FormUrlEncoded
