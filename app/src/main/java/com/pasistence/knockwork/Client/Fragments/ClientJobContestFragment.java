@@ -166,6 +166,7 @@ public class ClientJobContestFragment extends Fragment {
                 int currentProgress = (int)(100*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
                 progressDialog.setProgress(currentProgress);
 
+
             }
         });
 
@@ -188,6 +189,7 @@ public class ClientJobContestFragment extends Fragment {
         Intent intent = new Intent();
         intent.setType("application/pdf");
         intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(intent,86);
     }
 
@@ -197,11 +199,30 @@ public class ClientJobContestFragment extends Fragment {
         if(requestCode == 86 && resultCode ==RESULT_OK && data!=null)
         {
             pdfUri = data.getData();
-            txtUpload.setText("A file is selected : "+ data.getData().getLastPathSegment());
+            txtUpload.setText("a file is selected : "+ data.getData().getLastPathSegment());
+            progressDialog.dismiss();
         }
         else
         {
             Toast.makeText(getContext(), "Please select a file", Toast.LENGTH_SHORT).show();
         }
     }
+
+   /* public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 86) {
+            if(null != data) { // checking empty selection
+                if(null != data.getClipData()) { // checking multiple selection or not
+                    for(int i = 0; i < data.getClipData().getItemCount(); i++) {
+                        pdfUri = data.getClipData().getItemAt(i).getUri();
+                        txtUpload.setText("a file is selected : "+ data.getData().getLastPathSegment());
+                    }
+                } else {
+                   pdfUri = data.getData();
+
+
+                }
+            }
+        }
+    }*/
 }
