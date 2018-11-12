@@ -7,7 +7,6 @@ import android.widget.ImageView;
 
 import com.pasistence.knockwork.ChatBox.ChatModel.Dialog;
 import com.pasistence.knockwork.Common.AppUtils;
-import com.pasistence.knockwork.R;
 import com.squareup.picasso.Picasso;
 import com.stfalcon.chatkit.commons.ImageLoader;
 import com.stfalcon.chatkit.dialogs.DialogsListAdapter;
