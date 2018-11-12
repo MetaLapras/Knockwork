@@ -263,6 +263,7 @@
     <string name="contest_terms3">(c) We may revise the Terms and Conditions from time to time by updating this posting. The revised terms will take effect when they are posted.</string>
     <string name="contest_optional">Add Related File(Optional)</string>
     <string name="no_file">No file is Selected </string>
+    <string name="password">Password</string>
 
 
     <string-array name="milestones">

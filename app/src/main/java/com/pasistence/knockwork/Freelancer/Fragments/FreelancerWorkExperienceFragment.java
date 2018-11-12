@@ -1,7 +1,10 @@
 package com.pasistence.knockwork.Freelancer.Fragments;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,6 +24,7 @@ import android.widget.TextView;
 import com.pasistence.knockwork.Adapter.FreeLancerExperienceAdapter;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Common.PreferenceUtils;
+import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboardActivity;
 import com.pasistence.knockwork.Model.ApiResponse.ApiExperienceResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseUpdateLancer;
 import com.pasistence.knockwork.R;
@@ -59,7 +63,6 @@ public class FreelancerWorkExperienceFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -83,7 +86,6 @@ public class FreelancerWorkExperienceFragment extends Fragment {
                 }
             }
         });
-
 
         txtWorkto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,6 +167,25 @@ public class FreelancerWorkExperienceFragment extends Fragment {
         });
 
 
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+                alertDialogBuilder.setMessage("you have successfully Completed the Registration");
+                alertDialogBuilder.setNegativeButton("Ok",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                arg0.dismiss();
+                                startActivity(new Intent(getActivity(),FreeLancerDashboardActivity.class));
+                            }
+                        });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+        });
 
 
         return view;

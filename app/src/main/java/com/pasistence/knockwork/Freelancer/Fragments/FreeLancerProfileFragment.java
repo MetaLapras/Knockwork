@@ -75,15 +75,17 @@ public class FreeLancerProfileFragment extends Fragment {
         View view =  lf.inflate(R.layout.fragment_free_lancer_profile, container, false);
         mInit(view);
 
+
+
+        if(!PreferenceUtils.getPhoneNumber(getContext()).equals(null)||!PreferenceUtils.getPhoneNumber(getContext()).equals("")){
+            txtContactNo.setText(PreferenceUtils.getPhoneNumber(getContext()));
+            imgCorrect.setVisibility(View.VISIBLE);
+        }
+
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                if(!check()){
-                   final android.app.AlertDialog watingDialog = new SpotsDialog(getActivity());
-                   watingDialog.show();
-                   watingDialog.setMessage("Please Wait");
-                   watingDialog.setCancelable(false);
-                   watingDialog.show();
 
                     title = edtTitle.getText().toString();
                     minhrRate = edtMinhour.getText().toString();
@@ -103,79 +105,38 @@ public class FreeLancerProfileFragment extends Fragment {
                     selfintro = edtSelfIntro.getText().toString();*/
 
 
-                    if(Common.isConnectedToInterNet(getContext())){
+                   try
+                   {
 
-                        try{
-                        mService.updateLancerProfile(
-                              /* // Uid,
-                                //Lid,
-                                avaliblity,
-                                selfintro,
-                                dob,
-                                gender,
-                                minhrRate,
-                                skills,
-                                contactno*/
-                                "abc12318",
-                                "17",
-                                "ttl",
-                                "aff",
-                                "bgc",
-                                "da",
-                                "cadc",
-                                "dsc",
-                                ",l",
-                                "2323"
-                        ).enqueue(new Callback<ApiResponseUpdateLancer>() {
-                            @Override
-                            public void onResponse(Call<ApiResponseUpdateLancer> call, Response<ApiResponseUpdateLancer> response) {
-                                ApiResponseUpdateLancer result = response.body();
-                                Log.e(TAG, result.toString() );
+                       FreelancerSkillsFragment fragment = new FreelancerSkillsFragment();
 
-                                if(!result.getError()){
+                       Bundle args = new Bundle();
+                       args.putString("title", title);
+                       args.putString("avaiable", avaliblity);
+                       args.putString("dob", dob);
+                       args.putString("gender", gender);
+                       args.putString("minhrrate", minhrRate);
+                       args.putString("mobile", contactno);
 
-                                    FragmentTransaction ft = getFragmentManager().beginTransaction();
-                                    ft.replace(R.id.fragment_profile,new FreelancerSkillsFragment());
-                                    ft.addToBackStack(null);
-                                    ft.commit();
-
-                                }else if(result.getError()){
-                                    Common.commonDialog(getContext(),result.getMessage());
-                                }else
-                                {
-                                    Common.commonDialog(getContext(),"Server Not Found!");
-                                }
+                       fragment.setArguments(args);
 
 
-                                watingDialog.dismiss();
+                          FragmentTransaction ft = getFragmentManager().beginTransaction();
+                          ft.replace(R.id.fragment_profile,fragment);
+                          ft.addToBackStack(null);
+                          ft.commit();
 
-                            }
 
-                            @Override
-                            public void onFailure(Call<ApiResponseUpdateLancer> call, Throwable t) {
-                                Log.e(TAG, t.getMessage());
-                                t.printStackTrace();
-                                watingDialog.dismiss();
 
-                            }
-                        });
 
-                        }catch (Exception e){
-                            e.printStackTrace();
-                            Log.e(TAG, e.getMessage() );
-                            Common.commonDialog(getContext(),"Server Not Found!");
-                        }
+                   }catch (Exception e){
+                       e.printStackTrace();
+                       e.getMessage();
+                   }
 
-                    }else
-                    {
-                        Common.commonDialog(getContext(),"Please Check your Internet Connection");
-                    }
+
                }
 
-                /*FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.fragment_profile,new FreelanceEducationFragment());
-                ft.addToBackStack(null);
-                ft.commit();*/
 
             }
         });
@@ -242,10 +203,10 @@ public class FreeLancerProfileFragment extends Fragment {
             focusView=txtDateofBirth;
             cancel=true;
         }
-       /* if(( Uid.equals(null)||Uid.equals(""))&&(Lid.equals(null)||Lid.equals(""))){
+        if(( Uid.equals(null)||Uid.equals(""))&&(Lid.equals(null)||Lid.equals(""))){
             Common.commonDialog(getContext(),"You Need to Complete your Registration First");
             cancel=true;
-        }*/
+        }
 
         return cancel;
     }
@@ -321,7 +282,6 @@ public class FreeLancerProfileFragment extends Fragment {
         Lid = PreferenceUtils.getLid(getContext());
     }
 
-
     private void dateDialog(){
         // Get Current Date
         final Calendar c = Calendar.getInstance();
@@ -339,6 +299,8 @@ public class FreeLancerProfileFragment extends Fragment {
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
     }
+
+
 
 
 }

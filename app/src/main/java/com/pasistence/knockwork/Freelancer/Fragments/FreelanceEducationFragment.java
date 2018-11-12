@@ -1,5 +1,7 @@
 package com.pasistence.knockwork.Freelancer.Fragments;
 
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,6 +27,7 @@ import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.Remote.MyApi;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import info.hoang8f.widget.FButton;
 import retrofit2.Call;
@@ -37,14 +41,15 @@ public class FreelanceEducationFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private static final String TAG = "expLancer";
 
-    public EditText edtDegree,edtUniversity,edtPassingYear,edtPercentage;
+    public EditText edtDegree,edtUniversity,edtPercentage;
+    TextView edtPassingYear;
     public FButton btnNext;
     public FButton btnBack,btnAdd;
     public ListView lstEducations;
     MyApi mService;
     FreeLancerEducationAdapter adapter;
 
-
+    private int mYear, mMonth, mDay;
 
     String Uid,Lid,degree,university,percentage,passingyear;
 
@@ -76,6 +81,7 @@ public class FreelanceEducationFragment extends Fragment {
                         try{
                             mService.LancerProfileEducation(Uid,Lid,degree,percentage,passingyear,university)
                                     .enqueue(new Callback<ApiEducationResponse>() {
+                                        @SuppressLint("NewApi")
                                         @Override
                                         public void onResponse(Call<ApiEducationResponse> call, Response<ApiEducationResponse> response) {
                                             ApiEducationResponse result = response.body();
@@ -86,6 +92,7 @@ public class FreelanceEducationFragment extends Fragment {
                                                 ArrayList<ApiEducationResponse.LancerEducation> list = result.getLancerEducation();
 
                                                 lstEducations.setVisibility(View.VISIBLE);
+                                                lstEducations.isNestedScrollingEnabled();
                                                 adapter = new FreeLancerEducationAdapter(getContext(),list);
                                                 lstEducations.setAdapter(adapter);
                                                 adapter.notifyDataSetChanged();
@@ -117,6 +124,14 @@ public class FreelanceEducationFragment extends Fragment {
         });
 
 
+        edtPassingYear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dateDialog();
+            }
+        });
+
+
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,7 +150,7 @@ public class FreelanceEducationFragment extends Fragment {
         edtDegree = (EditText)view.findViewById(R.id.edt_freelancer_profile_Degree);
         edtUniversity = (EditText)view.findViewById(R.id.edt_freelancer_profile_Univeristy);
         edtPercentage = (EditText)view.findViewById(R.id.edt_freelancer_profile_percentage);
-        edtPassingYear = (EditText)view.findViewById(R.id.edt_freelancer_profile_yearofpassing);
+        edtPassingYear = (TextView)view.findViewById(R.id.edt_freelancer_profile_yearofpassing);
 
         btnNext =(FButton)view.findViewById(R.id.btn_next) ;
        // btnBack =(FButton)view.findViewById(R.id.btn_back) ;
@@ -183,6 +198,24 @@ public class FreelanceEducationFragment extends Fragment {
         }
 
         return cancel;
+    }
+
+    private void dateDialog(){
+        // Get Current Date
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),R.style.DialogTheme,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        edtPassingYear.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth );
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
     }
 
 }

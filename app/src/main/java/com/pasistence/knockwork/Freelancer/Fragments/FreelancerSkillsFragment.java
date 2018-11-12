@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.pasistence.knockwork.Common.Common;
+import com.pasistence.knockwork.Common.PreferenceUtils;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseUpdateLancer;
 import com.pasistence.knockwork.Model.ApiResponse.ApiSkillsResponse;
@@ -56,7 +57,13 @@ public class FreelancerSkillsFragment extends Fragment {
     //String[] labelsBelong;
     List<String> labelsDone = new ArrayList<String>();
     String[] listItem ;
-    String uid,lid,category,subcategory,skill,selfintro;
+    String uid,lid,category,subcategory,skill,selfintro,
+            avaliblity,
+            title,
+            dob,
+            gender,
+            minhrRate,
+            contactno;
 
 
     @Override
@@ -67,84 +74,16 @@ public class FreelancerSkillsFragment extends Fragment {
         final View view =  lf.inflate(R.layout.fragment_freelancer_skills, container, false);
         mInit(view);
 
-
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!check()){
-                    final android.app.AlertDialog watingDialog = new SpotsDialog(getActivity());
-                    watingDialog.show();
-                    watingDialog.setMessage("Please Wait");
-                    watingDialog.setCancelable(false);
-                    watingDialog.show();
-
-                    category = spnCategory.getSelectedItem().toString().trim();;
-                    subcategory = edtSubCatgory.getText().toString();
-                    selfintro = edtSelfIntro.getText().toString();
-                    skill = MSkills.getText().toString();
-                    selfintro = edtSelfIntro.getText().toString();
-
-
-                    if(Common.isConnectedToInterNet(getContext())){
-
-                        try{
-                            mServices.ClientPostContestDelete(
-                                    uid,
-                                    lid,
-                                    category,
-                                    subcategory,
-                                    skill,
-                                    selfintro
-                            ).enqueue(new Callback<ApiResponse>() {
-                                @Override
-                                public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-                                    ApiResponse result = response.body();
-                                    Log.e(TAG, result.toString() );
-
-                                    if(!result.getError()){
-
-                                        FragmentTransaction ft = getFragmentManager().beginTransaction();
-                                        ft.replace(R.id.fragment_profile,new FreelanceEducationFragment());
-                                        ft.addToBackStack(null);
-                                        ft.commit();
-
-                                    }else if(result.getError()){
-                                        Common.commonDialog(getContext(),result.getMessage());
-                                    }else
-                                    {
-                                        Common.commonDialog(getContext(),"Server Not Found!");
-                                    }
-
-
-                                    watingDialog.dismiss();
-
-                                }
-
-                                @Override
-                                public void onFailure(Call<ApiResponse> call, Throwable t) {
-                                    Log.e(TAG, t.getMessage());
-                                    t.printStackTrace();
-                                    watingDialog.dismiss();
-
-                                }
-                            });
-
-                        }catch (Exception e){
-                            e.printStackTrace();
-                            Log.e(TAG, e.getMessage() );
-                            Common.commonDialog(getContext(),"Server Not Found!");
-                        }
-
-                    }else
-                    {
-                        Common.commonDialog(getContext(),"Please Check your Internet Connection");
-                    }
+                    insertSkillsDetails();
+                    UpdateProfileDetails();
                 }
 
             }
         });
-
-
 
         if (Common.isConnectedToInterNet(mContext))
         {
@@ -183,31 +122,22 @@ public class FreelancerSkillsFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int position, boolean isChecked) {
                       if(isChecked)
                       {
-                          for(int i =0; i<mUserItem.size(); i++)
+                          for(int i = 0; i <= mUserItem.size(); i++)
                           {
                               if (!mUserItem.contains(position))
                               {
-                                 // mUserItem.remove(i);
                                   mUserItem.add(position);
-
                               }
-                              else if (mUserItem.contains(position))
+                             /* else if (mUserItem.contains(position))
                               {
                                   Toast.makeText(mContext, "hii", Toast.LENGTH_SHORT).show();
                                   // mUserItem.remove(mUserItem.contains(position));
                                  // mUserItem.remove(mUserItem.get(position));
                                  // mUserItem.set(position);
                                   ((AlertDialog) dialog).getListView().setItemChecked(position, false);
-                              }
+                              }*/
                           }
-                          /*if(!mUserItem.contains(position))
-                          {
-                              mUserItem.add(position);
-                          }*/
-                      }/*else if (mUserItem.contains(position))
-                      {
-                       // mUserItem.remove(mUserItem.contains(position));
-                          mUserItem.remove(position);*/
+                      }
                     }
                 });
 
@@ -256,7 +186,7 @@ public class FreelancerSkillsFragment extends Fragment {
         return view;
     }
 
-        private boolean check() {
+    private boolean check() {
 
             boolean cancel = false;
             View focusView = null;
@@ -272,9 +202,14 @@ public class FreelancerSkillsFragment extends Fragment {
                 cancel=true;
             }
 
+
+            if(( uid.equals(null)||uid.equals(""))&&(lid.equals(null)||lid.equals(""))){
+                Common.commonDialog(getContext(),"You Need to Complete your Registration First");
+                cancel=true;
+            }
+
             return cancel;
         }
-
 
     private void mInit(View view) {
         mContext = getContext();
@@ -286,6 +221,8 @@ public class FreelancerSkillsFragment extends Fragment {
         spnCategory =(Spinner) view.findViewById(R.id.spn_category);
         btnNext =(FButton)view.findViewById(R.id.freelancer_profile_btnNext);
 
+        uid = PreferenceUtils.getUid(getContext());
+        lid = PreferenceUtils.getLid(getContext());
 
     }
 
@@ -458,6 +395,156 @@ public class FreelancerSkillsFragment extends Fragment {
         }
         return toastText;
 
+    }
+
+    public void insertSkillsDetails(){
+
+        category = spnCategory.getSelectedItem().toString().trim();
+        subcategory = edtSubCatgory.getText().toString();
+        selfintro = edtSelfIntro.getText().toString();
+        skill = MSkills.getText().toString();
+        selfintro = edtSelfIntro.getText().toString();
+
+
+
+        final android.app.AlertDialog watingDialog = new SpotsDialog(getActivity());
+        watingDialog.show();
+        watingDialog.setMessage("Please Wait");
+        watingDialog.setCancelable(false);
+        watingDialog.show();
+
+        if(Common.isConnectedToInterNet(getContext())){
+
+            try{
+                mServices.ClientPostContestDelete(
+                        uid,
+                        lid,
+                        category,
+                        subcategory,
+                        skill,
+                        selfintro
+                ).enqueue(new Callback<ApiResponse>() {
+                    @Override
+                    public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                        ApiResponse result = response.body();
+                        Log.e(TAG, result.toString() );
+
+                        if(!result.getError()){
+
+                            FragmentTransaction ft = getFragmentManager().beginTransaction();
+                            ft.replace(R.id.fragment_profile,new FreelanceEducationFragment());
+                            ft.addToBackStack(null);
+                            ft.commit();
+
+                        }else if(result.getError()){
+                            Common.commonDialog(getContext(),result.getMessage());
+                        }else
+                        {
+                            Common.commonDialog(getContext(),"Server Not Found!");
+                        }
+
+
+                        watingDialog.dismiss();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApiResponse> call, Throwable t) {
+                        Log.e(TAG, t.getMessage());
+                        t.printStackTrace();
+                        watingDialog.dismiss();
+
+                    }
+                });
+
+            }catch (Exception e){
+                e.printStackTrace();
+                Log.e(TAG, e.getMessage() );
+                Common.commonDialog(getContext(),"Server Not Found!");
+            }
+
+        }else
+        {
+            Common.commonDialog(getContext(),"Please Check your Internet Connection");
+        }
+    }
+
+    public void UpdateProfileDetails() {
+
+
+        if(getArguments()!=null){
+            title = getArguments().getString("title");
+            avaliblity = getArguments().getString("avaiable");
+            dob = getArguments().getString("dob");
+            gender = getArguments().getString("gender");
+            minhrRate = getArguments().getString("minhrrate");
+            contactno = getArguments().getString("mobile");
+        }
+
+        final android.app.AlertDialog watingDialog = new SpotsDialog(getActivity());
+        watingDialog.show();
+        watingDialog.setMessage("Please Wait");
+        watingDialog.setCancelable(false);
+        watingDialog.show();
+
+        if(Common.isConnectedToInterNet(getContext())){
+
+            try{
+                mServices.updateLancerProfile(
+                                uid,
+                                lid,
+                                title,
+                                avaliblity,
+                                selfintro,
+                                dob,
+                                gender,
+                                minhrRate,
+                                skill,
+                                contactno
+                ).enqueue(new Callback<ApiResponseUpdateLancer>() {
+                    @Override
+                    public void onResponse(Call<ApiResponseUpdateLancer> call, Response<ApiResponseUpdateLancer> response) {
+                        ApiResponseUpdateLancer result = response.body();
+                        Log.e(TAG, result.toString() );
+
+                        if(!result.getError()){
+                            /*
+                            FragmentTransaction ft = getFragmentManager().beginTransaction();
+                            ft.replace(R.id.fragment_profile,new FreelancerSkillsFragment());
+                            ft.addToBackStack(null);
+                            ft.commit();*/
+
+                        }else if(result.getError()){
+                            Common.commonDialog(getContext(),result.getMessage());
+                        }else
+                        {
+                            Common.commonDialog(getContext(),"Server Not Found!");
+                        }
+
+
+                        watingDialog.dismiss();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApiResponseUpdateLancer> call, Throwable t) {
+                        Log.e(TAG, t.getMessage());
+                        t.printStackTrace();
+                        watingDialog.dismiss();
+
+                    }
+                });
+
+            }catch (Exception e){
+                e.printStackTrace();
+                Log.e(TAG, e.getMessage() );
+                Common.commonDialog(getContext(),"Server Not Found!");
+            }
+
+        }else
+        {
+            Common.commonDialog(getContext(),"Please Check your Internet Connection");
+        }
     }
 
 

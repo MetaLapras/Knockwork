@@ -3,6 +3,7 @@ package com.pasistence.knockwork.Remote;
 import com.pasistence.knockwork.Model.ApiResponse.ApiEducationResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiExperienceResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
+import com.pasistence.knockwork.Model.ApiResponse.ApiProfileStatus;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseLancer;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterClient;
@@ -49,9 +50,11 @@ public interface MyApi {
     @GET("lancers/{pageNo}")
     Call<ApiResponseRegisterLancer>getLancers(@Path("pageNo") int pageNo);
 
+
+// USER SIDE  -------------------------------------------------------/
     @FormUrlEncoded
     @POST("lancersearch")
-    Call<ApiResponseLancer>LancerSearch(@Field("pageNo") int pageNo, @Field("title") CharSequence Title);
+    Call<ApiResponseRegisterLancer>LancerSearch(@Field("pageNo") int pageNo, @Field("title") CharSequence Title);
 
     @FormUrlEncoded
     @POST("lancerRegistration")
@@ -108,7 +111,18 @@ public interface MyApi {
             @Field("start_date")  String startDate,
             @Field("end_date")  String endDate);
 
-// JOB POSTING-------------------------------------------------------/
+
+    //Check if lancer exist
+    @GET("checkClientExist/{uid}")
+    Call<ApiResponseRegisterClient>checkClientexist(@Path("uid") String uid);
+
+
+    //Check if client exist
+    @GET("checkLancerExist/{uid}")
+    Call<ApiResponseRegisterLancer>checkLancerexist(@Path("uid") String uid);
+
+
+    // JOB POSTING-------------------------------------------------------/
     //Post New Job
     @FormUrlEncoded
     @POST("postjob")
@@ -230,6 +244,13 @@ public interface MyApi {
             @Field("title") String Title);
 
 
+
+
+
+    //Profile Count
+    //Check if client exist
+    @GET("getProfileStatus/{uid}")
+    Call<ApiProfileStatus>getProfileStatus(@Path("uid") String uid);
 
 
 }

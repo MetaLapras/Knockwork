@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
+import com.akexorcist.roundcornerprogressbar.common.BaseRoundCornerProgressBar;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -56,11 +57,13 @@ import com.pasistence.knockwork.Common.PreferenceUtils;
 import com.pasistence.knockwork.Database.DatabseHandler;
 import com.pasistence.knockwork.Interface.ItemClickListener;
 import com.pasistence.knockwork.LoginActivity;
+import com.pasistence.knockwork.Model.ApiResponse.ApiProfileStatus;
 import com.pasistence.knockwork.Model.PopularServicesModel;
 import com.pasistence.knockwork.Model.ResponseTopService;
 import com.pasistence.knockwork.Model.TopServicesModel;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.Remote.MyApi;
+import com.pasistence.knockwork.SelectionActivity;
 import com.pasistence.knockwork.ViewHolder.ViewHolderTopServices;
 import com.squareup.picasso.Picasso;
 
@@ -90,11 +93,6 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
     LinearLayout navlinearlayout;
     ImageView imgEdit;
 
-   // public FirebaseDatabase database;
-   // public DatabaseReference popular_dataReference ;
-   // public DatabaseReference Top_dataReference ;
- //   public MaterialSearchBar SearchBar;
-
     MyApi mService;
     ClientPopularServiceAdapter popularServiceAdapter;
     ClientTopServiceAdapter topServiceAdapter;
@@ -105,12 +103,6 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
     CircleImageView imgUserProfile;
 
     RoundCornerProgressBar progressBar;
-    //Database Helper
-    DatabseHandler databasHandler;
-
-
-    // FirebaseRecyclerAdapter<PopularServicesModel,ViewHolderPopularServices> popularAdapter;
-    //FirebaseRecyclerAdapter<TopServicesModel,ViewHolderTopServices> TopServiceAdapter;
 
     //Sliders
     HashMap<String,String> image_list;
@@ -125,9 +117,6 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mInit();
-
-
-        ProfileCount = databasHandler.getProfileCount();
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -157,9 +146,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         txtUserEmail.setText(Common.UserEmail);
         Picasso.with(mContext).load(Common.UserPhoto).into(imgUserProfile);
 
-
         loadPopularServices();
-
 
         refreshLayout.setColorSchemeResources(R.color.colorPrimary,
                 android.R.color.holo_green_light,
@@ -199,11 +186,6 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         });
 
 
-
-        //Slider setup
-        //setupSlider();
-
-
         SearchBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -212,62 +194,92 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
             }
         });
 
-  //     checkProfile();
-
     }
 
     private void checkProfile() {
-        if(ProfileCount*10 < 100){
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
-            alertDialogBuilder.setMessage("Please Complete Your Profile! First");
-            alertDialogBuilder.setPositiveButton("Ok",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface arg0, int arg1) {
-                            startActivity(new Intent(mContext,FreelancerProfileActivity.class));
-                        }
-                    });
 
-            alertDialogBuilder.setNegativeButton("Cancel",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface arg0, int arg1) {
-                            arg0.dismiss();
-                        }
-                    });
+        try{
+            mService.getProfileStatus(PreferenceUtils.getUid(mContext)).enqueue(new Callback<ApiProfileStatus>() {
+                @Override
+                public void onResponse(Call<ApiProfileStatus> call, Response<ApiProfileStatus> response) {
+                    ApiProfileStatus result = response.body();
 
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            //AlertDialog alertDialog = alertDialogBuilder.create();
-            alertDialog.show();
+                    Log.e(TAG,result.toString() );
+
+                    ProfileCount = Float.valueOf(result.getTotal());
+
+                    if(!result.getError()){
+                        if(ProfileCount < 100){
+                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+                            alertDialogBuilder.setMessage("Please Complete Your Profile! First");
+                            alertDialogBuilder.setPositiveButton("Ok",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface arg0, int arg1) {
+                                            startActivity(new Intent(mContext,FreelancerProfileActivity.class));
+                                        }
+                                    });
+
+                            alertDialogBuilder.setNegativeButton("Cancel",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface arg0, int arg1) {
+                                            arg0.dismiss();
+                                        }
+                                    });
+
+                            AlertDialog alertDialog = alertDialogBuilder.create();
+                            //AlertDialog alertDialog = alertDialogBuilder.create();
+                            alertDialog.show();
+                        }
+
+                        progressBar.setProgress(ProfileCount*10);
+                        progressBar.setProgressColor(getResources().getColor(R.color.green));
+
+                    }else if(result.getError()){
+                       /* AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+                        alertDialogBuilder.setMessage("Please Complete Your Registration! First");
+                        alertDialogBuilder.setPositiveButton("Ok",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface arg0, int arg1) {
+                                        startActivity(new Intent(mContext,SelectionActivity.class));
+                                    }
+                                });
+
+                        alertDialogBuilder.setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface arg0, int arg1) {
+                                        arg0.dismiss();
+                                    }
+                                });
+
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+                        //AlertDialog alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();*/
+                    }else {
+                        Common.commonDialog(mContext,"Server Not Found!");
+                    }
+
+                  }
+
+                @Override
+                public void onFailure(Call<ApiProfileStatus> call, Throwable t) {
+                    t.printStackTrace();
+                    t.getMessage();
+                }
+
+
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e(TAG, e.getMessage());
         }
-
-        progressBar.setProgress(ProfileCount*10);
     }
 
     private void mInit() {
         mContext = FreeLancerDashboardActivity.this;
-
-      /*  NavigationView navigationView = (NavigationView) findViewById(R.id.free_nav_view);
-        View headerview = navigationView.getHeaderView(0);*/
-       /* TextView profilename = (TextView) headerview.findViewById(R.id.profile_name);
-        profilename.setText("your name");*/
-
-      /*  LinearLayout header = (LinearLayout) headerview.findViewById(R.id.nav_head_freelancer);
-        header.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(FreeLancerDashboardActivity.this, "clicked", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(FreeLancerDashboardActivity.this,FreelancerProfileActivity.class));
-            }
-        });*/
-        /*navlinearlayout = (LinearLayout)findViewById(R.id.nav_head_freelancer);
-        navlinearlayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(FreeLancerDashboardActivity.this,FreelancerProfileActivity.class));
-            }
-        });
-*/
 
         refreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
 
@@ -275,9 +287,6 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
          recyclerPopularServices.setHasFixedSize(true);
          recyclerPopularServices.setLayoutManager(new LinearLayoutManager(this, android.support.v7.widget.LinearLayoutManager.HORIZONTAL, false));
          recyclerPopularServices.setNestedScrollingEnabled(false);
-
-
-        // recyclerPopularServices.setLayoutManager(LinearLayoutManager);
 
         recyclerTopServices     =(RecyclerView)findViewById(R.id.recycler_top_services);
         recyclerTopServices.setHasFixedSize(false);
@@ -299,9 +308,6 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
 
         //Progress Bar
         progressBar = (RoundCornerProgressBar)findViewById(R.id.progressbar_profile);
-        //Init DatabaseHandler
-        databasHandler = new DatabseHandler(mContext);
-
 
     }
 
@@ -346,7 +352,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
                             //FirebaseAuth LogOut
                             mAuth.signOut();
 
-                            Intent signin = new Intent(mContext,LoginActivity.class);
+                            Intent signin = new Intent(mContext,SelectionActivity.class);
                             signin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(signin);
                             finish();
@@ -362,10 +368,6 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
 
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
-
-
-
-
 
             return true;
         }
@@ -461,7 +463,6 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
     }
 
 
-
   /*  private void setupSlider() {
         image_list = new HashMap<>();
         final DatabaseReference Fbanner = database.getReference("popular");
@@ -526,7 +527,6 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         mslider.setDuration(3000);
 
     }*/
-
 
     @Override
     protected void onResume() {

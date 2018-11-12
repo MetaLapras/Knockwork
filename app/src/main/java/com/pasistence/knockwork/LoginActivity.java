@@ -44,11 +44,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Context mContext;
     FButton buttonEmail,buttonGmail,buttonFacebook,buttonPhone;
     TextView txtSignIn,txtSkip;
-    LoginButton fbLoginButton, emailLoginButton;
 
-    RadioGroup radioGroupWH;
-    RadioButton radiobtnWork,radiobtnHire;
     MyApi mService;
+    boolean present = true;
 
 
     private static final int EMAIL_LOGIN      = 1000;
@@ -163,8 +161,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == EMAIL_LOGIN) {
             try{
-                handleSignInResponse(resultCode, data);
-                //startActivity(new Intent(LoginActivity.this,SignUpEmailActivity.class));
+                //handleSignInResponse(resultCode, data);
+                startActivity(new Intent(LoginActivity.this,SignUpEmailActivity.class));
                 return;
             }catch (Exception e){
                 e.printStackTrace();
@@ -185,9 +183,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.v(TAG, currentUser.getProviders().toString());
                 Log.v(TAG, currentUser.getPhotoUrl().toString());
                 // Log.e(TAG, currentUser.getPhoneNumber());
-                if(PreferenceUtils.getUserType(mContext).equals("Lancer")){
+                if(PreferenceUtils.getUserType(mContext).equals(Common.Lancer)){
                     RegisterLancerUser(currentUser,Common.gmail);
-                }else if(PreferenceUtils.getUserType(mContext).equals("Client")){
+                }else if(PreferenceUtils.getUserType(mContext).equals(Common.Client)){
                     RegisterClientUser(currentUser,Common.gmail);
                 }else
                 {
@@ -216,9 +214,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.v(TAG, currentUser.getProviders().toString());
                 Log.v(TAG, currentUser.getPhotoUrl().toString());
 
-                if(PreferenceUtils.getUserType(mContext).equals("Lancer")){
+                if(PreferenceUtils.getUserType(mContext).equals(Common.Lancer)){
                     RegisterLancerUser(currentUser, Common.facebook);
-                }else if(PreferenceUtils.getUserType(mContext).equals("Client")){
+                }else if(PreferenceUtils.getUserType(mContext).equals(Common.Client)){
                     RegisterClientUser(currentUser, Common.facebook);
                 }else
                 {
@@ -247,6 +245,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void handleSignInResponse(int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             switch (PreferenceUtils.getUserType(mContext)){
+
                 case Common.Client:
                     Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
                     startActivity(intent1);
@@ -383,6 +382,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                // phoneNo     = currentUser.getPhoneNumber();*/
 
 
+      if(!checkLancerAlreadyExist(uid)){
+
+          /*Intent intent1 = new Intent(LoginActivity.this, FreeLancerDashboardActivity.class);
+          startActivity(intent1);
+          finish();*/
         //If registered by Gmail OR Facebook
         mService.RegisterLancer(
                 uid,
@@ -405,18 +409,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         PreferenceUtils.setLid(mContext,lan.getLancerId());
                     }
 
-                    Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
+                    Intent intent1 = new Intent(LoginActivity.this, FreeLancerDashboardActivity.class);
                     startActivity(intent1);
                     finish();
+
                 }else if(result.getError()){
-                    Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
+                    Intent intent1 = new Intent(LoginActivity.this, FreeLancerDashboardActivity.class);
                     startActivity(intent1);
                     finish();
+
                 }else {
                     Common.commonDialog(mContext,"Server Not Found!");
                 }
-
-
             }
 
             @Override
@@ -425,20 +429,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.e(TAG, t.getMessage());
             }
         });
+      }
 
-        //Setting Shared Preference
-        PreferenceUtils.setDisplayName(mContext,currentUser.getDisplayName());
-        PreferenceUtils.setUid(mContext,currentUser.getUid());
-        PreferenceUtils.setEmail(mContext,currentUser.getEmail());
-        PreferenceUtils.setPhotoUrl(mContext,currentUser.getPhotoUrl().toString());
-        PreferenceUtils.setProvider(mContext,currentUser.getProviders().toString());
-        //PreferenceUtils.setPhoneNumber(mContext,phoneNo);
+            //Setting Shared Preference
+            PreferenceUtils.setDisplayName(mContext,currentUser.getDisplayName());
+            PreferenceUtils.setUid(mContext,currentUser.getUid());
+            PreferenceUtils.setEmail(mContext,currentUser.getEmail());
+            PreferenceUtils.setPhotoUrl(mContext,currentUser.getPhotoUrl().toString());
+            PreferenceUtils.setProvider(mContext,currentUser.getProviders().toString());
+            //PreferenceUtils.setPhoneNumber(mContext,phoneNo);
 
-        Log.v(TAG, PreferenceUtils.getDisplayName(mContext));
-        Log.v(TAG, PreferenceUtils.getUid(mContext));
-        Log.v(TAG, PreferenceUtils.getEmail(mContext));
-        Log.v(TAG, PreferenceUtils.getPhotoUrl(mContext));
-        Log.v(TAG, PreferenceUtils.getProvider(mContext));
+            Log.v(TAG, PreferenceUtils.getDisplayName(mContext));
+            Log.v(TAG, PreferenceUtils.getUid(mContext));
+            Log.v(TAG, PreferenceUtils.getEmail(mContext));
+            Log.v(TAG, PreferenceUtils.getPhotoUrl(mContext));
+            Log.v(TAG, PreferenceUtils.getProvider(mContext));
+
 
         }catch (Exception e){
             Common.commonDialog(mContext,"Server Not Found!");
@@ -448,8 +454,70 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    private void RegisterClientUser(FirebaseUser currentUser, String type) {
+    private boolean checkLancerAlreadyExist(String uid) {
+        mService.checkLancerexist(uid).enqueue(new Callback<ApiResponseRegisterLancer>() {
+            @Override
+            public void onResponse(Call<ApiResponseRegisterLancer> call, Response<ApiResponseRegisterLancer> response) {
+                ApiResponseRegisterLancer result = response.body();
+                Log.e(TAG, result.toString() );
 
+                if(!result.getError()){
+                    ArrayList<ApiResponseRegisterLancer.Lancer> lancers = (ArrayList<ApiResponseRegisterLancer.Lancer>) result.getLancer();
+
+                    for(ApiResponseRegisterLancer.Lancer lan : lancers){
+                        PreferenceUtils.setLid(mContext,lan.getLancerId());
+                    }
+                    present = true;
+                    startActivity(new Intent(mContext,FreeLancerDashboardActivity.class));
+
+                }else {
+                    present = false;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponseRegisterLancer> call, Throwable t) {
+                t.printStackTrace();
+                Log.e(TAG, t.getMessage());
+                present = false;
+            }
+        });
+        return present;
+    }
+
+    private boolean checkClientAlreadyExist(String uid) {
+
+        mService.checkClientexist(uid).enqueue(new Callback<ApiResponseRegisterClient>() {
+            @Override
+            public void onResponse(Call<ApiResponseRegisterClient> call, Response<ApiResponseRegisterClient> response) {
+                ApiResponseRegisterClient result = response.body();
+
+                Log.e(TAG, result.toString() );
+                if(!result.getError()){
+                    ArrayList<ApiResponseRegisterClient.Client> lancers = (ArrayList<ApiResponseRegisterClient.Client>) result.getClient();
+
+                    for(ApiResponseRegisterClient.Client lan : lancers){
+                        PreferenceUtils.setCid(mContext,lan.getClientId());
+                    }
+                    present = true;
+                    startActivity(new Intent(mContext,DashboardActivity.class));
+                }else {
+                    present = false;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponseRegisterClient> call, Throwable t) {
+                t.printStackTrace();
+                Log.e(TAG, t.getMessage());
+                present = false;
+            }
+        });
+
+        return present;
+    }
+
+    private void RegisterClientUser(FirebaseUser currentUser, String type) {
 
         try{
         String  displayname = null,
@@ -503,6 +571,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 */
         //If registered by Gmail OR Facebook
+
+
+    if(!checkClientAlreadyExist(uid)) {
+
         mService.RegisterClient(
                 uid,
                 displayname,
@@ -518,15 +590,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.e(TAG, result.toString());
 
                 if(!result.getError()){
+                    ArrayList<ApiResponseRegisterClient.Client> lancers = (ArrayList<ApiResponseRegisterClient.Client>) result.getClient();
+
+                    for(ApiResponseRegisterClient.Client lan : lancers){
+                        PreferenceUtils.setCid(mContext,lan.getClientId());
+                    }
+                    present = true;
+                    startActivity(new Intent(mContext,DashboardActivity.class));
+                }
+
+                if (!result.getError()) {
                     Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
                     startActivity(intent1);
                     finish();
-                }else if(result.getError()){
+                } else if (result.getError()) {
                     Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
                     startActivity(intent1);
                     finish();
-                }else {
-                    Common.commonDialog(mContext,"Server Not Found");
+                } else {
+                    Common.commonDialog(mContext, "Server Not Found");
                 }
 
             }
@@ -535,9 +617,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onFailure(Call<ApiResponseRegisterClient> call, Throwable t) {
 
                 t.printStackTrace();
-                Log.e(TAG, t.getMessage() );
+                Log.e(TAG, t.getMessage());
             }
         });
+
+    }
 
         //Setting Shared Preference
         PreferenceUtils.setDisplayName(mContext,currentUser.getDisplayName());

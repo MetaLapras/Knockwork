@@ -43,7 +43,7 @@ public class Common {
     //Server
     public static final String BASE_URL = "http://52.172.221.235:8985/knockwork/public/index.php/api/";
     private static final String TAG = "common";
-    //public static final String BASE_URL = "http://192.168.0.150/mantra/";
+    //public static final String BASE_URL = "http://192.168.0.150/knockwork/public/index.php/api/";
 
     public static MyApi getApi(){
         return RetrofitClient.getClient(BASE_URL).create(MyApi.class);

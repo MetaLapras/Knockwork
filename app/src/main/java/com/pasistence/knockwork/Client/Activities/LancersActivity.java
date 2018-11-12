@@ -60,12 +60,14 @@ public class LancersActivity extends AppCompatActivity
     LinearLayoutManager layoutManager;
     //Variable for pagination
     private boolean isScrolling = false;
+    private boolean isSearching = false;
     int PageNo =  1;
     int TotalElementsCount=0;
     int currentItems;
     int totalItems;
     int scrollOutItems;
     ProgressBar progressBar;
+    public CharSequence searchText;
 
     ArrayList<LancerListModel> lancerList = new ArrayList<LancerListModel>();
     ArrayList<ApiResponseRegisterLancer.Lancer> resultList = new ArrayList<ApiResponseRegisterLancer.Lancer>();
@@ -123,13 +125,14 @@ public class LancersActivity extends AppCompatActivity
             public void onSearchStateChanged(boolean enabled) {
                 if(!enabled)
                 {
-                   // recyclerLancer.setAdapter(lancerListAdapter);
+                    recyclerLancer.setAdapter(lancerListAdapter);
                 }
             }
 
             @Override
             public void onSearchConfirmed(CharSequence text) {
-              startSearch(text);
+                searchText = text;
+                startSearch(text,PageNo);
             }
 
             @Override
@@ -177,14 +180,19 @@ public class LancersActivity extends AppCompatActivity
 
                 if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
                     isScrolling = false;
-                    performPagination();
+                    if(isSearching){
+                        performPaginationWithSerach();
+                    }else {
+                        performPagination();
+                    }
+
                 }
                 //  isScrolling = true;
             }
         });
 
 
-        getSmallSuggestion("Mobile");
+        //getSmallSuggestion("Mobile");
     }
 
     private void getAllLancers(int PageNo) {
@@ -333,30 +341,42 @@ public class LancersActivity extends AppCompatActivity
 
     }
 
-    private void startSearch(CharSequence text) {
-      /*  mService.LancerSearch(1,text).enqueue(new Callback<ApiResponseLancer>() {
+    private void startSearch(CharSequence text,int PageNo) {
+        isSearching = true;
+        mService.LancerSearch(PageNo,text).enqueue(new Callback<ApiResponseRegisterLancer>() {
             @Override
-            public void onResponse(Call<ApiResponseLancer> call, Response<ApiResponseLancer> response) {
+            public void onResponse(Call<ApiResponseRegisterLancer> call, Response<ApiResponseRegisterLancer> response) {
+
                 response.message();
-                ApiResponseLancer result = response.body();
-              // Log.e(TAG, result.toString());
+                ApiResponseRegisterLancer result = response.body();
 
-               // resultList = result.getResult();
+                Log.e(TAG, result.toString());
+                if(!result.getError()){
 
-                searchAdapter = new LancerListAdapter(mContext,resultList);
-                recyclerLancer.setAdapter(searchAdapter);
-                searchAdapter.notifyDataSetChanged();
+                    resultList = result.getLancer();
+
+                    Log.e(TAG+"++++", result.getLancer().toString());
+
+                    searchAdapter = new LancerListAdapter(mContext,resultList);
+                    recyclerLancer.setAdapter(searchAdapter);
+                    searchAdapter.notifyDataSetChanged();
+
+                    TotalElementsCount = Integer.parseInt(response.body().getTotalCount());
+                }else if(result.getError()){
+
+                }
+
+
 
             }
 
             @Override
-            public void onFailure(Call<ApiResponseLancer> call, Throwable t) {
+            public void onFailure(Call<ApiResponseRegisterLancer> call, Throwable t) {
                 t.printStackTrace();
+
             }
 
         });
-*/
-
     }
 
     private void loadSuggestList() {
@@ -441,6 +461,58 @@ public class LancersActivity extends AppCompatActivity
         }
     }, 3000);
 }
+    private void performPaginationWithSerach(){
+        //perform call statment
+
+        progressBar.setVisibility(View.VISIBLE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // progressBar.setVisibility(View.VISIBLE);
+                for (int i=0; i<1; i++)
+                {
+                    try {
+                        if(TotalElementsCount == resultList.size()){
+                            //Toast.makeText(mContext, "Nothing to Display", Toast.LENGTH_SHORT).show();
+                            Snackbar.make(findViewById(R.id.lancer_activity), "Nothing to Display", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                        }else{
+                            PageNo++;
+                            mService.LancerSearch(PageNo,searchText).enqueue(new Callback<ApiResponseRegisterLancer>() {
+                                @Override
+                                public void onResponse(Call<ApiResponseRegisterLancer> call, Response<ApiResponseRegisterLancer> response) {
+                                    ApiResponseRegisterLancer result = response.body();
+                                    Log.e(TAG, result.toString());
+
+                                    Log.e(TAG+"SizeM",resultList.size()+"");
+                                    for (ApiResponseRegisterLancer.Lancer res : result.getLancer()){
+                                        resultList.add(res);
+                                    }
+
+                                    searchAdapter.notifyDataSetChanged();
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<ApiResponseRegisterLancer> call, Throwable t) {
+                                    Log.e(TAG, t.getMessage());
+                                    t.printStackTrace();
+
+                                }
+                            });
+                        }
+                    }catch (Exception e)
+                    {
+                        Log.e(TAG, e.getMessage() );
+                        e.printStackTrace();
+                        Common.commonDialog(mContext,"Sever not found..");
+                    }
+                    searchAdapter.notifyDataSetChanged();
+                    progressBar.setVisibility(View.GONE);
+                }
+
+            }
+        }, 3000);
+    }
 
     private void getSmallSuggestion(CharSequence str) {
 

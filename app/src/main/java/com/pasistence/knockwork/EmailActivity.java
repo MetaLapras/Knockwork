@@ -44,6 +44,7 @@ import com.google.firebase.storage.UploadTask;
 import com.pasistence.knockwork.Client.Activities.DashboardActivity;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Common.PreferenceUtils;
+import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboardActivity;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterClient;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
 import com.pasistence.knockwork.Model.SignUpEmailModel;
@@ -51,6 +52,7 @@ import com.pasistence.knockwork.Remote.MyApi;
 import com.rey.material.widget.LinearLayout;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.jar.Attributes;
 
@@ -554,7 +556,14 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
                 ApiResponseRegisterLancer result = response.body();
                 Log.e(TAG, result.toString());
 
-                Intent intent1 = new Intent(mContext, DashboardActivity.class);
+
+                ArrayList<ApiResponseRegisterLancer.Lancer> lancers = (ArrayList<ApiResponseRegisterLancer.Lancer>) result.getLancer();
+
+                for(ApiResponseRegisterLancer.Lancer lan : lancers){
+                    PreferenceUtils.setLid(mContext,lan.getLancerId());
+                }
+
+                Intent intent1 = new Intent(mContext, FreeLancerDashboardActivity.class);
                 startActivity(intent1);
 
                 progressDialog.dismiss();

@@ -41,6 +41,7 @@ import com.pasistence.knockwork.Model.ResponseTopService;
 import com.pasistence.knockwork.Model.UserData;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.Remote.MyApi;
+import com.pasistence.knockwork.SelectionActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -424,7 +425,7 @@ public class DashboardActivity extends AppCompatActivity
                             //FirebaseAuth LogOut
                             mAuth.signOut();
 
-                            Intent signin = new Intent(mContext,LoginActivity.class);
+                            Intent signin = new Intent(mContext,SelectionActivity.class);
                             signin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(signin);
                             finish();

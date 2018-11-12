@@ -38,11 +38,9 @@
             app:rcProgress="30"
             app:rcSecondaryProgress="50"
             android:layout_margin="8dp"
-            app:rcRadius="6dp"
-            app:rcBackgroundPadding="5dp"
+            app:rcBackgroundPadding="0dp"
             app:rcReverse="false"
-            app:rcProgressColor="@color/red"
-            app:rcSecondaryProgressColor="@color/green"
+            app:rcSecondaryProgressColor="@color/red"
             app:rcBackgroundColor="@color/fbutton_color_asbestos" />
 
         <android.support.v7.widget.CardView
