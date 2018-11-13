@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.pasistence.knockwork.ChatBox.ChatModel.Message;
 import com.pasistence.knockwork.ChatBox.DummyData.MessagesFixtures;
 import com.pasistence.knockwork.Common.AppUtils;
@@ -22,6 +23,8 @@ public class CustomLayoutMessagesActivity extends DemoMessagesActivity
     public static void open(Context context){
         context.startActivity(new Intent(context, CustomLayoutMessagesActivity.class));
     }
+
+
     private MessagesList messagesList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class CustomLayoutMessagesActivity extends DemoMessagesActivity
     public boolean onSubmit(CharSequence input) {
         messagesAdapter.addToStart(
                 MessagesFixtures.getTextMessage(input.toString()),true);
+        AppUtils.showToast(this,input.toString(),true);
         return true;
     }
 
