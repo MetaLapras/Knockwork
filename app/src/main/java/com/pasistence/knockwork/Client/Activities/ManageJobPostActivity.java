@@ -174,7 +174,6 @@ public class ManageJobPostActivity extends AppCompatActivity
                 }
             });
 
-
         }catch (Exception e)
         {
             Log.e(TAG, e.getMessage() );

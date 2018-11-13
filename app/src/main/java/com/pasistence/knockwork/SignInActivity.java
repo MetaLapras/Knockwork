@@ -116,11 +116,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         if(Common.isConnectedToInterNet(mContext)){
 
-        }else {
-            Common.commonDialog(mContext,"Please Check Your Internet Connection !");
-        }
-
-
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -161,6 +156,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         }
                     });
 
+
+        }else {
+            Common.commonDialog(mContext,"Please Check Your Internet Connection !");
+        }
     }
 
     private void checkUserType(String uid) {

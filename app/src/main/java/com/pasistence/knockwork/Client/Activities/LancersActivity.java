@@ -363,7 +363,7 @@ public class LancersActivity extends AppCompatActivity
 
                     TotalElementsCount = Integer.parseInt(response.body().getTotalCount());
                 }else if(result.getError()){
-
+                    Common.commonDialog(mContext,result.getMessage());
                 }
 
 
@@ -431,12 +431,21 @@ public class LancersActivity extends AppCompatActivity
                                 ApiResponseRegisterLancer result = response.body();
                                 Log.e(TAG, result.toString());
 
-                                Log.e(TAG+"SizeM",resultList.size()+"");
-                                for (ApiResponseRegisterLancer.Lancer res : result.getLancer()){
-                                    resultList.add(res);
+                                if(!result.getError()){
+
+                                    Log.e(TAG+"SizeM",resultList.size()+"");
+                                    for (ApiResponseRegisterLancer.Lancer res : result.getLancer()){
+                                        resultList.add(res);
+                                    }
+
+                                    lancerListAdapter.notifyDataSetChanged();
+
+                                }else if(result.getError()){
+                                    Common.commonDialog(mContext,result.getMessage());
+                                }else {
+                                    Common.commonDialog(mContext,"Server Not Found!");
                                 }
 
-                                lancerListAdapter.notifyDataSetChanged();
 
                             }
 
@@ -461,6 +470,7 @@ public class LancersActivity extends AppCompatActivity
         }
     }, 3000);
 }
+
     private void performPaginationWithSerach(){
         //perform call statment
 
@@ -483,12 +493,23 @@ public class LancersActivity extends AppCompatActivity
                                     ApiResponseRegisterLancer result = response.body();
                                     Log.e(TAG, result.toString());
 
-                                    Log.e(TAG+"SizeM",resultList.size()+"");
-                                    for (ApiResponseRegisterLancer.Lancer res : result.getLancer()){
-                                        resultList.add(res);
-                                    }
+                                    if(!result.getError()){
 
-                                    searchAdapter.notifyDataSetChanged();
+                                        Log.e(TAG+"SizeM",resultList.size()+"");
+                                        for (ApiResponseRegisterLancer.Lancer res : result.getLancer()){
+                                            resultList.add(res);
+                                        }
+
+                                        searchAdapter.notifyDataSetChanged();
+
+                                    }else if(result.getError()) {
+
+                                        Common.commonDialog(mContext,result.getMessage());
+
+                                    }else {
+
+                                        Common.commonDialog(mContext,"Server Not Found");
+                                    }
 
                                 }
 
@@ -506,7 +527,7 @@ public class LancersActivity extends AppCompatActivity
                         e.printStackTrace();
                         Common.commonDialog(mContext,"Sever not found..");
                     }
-                    searchAdapter.notifyDataSetChanged();
+                    //searchAdapter.notifyDataSetChanged();
                     progressBar.setVisibility(View.GONE);
                 }
 
