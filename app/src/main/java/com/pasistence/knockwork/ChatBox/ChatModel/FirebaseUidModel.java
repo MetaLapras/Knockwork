@@ -3,20 +3,19 @@ package com.pasistence.knockwork.ChatBox.ChatModel;
 import java.io.Serializable;
 
 public class FirebaseUidModel implements Serializable {
-    String client_id,lancer_id,lancer_name,lancer_url,client_name,client_url;
+    String client_id,lancer_id,lancer_name,lancer_url,client_name,client_url,last_message;
 
     public FirebaseUidModel() {
     }
 
-    public FirebaseUidModel(String client_id, String lancer_id, String lancer_name, String lancer_url, String client_name, String client_url) {
+    public FirebaseUidModel(String client_id, String lancer_id, String lancer_name, String lancer_url, String client_name, String client_url, String last_message) {
         this.client_id = client_id;
         this.lancer_id = lancer_id;
         this.lancer_name = lancer_name;
         this.lancer_url = lancer_url;
         this.client_name = client_name;
         this.client_url = client_url;
-
-
+        this.last_message = last_message;
     }
 
     @Override
@@ -28,6 +27,7 @@ public class FirebaseUidModel implements Serializable {
                 ", lancer_url='" + lancer_url + '\'' +
                 ", client_name='" + client_name + '\'' +
                 ", client_url='" + client_url + '\'' +
+                ", last_message='" + last_message + '\'' +
                 '}';
     }
 
@@ -77,5 +77,13 @@ public class FirebaseUidModel implements Serializable {
 
     public void setClient_url(String client_url) {
         this.client_url = client_url;
+    }
+
+    public String getLast_message() {
+        return last_message;
+    }
+
+    public void setLast_message(String last_message) {
+        this.last_message = last_message;
     }
 }

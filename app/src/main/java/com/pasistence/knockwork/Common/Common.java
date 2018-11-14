@@ -32,6 +32,7 @@ public class Common {
     public static final String facebook = "facebook";
     public static final String update = "update";
     public static final String register = "register";
+    public static final String chatbox = "chatbox";
     public static String UserName;
     public static String UserEmail ;
     public static String UserPhoto;

@@ -107,7 +107,8 @@ public class LancerListAdapter extends RecyclerView.Adapter<ViewHolderFreeLancer
                                         lancers.getLancerName(),
                                         lancers.getLancerImage(),
                                         getDisplayName(mContext),
-                                        getPhotoUrl(mContext));
+                                        getPhotoUrl(mContext),
+                                        "");
                                 mReference.child(chatId).setValue(uidModel);
 
                             }
