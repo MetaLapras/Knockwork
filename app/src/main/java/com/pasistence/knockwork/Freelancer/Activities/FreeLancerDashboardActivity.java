@@ -76,6 +76,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.pasistence.knockwork.Common.PreferenceUtils.getUid;
+
 public class FreeLancerDashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -142,9 +144,16 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
             }
         });
 
-        txtUserName.setText(Common.UserName);
-        txtUserEmail.setText(Common.UserEmail);
-        Picasso.with(mContext).load(Common.UserPhoto).into(imgUserProfile);
+
+        try{
+            txtUserName.setText(Common.UserName);
+            //txtUserEmail.setText(Common.UserEmail);
+            txtUserEmail.setText(getUid(mContext));
+            Picasso.with(mContext).load(Common.UserPhoto).into(imgUserProfile);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         loadPopularServices();
 
@@ -199,7 +208,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
     private void checkProfile() {
 
         try{
-            mService.getProfileStatus(PreferenceUtils.getUid(mContext)).enqueue(new Callback<ApiProfileStatus>() {
+            mService.getProfileStatus(getUid(mContext)).enqueue(new Callback<ApiProfileStatus>() {
                 @Override
                 public void onResponse(Call<ApiProfileStatus> call, Response<ApiProfileStatus> response) {
                     ApiProfileStatus result = response.body();

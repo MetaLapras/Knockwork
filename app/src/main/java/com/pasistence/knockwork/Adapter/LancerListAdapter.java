@@ -13,6 +13,13 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.pasistence.knockwork.ChatBox.ChatModel.FirebaseUidModel;
+import com.pasistence.knockwork.ChatBox.CustomLayoutMessagesActivity;
 import com.pasistence.knockwork.Client.Activities.ChattingActivity;
 import com.pasistence.knockwork.Client.Activities.ClientJobRequest;
 import com.pasistence.knockwork.Interface.ILoadMore;
@@ -27,11 +34,17 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.pasistence.knockwork.Common.PreferenceUtils.getDisplayName;
+import static com.pasistence.knockwork.Common.PreferenceUtils.getPhotoUrl;
+import static com.pasistence.knockwork.Common.PreferenceUtils.getUid;
+
 public class LancerListAdapter extends RecyclerView.Adapter<ViewHolderFreeLancerList> {
 
     private static final String TAG = "lanceradapter";
     public Context mContext;
     ArrayList<ApiResponseRegisterLancer.Lancer> lancerArraylist ;
+    FirebaseDatabase mDatabase;
+    DatabaseReference mReference;
 
     public LancerListAdapter(Context mContext, ArrayList<ApiResponseRegisterLancer.Lancer> workerList) {
         this.mContext = mContext;
@@ -61,11 +74,61 @@ public class LancerListAdapter extends RecyclerView.Adapter<ViewHolderFreeLancer
                         .into(holder.CircularImageViewProfile);
             }
 
+
             holder.txtLancerName.setText(lancers.getLancerName());
             holder.txtLancerState.setText(lancers.getLancerGender());
             holder.txtLancerDescription.setText(lancers.getLancerSelfIntro());
                 //   holder.txtLancerLike.setText(lancers.getLike());
             holder.txtLancerEarned.setText(lancers.getLancerMinHourRate());
+
+
+            //init Firebase
+
+            mDatabase = FirebaseDatabase.getInstance();
+            mReference = mDatabase.getReference("chatbox");
+            final String chatId = getUid(mContext) +"_" + lancers.getUid();
+
+
+
+
+
+            holder.btnLancerMessage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    mReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            if(!dataSnapshot.child(chatId).exists()){
+                                FirebaseUidModel uidModel = new FirebaseUidModel(
+                                        getUid(mContext),
+                                        lancers.getUid(),
+                                        lancers.getLancerName(),
+                                        lancers.getLancerImage(),
+                                        getDisplayName(mContext),
+                                        getPhotoUrl(mContext));
+                                mReference.child(chatId).setValue(uidModel);
+
+                            }
+
+                            mContext.startActivity(new Intent(mContext,CustomLayoutMessagesActivity.class)
+                                    .putExtra("lancerUid",lancers.getUid())
+                                    .putExtra("clientUid",getUid(mContext))
+                                    .putExtra("image",lancers.getLancerImage())
+                            );
+
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.e(TAG, databaseError.getDetails() );
+                        }
+                    });
+
+
+
+                }
+            });
 
     }
 

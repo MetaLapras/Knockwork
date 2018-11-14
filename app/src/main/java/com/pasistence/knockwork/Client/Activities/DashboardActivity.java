@@ -53,6 +53,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.pasistence.knockwork.Common.PreferenceUtils.getUid;
+
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -135,6 +137,7 @@ public class DashboardActivity extends AppCompatActivity
 
         txtUserName.setText(Common.UserName);
         txtUserEmail.setText(Common.UserEmail);
+        txtUserEmail.setText(getUid(mContext));
         Picasso.with(mContext).load(Common.UserPhoto).into(imgUserProfile);
 
 
@@ -185,91 +188,6 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
 
-
-
-     /*   FirebaseRecyclerOptions<TopServicesModel> topOptions = new FirebaseRecyclerOptions.Builder<TopServicesModel>()
-                .setQuery(Top_dataReference,TopServicesModel.class)
-                .build();
-
-        TopServiceAdapter = new FirebaseRecyclerAdapter<TopServicesModel, ViewHolderTopServices>(topOptions) {
-            @Override
-            protected void onBindViewHolder(@NonNull ViewHolderTopServices viewHolder, int position, @NonNull TopServicesModel model) {
-
-                viewHolder.txtHead.setText(model.getHead());
-                viewHolder.txtContent.setText(model.getContent());
-
-                Picasso.with(getBaseContext()).load(model.getImage())
-                        .into(viewHolder.imgTopServices);
-
-                Picasso.with(getBaseContext()).load(model.getLogo())
-                        .into(viewHolder.imgLogo);
-
-
-                final TopServicesModel clickitem = model;
-
-                viewHolder.setItemClickListener(new ItemClickListener() {
-                    @Override
-                    public void onClick(View view, int position, boolean isLongClick) {
-//                        Snackbar.make(view, ""+clickitem.getHead(), Snackbar.LENGTH_LONG)
-//                                .setAction("Action", null).show();
-
-                    startActivity(new Intent(mContext,LancersActivity.class));
-                    }
-                });
-            }
-
-
-
-            @Override
-            public ViewHolderTopServices onCreateViewHolder(ViewGroup parent, int viewType) {
-                View itemView = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.custom_template_topservices,parent,false);
-                return new ViewHolderTopServices(itemView);
-
-            }
-        };
-        recyclerTopServices.setAdapter(TopServiceAdapter);
-        recyclerTopServices.scheduleLayoutAnimation();
-        TopServiceAdapter.notifyDataSetChanged();
-
-        TopServiceAdapter.startListening();*/
-
-
-       /* refreshLayout.setColorSchemeResources(R.color.colorPrimary,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_dark,
-                android.R.color.holo_blue_dark);
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                //to Load menu from Firebase
-                if(Common.isConnectedToInterNet(getBaseContext())) {
-                    //loadPopularServices();
-                    loadTopServices();
-                }else
-                {
-                    Toast.makeText(getBaseContext(), "Check Your Internet Connection ! ", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            }
-        });
-        //Default Load
-        refreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                //to Load menu from Firebase
-                if(Common.isConnectedToInterNet(getBaseContext())) {
-                    //loadPopularServices();
-                    loadTopServices();
-                }else
-                {
-                    Toast.makeText(getBaseContext(), "Check Your Internet Connection ! ", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-            }
-        });
-*/
         //Slider setup
        // setupSlider();
         SearchBar.setOnClickListener(new View.OnClickListener() {

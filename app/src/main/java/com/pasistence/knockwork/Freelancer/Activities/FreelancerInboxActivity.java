@@ -19,6 +19,8 @@ import com.pasistence.knockwork.R;
 import com.stfalcon.chatkit.dialogs.DialogsList;
 import com.stfalcon.chatkit.dialogs.DialogsListAdapter;
 
+import static com.pasistence.knockwork.Common.PreferenceUtils.getUid;
+
 public class FreelancerInboxActivity extends DemoDialogsActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -34,6 +36,8 @@ public class FreelancerInboxActivity extends DemoDialogsActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_freelancer_inbox);
         mContext=FreelancerInboxActivity.this;
+
+
         /********-----------------------------------------------*********/
         dialogsList = (DialogsList)  findViewById(R.id.dialogsList);
         initAdapter();
@@ -58,7 +62,11 @@ public class FreelancerInboxActivity extends DemoDialogsActivity
     @Override
     public void onDialogClick(Dialog dialog) {
         super.onDialogClick(dialog);
-        CustomLayoutMessagesActivity.open(this);
+        mContext.startActivity(new Intent(mContext,CustomLayoutMessagesActivity.class)
+                .putExtra("lancerUid",getUid(mContext))
+                .putExtra("clientUid","8Js2tNxHlwRXUpQJMgNLLBeRFDH2"));
+
+        //CustomLayoutMessagesActivity.open(this);
     }
 
     private void initAdapter() {
