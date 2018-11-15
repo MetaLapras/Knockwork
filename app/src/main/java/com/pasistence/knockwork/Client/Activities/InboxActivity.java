@@ -3,8 +3,11 @@ package com.pasistence.knockwork.Client.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,20 +17,40 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.pasistence.knockwork.ChatBox.ChatModel.Dialog;
+import com.pasistence.knockwork.ChatBox.ChatModel.FirebaseUidModel;
+import com.pasistence.knockwork.ChatBox.ChatModel.Message;
+import com.pasistence.knockwork.ChatBox.ChatModel.User;
 import com.pasistence.knockwork.ChatBox.CustomLayoutMessagesActivity;
 import com.pasistence.knockwork.ChatBox.DemoDialogsActivity;
 import com.pasistence.knockwork.ChatBox.DummyData.DialogsFixtures;
+import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Freelancer.Activities.JobPoastingActivity;
 import com.pasistence.knockwork.R;
 import com.stfalcon.chatkit.dialogs.DialogsList;
 import com.stfalcon.chatkit.dialogs.DialogsListAdapter;
 
+import java.util.ArrayList;
+import java.util.Date;
+
+import static com.pasistence.knockwork.Common.PreferenceUtils.getUid;
+
 public class InboxActivity extends DemoDialogsActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DialogsList dialogsList;
     Context mContext;
+    private static final String TAG = "clientInbox";
 
+    ArrayList<Dialog> dialogs = new ArrayList<Dialog>();
+
+    FirebaseDatabase mDatabse;
+    DatabaseReference mReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +59,52 @@ public class InboxActivity extends DemoDialogsActivity implements NavigationView
         mContext = InboxActivity.this;
         /********-----------------------------------------------*********/
         dialogsList = (DialogsList)  findViewById(R.id.dialogsList);
-        initAdapter();
+
         /********-----------------------------------------------*********/
+
+
+        mDatabse = FirebaseDatabase.getInstance();
+        mReference = mDatabse.getReference(Common.chatbox);
+
+
+        Query query = mReference.orderByChild("client_id").equalTo(getUid(mContext));
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.e(TAG, dataSnapshot.toString());
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    FirebaseUidModel model = ds.getValue(FirebaseUidModel.class);
+                    Log.e(TAG+"get", model.toString());
+
+                    User user = new User(model.getLancer_id(),model.getLancer_name(),model.getLancer_url(),true);
+                  //  Log.e(TAG, user.toString());
+                    Date date = new Date();
+                    Message message = new Message(model.getLancer_id(),user,model.getLast_message(),date);
+
+                    ArrayList<User> userlist = new ArrayList<>();
+                    userlist.add(user);
+
+                    Dialog d = new Dialog(
+                            model.getLancer_id(),
+                            model.getLancer_name(),
+                            model.getLancer_url(),
+                            userlist,
+                            message,
+                            0
+                    );
+
+                    dialogs.add(d);
+                }
+
+                initAdapter();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, databaseError.toString());
+            }
+        });
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -67,12 +134,15 @@ public class InboxActivity extends DemoDialogsActivity implements NavigationView
     @Override
     public void onDialogClick(Dialog dialog) {
         super.onDialogClick(dialog);
-        CustomLayoutMessagesActivity.open(this);
+       // CustomLayoutMessagesActivity.open(this);
+        mContext.startActivity(new Intent(mContext,CustomLayoutMessagesActivity.class)
+                .putExtra("lancerUid",dialog.getId())
+                .putExtra("clientUid",getUid(mContext)));
     }
 
     private void initAdapter() {
         super.dialogsAdapter=new DialogsListAdapter<>(R.layout.item_custom_chat_dialog,super.imageLoader);
-        super.dialogsAdapter.setItems(DialogsFixtures.getDialogs());
+        super.dialogsAdapter.setItems(dialogs);
         super.dialogsAdapter.setOnDialogClickListener(this);
         super.dialogsAdapter.setOnDialogLongClickListener(this);
         dialogsList.setAdapter(super.dialogsAdapter);

@@ -50,7 +50,6 @@ dependencies {
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
     //Buttons
-    //implementation 'info.hoang8f:fbutton:1.0.5'
     implementation 'com.github.jd-alexander:android-flat-button:v1.1'
     //Fancy Button
     implementation 'com.github.medyo:fancybuttons:1.8.4'
@@ -71,14 +70,15 @@ dependencies {
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
 
     //for firebase
-    //for firebase
     implementation 'com.google.firebase:firebase-core:16.0.3'
     implementation 'com.google.firebase:firebase-messaging:17.3.2'
+    implementation 'com.google.firebase:firebase-auth:16.0.1'
+
+    implementation 'com.google.firebase:firebase-storage:16.0.1'
 
     implementation 'com.google.android.gms:play-services-analytics:16.0.3'
     implementation 'com.google.android.gms:play-services-auth:16.0.0'
 
-    //implementation 'com.google.android.gms:play-services-auth:16.0.0'
     implementation 'com.firebaseui:firebase-ui-auth:4.2.0'
     implementation 'com.google.android.gms:play-services-base:15.0.1'
     implementation 'com.firebaseui:firebase-ui-database:3.3.0'
@@ -94,26 +94,22 @@ dependencies {
     implementation 'com.firebase:geofire-android:2.0.0'
 
     //for facebook
-    //implementation 'com.facebook.android:facebook-login:4.x'
     implementation 'com.facebook.android:facebook-login:4.33.0'
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 
-    implementation 'com.google.firebase:firebase-auth:16.0.1'
 
     //Material Search bar
     implementation 'com.github.mancj:MaterialSearchBar:+'
-    //implementation 'com.github.mancj:MaterialSearchBar:0.7.6'
 
     // Retrofit & OkHttp
-    //implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
 
     // JSON Converter
     implementation 'com.google.code.gson:gson:2.8.5'
-    //implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.4.0'
 
+    //Material Edittext
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
 
     // Material Slider
@@ -125,14 +121,11 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
 
     //spot dialogue
-    // implementation 'com.github.d-max:spots-dialog:1.1@aar'
     implementation 'com.github.d-max:spots-dialog:0.7@aar'
     implementation 'com.akexorcist:RoundCornerProgressBar:2.0.3'
 
     //Fragment Manager
     implementation 'com.massivedisaster:activity-fragment-manager:0.4.5'
-
-    // of course, do not write x.x.x but the version number
 
     //LoadingDots
     implementation 'com.eyalbira.loadingdots:loading-dots:1.0.2'
@@ -140,19 +133,9 @@ dependencies {
     //chatkit
     implementation 'com.github.stfalcon:chatkit:0.3.3'
     implementation 'com.github.siyamed:android-shape-imageview:0.9.3'
-    /* implementation 'com.google.firebase:firebase-storage:16.0.1:15.0.0'
-    implementation 'com.google.firebase:firebase-auth:16.0.1:15.0.0'
-*/
-    implementation 'com.google.firebase:firebase-storage:16.0.1'
-    implementation 'com.google.firebase:firebase-auth:16.0.1'
-
 
     implementation 'com.chootdev:timezago:1.1.8'
-    //implementation 'com.github.marlonlom:timeago:3.0.1'
 
-
-
-    //Design Progress bar for Pagination
 }
 
 

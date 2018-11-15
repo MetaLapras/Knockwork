@@ -8,6 +8,16 @@ public class User implements IUser {
     private String avatar;
     private boolean online;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", online=" + online +
+                '}';
+    }
+
     public User(String id, String name, String avatar, boolean online) {
         this.id = id;
         this.name = name;

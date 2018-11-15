@@ -86,7 +86,7 @@ public class CustomLayoutMessagesActivity extends DemoMessagesActivity
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.e(TAG+"get", dataSnapshot.toString());
                 FirebaseUidModel model = dataSnapshot.getValue(FirebaseUidModel.class);
-                Log.e(TAG+"get", model.toString());
+       //         Log.e(TAG+"get", model.toString());
 
                 name = model.getLancer_name();
                 lImage = model.getLancer_url();
