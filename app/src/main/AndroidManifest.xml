@@ -84,7 +84,6 @@
         <activity android:name=".Client.Activities.ChattingActivity" />
         <activity android:name=".Client.Activities.ChattingMessageActivity" />
         <activity android:name=".Client.Activities.ClientJobRequest" />
-        android:theme="@style/AppTheme"/>
         <activity
             android:name=".Freelancer.Activities.FreelancerJobsActivity"
             android:label="@string/title_activity_freelancer_jobs"
@@ -115,8 +114,10 @@
         <!-- <activity android:name=".Client.Activities.ClientJobPostingActivity"></activity> -->
 
         <activity android:name=".ChatBox.DemoDialogsActivity" />
-        <activity android:name=".ChatBox.CustomLayoutMessagesActivity" />
-        <activity android:name=".ChatBox.DemoMessagesActivity"></activity>
+        <activity android:name=".ChatBox.CustomLayoutMessagesActivity"
+            android:label="Chat"
+            android:theme="@style/GreenTheme"/>
+        <!--<activity android:name=".ChatBox.DemoMessagesActivity"></activity>-->
     </application>
 
 </manifest>

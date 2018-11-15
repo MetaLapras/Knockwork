@@ -66,8 +66,11 @@ public class CustomLayoutMessagesActivity extends DemoMessagesActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_layout_messages);
 
+
         LUID = getIntent().getStringExtra("lancerUid");
         CUID = getIntent().getStringExtra("clientUid");
+        getSupportActionBar().setTitle(LUID);
+
         //Image = getIntent().getStringExtra("image");
         chatBoxId = CUID+"_"+LUID;
 
