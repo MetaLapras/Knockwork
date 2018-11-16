@@ -9,9 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.pasistence.knockwork.ChatBox.CustomLayoutMessagesActivity;
-import com.pasistence.knockwork.Client.Activities.ChattingActivity;
 import com.pasistence.knockwork.Client.Activities.ClientJobRequest;
-import com.pasistence.knockwork.Client.Activities.LancersActivity;
 import com.pasistence.knockwork.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;

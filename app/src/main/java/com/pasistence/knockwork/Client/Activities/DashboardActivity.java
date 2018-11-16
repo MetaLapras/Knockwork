@@ -1,9 +1,11 @@
 package com.pasistence.knockwork.Client.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
@@ -20,6 +22,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +52,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.supercharge.shimmerlayout.ShimmerLayout;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -68,6 +72,8 @@ public class DashboardActivity extends AppCompatActivity
     RecyclerView.LayoutManager GridlayoutManager,LinearlayoutManager ;
     SwipeRefreshLayout refreshLayout;
     CardView SearchBar;
+    ShimmerLayout shimmerlayout;
+    RelativeLayout AfterLoad;
 
     //set up popular services adapter
     MyApi mService;
@@ -178,6 +184,15 @@ public class DashboardActivity extends AppCompatActivity
             public void run() {
                 if(Common.isConnectedToInterNet(getBaseContext())) {
                     loadPopularServices();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            refreshLayout.setVisibility(View.VISIBLE);
+                            shimmerlayout.stopShimmerAnimation();
+                            AfterLoad.setVisibility(View.GONE);
+
+                        }
+                    },1200);
                     //loadTopServices();
                 }else
                 {
@@ -228,6 +243,12 @@ public class DashboardActivity extends AppCompatActivity
 
         mAuth = FirebaseAuth.getInstance();
 
+        shimmerlayout = (ShimmerLayout) findViewById(R.id.shimmer_layout);
+        shimmerlayout.startShimmerAnimation();
+
+        AfterLoad = (RelativeLayout)findViewById(R.id.relative_afterload);
+        refreshLayout.setVisibility(View.GONE);
+
     }
 
     private void loadTopServices() {
@@ -264,6 +285,7 @@ public class DashboardActivity extends AppCompatActivity
         refreshLayout.setRefreshing(false);*/
 
       mService.getTopServices().enqueue(new Callback<List<ResponseTopService>>() {
+            @SuppressLint("NewApi")
             @Override
             public void onResponse(Call<List<ResponseTopService>> call, Response<List<ResponseTopService>> response) {
                 //Log.e(TAG, response.body().toString());
@@ -274,6 +296,10 @@ public class DashboardActivity extends AppCompatActivity
                 topServiceAdapter.notifyDataSetChanged();
 
                 refreshLayout.setRefreshing(false);
+
+                /*refreshLayout.setVisibility(View.VISIBLE);
+                shimmerlayout.stopShimmerAnimation();
+                AfterLoad.setVisibility(View.GONE);*/
             }
 
             @Override

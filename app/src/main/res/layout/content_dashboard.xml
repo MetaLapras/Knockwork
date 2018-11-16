@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout
+<io.supercharge.shimmerlayout.ShimmerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,132 +9,264 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Client.Activities.DashboardActivity"
     tools:showIn="@layout/app_bar_dashboard"
-    android:id="@+id/swipe_refresh_layout">
+    android:id="@+id/shimmer_layout"
+    app:shimmer_animation_duration="1200">
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:fillViewport="true">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/search_bar"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:id="@+id/relative_afterload"
+            android:paddingTop="30dp">
+
+
+
+            <View
+                android:id="@+id/shimmer_description_1"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@+id/shimmer_avatar_1"
+                android:layout_toRightOf="@+id/shimmer_avatar_1"
+                android:background="@color/shimmer_background_color"/>
+
+          <View
+                android:id="@+id/shimmer_divider_1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/shimmer_description_1"
+                android:layout_marginBottom="11dp"
+                android:layout_marginTop="11dp"
+                android:background="@color/shimmer_background_color"/>
+
+            <View
+                android:id="@+id/shimmer_description_2"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginRight="10dp"
+                android:layout_below="@+id/shimmer_divider_1"
+                android:background="@color/shimmer_background_color"/>
+
+            <View
+                android:id="@+id/shimmer_description_2.1"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginRight="10dp"
+                android:layout_below="@+id/shimmer_divider_1"
+                android:layout_toRightOf="@+id/shimmer_description_2"
+                android:background="@color/shimmer_background_color"/>
+
+            <View
+                android:id="@+id/shimmer_description_2.2"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_below="@+id/shimmer_divider_1"
+                android:layout_toRightOf="@+id/shimmer_description_2.1"
+                android:background="@color/shimmer_background_color"/>
+
+
+            <View
+                android:id="@+id/shimmer_divider_2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/shimmer_description_2"
+                android:layout_marginBottom="11dp"
+                android:layout_marginTop="11dp"
+                android:background="@color/shimmer_background_color"/>
+
+            <View
+                android:layout_width="130dp"
+                android:layout_height="19dp"
+                android:layout_alignTop="@+id/shimmer_avatar_3"
+                android:layout_toRightOf="@+id/shimmer_avatar_3"
+                android:background="@color/shimmer_background_color"/>
+
+            <View
+                android:id="@+id/shimmer_description_3"
+                android:layout_width="180dp"
+                android:layout_height="100dp"
+                android:layout_below="@+id/shimmer_divider_2"
+                android:background="@color/shimmer_background_color"/>
+
+            <View
+                android:layout_width="180dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/shimmer_description_3"
+                android:layout_alignBottom="@+id/shimmer_description_3"
+                android:background="@color/shimmer_background_color"/>
+
+            <View
+                android:id="@+id/shimmer_description_3.1"
+                android:layout_width="180dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/shimmer_description_3"
+                android:background="@color/shimmer_background_color"/>
+
+            <View
+                android:layout_width="180dp"
+                android:layout_height="100dp"
+                android:layout_alignBottom="@+id/shimmer_description_3"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="-108dp"
+                android:layout_toRightOf="@+id/shimmer_description_3.1"
+                android:background="@color/shimmer_background_color" />
+
+            <View
+                android:id="@+id/shimmer_description_3.2"
+                android:layout_width="180dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/shimmer_description_3.1"
+                android:background="@color/shimmer_background_color"/>
+
+            <View
+                android:layout_width="180dp"
+                android:layout_height="100dp"
+                android:layout_alignBottom="@+id/shimmer_description_3.1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="-108dp"
+                android:layout_toRightOf="@+id/shimmer_description_3.2"
+                android:background="@color/shimmer_background_color" />
+
+
+        </RelativeLayout>
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:weightSum="9">
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:padding="3dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="8dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_search"/>
+                <android.support.v7.widget.CardView
+                    android:id="@+id/search_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:weightSum="9">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:padding="3dp"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="8dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_search"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="8"
+                            android:textSize="@dimen/text_size_medium"
+                            android:text="@string/search"
+                            />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="8"
+                    android:layout_margin="8dp"
+                    android:text="@string/pServices"
                     android:textSize="@dimen/text_size_medium"
-                    android:text="@string/search"
-                    />
+                    android:textColor="@color/colorAccent"/>
+
+                <android.support.v4.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_popular_services"
+                        android:layout_width="match_parent"
+                        android:nestedScrollingEnabled="false"
+                        android:layout_height="wrap_content"/>
+
+                </android.support.v4.widget.NestedScrollView>
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_margin="10dp"
+                    android:elevation="10dp"
+                    android:visibility="gone"
+                    app:cardCornerRadius="2dp"
+                    android:id="@+id/card_popular_services">
+
+                    <!-- <com.daimajia.slider.library.SliderLayout
+                         android:id="@+id/slider"
+                         android:layout_width="wrap_content"
+                         android:layout_height="180dp"
+                         android:gravity="center"
+                         custom:selected_color="#FF5500"
+                         custom:unselected_color="#55333333"
+                         custom:shape="rect"
+                         custom:selected_padding_left="2dp"
+                         custom:selected_padding_right="2dp"
+                         custom:unselected_padding_left="2dp"
+                         custom:unselected_padding_right="2dp"
+                         custom:selected_width="16dp"
+                         custom:selected_height="3dp"
+                         custom:unselected_width="16dp"
+                         custom:unselected_height="3dp">
+
+                     </com.daimajia.slider.library.SliderLayout>-->
+
+                </android.support.v7.widget.CardView>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/category"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textColor="@color/colorAccent"/>
+
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:elevation="10dp"
+                    android:id="@+id/card_Top_services">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_top_services"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:isScrollContainer="false"
+                        android:layout_margin="5dp" />
+
+                </android.support.v7.widget.CardView>
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </ScrollView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/pServices"
-        android:textSize="@dimen/text_size_medium"
-        android:textColor="@color/colorAccent"/>
-
-        <android.support.v4.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_popular_services"
-                android:layout_width="match_parent"
-                android:nestedScrollingEnabled="false"
-                android:layout_height="wrap_content"/>
-
-        </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
-        <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_margin="10dp"
-                android:elevation="10dp"
-                android:visibility="gone"
-                app:cardCornerRadius="2dp"
-                android:id="@+id/card_popular_services">
-
-                <!-- <com.daimajia.slider.library.SliderLayout
-                     android:id="@+id/slider"
-                     android:layout_width="wrap_content"
-                     android:layout_height="180dp"
-                     android:gravity="center"
-                     custom:selected_color="#FF5500"
-                     custom:unselected_color="#55333333"
-                     custom:shape="rect"
-                     custom:selected_padding_left="2dp"
-                     custom:selected_padding_right="2dp"
-                     custom:unselected_padding_left="2dp"
-                     custom:unselected_padding_right="2dp"
-                     custom:selected_width="16dp"
-                     custom:selected_height="3dp"
-                     custom:unselected_width="16dp"
-                     custom:unselected_height="3dp">
-
-                 </com.daimajia.slider.library.SliderLayout>-->
-
-            </android.support.v7.widget.CardView>
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/category"
-        android:textSize="@dimen/text_size_medium"
-        android:textColor="@color/colorAccent"/>
-
-
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:elevation="10dp"
-        android:id="@+id/card_Top_services">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_top_services"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:isScrollContainer="false"
-            android:layout_margin="5dp" />
-
-    </android.support.v7.widget.CardView>
-
-    </LinearLayout>
-
-    </ScrollView>
-
-</android.support.v4.widget.SwipeRefreshLayout>
+</io.supercharge.shimmerlayout.ShimmerLayout>

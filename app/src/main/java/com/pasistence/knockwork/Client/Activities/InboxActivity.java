@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RelativeLayout;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,6 +40,8 @@ import com.stfalcon.chatkit.dialogs.DialogsListAdapter;
 import java.util.ArrayList;
 import java.util.Date;
 
+import io.supercharge.shimmerlayout.ShimmerLayout;
+
 import static com.pasistence.knockwork.Common.PreferenceUtils.getUid;
 
 public class InboxActivity extends DemoDialogsActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -52,11 +55,21 @@ public class InboxActivity extends DemoDialogsActivity implements NavigationView
     FirebaseDatabase mDatabse;
     DatabaseReference mReference;
 
+
+    ShimmerLayout shimmerlayout;
+    RelativeLayout AfterLoad;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inbox);
         mContext = InboxActivity.this;
+
+        shimmerlayout = (ShimmerLayout) findViewById(R.id.shimmer_layout);
+        shimmerlayout.startShimmerAnimation();
+
+        AfterLoad = (RelativeLayout)findViewById(R.id.relative_afterload);
+
         /********-----------------------------------------------*********/
         dialogsList = (DialogsList)  findViewById(R.id.dialogsList);
 
@@ -146,6 +159,8 @@ public class InboxActivity extends DemoDialogsActivity implements NavigationView
         super.dialogsAdapter.setOnDialogClickListener(this);
         super.dialogsAdapter.setOnDialogLongClickListener(this);
         dialogsList.setAdapter(super.dialogsAdapter);
+        AfterLoad.setVisibility(View.GONE);
+        shimmerlayout.stopShimmerAnimation();
     }
     /********-----------------------------------------------*********/
 

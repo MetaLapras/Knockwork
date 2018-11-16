@@ -38,8 +38,6 @@ public class SplashActivity extends AppCompatActivity {
 
         final ImageView imgProfile = (ImageView)findViewById(R.id.img_profile);
 
-
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

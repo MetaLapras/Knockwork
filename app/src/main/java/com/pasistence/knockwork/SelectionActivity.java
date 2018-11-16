@@ -56,9 +56,6 @@ public class SelectionActivity extends AppCompatActivity
                 Log.e(TAG, auth.getProviders().toString()+"");
                 Log.e(TAG, auth.getPhoneNumber()+"");
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
 
                         if(PreferenceUtils.getUserType(mContext).equals(Common.Client)){
 
@@ -78,8 +75,7 @@ public class SelectionActivity extends AppCompatActivity
 
                         // This method will be executed once the timer is over
 
-                    }
-                }, 3000);
+
             }
         }else
             {

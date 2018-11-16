@@ -210,7 +210,7 @@
                 android:textAlignment="center"
                 android:textSize="15dp" />
 
-            <TextView
+          <!--  <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -218,7 +218,24 @@
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
-                android:textSize="18dp" />
+                android:textSize="18dp" />-->
+
+            <Spinner
+                android:id="@+id/spn_currency"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="2"
+                android:background="@drawable/border_corner"
+                android:entries="@array/currency"
+                android:spinnerMode="dropdown"
+                android:textAlignment="center">
+
+            </Spinner>
+
+
+
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -245,7 +262,9 @@
                 android:background="@drawable/border_corner"
                 android:entries="@array/spinner_week"
                 android:spinnerMode="dropdown"
-                android:textAlignment="center"></Spinner>
+                android:textAlignment="center">
+
+            </Spinner>
 
         </LinearLayout>
 

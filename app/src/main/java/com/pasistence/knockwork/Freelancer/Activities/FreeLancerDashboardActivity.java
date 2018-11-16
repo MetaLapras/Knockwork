@@ -182,7 +182,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
             public void run() {
                 //to Load menu from Firebase
                 if(Common.isConnectedToInterNet(getBaseContext())) {
-                    checkProfile();
+                   // checkProfile();
                     loadPopularServices();
                     //loadTopServices();
                 }else

@@ -479,11 +479,12 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
-       /* alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"Upload", new DialogInterface.OnClickListener() {
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"Upload", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 // Perform Action on Button
+                dialog.dismiss();
             }
-        });*/
+        });
 
         //new Dialog(getApplicationContext());
         alertDialog.show();

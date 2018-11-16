@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,12 +36,16 @@ import com.stfalcon.chatkit.dialogs.DialogsListAdapter;
 import java.util.ArrayList;
 import java.util.Date;
 
+import io.supercharge.shimmerlayout.ShimmerLayout;
+
 import static com.pasistence.knockwork.Common.PreferenceUtils.getUid;
 
 public class FreelancerInboxActivity extends DemoDialogsActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "freeInbox";
+    ShimmerLayout shimmerlayout;
+    RelativeLayout AfterLoad;
 
     //CustomlayoutDialogsActivity
     public static void open(Context context) {
@@ -57,8 +63,13 @@ public class FreelancerInboxActivity extends DemoDialogsActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_freelancer_inbox);
+
         mContext=FreelancerInboxActivity.this;
 
+        shimmerlayout = (ShimmerLayout) findViewById(R.id.shimmer_layout);
+        shimmerlayout.startShimmerAnimation();
+
+        AfterLoad = (RelativeLayout)findViewById(R.id.relative_afterload);
 
         /********-----------------------------------------------*********/
         dialogsList = (DialogsList)  findViewById(R.id.dialogsList);
@@ -138,6 +149,9 @@ public class FreelancerInboxActivity extends DemoDialogsActivity
         super.dialogsAdapter.setOnDialogLongClickListener(this);
         super.dialogsAdapter.notifyDataSetChanged();
         dialogsList.setAdapter(super.dialogsAdapter);
+
+        AfterLoad.setVisibility(View.GONE);
+        shimmerlayout.stopShimmerAnimation();
 
     }
     /********-----------------------------------------------*********/

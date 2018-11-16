@@ -274,10 +274,12 @@ public class ManageJobPostActivity extends AppCompatActivity
 
     private void mInit() {
         mContext = ManageJobPostActivity.this;
+
         recyclerLancer = (RecyclerView)findViewById(R.id.jobposting_recycler_view);
         recyclerLancer.setHasFixedSize(false);
         layoutManager = new LinearLayoutManager(this);
         recyclerLancer.setLayoutManager(layoutManager);
+
         progressBar = (ProgressBar)findViewById(R.id.progress);
 
         //btnMore = (Button)findViewById(R.id.btn_more);

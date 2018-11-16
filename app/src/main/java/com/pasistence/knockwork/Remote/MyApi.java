@@ -2,6 +2,7 @@ package com.pasistence.knockwork.Remote;
 
 import com.pasistence.knockwork.Model.ApiResponse.ApiEducationResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiExperienceResponse;
+import com.pasistence.knockwork.Model.ApiResponse.ApiPostContestResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiProfileStatus;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponse;
@@ -179,7 +180,7 @@ public interface MyApi {
     //Post New Contest
     @FormUrlEncoded
     @POST("postcontest")
-    Call<ApiPostJobResponse>ClientPostContest(
+    Call<ApiPostContestResponse>ClientPostContest(
             @Field("uid") String Uid,
             @Field("cid")  String cid,
             @Field("title")  String title,
@@ -193,7 +194,7 @@ public interface MyApi {
     //Update Posted Contest
     @FormUrlEncoded
     @POST("postcontestUpdate")
-    Call<ApiPostJobResponse>ClientPostContestUpdate(
+    Call<ApiPostContestResponse>ClientPostContestUpdate(
             @Field("pid") String Pid,
             @Field("uid") String Uid,
             @Field("cid")  String cid,
@@ -208,12 +209,12 @@ public interface MyApi {
 
     //getAll Posted Contest
     @GET("allpostcontest/{pageNo}")
-    Call<ApiPostJobResponse>ClientPostContestRead(@Path("pageNo") int pageNo);
+    Call<ApiPostContestResponse>ClientPostContestRead(@Path("pageNo") int pageNo);
 
     //Delete Posted Contest
     @FormUrlEncoded
     @POST("postcontestdelete")
-    Call<ApiPostJobResponse>ClientPostContestDelete(
+    Call<ApiPostContestResponse>ClientPostContestDelete(
             @Field("pid") String Pid,
             @Field("uid") String Uid,
             @Field("cid")  String cid

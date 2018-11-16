@@ -134,7 +134,11 @@ dependencies {
     implementation 'com.github.stfalcon:chatkit:0.3.3'
     implementation 'com.github.siyamed:android-shape-imageview:0.9.3'
 
+    //Date ago
     implementation 'com.chootdev:timezago:1.1.8'
+
+    //ShimmerLayout Loading like Facebook
+    implementation 'io.supercharge:shimmerlayout:2.1.0'
 
 }
 
