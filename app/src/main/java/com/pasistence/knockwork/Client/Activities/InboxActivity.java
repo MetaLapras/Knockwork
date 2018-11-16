@@ -37,6 +37,7 @@ import com.stfalcon.chatkit.dialogs.DialogsList;
 import com.stfalcon.chatkit.dialogs.DialogsListAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 import static com.pasistence.knockwork.Common.PreferenceUtils.getUid;
@@ -73,29 +74,36 @@ public class InboxActivity extends DemoDialogsActivity implements NavigationView
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.e(TAG, dataSnapshot.toString());
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    FirebaseUidModel model = ds.getValue(FirebaseUidModel.class);
-                    Log.e(TAG+"get", model.toString());
+                    if (ds.child("chat").exists()) {
+                        FirebaseUidModel model = ds.getValue(FirebaseUidModel.class);
+                        Log.e(TAG + "get", model.toString());
 
-                    User user = new User(model.getLancer_id(),model.getLancer_name(),model.getLancer_url(),true);
-                  //  Log.e(TAG, user.toString());
-                    Date date = new Date();
-                    Message message = new Message(model.getLancer_id(),user,model.getLast_message(),date);
+                        User user = new User(model.getLancer_id(), model.getLancer_name(), model.getLancer_url(), true);
+                        //  Log.e(TAG, user.toString());
+                        Date date = null;
+                        try {
+                            date = model.getLast_date() == null ? new Date() : new Date(model.getLast_date());
+                        } catch (Exception e) {
+                            date = new Date();
+                        }
+                        Message message = new Message(model.getLancer_id(), user, model.getLast_message(), date);
 
-                    ArrayList<User> userlist = new ArrayList<>();
-                    userlist.add(user);
+                        ArrayList<User> userlist = new ArrayList<>();
+                        userlist.add(user);
 
-                    Dialog d = new Dialog(
-                            model.getLancer_id(),
-                            model.getLancer_name(),
-                            model.getLancer_url(),
-                            userlist,
-                            message,
-                            0
-                    );
+                        Dialog d = new Dialog(
+                                model.getLancer_id(),
+                                model.getLancer_name(),
+                                model.getLancer_url(),
+                                userlist,
+                                message,
+                                0
+                        );
+                            dialogs.add(d);
 
-                    dialogs.add(d);
+
+                    }
                 }
-
                 initAdapter();
             }
 
@@ -130,6 +138,49 @@ public class InboxActivity extends DemoDialogsActivity implements NavigationView
     }
 
     /********-----------------------------------------------*********/
+//    public static ArrayList<Dialog> doSelectionSort(int[] arr) {
+//        for (int i = 0; i < arr.length - 1; i++) {
+//            int pos = i;
+//            // find position of smallest num between (i + 1)th element and last element
+//            for (int j = i + 1; j <= arr.length; j++) {
+//                if (arr[j] < arr[pos])
+//                    pos = j;
+//
+//                // Swap min (smallest num) to current position on array
+//                int min = arr[pos];
+//                arr[pos] = arr[i];
+//                arr[i] = min;
+//            }
+//        }
+//        return arr;
+//    }
+
+
+    public ArrayList<Dialog> sort(ArrayList<Dialog> dialogs)
+    {
+        int n = dialogs.size();
+
+        // One by one move boundary of unsorted subarray
+        for (int i = 0; i < n-1; i++)
+        {
+            // Find the minimum element in unsorted array
+            int min_idx = i;
+            for (int j = i+1; j < n; j++)
+                if (dialogs.get(j).getLastMessage().getCreatedAt().after(dialogs.get(min_idx).getLastMessage().getCreatedAt()))
+                    min_idx = j;
+
+            // Swap the found minimum element with the first
+            // element
+            Dialog temp = dialogs.get(min_idx);
+            dialogs.set(min_idx,dialogs.get(i));
+            dialogs.set(i,temp);
+            //arr[min_idx] = arr[i];
+            //arr[i] = temp;
+        }
+        return dialogs;
+    }
+    /*******************/
+
 
     @Override
     public void onDialogClick(Dialog dialog) {
@@ -142,7 +193,7 @@ public class InboxActivity extends DemoDialogsActivity implements NavigationView
 
     private void initAdapter() {
         super.dialogsAdapter=new DialogsListAdapter<>(R.layout.item_custom_chat_dialog,super.imageLoader);
-        super.dialogsAdapter.setItems(dialogs);
+        super.dialogsAdapter.setItems(sort(dialogs));
         super.dialogsAdapter.setOnDialogClickListener(this);
         super.dialogsAdapter.setOnDialogLongClickListener(this);
         dialogsList.setAdapter(super.dialogsAdapter);

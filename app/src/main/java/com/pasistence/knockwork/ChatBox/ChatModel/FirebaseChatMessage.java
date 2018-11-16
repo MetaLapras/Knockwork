@@ -31,16 +31,16 @@ public class FirebaseChatMessage implements Serializable {
                 '}';
     }
 
+    public FirebaseChatMessage(long created, String text, String uid) {
+        this.created = created;
+        this.text = text;
+        this.uid = uid;
+    }
+
     public FirebaseChatMessage(String text, String uid) {
        // this.id = id;
         this.text = text;
         this.uid = uid;
-
-
-
-        //this.created = ServerValue.TIMESTAMP;
-        this.created = new Date().getTime();
-
 
     }
 

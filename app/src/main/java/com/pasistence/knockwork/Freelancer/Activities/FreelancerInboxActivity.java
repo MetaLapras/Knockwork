@@ -79,7 +79,7 @@ public class FreelancerInboxActivity extends DemoDialogsActivity
                     Log.e(TAG+"get", model.toString());
 
                     User user = new User(model.getClient_id(),model.getClient_name(),model.getClient_url(),true);
-                    Date date = new Date();
+                    Date date = new Date(model.getLast_date());
                     Message message = new Message(model.getClient_id(),user,model.getLast_message(),date);
 
                     ArrayList<User> userlist = new ArrayList<>();
