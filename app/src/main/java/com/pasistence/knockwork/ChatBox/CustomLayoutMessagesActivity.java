@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -17,8 +18,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.pasistence.knockwork.ChatBox.ChatModel.FirebaseChatMessage;
+import com.pasistence.knockwork.ChatBox.ChatModel.FirebaseChatMessagePost;
 import com.pasistence.knockwork.ChatBox.ChatModel.FirebaseUidModel;
 import com.pasistence.knockwork.ChatBox.ChatModel.Message;
 import com.pasistence.knockwork.ChatBox.ChatModel.User;
@@ -54,7 +57,6 @@ public class CustomLayoutMessagesActivity extends DemoMessagesActivity
         User user;
 
 
-
     public static void open(Context context){
         context.startActivity(new Intent(context, CustomLayoutMessagesActivity.class));
     }
@@ -65,9 +67,13 @@ public class CustomLayoutMessagesActivity extends DemoMessagesActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_layout_messages);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         LUID = getIntent().getStringExtra("lancerUid");
         CUID = getIntent().getStringExtra("clientUid");
+
+
         //Image = getIntent().getStringExtra("image");
         chatBoxId = CUID+"_"+LUID;
 
@@ -85,13 +91,13 @@ public class CustomLayoutMessagesActivity extends DemoMessagesActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.e(TAG+"get", dataSnapshot.toString());
-                FirebaseUidModel model = dataSnapshot.getValue(FirebaseUidModel.class);
+                final FirebaseUidModel model = dataSnapshot.getValue(FirebaseUidModel.class);
        //         Log.e(TAG+"get", model.toString());
 
                 name = model.getLancer_name();
                 lImage = model.getLancer_url();
                 cImage = model.getClient_url();
-
+                getSupportActionBar().setTitle(name);
                 Query query = mReference.child(chatBoxId).child("chat").orderByChild("created");
                 query.addChildEventListener(new ChildEventListener() {
                     @Override
@@ -107,7 +113,7 @@ public class CustomLayoutMessagesActivity extends DemoMessagesActivity
                                 ,true);
 
 
-                        Date date = new Date();
+                        Date date = new Date(message.getCreated());
 
                         Message m = new Message(id,user,message.getText(),date);
 
@@ -115,6 +121,8 @@ public class CustomLayoutMessagesActivity extends DemoMessagesActivity
                         messagesAdapter.notifyDataSetChanged();
 
                         mReference.child(chatBoxId).child("last_message").setValue(message.getText());
+                        mReference.child(chatBoxId).child("last_date").setValue(message.getCreated());
+
                     }
 
                     @Override
@@ -123,15 +131,18 @@ public class CustomLayoutMessagesActivity extends DemoMessagesActivity
                         Log.e(TAG+"add", dataSnapshot.toString());
                         FirebaseChatMessage message = dataSnapshot.getValue(FirebaseChatMessage.class);
                         Log.e(TAG+"m",message.toString());
-                        String id=getUid(CustomLayoutMessagesActivity.this)==message.getUid()?"0":"1";
-                        User user=new User(id,"",
-                                getUserType(CustomLayoutMessagesActivity.this).equals(Common.Lancer)?cImage:lImage
-                                ,true);
-                        Date date = new Date();
-                        Message m = new Message(id,user,message.getText(),date);
-                        messagesAdapter.addToStart(m,true);
-                        messagesAdapter.notifyDataSetChanged();
 
+                        if(!getUid(CustomLayoutMessagesActivity.this).equals(message.getUid())) {
+                            String id = getUid(CustomLayoutMessagesActivity.this).equals(message.getUid()) ? "0" : "1";
+                            User user = new User(id, "",
+                                    getUserType(CustomLayoutMessagesActivity.this).equals(Common.Lancer) ? cImage : lImage
+                                    , true);
+                            //Date date = message.getCreated();
+                            Date date = new Date(message.getCreated() * 1000);
+                            Message m = new Message(id, user, message.getText(), date);
+                            messagesAdapter.addToStart(m, true);
+                            messagesAdapter.notifyDataSetChanged();
+                        }
                     }
 
                     @Override
@@ -163,14 +174,25 @@ public class CustomLayoutMessagesActivity extends DemoMessagesActivity
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public boolean onSubmit(CharSequence input) {
         //Adding data to firebase Chatbox -> id -> Chat
-        FirebaseChatMessage chat = new FirebaseChatMessage(input.toString(),getUid(CustomLayoutMessagesActivity.this));
+//        FirebaseChatMessage chat = new FirebaseChatMessage(input.toString(),getUid(CustomLayoutMessagesActivity.this));
+        FirebaseChatMessagePost chatPost = new FirebaseChatMessagePost(ServerValue.TIMESTAMP,input.toString(),getUid(CustomLayoutMessagesActivity.this));
+
         mReference.child(chatBoxId)
                   .child("chat")
-                .push().setValue(chat);
+                .push().setValue(chatPost);
 
         /*messagesAdapter.addToStart(
                 MessagesFixtures.getTextMessage(input.toString()),true);
@@ -202,5 +224,4 @@ public class CustomLayoutMessagesActivity extends DemoMessagesActivity
         super.messagesAdapter.setLoadMoreListener(this);
         messagesList.setAdapter(super.messagesAdapter);
     }
-
 }
