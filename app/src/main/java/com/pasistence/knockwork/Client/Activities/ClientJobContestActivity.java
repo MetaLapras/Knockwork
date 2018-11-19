@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.pasistence.knockwork.Client.Fragments.ClientJobContestFragment;
 import com.pasistence.knockwork.Client.Fragments.ClientJobContestSecondFragment;
+import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Common.PreferenceUtils;
 import com.pasistence.knockwork.Freelancer.Fragments.FreeLancerProfileFragment;
 import com.pasistence.knockwork.R;
@@ -69,8 +70,23 @@ public class ClientJobContestActivity extends AppCompatActivity {
 
         if (id == R.id.action_add) {
 
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+          /*  FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.contest_frame,new ClientJobContestFragment());
+            ft.addToBackStack(null);
+            ft.commit();*/
+
+
+            ClientJobContestFragment fragment = new ClientJobContestFragment();
+
+            Bundle args = new Bundle();
+
+            args.putString("type",Common.register);
+
+            fragment.setArguments(args);
+
+
+            FragmentTransaction ft = fragmentManager.beginTransaction();
+            ft.replace(R.id.contest_frame,fragment);
             ft.addToBackStack(null);
             ft.commit();
 

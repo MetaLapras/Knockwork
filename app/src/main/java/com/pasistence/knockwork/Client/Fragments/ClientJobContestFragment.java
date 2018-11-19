@@ -139,17 +139,42 @@ public class ClientJobContestFragment extends Fragment {
         mService = Common.getApi();
 
 
+        if(getArguments()!=null){
+
+            type = getArguments().getString("type");
+
+            if(type.equals(Common.update)) {
+                loadAllData();
+                btnContinue.setText("Update Contest");
+                Log.e("-->","Update job");
+            }
+
+
+        }else {
+            Log.e(TAG, "Failed Argu" );
+        }
+
+
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if(!isCheck()){
-                    createAContest();
+
+                    if(type.equals(Common.update)) {
+                        updateAContest();
+                        Log.e("-->","Update job");
+                    }else{
+                        createAContest();
+                        Log.e("-->","RegisterJob");
+                    }
+
+
                 }
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.contest_frame,new ClientJobContestSecondFragment());
-                ft.addToBackStack(null);
+                //ft.addToBackStack(null);
                 ft.commit();
             }
         });
@@ -181,17 +206,16 @@ public class ClientJobContestFragment extends Fragment {
         Uid = getUid(mContext);
         Cid = getCid(mContext);
 
-        updateAContest();
 
-        loadAllData();
+
+
+
 
     }
 
     private void loadAllData() {
 
         if(getArguments()!=null){
-
-            type = getArguments().getString("type");
 
             Pid = getArguments().getString("pid");
             Uid = getArguments().getString("uid");
@@ -208,7 +232,7 @@ public class ClientJobContestFragment extends Fragment {
 
             String[] arrOfStr = prizemoney.split("_", 5);
 
-            for(int i =0 ;i<arrOfStr.length;i++){
+            for(int i =0 ;i<=arrOfStr.length;i++){
                 str0 = arrOfStr[0];
                 str1 = arrOfStr[1];
             }
@@ -294,6 +318,62 @@ public class ClientJobContestFragment extends Fragment {
     }
 
     public void updateAContest(){
+
+        Common.showSpotDialogue(mActivity);
+
+
+        Title = editContestTitle.getText().toString();
+        Description =editContestDesription.getText().toString();
+        prizemoney =edtPrize.getText().toString()+"_"+spnCurrency.getSelectedItem().toString();
+        duration = spnDuration.getSelectedItem().toString();
+
+
+        if(radioPrivate.isChecked()){
+            visibility = radioPrivate.getText().toString();
+        }else {
+            visibility = radioPublic.getText().toString();
+        }
+
+        try{
+
+            if(Common.isConnectedToInterNet(mContext)){
+
+                mService.ClientPostContestUpdate(
+                        Pid,
+                        Uid,
+                        Cid,
+                        Title,
+                        Description,
+                        duration,
+                        prizemoney,
+                        ModeofPayment,
+                        visibility).enqueue(new Callback<ApiPostContestResponse>() {
+                    @Override
+                    public void onResponse(Call<ApiPostContestResponse> call, Response<ApiPostContestResponse> response) {
+                        ApiPostContestResponse result = response.body();
+                        Log.e(TAG, result.toString());
+                        Common.dismissSpotDilogue();
+                        Common.commonDialog(mContext,result.getMessage().toString());
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApiPostContestResponse> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+
+
+            }else {
+                Common.commonDialog(mContext,"Please Check your Internet Connection");
+            }
+
+
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
 
     }
 

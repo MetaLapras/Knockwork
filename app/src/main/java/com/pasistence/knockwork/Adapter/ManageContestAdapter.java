@@ -164,13 +164,13 @@ public class ManageContestAdapter extends RecyclerView.Adapter<ViewHolderMnageJo
         holder.btnJobRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //removeAt(position);
+                removeAt(position);
             }
         });
     }
 
     private void removeAt(final int position) {
-        /*if(!job.getPId().equals(null) && !job.getCid().equals(null) && !job.getUid().equals(null))
+        if(!manageJobPostingModels.get(position).getContestid().equals(null) && !manageJobPostingModels.get(position).getCid().equals(null) && !manageJobPostingModels.get(position).getUid().equals(null))
         {
             try {
                 //Common.dismissSpotDilogue();
@@ -178,37 +178,38 @@ public class ManageContestAdapter extends RecyclerView.Adapter<ViewHolderMnageJo
                 alertDialogBuilder.setMessage("Are you Sure Want to Delete")
                         .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                mServices.ClientPostAJobDelete(job.getPId(),job.getUid(),job.getCid()).enqueue(new Callback<ApiPostJobResponse>() {
+
+                                mServices.ClientPostContestDelete(
+                                        manageJobPostingModels.get(position).getContestid(),
+                                        manageJobPostingModels.get(position).getUid(),
+                                        manageJobPostingModels.get(position).getCid()).enqueue(new Callback<ApiPostContestResponse>() {
                                     @Override
-                                    public void onResponse(Call<ApiPostJobResponse> call, Response<ApiPostJobResponse> response) {
+                                    public void onResponse(Call<ApiPostContestResponse> call, Response<ApiPostContestResponse> response) {
                                         response.body().getMessage();
-                                        final ApiPostJobResponse result = response.body();
+                                        final ApiPostContestResponse result = response.body();
                                         Log.e(TAG, result.toString());
                                         if(!result.getError()){
+
                                             manageJobPostingModels.remove(position);
                                             notifyItemRemoved(position);
                                             notifyItemRangeChanged(position,manageJobPostingModels.size());
                                             notifyDataSetChanged();
-                                            //Intent intent = new Intent(mContext,ManageJobPostActivity.class);
-                                            //ActivityOptions options = ActivityOptions.makeCustomAnimation(mContext,android.R.anim.fade_in,android.R.anim.fade_out);
-                                            //mContext.startActivity(intent,options.toBundle());
-                                            //activity.finish();
-                                            //mContext.startActivity(new Intent(mContext,ManageJobPostActivity.class));
+
 
                                         }else if(result.getError()){
                                             Common.commonDialog(mContext,result.getMessage());
-                                            Common.dismissSpotDilogue();
+                                            //Common.dismissSpotDilogue();
                                         }else {
                                             Common.commonDialog(mContext,"Sever not found..");
-                                            Common.dismissSpotDilogue();
+                                            //Common.dismissSpotDilogue();
                                         }
                                     }
 
                                     @Override
-                                    public void onFailure(Call<ApiPostJobResponse> call, Throwable t) {
+                                    public void onFailure(Call<ApiPostContestResponse> call, Throwable t) {
                                         Log.e(TAG, t.getMessage() );
                                         t.printStackTrace();
-                                        Common.dismissSpotDilogue();
+                                        //Common.dismissSpotDilogue();
                                         Common.commonDialog(mContext,"Something went, wrong please try again");
                                     }
                                 });
@@ -234,7 +235,6 @@ public class ManageContestAdapter extends RecyclerView.Adapter<ViewHolderMnageJo
                 Common.commonDialog(mContext,"Sever not found..");
             }
         }
-*/
     }
 
     @Override
