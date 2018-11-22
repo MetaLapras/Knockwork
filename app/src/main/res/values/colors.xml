@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#0f87ff</color>
     <color name="colorAccent">#0a5196</color>
 
-
+    <color name="shimmer_background_color">#b1b1b1</color>
 
     //Color Swatches provided by http://designmodo.github.io/Flat-UI/
     <color name="fbutton_color_turquoise">#1abc9c</color>

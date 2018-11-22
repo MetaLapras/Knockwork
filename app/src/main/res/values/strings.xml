@@ -26,6 +26,7 @@
     <string name="nav_header_subtitle">sample@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Logout</string>
+    <string name="action_add">Create</string>
     <string name="signPhoneNumber">Sign Up with Number</string>
     <string name="pServices">Popular Services</string>
     <string name="profilestatus">Profile Completions</string>
@@ -279,5 +280,13 @@
         <item>Mobile development</item>
         <item>logo design</item>
     </string-array>
+
+
+    <string-array name="currency">
+        <item> INR </item>
+        <item> USD </item>
+        <item> EUR </item>
+    </string-array>
+    <string name="title_activity_client_hire">ClientHireActivity</string>
 
 </resources>

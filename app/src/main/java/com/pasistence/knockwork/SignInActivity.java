@@ -9,14 +9,13 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.pasistence.knockwork.Client.Activities.DashboardActivity;
+import com.pasistence.knockwork.Client.Activities.DashboardActivityClient;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Common.PreferenceUtils;
 import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboardActivity;
@@ -200,7 +199,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
                         Log.e(TAG, result.toString() );
 
-                        startActivity(new Intent(mContext,DashboardActivity.class));
+                        startActivity(new Intent(mContext,DashboardActivityClient.class));
 
                     }
 

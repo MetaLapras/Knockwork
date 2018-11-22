@@ -7,15 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-
-import com.pasistence.knockwork.Client.Activities.ChattingMessageActivity;
-import com.pasistence.knockwork.Freelancer.Activities.JobDescriptionActivity;
 import com.pasistence.knockwork.Model.ChattingModel;
-import com.pasistence.knockwork.Model.InboxDataModel;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.ViewHolder.ViewHolderChattingClient;
-import com.pasistence.knockwork.ViewHolder.ViewHolderInboxList;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -55,8 +49,7 @@ public class ChattingAdapter  extends RecyclerView.Adapter<ViewHolderChattingCli
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent chattingintent = new Intent(mContext, ChattingMessageActivity.class);
-                mContext.startActivity(chattingintent);
+
             }
         });
         /*holder.CircularImageViewProfile.setText(lancers.getLike());

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -14,11 +15,16 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
+import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
 import com.pasistence.knockwork.R;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.rey.material.app.Dialog;
 import com.rey.material.widget.EditText;
 import com.rey.material.widget.LinearLayout;
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
 
@@ -26,11 +32,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import info.hoang8f.widget.FButton;
 
 public class ClientJobRequest extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "HireSection";
     CircleImageView circleImageView;
-    TextView txt_name,txt_state,txt_price,txt_feedback,txt_description,txt_timeline,txt_amount,txt_amount_price;
+    TextView txt_name,txt_state,txtProfTitile,txt_price,txt_feedback,txt_description,txt_timeline,txt_amount,txt_amount_price;
     FButton btnSubmitRequest;
     MaterialEditText edtstarttime,edtendtime;
     Context mContext;
+    ApiResponseRegisterLancer.Lancer Lancer;
 
     private int mYear, mMonth, mDay;
 
@@ -51,9 +59,13 @@ public class ClientJobRequest extends AppCompatActivity implements View.OnClickL
     }
 
     private void mInit() {
+
         mContext = ClientJobRequest.this;
+
         circleImageView = (CircleImageView)findViewById(R.id.circularImage_profile);
+
         txt_name=(TextView)findViewById(R.id.txt_lancer_name);
+        txtProfTitile=(TextView)findViewById(R.id.txt_lancer_jobName);
         txt_state=(TextView)findViewById(R.id.txt_lancer_state);
         txt_price=(TextView)findViewById(R.id.txt_lancer_earing);
         txt_feedback=(TextView)findViewById(R.id.txt_lancer_per);
@@ -68,8 +80,9 @@ public class ClientJobRequest extends AppCompatActivity implements View.OnClickL
 
         btnSubmitRequest = (FButton)findViewById(R.id.btn_submit_request);
 
-    }
+        loadAllDetails();
 
+    }
 
     @Override
     public void onClick(View v) {
@@ -81,16 +94,16 @@ public class ClientJobRequest extends AppCompatActivity implements View.OnClickL
 
         if (v == edtstarttime)
         {
-            dateDialog();
+            dateDialog(edtstarttime);
         }
         if (v == edtendtime)
         {
-            dateDialog();
+            dateDialog(edtendtime);
         }
 
     }
 
-    private void agreedialog() {
+    public void agreedialog() {
 
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 
@@ -150,7 +163,7 @@ public class ClientJobRequest extends AppCompatActivity implements View.OnClickL
         cancelBT.setLayoutParams(negBtnLP);
     }
 
-    private void dateDialog(){
+    public void dateDialog(final MaterialEditText editText){
         // Get Current Date
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
@@ -166,10 +179,28 @@ public class ClientJobRequest extends AppCompatActivity implements View.OnClickL
 
                         // edtdob.setText(year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
                         //edtdob.setText(dayOfMonth  + "/" + (monthOfYear + 1) + "/" + year );
-                        edtstarttime.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth );
+                        editText.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth );
 
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
+    }
+
+    private void loadAllDetails() {
+
+        Lancer = (ApiResponseRegisterLancer.Lancer) getIntent().getSerializableExtra("lancer");
+        Log.e(TAG+"-Intent", Lancer.toString());
+
+
+        Picasso.with(mContext).load(Lancer.getLancerImage()).into(circleImageView);
+
+        txtProfTitile.setText(Lancer.getLancerProfessionalTitle());
+        txt_name.setText(Lancer.getLancerName());
+        txt_state.setText(Lancer.getLancerGender());
+        txt_price.setText(Lancer.getLancerMinHourRate());
+        txt_feedback.setText("80%");
+        txt_description.setText(Lancer.getLancerSelfIntro());
+        txt_amount.setText(Lancer.getLancerMinHourRate());
+
     }
 }

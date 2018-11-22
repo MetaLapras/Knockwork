@@ -7,20 +7,16 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.FacebookSdk;
-import com.facebook.login.widget.LoginButton;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.pasistence.knockwork.Client.Activities.DashboardActivity;
+import com.pasistence.knockwork.Client.Activities.DashboardActivityClient;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Common.PreferenceUtils;
 import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboardActivity;
@@ -247,7 +243,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             switch (PreferenceUtils.getUserType(mContext)){
 
                 case Common.Client:
-                    Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
+                    Intent intent1 = new Intent(LoginActivity.this, DashboardActivityClient.class);
                     startActivity(intent1);
                     finish();
                     break;
@@ -291,7 +287,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 /*switch (radioGroupWH.getCheckedRadioButtonId()){
                     case R.id.radio_button_hire:
-                        Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
+                        Intent intent1 = new Intent(LoginActivity.this, DashboardActivityClient.class);
                         startActivity(intent1);
                         finish();
                         break;
@@ -500,7 +496,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         PreferenceUtils.setCid(mContext,lan.getClientId());
                     }
                     present = true;
-                    startActivity(new Intent(mContext,DashboardActivity.class));
+                    startActivity(new Intent(mContext,DashboardActivityClient.class));
                 }else {
                     present = false;
                 }
@@ -596,15 +592,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         PreferenceUtils.setCid(mContext,lan.getClientId());
                     }
                     present = true;
-                    startActivity(new Intent(mContext,DashboardActivity.class));
+                    startActivity(new Intent(mContext,DashboardActivityClient.class));
                 }
 
                 if (!result.getError()) {
-                    Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
+                    Intent intent1 = new Intent(LoginActivity.this, DashboardActivityClient.class);
                     startActivity(intent1);
                     finish();
                 } else if (result.getError()) {
-                    Intent intent1 = new Intent(LoginActivity.this, DashboardActivity.class);
+                    Intent intent1 = new Intent(LoginActivity.this, DashboardActivityClient.class);
                     startActivity(intent1);
                     finish();
                 } else {

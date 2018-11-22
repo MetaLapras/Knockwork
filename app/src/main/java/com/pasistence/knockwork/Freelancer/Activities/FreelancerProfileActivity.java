@@ -49,7 +49,7 @@ Context mContext;
         fragmentTransaction.commit()*/;
 
         fragmentTransaction.add(R.id.fragment_profile,new FreeLancerProfileFragment());
-        fragmentTransaction.addToBackStack(null);
+        //fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
         txtProfileName.setText(Common.UserName);

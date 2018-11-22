@@ -1,5 +1,6 @@
 package com.pasistence.knockwork.Model.ApiResponse;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
@@ -74,7 +75,7 @@ public class ApiResponseRegisterLancer {
         this.lancer = lancer;
     }
 
-    public class Lancer {
+    public class Lancer implements Serializable {
 
         @SerializedName("uid")
         @Expose

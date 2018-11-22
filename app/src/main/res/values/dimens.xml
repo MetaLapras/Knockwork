@@ -23,4 +23,6 @@
     <dimen name="dialog_avatar_width">56dp</dimen>
     <dimen name="dialog_avatar_height">56dp</dimen>
 
+    <dimen name="monogram_width">40dp</dimen>
+
 </resources>

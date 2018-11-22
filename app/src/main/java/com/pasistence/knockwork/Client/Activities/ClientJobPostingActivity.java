@@ -48,12 +48,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.pasistence.knockwork.Common.PreferenceUtils.getCid;
+import static com.pasistence.knockwork.Common.PreferenceUtils.getUid;
+
 public class ClientJobPostingActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "JobPosting";
     TextView txtDone,txtBelong,txtAbout,txtExplain,txtSkill,txtChkFeatured,txtChkRecruiter,txtChkNDA,txtChkUrgent,txtChkPrivate, txtFeatured,txtRecruiter,txtNDA,txtUrgent,txtPrivate,txtFINR,txtRINr,txtNINR,txtUINr,txtPINr;
     EditText editAbout,editExplain,editSkill,editINR;
-    Spinner spnDone,spnBelong,spnSpend;
+    Spinner spnDone,spnBelong,spnSpend,spnCurrency;
     RadioButton radioFixed,radioHourly,radioPublic,radioPrivate;
     RadioGroup radioGrouptype,radioGroupvisibility;
     CheckBox checkBox,chkFeatured,chkRecruiter,chkNDA,chkUrgent,chkPrivate;
@@ -70,10 +73,7 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
     String Uid,Cid,category,subcategory,title,details,skills,type,rate,duration,visibility,featured;
 
      ArrayList<String> Skills = new ArrayList<String>();
-            /*{
-                    "java","Android","JavaScript","Pythan","Objective C","Swift","Angular","Angular jS","Ajax","Jquery"
-                    ,"C++","C","Wordpress","HTML","CSS","Web design","web Development","logo Design","Graphics"
-            };*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,8 +104,6 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
                 allCategories();
                 AllSubCategories();
                 allSkill();
-
-
 
             }catch (Exception e)
             {
@@ -362,6 +360,7 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
         spnDone           = (Spinner)findViewById(R.id.spn_work);
         spnBelong         = (Spinner)findViewById(R.id.spn_specility);
         spnSpend          = (Spinner)findViewById(R.id.spn_spend);
+        spnCurrency       = (Spinner)findViewById(R.id.spn_currency);
 
         radioFixed        = (RadioButton)findViewById(R.id.radio_fixed);
         radioHourly       =(RadioButton)findViewById(R.id.radio_hourly);
@@ -497,8 +496,8 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
 
         Common.showSpotDialogue(mContext);
 
-        //Uid = PreferenceUtils.getUid(mContext);
-        //Cid = PreferenceUtils.getCid(mContext);
+        Uid = getUid(mContext);
+        Cid = getCid(mContext);
         category = spnDone.getSelectedItem().toString().trim();
         subcategory = spnBelong.getSelectedItem().toString().trim();
         title = editAbout.getText().toString();
@@ -515,7 +514,7 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
         }else {
             visibility = radioPublic.getText().toString();
         }
-        rate = editINR.getText().toString();
+        rate = editINR.getText().toString()+" "+spnCurrency.getSelectedItem().toString().trim();
         duration = spnSpend.getSelectedItem().toString().trim();
         if(chkFeatured.isChecked()){
             featured = "yes";
@@ -523,10 +522,8 @@ public class ClientJobPostingActivity extends AppCompatActivity implements View.
         try
         {
             mServices.ClientPostAJob(
-                    "EXSYrhgNDZPrRRyRgZPvy3agVJR2",
-                    //Uid,
-                    "44",
-                    //Cid,
+                    Uid,
+                    Cid,
                     category,
                     subcategory,
                     title,

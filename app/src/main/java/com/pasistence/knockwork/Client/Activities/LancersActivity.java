@@ -22,20 +22,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AbsListView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Adapter.LancerListAdapter;
 import com.pasistence.knockwork.Adapter.SmallSuggestionAdapter;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Freelancer.Activities.JobPoastingActivity;
-import com.pasistence.knockwork.Interface.ILoadMore;
-import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
-import com.pasistence.knockwork.Model.ApiResponse.ApiResponseLancer;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
 import com.pasistence.knockwork.Model.ApiResponse.ApiSkillsResponse;
 import com.pasistence.knockwork.Model.LancerListModel;
@@ -43,7 +37,6 @@ import com.pasistence.knockwork.Model.ResponseSuggestionList;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.Remote.MyApi;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -265,7 +258,7 @@ public class LancersActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
    //         Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
      //               .setAction("Action", null).show();
-            startActivity(new Intent(mContext,DashboardActivity.class));
+            startActivity(new Intent(mContext,DashboardActivityClient.class));
 
         } else if (id == R.id.nav_inbox) {
 //            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)

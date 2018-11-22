@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
@@ -14,7 +12,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,47 +21,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
-import com.akexorcist.roundcornerprogressbar.common.BaseRoundCornerProgressBar;
-import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
-import com.facebook.login.Login;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Adapter.ClientPopularServiceAdapter;
 import com.pasistence.knockwork.Adapter.ClientTopServiceAdapter;
-import com.pasistence.knockwork.Client.Activities.DashboardActivity;
-import com.pasistence.knockwork.Client.Activities.InboxActivity;
 import com.pasistence.knockwork.Common.Common;
 
 import com.pasistence.knockwork.Common.PreferenceUtils;
-import com.pasistence.knockwork.Database.DatabseHandler;
-import com.pasistence.knockwork.Interface.ItemClickListener;
-import com.pasistence.knockwork.LoginActivity;
 import com.pasistence.knockwork.Model.ApiResponse.ApiProfileStatus;
 import com.pasistence.knockwork.Model.PopularServicesModel;
 import com.pasistence.knockwork.Model.ResponseTopService;
-import com.pasistence.knockwork.Model.TopServicesModel;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.Remote.MyApi;
 import com.pasistence.knockwork.SelectionActivity;
-import com.pasistence.knockwork.ViewHolder.ViewHolderTopServices;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -136,13 +111,13 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         txtUserName = (TextView)header.findViewById(R.id.txt_user_name);
         txtUserEmail = (TextView)header.findViewById(R.id.txt_user_emailid);
         imgUserProfile = (CircleImageView)header.findViewById(R.id.user_profile_image) ;
-        imgEdit=(ImageView)header.findViewById(R.id.img_edit);
+       /* imgEdit=(ImageView)header.findViewById(R.id.img_edit);
         imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(FreeLancerDashboardActivity.this,FreelancerProfileActivity.class));
             }
-        });
+        });*/
 
 
         try{
@@ -182,7 +157,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
             public void run() {
                 //to Load menu from Firebase
                 if(Common.isConnectedToInterNet(getBaseContext())) {
-                    checkProfile();
+                   // checkProfile();
                     loadPopularServices();
                     //loadTopServices();
                 }else
@@ -503,7 +478,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
                             .setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
                                 @Override
                                 public void onSliderClick(BaseSliderView slider) {
-                                   *//* Intent intent = new Intent(DashboardActivity.this,FoodDetails.class);
+                                   *//* Intent intent = new Intent(DashboardActivityClient.this,FoodDetails.class);
                                     //send food id to food details
                                     intent.putExtras(textSliderView.getBundle());
                                     startActivity(intent);*//*

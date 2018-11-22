@@ -59,7 +59,7 @@ public class SmallSuggestionAdapter extends RecyclerView.Adapter<ViewHolderSimpl
         viewHolder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
-                //Toast.makeText(DashboardActivity.this, "", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(DashboardActivityClient.this, "", Toast.LENGTH_SHORT).show();
                 Snackbar.make(view, ""+clickitem.getName(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 Log.e("popular", model.toString());

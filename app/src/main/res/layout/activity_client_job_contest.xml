@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Client.Activities.ClientJobContestActivity">
+
+
+
 <FrameLayout
     android:id="@+id/contest_frame"
     android:layout_width="match_parent"

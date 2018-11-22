@@ -50,7 +50,7 @@ public class FreeLancerProfileFragment extends Fragment {
     private String mParam2;
     public FButton btnSubmit;
     public EditText edtTitle,edtMinhour,edtSkills,edtSelfIntro;
-    public Spinner spnAvability;
+    public Spinner spnAvability,spnCurrency;
     public TextView txtContactNo,txtDateofBirth;
     RadioButton rdMale,rdFemale;
     RadioGroup rdgGender;
@@ -88,7 +88,7 @@ public class FreeLancerProfileFragment extends Fragment {
                if(!check()){
 
                     title = edtTitle.getText().toString();
-                    minhrRate = edtMinhour.getText().toString();
+                    minhrRate = edtMinhour.getText().toString() + " " + spnCurrency.getSelectedItem().toString().trim();
                     avaliblity = spnAvability.getSelectedItem().toString().trim();
                     contactno = txtContactNo.getText().toString();
                     dob = txtDateofBirth.getText().toString();
@@ -264,6 +264,7 @@ public class FreeLancerProfileFragment extends Fragment {
         //edtSkills = (EditText)view.findViewById(R.id.freelancer_profile_editSkills);
 
         spnAvability = (Spinner)view.findViewById(R.id.freelancer_profile_spn_avalibility);
+        spnCurrency = (Spinner)view.findViewById(R.id.spn_currency);
         txtContactNo = (TextView)view.findViewById(R.id.freelancer_profile_MNumber);
 
         imgCorrect=(ImageView)view.findViewById(R.id.freelancer_profile_imgright);
