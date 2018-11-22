@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Common.PreferenceUtils;
 import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboardActivity;
+import com.pasistence.knockwork.Freelancer.Activities.FreelancerProfileActivity;
+import com.pasistence.knockwork.Freelancer.Fragments.FreeLancerProfileFragment;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterClient;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
 import com.pasistence.knockwork.Remote.MyApi;
@@ -62,7 +65,24 @@ public class ProfileActivity extends AppCompatActivity {
         //Init retrofit
         mService = Common.getApi();
 
+        imgEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editProfile();
+            }
+        });
+
         loadAlldata();
+    }
+
+    private void editProfile() {
+        if(getUserType(mContext).equals(Common.Lancer)){
+            Intent intent = new Intent(mContext,FreelancerProfileActivity.class);
+            intent.putExtra("edit",Common.update);
+            startActivity(intent);
+        }else{
+
+        }
     }
 
     private void loadAlldata() {
@@ -89,6 +109,16 @@ public class ProfileActivity extends AppCompatActivity {
                             gender = lan.getLancerGender();
                             payment = lan.getLancerMinHourRate();
                             intro = lan.getLancerSelfIntro();
+
+                            txtName.setText(name);
+                            txtEmail.setText(email);
+                            txtGender.setText(gender);
+                            txtProfessionalTitle.setText(title);
+                            txtAvailabilty.setText(available);
+                            txtPaymentType.setText(payment);
+                            txtSelfIntro.setText(intro);
+
+                            Picasso.with(mContext).load(image).into(imgProfile);
                         }
 
 
@@ -103,15 +133,6 @@ public class ProfileActivity extends AppCompatActivity {
                     Log.e(TAG, t.getMessage());
                 }
             });
-            txtName.setText(name);
-            txtEmail.setText(email);
-            txtGender.setText(gender);
-            txtProfessionalTitle.setText(title);
-            txtAvailabilty.setText(available);
-            txtPaymentType.setText(payment);
-            txtSelfIntro.setText(intro);
-
-            Picasso.with(mContext).load(image).into(imgProfile);
         }else {
             Log.e(TAG, getUid(mContext));
             mService.checkClientexist(getUid(mContext)).enqueue(new Callback<ApiResponseRegisterClient>() {
@@ -128,7 +149,7 @@ public class ProfileActivity extends AppCompatActivity {
                             //PreferenceUtils.setLid(mContext,lan.getClientId());
 
                             email = lan.getClientEmail();
-                            mobile = lan.getClientPhoneNo();
+                            mobile = "";
                             name = lan.getClientName();
                             title = lan.getClientName();
                             available = lan.getClientProvider();
@@ -136,9 +157,18 @@ public class ProfileActivity extends AppCompatActivity {
                             gender = "";
                             payment = "";
                             intro = "";
-                            Log.e(TAG, lan.toString());
-                        }
+                            Log.e(TAG+"det", email+mobile+name+title+available+image);
 
+                            txtName.setText(name);
+                            txtEmail.setText(email);
+                            txtGender.setText(gender);
+                            txtProfessionalTitle.setText(title);
+                            txtAvailabilty.setText(available);
+                            txtPaymentType.setText(payment);
+                            txtSelfIntro.setText(intro);
+
+                            Picasso.with(mContext).load(image).into(imgProfile);
+                        }
 
 
                     }else {
@@ -152,16 +182,6 @@ public class ProfileActivity extends AppCompatActivity {
                     Log.e(TAG, t.getMessage());
                 }
             });
-
-            txtName.setText(name);
-            txtEmail.setText(email);
-            txtGender.setText(gender);
-            txtProfessionalTitle.setText(title);
-            txtAvailabilty.setText(available);
-            txtPaymentType.setText(payment);
-            txtSelfIntro.setText(intro);
-
-            Picasso.with(mContext).load(image).into(imgProfile);
         }
     }
 }
