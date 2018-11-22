@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Client.Activities.DashboardActivity"
+            android:name=".Client.Activities.DashboardActivityClient"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme" />
         <activity android:name=".Client.Activities.MemberListActivity" />
@@ -106,7 +106,6 @@
 
 
         <!-- <activity android:name=".Client.Activities.ClientJobContestActivity"></activity> -->
-        <activity android:name=".Client.Activities.ClientJobContestActivity" />
 
         <activity android:name=".Freelancer.Activities.FreelancerProfileActivity" />
         <!-- <activity android:name=".Client.Activities.ClientJobPostingActivity"></activity> -->
@@ -121,7 +120,5 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".Client.Activities.ClientBaseActivity"></activity>
     </application>
-            android:theme="@style/GreenTheme"/>
-      </application>
 
 </manifest>
