@@ -55,8 +55,6 @@ Context mContext;
         txtProfileName.setText(Common.UserName);
         txtprofileEmail.setText(Common.UserEmail);
         Picasso.with(mContext).load(Common.UserPhoto).into(imgProfile);
-
-
     }
 
 }
