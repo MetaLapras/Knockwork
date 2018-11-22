@@ -29,22 +29,33 @@
             android:title="Post a Contest"
             android:icon="@drawable/ic_trophy"
             />
-
     </group>
+    <item
+        android:title="Management">
+        <group>
+            <menu>
+                <item
+                    android:id="@+id/nav_settings"
+                    android:icon="@drawable/ic_adjust"
+                    android:title="Settings" />
+                <item
+                    android:id="@+id/nav_support"
+                    android:icon="@drawable/ic_headset"
+                    android:title="Support" />
+            </menu>
+        </group>
+    </item>
+    <item
+        android:title="Logout">
+        <group>
+            <menu>
+                <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/ic_exit"
+                    android:title="Logout" />
+            </menu>
+        </group>
+    </item>
 
-
-    <group>
-        <menu>
-            <item
-                android:id="@+id/nav_settings"
-                android:icon="@drawable/ic_adjust"
-                android:title="Settings" />
-            <item
-                android:id="@+id/nav_support"
-                android:icon="@drawable/ic_headset"
-                android:title="Support" />
-        </menu>
-    </group>
-
-
+    <item android:title="powered by Pasistence"></item>
 </menu>

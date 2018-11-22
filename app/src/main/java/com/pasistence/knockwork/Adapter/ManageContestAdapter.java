@@ -150,9 +150,6 @@ public class ManageContestAdapter extends RecyclerView.Adapter<ViewHolderMnageJo
                     ft.addToBackStack(null);
                     ft.commit();
 
-
-
-
                 }catch (Exception e){
                     e.printStackTrace();
                     e.getMessage();

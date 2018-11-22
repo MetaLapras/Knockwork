@@ -97,7 +97,6 @@ dependencies {
     implementation 'com.facebook.android:facebook-login:4.33.0'
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 
-
     //Material Search bar
     implementation 'com.github.mancj:MaterialSearchBar:+'
 

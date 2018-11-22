@@ -3,7 +3,6 @@ package com.pasistence.knockwork;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,8 +10,7 @@ import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.pasistence.knockwork.ChatBox.ChatActivity;
-import com.pasistence.knockwork.Client.Activities.DashboardActivity;
+import com.pasistence.knockwork.Client.Activities.DashboardActivityClient;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Common.PreferenceUtils;
 import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboardActivity;
@@ -59,7 +57,7 @@ public class SelectionActivity extends AppCompatActivity
 
                         if(PreferenceUtils.getUserType(mContext).equals(Common.Client)){
 
-                            startActivity(new Intent(mContext,DashboardActivity.class));
+                            startActivity(new Intent(mContext,DashboardActivityClient.class));
                             watingDialog.dismiss();
                             finish();
 

@@ -21,7 +21,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AbsListView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -29,12 +31,9 @@ import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Adapter.ManageJobPostingAdapter;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Freelancer.Activities.JobPoastingActivity;
-import com.pasistence.knockwork.Interface.ItemClickListener;
 import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
-import com.pasistence.knockwork.Model.ManageJobPostingModel;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.Remote.MyApi;
-import com.pasistence.knockwork.ViewHolder.ViewHolderMnageJobPosting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +42,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ManageJobPostActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class ManageJobPostActivity extends ClientBaseActivity {
 
     Context mContext;
     MaterialSearchBar searchBar;
@@ -75,23 +73,23 @@ public class ManageJobPostActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_job_post);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame);
+        getLayoutInflater().inflate(R.layout.activity_manage_job_post, contentFrameLayout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.getMenu().getItem(3).setChecked(true);
+
+
+        //setContentView(R.layout.activity_manage_job_post);
+
         activity = ManageJobPostActivity.this;
         /*--------------------------------------------------------------*/
 
         mInit();
+
         // mOnclick();
         mServices = Common.getApi();
         readAllJobs(PageNo);
-
-     /*   manageJobPostingAdapter = new ManageJobPostingAdapter(mContext,ManageJobPostActivity.this, manageJobPostingModels);
-        recyclerLancer.setAdapter(manageJobPostingAdapter);
-        recyclerLancer.setLayoutManager(layoutManager);*/
-        // manageJobPostingAdapter.notifyDataSetChanged();
-
-
 
         recyclerLancer.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -118,23 +116,7 @@ public class ManageJobPostActivity extends AppCompatActivity
         });
 
         /*--------------------------------------------------------------*/
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
     private void readAllJobs(int PageNo) {
@@ -182,10 +164,6 @@ public class ManageJobPostActivity extends AppCompatActivity
         }
     }
 
-    /* private void mOnclick() {
-         btnMore.setOnClickListener(this);
-     }
- */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -194,82 +172,6 @@ public class ManageJobPostActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.manage_job_post, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_home) {
-            //Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
-              //      .setAction("Action", null).show();
-              startActivity(new Intent(mContext,DashboardActivity.class));
-
-        } else if (id == R.id.nav_inbox) {
-//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show();
-            startActivity(new Intent(mContext,InboxActivity.class));
-
-
-        } else if (id == R.id.nav_notification) {
-//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Notification", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show();
-
-        } else if (id == R.id.nav_manage) {
-//                       Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage", Snackbar.LENGTH_LONG)
-//                             .setAction("Action", null).show();
-//            //startActivity(new Intent(mContext,ManageJobPostActivity.class));
-
-        } else if (id == R.id.nav_posting) {
-//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Posting", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show();
-            startActivity(new Intent(mContext,JobPoastingActivity.class));
-
-        } else if (id == R.id.nav_contest) {
-//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Contest", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show();
-
-        }else if (id == R.id.nav_settings) {
-
- //           startActivity(new Intent(mContext,SettingActivity.class));
-//                         Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Settings", Snackbar.LENGTH_LONG)
-//                            .setAction("Action", null).show();
-
-        }else if (id == R.id.nav_support) {
-//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Support", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show();
-
-        }
-
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-
     }
 
     private void mInit() {
@@ -281,44 +183,6 @@ public class ManageJobPostActivity extends AppCompatActivity
         recyclerLancer.setLayoutManager(layoutManager);
 
         progressBar = (ProgressBar)findViewById(R.id.progress);
-
-        //btnMore = (Button)findViewById(R.id.btn_more);
-     /*   btnMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (v==btnMore) {
-                    btnMore.setVisibility(View.INVISIBLE);
-                    progressBar.setVisibility(View.VISIBLE);
-                    recyclerLancer.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                        @Override
-                        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                            super.onScrollStateChanged(recyclerView, newState);
-                            if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-                                isScrolling = true;
-                            }
-                        }
-
-                        @Override
-                        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                            super.onScrolled(recyclerView, dx, dy);
-                            currentItems = layoutManager.getChildCount();
-                            totalItems = layoutManager.getItemCount();
-                            scrollOutItems = layoutManager.findFirstCompletelyVisibleItemPosition();
-
-                            if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
-                                isScrolling = false;
-                                fetchData();
-                            }
-                        }
-                    });
-                    progressBar.setVisibility(View.INVISIBLE);
-
-                }
-
-            }
-        });*/
-
-
 
     }
 

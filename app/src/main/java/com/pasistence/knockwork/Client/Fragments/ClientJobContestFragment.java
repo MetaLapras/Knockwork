@@ -476,6 +476,7 @@ public class ClientJobContestFragment extends Fragment {
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(intent,86);
     }
+
     private void selectImage() {
         //to offer user to select a file using file manager
         //we will be using an Intent

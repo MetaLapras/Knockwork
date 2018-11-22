@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,7 +25,6 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.SuccessContinuation;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,7 +39,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.pasistence.knockwork.Client.Activities.DashboardActivity;
+import com.pasistence.knockwork.Client.Activities.DashboardActivityClient;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Common.PreferenceUtils;
 import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboardActivity;
@@ -54,7 +52,6 @@ import com.rey.material.widget.LinearLayout;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.jar.Attributes;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import info.hoang8f.widget.FButton;
@@ -198,7 +195,7 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
 
                /* Intent mIntent = new Intent(
                         EmailActivity.this,
-                        DashboardActivity.class);
+                        DashboardActivityClient.class);
                 startActivity(mIntent);*/
                 progressDialog.dismiss();
 
@@ -280,7 +277,7 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
                 Log.e(TAG  + "success", uri.toString());
                 Log.e(TAG  + "success", User.getProviders().toString()+"");
                 isUploaded = true;
-                //startActivity(new Intent(mContext,DashboardActivity.class));
+                //startActivity(new Intent(mContext,DashboardActivityClient.class));
 
                 userName = editTextUserName.getText().toString();
                 uid = User.getUid();
@@ -627,7 +624,7 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
                 ApiResponseRegisterClient result = response.body();
                 Log.e(TAG, result.toString());
 
-                Intent intent1 = new Intent(mContext, DashboardActivity.class);
+                Intent intent1 = new Intent(mContext, DashboardActivityClient.class);
                 startActivity(intent1);
                 progressDialog.dismiss();
 

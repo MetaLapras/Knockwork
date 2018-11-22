@@ -287,5 +287,6 @@
         <item> USD </item>
         <item> EUR </item>
     </string-array>
+    <string name="title_activity_client_hire">ClientHireActivity</string>
 
 </resources>

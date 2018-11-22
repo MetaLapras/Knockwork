@@ -24,12 +24,11 @@
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".Client.Activities.DashboardActivity"
+            android:name=".Client.Activities.DashboardActivityClient"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme" />
         <activity android:name=".Client.Activities.MemberListActivity" />
@@ -37,11 +36,9 @@
             android:name=".Client.Activities.InboxActivity"
             android:label="@string/title_activity_inbox"
             android:theme="@style/AppTheme" />
-
         <activity
             android:name=".Client.Activities.SettingActivity"
             android:theme="@style/AppTheme" />
-
         <activity android:name=".LoginActivity" />
         <activity android:name=".PhonNumberSignInActivity" />
         <activity android:name=".SignInActivity" />
@@ -76,13 +73,12 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".Client.Activities.ManageJobPostActivity"
-            android:label="@string/title_activity_manage_job_post" />
+            android:label="@string/title_activity_manage_job_post"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Freelancer.Activities.FreelancerSettingActivity"
             android:label="@string/title_activity_freelancer_setting"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Client.Activities.ChattingActivity" />
-        <activity android:name=".Client.Activities.ChattingMessageActivity" />
         <activity android:name=".Client.Activities.ClientJobRequest" />
         <activity
             android:name=".Freelancer.Activities.FreelancerJobsActivity"
@@ -103,7 +99,9 @@
 
         <!-- <activity android:name=".Freelancer.Activities.FreelancerProfileActivity" /> -->
         <activity android:name=".Client.Activities.ClientJobPostingActivity" />
-        <activity android:name=".Client.Activities.ClientJobContestActivity" />
+        <activity android:name=".Client.Activities.ClientJobContestActivity"
+            android:theme="@style/AppTheme"
+            android:label="Manage Contest"/>
         <!-- <activity android:name=".SplashActivity" /> -->
         <!-- <activity android:name=".Client.Activities.ClientJobPostingActivity"></activity> -->
 
@@ -114,10 +112,14 @@
         <!-- <activity android:name=".Client.Activities.ClientJobPostingActivity"></activity> -->
 
         <activity android:name=".ChatBox.DemoDialogsActivity" />
-        <activity android:name=".ChatBox.CustomLayoutMessagesActivity"
+        <activity
+            android:name=".ChatBox.CustomLayoutMessagesActivity"
             android:label="Chat"
-            android:theme="@style/GreenTheme"/>
-        <!--<activity android:name=".ChatBox.DemoMessagesActivity"></activity>-->
+            android:theme="@style/GreenTheme" />
+        <!-- <activity android:name=".ChatBox.DemoMessagesActivity"></activity> -->
+
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".Client.Activities.ClientBaseActivity"></activity>
     </application>
 
 </manifest>

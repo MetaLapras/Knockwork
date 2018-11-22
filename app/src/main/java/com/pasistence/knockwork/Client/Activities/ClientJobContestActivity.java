@@ -3,6 +3,7 @@ package com.pasistence.knockwork.Client.Activities;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.pasistence.knockwork.Client.Fragments.ClientJobContestFragment;
@@ -22,19 +24,22 @@ import com.pasistence.knockwork.Freelancer.Fragments.FreeLancerProfileFragment;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.SelectionActivity;
 
-public class ClientJobContestActivity extends AppCompatActivity {
+public class ClientJobContestActivity extends ClientBaseActivity {
 
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     Context mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_client_job_contest);
-        mContext = ClientJobContestActivity.this;
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame);
+        getLayoutInflater().inflate(R.layout.activity_client_job_contest, contentFrameLayout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.getMenu().getItem(0).setChecked(true);
+
+        mContext = ClientJobContestActivity.this;
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -43,23 +48,10 @@ public class ClientJobContestActivity extends AppCompatActivity {
         //fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
-
-        //For back Button on Action bar
-        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //What to do on back clicked
-                Toast.makeText(mContext, "Back is Clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.manage_job_post, menu);
         return true;
     }
@@ -74,7 +66,6 @@ public class ClientJobContestActivity extends AppCompatActivity {
             ft.replace(R.id.contest_frame,new ClientJobContestFragment());
             ft.addToBackStack(null);
             ft.commit();*/
-
 
             ClientJobContestFragment fragment = new ClientJobContestFragment();
 

@@ -123,6 +123,7 @@ public interface MyApi {
     Call<ApiResponseRegisterLancer>checkLancerexist(@Path("uid") String uid);
 
 
+
     // JOB POSTING-------------------------------------------------------/
     //Post New Job
     @FormUrlEncoded
@@ -243,9 +244,6 @@ public interface MyApi {
     @POST("getSmallSuggestions")
     Call<List<ApiSkillsResponse>>getSmallSuggestion(
             @Field("title") String Title);
-
-
-
 
 
     //Profile Count

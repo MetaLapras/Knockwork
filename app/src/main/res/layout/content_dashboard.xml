@@ -7,7 +7,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Client.Activities.DashboardActivity"
+    tools:context=".Client.Activities.DashboardActivityClient"
     tools:showIn="@layout/app_bar_dashboard"
     android:id="@+id/shimmer_layout"
     app:shimmer_animation_duration="1200">
