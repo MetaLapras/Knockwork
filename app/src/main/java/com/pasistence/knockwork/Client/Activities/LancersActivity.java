@@ -1,11 +1,9 @@
 package com.pasistence.knockwork.Client.Activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,14 +12,8 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.AbsListView;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
@@ -29,7 +21,6 @@ import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Adapter.LancerListAdapter;
 import com.pasistence.knockwork.Adapter.SmallSuggestionAdapter;
 import com.pasistence.knockwork.Common.Common;
-import com.pasistence.knockwork.Freelancer.Activities.JobPoastingActivity;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
 import com.pasistence.knockwork.Model.ApiResponse.ApiSkillsResponse;
 import com.pasistence.knockwork.Model.LancerListModel;
@@ -44,8 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LancersActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class LancersActivity extends ClientBaseActivity {
     private static final String TAG = "search";
     Context mContext;
     MaterialSearchBar searchBar;
@@ -68,6 +58,7 @@ public class LancersActivity extends AppCompatActivity
     LancerListAdapter searchAdapter;
     List<String> suggestList = new ArrayList<String>();
     String CatId,subCatId;
+    CharSequence subCatTitle;
     MyApi mService;
     List<ResponseSuggestionList> suggestionLists;
     List<ApiSkillsResponse> smallSuggestions;
@@ -77,9 +68,14 @@ public class LancersActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lancers);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame);
+        getLayoutInflater().inflate(R.layout.activity_lancers, contentFrameLayout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.getMenu().getItem(0).setChecked(true);
+
+        //setContentView(R.layout.activity_lancers);
+
 
         /*----------------------------------------------------------------------------*/
         mInit();
@@ -136,25 +132,6 @@ public class LancersActivity extends AppCompatActivity
 
         /*----------------------------------------------------------------------------*/
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-
         recyclerLancer.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -184,12 +161,14 @@ public class LancersActivity extends AppCompatActivity
             }
         });
 
-
         //getSmallSuggestion("Mobile");
     }
 
     private void getAllLancers(int PageNo) {
 
+        if(subCatTitle!=null){
+            startSearch(subCatTitle,PageNo);
+        }else {
         mService.getLancers(PageNo).enqueue(new Callback<ApiResponseRegisterLancer>() {
             @Override
             public void onResponse(Call<ApiResponseRegisterLancer> call, Response<ApiResponseRegisterLancer> response) {
@@ -213,92 +192,8 @@ public class LancersActivity extends AppCompatActivity
                 t.printStackTrace();
             }
         });
-
          /* */
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.lancers, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_home) {
-   //         Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Home", Snackbar.LENGTH_LONG)
-     //               .setAction("Action", null).show();
-            startActivity(new Intent(mContext,DashboardActivityClient.class));
-
-        } else if (id == R.id.nav_inbox) {
-//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Inbox", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show();
-            startActivity(new Intent(mContext,InboxActivity.class));
-
-
-        } else if (id == R.id.nav_notification) {
-//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Notification", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show();
-
-        } else if (id == R.id.nav_manage) {
-//                       Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Manage", Snackbar.LENGTH_LONG)
-//                             .setAction("Action", null).show();
-//            //startActivity(new Intent(mContext,ManageJobPostActivity.class));
-
-        } else if (id == R.id.nav_posting) {
-//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Posting", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show();
-            startActivity(new Intent(mContext,JobPoastingActivity.class));
-
-        } else if (id == R.id.nav_contest) {
-//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Contest", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show();
-
-        }else if (id == R.id.nav_settings) {
-
-            startActivity(new Intent(mContext,SettingActivity.class));
-            //             Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Settings", Snackbar.LENGTH_LONG)
-            //                .setAction("Action", null).show();
-
-        }else if (id == R.id.nav_support) {
-//            Snackbar.make(findViewById(R.id.swipe_refresh_layout), "Support", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show();
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     private void mInit() {
@@ -319,10 +214,14 @@ public class LancersActivity extends AppCompatActivity
 
         try{
 
-            if(getIntent()!=null){
+            if(getIntent()!= null){
 
                 CatId = getIntent().getStringExtra("catId");
                 subCatId = getIntent().getStringExtra("subcatId") ;
+                subCatTitle = getIntent().getStringExtra("subcatTitle") ;
+
+                Log.e(TAG, CatId+"-"+subCatId+"-"+subCatTitle);
+
             }
 
         }catch (Exception e){

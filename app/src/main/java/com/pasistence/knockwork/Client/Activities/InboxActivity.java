@@ -35,7 +35,6 @@ import com.pasistence.knockwork.ChatBox.CustomLayoutMessagesActivity;
 import com.pasistence.knockwork.ChatBox.DemoDialogsActivity;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Common.PreferenceUtils;
-import com.pasistence.knockwork.Freelancer.Activities.JobPoastingActivity;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.SelectionActivity;
 import com.squareup.picasso.Picasso;

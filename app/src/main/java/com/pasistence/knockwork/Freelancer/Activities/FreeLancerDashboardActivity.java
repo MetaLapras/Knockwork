@@ -21,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -91,46 +92,16 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_free_lancer_dashboard);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        mInit();
-
         FirebaseMessaging.getInstance().subscribeToTopic(getUid(mContext));
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-
+        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame);
+        getLayoutInflater().inflate(R.layout.activity_free_lancer_dashboard, contentFrameLayout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        View header=navigationView.getHeaderView(0);
+        navigationView.getMenu().getItem(0).setChecked(true);
 
-        txtUserName = (TextView)header.findViewById(R.id.txt_user_name);
-        txtUserEmail = (TextView)header.findViewById(R.id.txt_user_emailid);
-        imgUserProfile = (CircleImageView)header.findViewById(R.id.user_profile_image) ;
-       /* imgEdit=(ImageView)header.findViewById(R.id.img_edit);
-        imgEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(FreeLancerDashboardActivity.this,FreelancerProfileActivity.class));
-            }
-        });*/
+        //setContentView(R.layout.activity_free_lancer_dashboard);
 
-
-        try{
-            txtUserName.setText(Common.UserName);
-            //txtUserEmail.setText(Common.UserEmail);
-            txtUserEmail.setText(getUid(mContext));
-            Picasso.with(mContext).load(Common.UserPhoto).into(imgUserProfile);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        mInit();
 
         loadPopularServices();
 
@@ -295,107 +266,6 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         //Progress Bar
         progressBar = (RoundCornerProgressBar)findViewById(R.id.progressbar_profile);
 
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.dashboard, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_logout) {
-
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
-            alertDialogBuilder.setMessage("Are you Sure Want to Logout")
-                    .setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // FIRE ZE MISSILES!
-
-                            //Clear Saved Password and Users
-                            PreferenceUtils.setSignIn(mContext,false);
-                            PreferenceUtils.setDisplayName(mContext,"");
-                            PreferenceUtils.setUid(mContext,"");
-                            PreferenceUtils.setEmail(mContext,"");
-                            PreferenceUtils.setPhotoUrl(mContext,"");
-                            PreferenceUtils.setProvider(mContext,"");
-                            PreferenceUtils.setPhoneNumber(mContext,"");
-
-                            //FirebaseAuth LogOut
-                            mAuth.signOut();
-
-                            Intent signin = new Intent(mContext,SelectionActivity.class);
-                            signin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(signin);
-                            finish();
-
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // User cancelled the dialog
-                            dialog.dismiss();
-                        }
-                    });
-
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            alertDialog.show();
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_home) {
-            startActivity(new Intent(FreeLancerDashboardActivity.this,SearchFreelancerActivity.class));
-        } else if (id == R.id.nav_inbox) {
-            startActivity(new Intent(FreeLancerDashboardActivity.this,FreelancerInboxActivity.class));
-
-        } else if (id == R.id.nav_notification) {
-
-        } else if (id == R.id.nav_manage) {
-            startActivity(new Intent(mContext,ManageBidsActivity.class));
-
-        } else if (id == R.id.nav_active) {
-        } else if (id == R.id.nav_manage_jobs) {
-
-            startActivity(new Intent(mContext,FreelancerJobsActivity.class));
-
-
-        } else if (id == R.id.nav_proposal) {
-
-        }else if (id == R.id.nav_settings) {
-            startActivity(new Intent(FreeLancerDashboardActivity.this,FreelancerSettingActivity.class));
-
-
-        }else if (id == R.id.nav_support) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     private void loadPopularServices() {

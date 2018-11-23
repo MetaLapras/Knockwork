@@ -75,15 +75,14 @@ public class SubCategoryActivity extends AppCompatActivity {
                         listSubcategory.setAdapter(itemsAdapter);
                         itemsAdapter.notifyDataSetChanged();
 
-
-
-
                         listSubcategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                                 Intent intent = new Intent(mContext,LancersActivity.class);
                                 intent.putExtra("catId",CatId);
                                 intent.putExtra("subcatId",subCategoryList.get(position).getSub_categories_id());
+                                intent.putExtra("subcatTitle",subCategoryList.get(position).getSub_categories_title());
                                // intent.putStringArrayListExtra("suggestion", (ArrayList<String>) labels);
 
                                 startActivity(intent);
@@ -96,7 +95,6 @@ public class SubCategoryActivity extends AppCompatActivity {
                         t.printStackTrace();
                     }
                 });
-
 
     }
 

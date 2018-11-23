@@ -63,6 +63,7 @@
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -137,9 +138,10 @@
         <activity android:name=".ImageUploadActivity" />
 
         <activity android:name=".Client.Activities.ClientJobPostingActivity" />
-        <activity android:name=".Client.Activities.ClientJobContestActivity"
-            android:theme="@style/AppTheme"
-            android:label="Manage Contest"/>
+        <activity
+            android:name=".Client.Activities.ClientJobContestActivity"
+            android:label="Manage Contest"
+            android:theme="@style/AppTheme" />
         <!-- <activity android:name=".SplashActivity" /> -->
         <!-- <activity android:name=".Client.Activities.ClientJobPostingActivity"></activity> -->
 
@@ -157,6 +159,8 @@
         <!-- <activity android:name=".ChatBox.DemoMessagesActivity"></activity> -->
 
         <activity android:name=".ProfileActivity" />
+        <activity android:name=".Client.Activities.ClientBaseActivity" />
+        <activity android:name=".Freelancer.Activities.FreeLancerBaseActivity"></activity>
         <activity android:name=".Client.Activities.ClientBaseActivity"></activity>
 
         <service android:name=".ChatBox.Service.MyFirebaseMessagingService">

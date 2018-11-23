@@ -8,8 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.pasistence.knockwork.Freelancer.Activities.JobDescriptionActivity;
-import com.pasistence.knockwork.Freelancer.Activities.SearchFreelancerActivity;
+import com.pasistence.knockwork.Freelancer.Activities.FreelancerJobDescriptionActivity;
 import com.pasistence.knockwork.Freelancer.Activities.SubmitProposalActivity;
 import com.pasistence.knockwork.Model.SearchPageFreelancerModel;
 import com.pasistence.knockwork.R;
@@ -54,61 +53,6 @@ public class SearchPageFreelancerAdapter  extends RecyclerView.Adapter<ViewHolde
     @Override
     public void onBindViewHolder(@NonNull final ViewHolderSearchPageFreelancer holder, int position) {
 
-       /* final JobList lancers = jobLists.get(position);
-
-        holder.txtjobName.setText(lancers.getJd_title());
-        holder.txtfixedPrice.setText(lancers.getJd_price_type());
-        holder.txtpriceRange.setText(lancers.getJd_price());
-        //holder.txtpoastedDays.setText(lancers.getPoasteddays());
-        holder.txtjobQuotes.setText(lancers.getJd_quotes());
-        holder.txtjobDescription.setText(lancers.getJd_description());
-        holder.txtnamefreelancer.setText((CharSequence) lancers.getJd_client());*/
-
-       /* final SearchPageListModel searchModel = searchPageListModel;
-
-
-        page = searchModel.getPage();
-        count = searchModel.getCount();
-        totalcount = searchModel.getTotal_count();*/
-       // joblist = String.valueOf(searchModel.getJob_list());
-
-
-        /*mMyServices = Common.getApi();
-        mMyServices = RetrofitClient.getClient("").create(MyApi.class);
-        Call<List<SearchPageListModel>> call = mMyServices.getIP();
-
-
-        ///call.enqueue(new Callback<List<SearchPageListModel>>() {
-
-
-      call.enqueue(new Callback<List<SearchPageListModel>>() {
-            @Override
-            public void onResponse(Call<List<SearchPageListModel>> call, Response<List<SearchPageListModel>> response) {
-               SearchPageListModel result = (SearchPageListModel) response.body();
-                if (result.isError())
-                {
-                    Toast.makeText(mContext, "not done", Toast.LENGTH_SHORT).show();
-
-
-                    Toast.makeText(mContext, "done", Toast.LENGTH_SHORT).show();
-                }
-
-
-            }
-
-            @Override
-            public void onFailure(Call<List<SearchPageListModel>> call, Throwable t) {
-                Toast.makeText(mContext, "Failed", Toast.LENGTH_SHORT).show();
-
-            }
-
-
-        });*/
-
-        //searchModel.set(workerList.get(position).getId());
-
-        // holder.txtfreelancerstate.setText(lancers.getState());
-
         final SearchPageFreelancerModel search = searchPageFreelancerModels.get(position);
         Picasso.with(mContext).load(search.getImage())
                 .into(holder.img);
@@ -137,9 +81,7 @@ public class SearchPageFreelancerAdapter  extends RecyclerView.Adapter<ViewHolde
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent workerDetails = new Intent(mContext, JobDescriptionActivity.class);
-                /*workerDetails.putExtra("id",workers.getId());
-                workerDetails.putExtra("workers",workers);*/
+                Intent workerDetails = new Intent(mContext, FreelancerJobDescriptionActivity.class);
                 mContext.startActivity(workerDetails);
 
             }

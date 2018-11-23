@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (v == buttonEmail) {
            // startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), EMAIL_LOGIN);
            startActivity(new Intent(LoginActivity.this,EmailActivity.class));
-           finish();
+           //finish();
         }
 
         if (v == buttonGmail) {
@@ -147,16 +147,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (v == txtSignIn) {
             startActivity(new Intent(mContext, SignInActivity.class));
-            finish();
+            //finish();
         }
 
         if (v == txtSkip) {
-            ApiNotification notification = new ApiNotification(
-                    new ApiNotification.Notification("AA","SS","default","FCM_PLUGIN_ACTIVITY","fcm_push_icon"),
-                    "/topics/marketing",
-                    "high"
-            );
-            serviceNotify(notification);
+            startActivity(new Intent(mContext, FreeLancerDashboardActivity.class));
+            //finish();
+                serviceNotify();
+           // startActivity(new Intent(mContext, FreeLancerDashboardActivity.class));
+            //finish();
+        }
+
+    }
+
+    private void serviceNotify() {
+        FCMService = Common.getFCMAPI();
+        //MyApiNotification.Notification apiNotify = new MyApiNotification.Notification("","","","","");
+        ApiNotification notification = new ApiNotification(
+                new ApiNotification.Notification("AA","SS","default","FCM_PLUGIN_ACTIVITY","fcm_push_icon"),
+                "/topics/marketing",
+                "high"
+        );
 
             // startActivity(new Intent(mContext, FreeLancerDashboardActivity.class));
             //finish();
@@ -169,6 +180,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         FCMService.notificattion(notification).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
+//
             }
 
             @Override
@@ -180,6 +192,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
+
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == EMAIL_LOGIN) {
             try{
@@ -271,7 +284,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 case Common.Client:
                     Intent intent1 = new Intent(LoginActivity.this, DashboardActivityClient.class);
                     startActivity(intent1);
-                    finish();
+                   // finish();
                     break;
 
                 case Common.Lancer:
@@ -433,12 +446,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     Intent intent1 = new Intent(LoginActivity.this, FreeLancerDashboardActivity.class);
                     startActivity(intent1);
-                    finish();
+                    //finish();
 
                 }else if(result.getError()){
                     Intent intent1 = new Intent(LoginActivity.this, FreeLancerDashboardActivity.class);
                     startActivity(intent1);
-                    finish();
+                    //finish();
 
                 }else {
                     Common.commonDialog(mContext,"Server Not Found!");
@@ -624,11 +637,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (!result.getError()) {
                     Intent intent1 = new Intent(LoginActivity.this, DashboardActivityClient.class);
                     startActivity(intent1);
-                    finish();
+                   // finish();
                 } else if (result.getError()) {
                     Intent intent1 = new Intent(LoginActivity.this, DashboardActivityClient.class);
                     startActivity(intent1);
-                    finish();
+                   // finish();
                 } else {
                     Common.commonDialog(mContext, "Server Not Found");
                 }
