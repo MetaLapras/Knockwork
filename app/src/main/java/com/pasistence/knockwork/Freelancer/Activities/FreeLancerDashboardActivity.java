@@ -55,8 +55,7 @@ import retrofit2.Response;
 
 import static com.pasistence.knockwork.Common.PreferenceUtils.getUid;
 
-public class FreeLancerDashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+public class FreeLancerDashboardActivity extends FreeLancerBaseActivity{
 
     private static final String TAG = "cdash-->";
     Boolean isLancer=false;

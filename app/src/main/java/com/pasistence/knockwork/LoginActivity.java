@@ -173,7 +173,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             //finish();
         }
 
-    }
 
     private void serviceNotify(ApiNotification notification) {
         FCMService = Common.getFCMAPI();
