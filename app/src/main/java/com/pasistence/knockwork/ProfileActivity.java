@@ -81,7 +81,7 @@ public class ProfileActivity extends AppCompatActivity {
             intent.putExtra("edit",Common.update);
             startActivity(intent);
         }else{
-
+            Common.commonDialog(mContext,"Under Maintenance's");
         }
     }
 
