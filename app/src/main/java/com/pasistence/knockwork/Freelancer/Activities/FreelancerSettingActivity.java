@@ -14,41 +14,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.pasistence.knockwork.R;
 
-public class FreelancerSettingActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class FreelancerSettingActivity extends FreeLancerBaseActivity
+{
     public TextView txtPaymentSetting,txtManageCashAccount,txtTransactionFee,txtPaymentMethod,txtGeneral,txtNotification,txtAbout,txtAboutUs,txtTermsOfServices,txtVersion;
     Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_freelancer_setting);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
+        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame);
+        getLayoutInflater().inflate(R.layout.activity_freelancer_setting, contentFrameLayout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().getItem(0).setChecked(true);
 
-
-
+        //setContentView(R.layout.activity_freelancer_setting);
         mInit();
     }
 
@@ -66,72 +50,4 @@ public class FreelancerSettingActivity extends AppCompatActivity
         txtVersion           = (TextView)findViewById(R.id.setting_version);
     }
 
-
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.freelancer_setting, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_home) {
-            startActivity(new Intent(mContext,FreeLancerDashboardActivity.class));
-
-        } else if (id == R.id.nav_inbox) {
-            startActivity(new Intent(mContext,FreelancerInboxActivity.class));
-
-
-        } else if (id == R.id.nav_notification) {
-
-        } else if (id == R.id.nav_manage) {
-            startActivity(new Intent(mContext,ManageBidsActivity.class));
-
-        } else if (id == R.id.nav_active) {
-
-        } else if (id == R.id.nav_manage_jobs) {
-
-        } else if (id == R.id.nav_proposal) {
-
-        }else if (id == R.id.nav_settings) {
-
-        }else if (id == R.id.nav_support) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 }

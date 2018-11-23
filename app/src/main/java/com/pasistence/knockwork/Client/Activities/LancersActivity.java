@@ -1,11 +1,9 @@
 package com.pasistence.knockwork.Client.Activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,15 +12,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.AbsListView;
-import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -31,7 +21,6 @@ import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.pasistence.knockwork.Adapter.LancerListAdapter;
 import com.pasistence.knockwork.Adapter.SmallSuggestionAdapter;
 import com.pasistence.knockwork.Common.Common;
-import com.pasistence.knockwork.Freelancer.Activities.JobPoastingActivity;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
 import com.pasistence.knockwork.Model.ApiResponse.ApiSkillsResponse;
 import com.pasistence.knockwork.Model.LancerListModel;
@@ -69,6 +58,7 @@ public class LancersActivity extends ClientBaseActivity {
     LancerListAdapter searchAdapter;
     List<String> suggestList = new ArrayList<String>();
     String CatId,subCatId;
+    CharSequence subCatTitle;
     MyApi mService;
     List<ResponseSuggestionList> suggestionLists;
     List<ApiSkillsResponse> smallSuggestions;
@@ -176,6 +166,9 @@ public class LancersActivity extends ClientBaseActivity {
 
     private void getAllLancers(int PageNo) {
 
+        if(subCatTitle!=null){
+            startSearch(subCatTitle,PageNo);
+        }else {
         mService.getLancers(PageNo).enqueue(new Callback<ApiResponseRegisterLancer>() {
             @Override
             public void onResponse(Call<ApiResponseRegisterLancer> call, Response<ApiResponseRegisterLancer> response) {
@@ -199,8 +192,8 @@ public class LancersActivity extends ClientBaseActivity {
                 t.printStackTrace();
             }
         });
-
          /* */
+        }
     }
 
     private void mInit() {
@@ -221,10 +214,14 @@ public class LancersActivity extends ClientBaseActivity {
 
         try{
 
-            if(getIntent()!=null){
+            if(getIntent()!= null){
 
                 CatId = getIntent().getStringExtra("catId");
                 subCatId = getIntent().getStringExtra("subcatId") ;
+                subCatTitle = getIntent().getStringExtra("subcatTitle") ;
+
+                Log.e(TAG, CatId+"-"+subCatId+"-"+subCatTitle);
+
             }
 
         }catch (Exception e){

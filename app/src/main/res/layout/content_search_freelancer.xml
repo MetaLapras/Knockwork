@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/search_freelancer"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Freelancer.Activities.SearchFreelancerActivity"
-    tools:showIn="@layout/app_bar_search_freelancer">
+    tools:context=".Freelancer.Activities.SearchFreelancerActivity">
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_search"
@@ -29,9 +29,20 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/card_search">
 
     </android.support.v7.widget.RecyclerView>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:visibility="gone"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="true"
+        />
 
 </RelativeLayout>

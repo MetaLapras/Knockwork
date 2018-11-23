@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (v == buttonEmail) {
            // startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), EMAIL_LOGIN);
            startActivity(new Intent(LoginActivity.this,EmailActivity.class));
-           finish();
+           //finish();
         }
 
         if (v == buttonGmail) {
@@ -147,10 +147,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (v == txtSignIn) {
             startActivity(new Intent(mContext, SignInActivity.class));
-            finish();
+            //finish();
         }
 
         if (v == txtSkip) {
+            startActivity(new Intent(mContext, FreeLancerDashboardActivity.class));
+            //finish();
                 serviceNotify();
            // startActivity(new Intent(mContext, FreeLancerDashboardActivity.class));
             //finish();
@@ -274,7 +276,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 case Common.Client:
                     Intent intent1 = new Intent(LoginActivity.this, DashboardActivityClient.class);
                     startActivity(intent1);
-                    finish();
+                   // finish();
                     break;
 
                 case Common.Lancer:
@@ -436,12 +438,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     Intent intent1 = new Intent(LoginActivity.this, FreeLancerDashboardActivity.class);
                     startActivity(intent1);
-                    finish();
+                    //finish();
 
                 }else if(result.getError()){
                     Intent intent1 = new Intent(LoginActivity.this, FreeLancerDashboardActivity.class);
                     startActivity(intent1);
-                    finish();
+                    //finish();
 
                 }else {
                     Common.commonDialog(mContext,"Server Not Found!");
@@ -627,11 +629,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (!result.getError()) {
                     Intent intent1 = new Intent(LoginActivity.this, DashboardActivityClient.class);
                     startActivity(intent1);
-                    finish();
+                   // finish();
                 } else if (result.getError()) {
                     Intent intent1 = new Intent(LoginActivity.this, DashboardActivityClient.class);
                     startActivity(intent1);
-                    finish();
+                   // finish();
                 } else {
                     Common.commonDialog(mContext, "Server Not Found");
                 }

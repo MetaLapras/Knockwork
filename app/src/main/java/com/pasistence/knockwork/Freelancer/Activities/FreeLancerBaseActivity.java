@@ -1,4 +1,4 @@
-package com.pasistence.knockwork.Client.Activities;
+package com.pasistence.knockwork.Freelancer.Activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,6 +16,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.pasistence.knockwork.Client.Activities.ClientBaseActivity;
+import com.pasistence.knockwork.Client.Activities.ClientJobContestActivity;
+import com.pasistence.knockwork.Client.Activities.ClientJobPostingActivity;
+import com.pasistence.knockwork.Client.Activities.DashboardActivityClient;
+import com.pasistence.knockwork.Client.Activities.InboxActivity;
+import com.pasistence.knockwork.Client.Activities.ManageJobPostActivity;
+import com.pasistence.knockwork.Client.Activities.SettingActivity;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Common.PreferenceUtils;
 import com.pasistence.knockwork.ProfileActivity;
@@ -25,8 +32,7 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
-public class ClientBaseActivity extends AppCompatActivity
+public class FreeLancerBaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener{
 
     DrawerLayout drawerLayout;
@@ -41,8 +47,8 @@ public class ClientBaseActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
-        mContext = ClientBaseActivity.this;
+        setContentView(R.layout.activity_free_lancer_base);
+        mContext = FreeLancerBaseActivity.this;
         mAuth = FirebaseAuth.getInstance();
 
         //Init Preference Values for Navigation Drawer
@@ -50,10 +56,10 @@ public class ClientBaseActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar_dash);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_freedash);
         setSupportActionBar(toolbar);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_dash);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_freedash);
         //drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -86,49 +92,39 @@ public class ClientBaseActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-
-            startActivity(new Intent(mContext,DashboardActivityClient.class));
-
+            startActivity(new Intent(mContext,FreeLancerDashboardActivity.class));
 
         } else if (id == R.id.nav_inbox) {
-
-            startActivity(new Intent(mContext,InboxActivity.class));
-
+            startActivity(new Intent(mContext,FreelancerInboxActivity.class));
 
         } else if (id == R.id.nav_notification) {
 
-
         } else if (id == R.id.nav_manage) {
+            startActivity(new Intent(mContext,ManageBidsActivity.class));
 
-            startActivity(new Intent(mContext,ManageJobPostActivity.class));
+        } else if (id == R.id.nav_active) {
 
+        } else if (id == R.id.nav_manage_jobs) {
+            //    startActivity(new Intent(FreelancerInboxActivity.this,JobPoastingActivity.class));
 
-        } else if (id == R.id.nav_posting) {
-
-            startActivity(new Intent(mContext,ClientJobPostingActivity.class));
-
-
-        } else if (id == R.id.nav_contest) {
-
-            startActivity(new Intent(mContext,ClientJobContestActivity.class));
-
+        } else if (id == R.id.nav_proposal) {
 
         }else if (id == R.id.nav_settings) {
-
-            startActivity(new Intent(mContext,SettingActivity.class));
+            startActivity(new Intent(mContext,FreelancerSettingActivity.class));
 
 
         }else if (id == R.id.nav_support) {
 
 
-        }
-        else if (id == R.id.nav_logout) {
+        }else if (id == R.id.nav_logout) {
             onLogout();
         }
 
+        //drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -175,13 +171,13 @@ public class ClientBaseActivity extends AppCompatActivity
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-       // actionBarDrawerToggle.syncState();
+        // actionBarDrawerToggle.syncState();
     }
 
     @Override
     public void finish() {
         super.finish();
-      //  overridePendingTransitionExit();
+        //  overridePendingTransitionExit();
     }
 
    /* @Override
