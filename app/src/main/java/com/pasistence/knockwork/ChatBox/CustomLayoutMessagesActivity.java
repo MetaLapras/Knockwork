@@ -28,7 +28,9 @@ import com.pasistence.knockwork.ChatBox.ChatModel.User;
 import com.pasistence.knockwork.ChatBox.DummyData.MessagesFixtures;
 import com.pasistence.knockwork.Common.AppUtils;
 import com.pasistence.knockwork.Common.Common;
+import com.pasistence.knockwork.Model.ApiResponse.ApiNotification;
 import com.pasistence.knockwork.R;
+import com.pasistence.knockwork.Remote.MyApiNotification;
 import com.stfalcon.chatkit.messages.MessageHolders;
 import com.stfalcon.chatkit.messages.MessageInput;
 import com.stfalcon.chatkit.messages.MessagesList;
@@ -36,9 +38,10 @@ import com.stfalcon.chatkit.messages.MessagesListAdapter;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.pasistence.knockwork.Common.PreferenceUtils.getUid;
 import static com.pasistence.knockwork.Common.PreferenceUtils.getUserType;
@@ -48,11 +51,13 @@ public class CustomLayoutMessagesActivity extends DemoMessagesActivity
         MessageInput.InputListener,
         MessageInput.AttachmentsListener{
     private static final String TAG = "chatFire";
-    String LUID,CUID,chatBoxId,cImage,lImage,name;
+
+    String LUID,CUID,chatBoxId,cImage,lImage,name,mName;
         FirebaseDatabase mDatabase;
         DatabaseReference mReference;
+        MyApiNotification FCMService;
 
-        ArrayList<Message> messageArrayList = new ArrayList<Message>();
+    ArrayList<Message> messageArrayList = new ArrayList<Message>();
 
         User user;
 
@@ -61,6 +66,20 @@ public class CustomLayoutMessagesActivity extends DemoMessagesActivity
         context.startActivity(new Intent(context, CustomLayoutMessagesActivity.class));
     }
 
+    private void serviceNotify(ApiNotification notification) {
+        FCMService = Common.getFCMAPI();
+        FCMService.notificattion(notification).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e("-->",t.getMessage());
+            }
+        });
+
+    }
 
     private MessagesList messagesList;
     @Override
@@ -72,8 +91,7 @@ public class CustomLayoutMessagesActivity extends DemoMessagesActivity
 
         LUID = getIntent().getStringExtra("lancerUid");
         CUID = getIntent().getStringExtra("clientUid");
-
-
+        mName = getIntent().getStringExtra("name");
         //Image = getIntent().getStringExtra("image");
         chatBoxId = CUID+"_"+LUID;
 
@@ -193,6 +211,12 @@ public class CustomLayoutMessagesActivity extends DemoMessagesActivity
         mReference.child(chatBoxId)
                   .child("chat")
                 .push().setValue(chatPost);
+            ApiNotification notification = new ApiNotification(
+                new ApiNotification.Notification(mName,input.toString(),"default","FCM_PLUGIN_ACTIVITY","fcm_push_icon"),
+                "/topics/"+getUid(CustomLayoutMessagesActivity.this),
+                "high"
+        );
+        serviceNotify(notification);
 
         /*messagesAdapter.addToStart(
                 MessagesFixtures.getTextMessage(input.toString()),true);

@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.daimajia.slider.library.SliderLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.pasistence.knockwork.Adapter.ClientPopularServiceAdapter;
 import com.pasistence.knockwork.Adapter.ClientTopServiceAdapter;
 import com.pasistence.knockwork.Common.Common;
@@ -95,6 +96,7 @@ public class FreeLancerDashboardActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         mInit();
 
+        FirebaseMessaging.getInstance().subscribeToTopic(getUid(mContext));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

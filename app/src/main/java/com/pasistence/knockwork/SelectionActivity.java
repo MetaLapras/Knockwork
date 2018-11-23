@@ -52,7 +52,6 @@ public class SelectionActivity extends AppCompatActivity
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-           //             showNotification("Aashay","AshClanZ");
                     }
                 });
 

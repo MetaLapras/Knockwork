@@ -113,6 +113,7 @@ public class LancerListAdapter extends RecyclerView.Adapter<ViewHolderFreeLancer
                                     .putExtra("lancerUid",lancers.getUid())
                                     .putExtra("clientUid",getUid(mContext))
                                     .putExtra("image",lancers.getLancerImage())
+                                    .putExtra("name",lancers.getLancerName())
                             );
 
                         }

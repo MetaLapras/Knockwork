@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.daimajia.slider.library.SliderLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.pasistence.knockwork.Adapter.ClientPopularServiceAdapter;
 import com.pasistence.knockwork.Adapter.ClientTopServiceAdapter;
 import com.pasistence.knockwork.Common.Common;
@@ -42,6 +43,8 @@ import io.supercharge.shimmerlayout.ShimmerLayout;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.pasistence.knockwork.Common.PreferenceUtils.getUid;
 
 public class DashboardActivityClient extends ClientBaseActivity {
 
@@ -83,6 +86,7 @@ public class DashboardActivityClient extends ClientBaseActivity {
         navigationView.getMenu().getItem(0).setChecked(true);
 
         mInit();
+        FirebaseMessaging.getInstance().subscribeToTopic(getUid(mContext));
 
         //loadTopServices();
         loadPopularServices();

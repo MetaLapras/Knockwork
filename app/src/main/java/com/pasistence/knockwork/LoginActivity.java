@@ -151,27 +151,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         if (v == txtSkip) {
-                serviceNotify();
-           // startActivity(new Intent(mContext, FreeLancerDashboardActivity.class));
+            ApiNotification notification = new ApiNotification(
+                    new ApiNotification.Notification("AA","SS","default","FCM_PLUGIN_ACTIVITY","fcm_push_icon"),
+                    "/topics/marketing",
+                    "high"
+            );
+            serviceNotify(notification);
+
+            // startActivity(new Intent(mContext, FreeLancerDashboardActivity.class));
             //finish();
         }
 
     }
 
-    private void serviceNotify() {
+    private void serviceNotify(ApiNotification notification) {
         FCMService = Common.getFCMAPI();
-        //MyApiNotification.Notification apiNotify = new MyApiNotification.Notification("","","","","");
-        ApiNotification notification = new ApiNotification(
-                new ApiNotification.Notification("AA","SS","default","FCM_PLUGIN_ACTIVITY","fcm_push_icon"),
-                "/topics/marketing",
-                "high"
-        );
-
-
         FCMService.notificattion(notification).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-//
             }
 
             @Override
@@ -181,8 +178,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
 
     }
-    @Override
 
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == EMAIL_LOGIN) {
             try{

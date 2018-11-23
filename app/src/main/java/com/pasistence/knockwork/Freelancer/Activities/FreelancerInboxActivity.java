@@ -137,7 +137,8 @@ public class FreelancerInboxActivity extends DemoDialogsActivity
         super.onDialogClick(dialog);
         mContext.startActivity(new Intent(mContext,CustomLayoutMessagesActivity.class)
                 .putExtra("lancerUid",getUid(mContext))
-                .putExtra("clientUid",dialog.getId()));
+                .putExtra("clientUid",dialog.getId())
+                .putExtra("name",dialog.getDialogName()));
 
         //CustomLayoutMessagesActivity.open(this);
     }

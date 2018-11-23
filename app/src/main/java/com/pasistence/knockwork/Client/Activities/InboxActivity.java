@@ -225,7 +225,8 @@ public class InboxActivity extends DemoDialogsActivity implements NavigationView
        // CustomLayoutMessagesActivity.open(this);
         mContext.startActivity(new Intent(mContext,CustomLayoutMessagesActivity.class)
                 .putExtra("lancerUid",dialog.getId())
-                .putExtra("clientUid",getUid(mContext)));
+                .putExtra("clientUid",getUid(mContext))
+                .putExtra("name",dialog.getDialogName()));
     }
 
     private void initAdapter() {
