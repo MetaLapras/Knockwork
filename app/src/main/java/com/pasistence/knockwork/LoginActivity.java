@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.common.api.Api;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthProvider;
@@ -22,9 +23,11 @@ import com.pasistence.knockwork.Common.PreferenceUtils;
 import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboardActivity;
 
 
+import com.pasistence.knockwork.Model.ApiResponse.ApiNotification;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterClient;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
 import com.pasistence.knockwork.Remote.MyApi;
+import com.pasistence.knockwork.Remote.MyApiNotification;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView txtSignIn,txtSkip;
 
     MyApi mService;
+    MyApiNotification FCMService;
     boolean present = true;
 
 
@@ -147,13 +151,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         if (v == txtSkip) {
-            startActivity(new Intent(mContext, FreeLancerDashboardActivity.class));
-            finish();
+                serviceNotify();
+           // startActivity(new Intent(mContext, FreeLancerDashboardActivity.class));
+            //finish();
         }
 
     }
 
+    private void serviceNotify() {
+        FCMService = Common.getFCMAPI();
+        //MyApiNotification.Notification apiNotify = new MyApiNotification.Notification("","","","","");
+        ApiNotification notification = new ApiNotification(
+                new ApiNotification.Notification("AA","SS","default","FCM_PLUGIN_ACTIVITY","fcm_push_icon"),
+                "/topics/marketing",
+                "high"
+        );
+
+
+        FCMService.notificattion(notification).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+//
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e("-->",t.getMessage());
+            }
+        });
+
+    }
     @Override
+
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == EMAIL_LOGIN) {
             try{

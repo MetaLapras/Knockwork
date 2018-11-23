@@ -5,15 +5,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.pasistence.knockwork.Model.UserData;
+import com.pasistence.knockwork.Remote.MyApiNotification;
 import com.pasistence.knockwork.Remote.MyApi;
 import com.pasistence.knockwork.Remote.RetrofitClient;
+import com.pasistence.knockwork.Remote.RetrofitClientNotification;
 
 import dmax.dialog.SpotsDialog;
 
@@ -33,6 +32,7 @@ public class Common {
     public static final String update = "update";
     public static final String register = "register";
     public static final String chatbox = "chatbox";
+    public static String currentToken = "";
     public static String UserName;
     public static String UserEmail ;
     public static String UserPhoto;
@@ -43,11 +43,17 @@ public class Common {
     //public static final String BASE_URL = "http://10.0.2.2/knockwork/public/index.php/api/";
     //Server
     public static final String BASE_URL = "http://52.172.221.235:8985/knockwork/public/index.php/api/";
+    public static final String FCM_Url = "https://fcm.googleapis.com/";
     private static final String TAG = "common";
     //public static final String BASE_URL = "http://192.168.0.150/knockwork/public/index.php/api/";
 
     public static MyApi getApi(){
         return RetrofitClient.getClient(BASE_URL).create(MyApi.class);
+    }
+
+
+    public static MyApiNotification getFCMAPI(){
+        return RetrofitClientNotification.getClient(FCM_Url).create(MyApiNotification.class);
     }
 
     public static FirebaseDatabase database;

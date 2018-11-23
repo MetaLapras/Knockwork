@@ -2,6 +2,7 @@ package com.pasistence.knockwork.Remote;
 
 import com.pasistence.knockwork.Model.ApiResponse.ApiEducationResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiExperienceResponse;
+import com.pasistence.knockwork.Model.ApiResponse.ApiNotification;
 import com.pasistence.knockwork.Model.ApiResponse.ApiPostContestResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiProfileStatus;
@@ -20,9 +21,11 @@ import com.pasistence.knockwork.Model.SearchPageListModel;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -250,6 +253,7 @@ public interface MyApi {
     //Check if client exist
     @GET("getProfileStatus/{uid}")
     Call<ApiProfileStatus>getProfileStatus(@Path("uid") String uid);
+
 
 
 }
