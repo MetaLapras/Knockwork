@@ -91,12 +91,14 @@ public class FreeLancerDashboardActivity extends FreeLancerBaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FirebaseMessaging.getInstance().subscribeToTopic(getUid(mContext));
 
         FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame);
         getLayoutInflater().inflate(R.layout.activity_free_lancer_dashboard, contentFrameLayout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(0).setChecked(true);
+
+
+//        FirebaseMessaging.getInstance().subscribeToTopic(getUid(mContext));
 
         //setContentView(R.layout.activity_free_lancer_dashboard);
 

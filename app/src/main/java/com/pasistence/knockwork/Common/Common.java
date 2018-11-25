@@ -32,6 +32,8 @@ public class Common {
     public static final String update = "update";
     public static final String register = "register";
     public static final String chatbox = "chatbox";
+    public static final String JOB = "job";
+    public static final String PROPOSAL = "proposal";
     public static String currentToken = "";
     public static String UserName;
     public static String UserEmail ;

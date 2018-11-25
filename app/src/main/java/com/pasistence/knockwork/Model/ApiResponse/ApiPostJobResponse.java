@@ -77,7 +77,7 @@ public class ApiPostJobResponse {
         this.message = message;
     }
 
-    public class Result implements Serializable {
+    public class Result implements Serializable{
 
         @SerializedName("PId")
         @Expose
@@ -124,27 +124,24 @@ public class ApiPostJobResponse {
         @SerializedName("updatedAt")
         @Expose
         private String updatedAt;
-
-        @Override
-        public String toString() {
-            return "Result{" +
-                    "pId='" + pId + '\'' +
-                    ", uid='" + uid + '\'' +
-                    ", cid='" + cid + '\'' +
-                    ", category='" + category + '\'' +
-                    ", subcategory='" + subcategory + '\'' +
-                    ", title='" + title + '\'' +
-                    ", details='" + details + '\'' +
-                    ", skills='" + skills + '\'' +
-                    ", type='" + type + '\'' +
-                    ", rate='" + rate + '\'' +
-                    ", duration='" + duration + '\'' +
-                    ", visibility='" + visibility + '\'' +
-                    ", featured='" + featured + '\'' +
-                    ", createdAt='" + createdAt + '\'' +
-                    ", updatedAt='" + updatedAt + '\'' +
-                    '}';
-        }
+        @SerializedName("profileImage")
+        @Expose
+        private String profileImage;
+        @SerializedName("cname")
+        @Expose
+        private String cname;
+        @SerializedName("spending")
+        @Expose
+        private String spending;
+        @SerializedName("state")
+        @Expose
+        private String state;
+        @SerializedName("review")
+        @Expose
+        private String review;
+        @SerializedName("quotes")
+        @Expose
+        private String quotes;
 
         public String getPId() {
             return pId;
@@ -266,6 +263,88 @@ public class ApiPostJobResponse {
             this.updatedAt = updatedAt;
         }
 
+        public String getProfileImage() {
+            return profileImage;
+        }
+
+        public void setProfileImage(String profileImage) {
+            this.profileImage = profileImage;
+        }
+
+        public String getCname() {
+            return cname;
+        }
+
+        public void setCname(String cname) {
+            this.cname = cname;
+        }
+
+        public String getpId() {
+            return pId;
+        }
+
+        public void setpId(String pId) {
+            this.pId = pId;
+        }
+
+        public String getSpending() {
+            return spending;
+        }
+
+        public void setSpending(String spending) {
+            this.spending = spending;
+        }
+
+        public String getState() {
+            return state;
+        }
+
+        public void setState(String state) {
+            this.state = state;
+        }
+
+        public String getReview() {
+            return review;
+        }
+
+        public void setReview(String review) {
+            this.review = review;
+        }
+
+        public String getQuotes() {
+            return quotes;
+        }
+
+        public void setQuotes(String quotes) {
+            this.quotes = quotes;
+        }
+
+        @Override
+        public String toString() {
+            return "Result{" +
+                    "pId='" + pId + '\'' +
+                    ", uid='" + uid + '\'' +
+                    ", cid='" + cid + '\'' +
+                    ", category='" + category + '\'' +
+                    ", subcategory='" + subcategory + '\'' +
+                    ", title='" + title + '\'' +
+                    ", details='" + details + '\'' +
+                    ", skills='" + skills + '\'' +
+                    ", type='" + type + '\'' +
+                    ", rate='" + rate + '\'' +
+                    ", duration='" + duration + '\'' +
+                    ", visibility='" + visibility + '\'' +
+                    ", featured='" + featured + '\'' +
+                    ", createdAt='" + createdAt + '\'' +
+                    ", updatedAt='" + updatedAt + '\'' +
+                    ", profileImage='" + profileImage + '\'' +
+                    ", cname='" + cname + '\'' +
+                    ", spending='" + spending + '\'' +
+                    ", state='" + state + '\'' +
+                    ", review='" + review + '\'' +
+                    ", quotes='" + quotes + '\'' +
+                    '}';
+        }
     }
 
 }

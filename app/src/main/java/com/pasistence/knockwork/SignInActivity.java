@@ -25,6 +25,8 @@ import com.pasistence.knockwork.Remote.MyApi;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.rey.material.widget.CheckBox;
 
+import java.util.ArrayList;
+
 import info.hoang8f.widget.FButton;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -83,8 +85,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     email = edtEmail.getText().toString();
                     password = edtPassword.getText().toString();
                     startFirebaseLogin();
-
-
                 }
 
 
@@ -171,9 +171,15 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     public void onResponse(Call<ApiResponseRegisterLancer> call, Response<ApiResponseRegisterLancer> response) {
                         ApiResponseRegisterLancer result = response.body();
                         Log.e(TAG, result.toString() );
+                        if(!result.getError()) {
+                            ArrayList<ApiResponseRegisterLancer.Lancer> lancers = (ArrayList<ApiResponseRegisterLancer.Lancer>) result.getLancer();
 
-                        startActivity(new Intent(mContext,FreeLancerDashboardActivity.class));
+                            for (ApiResponseRegisterLancer.Lancer lan : lancers) {
+                                PreferenceUtils.setLid(mContext, lan.getLancerId());
+                            }
 
+                            startActivity(new Intent(mContext, FreeLancerDashboardActivity.class));
+                        }
                     }
 
                     @Override
@@ -182,8 +188,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         Log.e(TAG, t.getMessage());
                     }
                 });
-
-
             }catch (Exception e){
                 e.printStackTrace();
                 Log.e(TAG, e.getMessage() );
@@ -198,8 +202,16 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         ApiResponseRegisterClient result = response.body();
 
                         Log.e(TAG, result.toString() );
+                        if(!result.getError()){
+                            ArrayList<ApiResponseRegisterClient.Client> lancers = (ArrayList<ApiResponseRegisterClient.Client>) result.getClient();
 
-                        startActivity(new Intent(mContext,DashboardActivityClient.class));
+                            for(ApiResponseRegisterClient.Client lan : lancers){
+                                PreferenceUtils.setCid(mContext,lan.getClientId());
+                            }
+
+                            startActivity(new Intent(mContext,DashboardActivityClient.class));
+                        }
+                        //startActivity(new Intent(mContext,DashboardActivityClient.class));
 
                     }
 

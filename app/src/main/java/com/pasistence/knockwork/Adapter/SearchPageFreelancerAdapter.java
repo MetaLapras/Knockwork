@@ -4,18 +4,28 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.choota.dev.ctimeago.TimeAgo;
+import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Freelancer.Activities.FreelancerJobDescriptionActivity;
 import com.pasistence.knockwork.Freelancer.Activities.SubmitProposalActivity;
+import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
 import com.pasistence.knockwork.Model.SearchPageFreelancerModel;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.ViewHolder.ViewHolderSearchPageFreelancer;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class SearchPageFreelancerAdapter  extends RecyclerView.Adapter<ViewHolderSearchPageFreelancer> {
 
@@ -27,19 +37,19 @@ public class SearchPageFreelancerAdapter  extends RecyclerView.Adapter<ViewHolde
         this.jobLists = searchList;
     }*/
 
+    String updatedat;
 
     Context mContext;
-    List<SearchPageFreelancerModel> searchPageFreelancerModels ;
+    ArrayList<ApiPostJobResponse.Result> searchPageFreelancerModels ;
 
 
-    public SearchPageFreelancerAdapter(Context mContext, List<SearchPageFreelancerModel> searchpagelist) {
+    public SearchPageFreelancerAdapter(Context mContext,  ArrayList<ApiPostJobResponse.Result> searchpagelist) {
         this.mContext = mContext;
         this.searchPageFreelancerModels = searchpagelist;
     }
 
    /* public SearchPageFreelancerAdapter(Context mContext, ArrayList<SearchPageFreelancerActivity> searchPageListModels) {
     }
-
 */
     @NonNull
     @Override
@@ -51,29 +61,32 @@ public class SearchPageFreelancerAdapter  extends RecyclerView.Adapter<ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolderSearchPageFreelancer holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolderSearchPageFreelancer holder, final int position) {
 
-        final SearchPageFreelancerModel search = searchPageFreelancerModels.get(position);
-        Picasso.with(mContext).load(search.getImage())
+        final ApiPostJobResponse.Result search = searchPageFreelancerModels.get(position);
+
+        Picasso.with(mContext).load(search.getProfileImage())
                 .into(holder.img);
 
+        holder.txtjobName.setText(search.getTitle());
+        holder.txtfixedPrice.setText(search.getType());
+        holder.txtpriceRange.setText(search.getRate());
+        //holder.txtpoastedDays.setText(search.getUpdatedAt());
+        updatedat = search.getUpdatedAt();
+        holder.txtjobQuotes.setText("quotes");
+        holder.txtjobDescription.setText(search.getDetails());
+        holder.txtnamefreelancer.setText(search.getCname());
+        holder.txtfreelancerstate.setText("state");
+        holder.txtprojectrange.setText("spending");
+        holder.txtfeedback.setText("review");
 
-        holder.txtjobName.setText(search.getJobname());
-        holder.txtfixedPrice.setText(search.getFixedprice());
-        holder.txtpriceRange.setText(search.getPricerange());
-        holder.txtpoastedDays.setText(search.getPoasteddays());
-        holder.txtjobQuotes.setText(search.getQuotes());
-        holder.txtjobDescription.setText(search.getDescription());
-        holder.txtnamefreelancer.setText(search.getPersonname());
-        holder.txtfreelancerstate.setText(search.getState());
-        holder.txtprojectrange.setText(search.getProjectrange());
-        holder.txtfeedback.setText(search.getFeedback());
 
         holder.btnapply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent  intent = new Intent(mContext,SubmitProposalActivity.class);
-                intent.putExtra("title",holder.txtjobName.getText());
+                Intent intent = new Intent(mContext,SubmitProposalActivity.class);
+                intent.putExtra("proposal",Common.PROPOSAL);
+                intent.putExtra("jobs",searchPageFreelancerModels.get(position));
                 mContext.startActivity(intent);
             }
         });
@@ -81,11 +94,45 @@ public class SearchPageFreelancerAdapter  extends RecyclerView.Adapter<ViewHolde
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent workerDetails = new Intent(mContext, FreelancerJobDescriptionActivity.class);
-                mContext.startActivity(workerDetails);
+                Intent intent = new Intent(mContext, FreelancerJobDescriptionActivity.class);
+                intent.putExtra("details",Common.JOB);
+                intent.putExtra("jobs",searchPageFreelancerModels.get(position));
+                mContext.startActivity(intent);
 
             }
         });
+
+       // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+
+            if(search.getUpdatedAt()!= null){
+              /*  Date d = sdf.parse(search.getUpdatedAt());
+
+                TimeAgo timeAgo = new TimeAgo();
+                String result = timeAgo.getTimeAgo(d);*/
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+                long time = sdf.parse(updatedat).getTime();
+                long now = System.currentTimeMillis();
+
+                CharSequence result =
+                        DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS);
+
+
+                holder.txtpoastedDays.setText(result);
+            }else {
+
+            }
+
+            // holder.txtpoastedDays.setText(result);
+
+        } catch (ParseException ex) {
+            Log.v("Exception", ex.getLocalizedMessage());
+        }
+        catch (Exception ex) {
+            Log.v("Exception", ex.getMessage());
+        }
 
 
     }

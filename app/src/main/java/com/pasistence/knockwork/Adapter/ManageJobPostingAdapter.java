@@ -9,6 +9,7 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,6 +51,7 @@ public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnag
     ArrayList<ApiPostJobResponse.Result> manageJobPostingModels ;
     ApiPostJobResponse.Result job;
     MyApi mServices;
+    String updatedat;
 
     public ManageJobPostingAdapter(Context mContext,Activity activity, ArrayList<ApiPostJobResponse.Result> workerList) {
         this.mContext = mContext;
@@ -77,24 +80,26 @@ public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnag
         holder.txtfixedPrice.setText(job.getType());
         holder.txtpriceRange.setText(job.getRate());
         //holder.txtpoastedDays.setText(job.getUpdatedAt());
+        updatedat = job.getUpdatedAt();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         try {
 
             if(job.getUpdatedAt()!= null){
-                Date d = sdf.parse(job.getUpdatedAt());
 
-                TimeAgo timeAgo = new TimeAgo();
-                String result = timeAgo.getTimeAgo(d);
-            /*TimeAgo timeAgo = new TimeAgo();
-            String result = timeAgo.getTimeAgo(d);*/
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+                long time = sdf.parse(updatedat).getTime();
+                long now = System.currentTimeMillis();
+
+                CharSequence result =
+                        DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS);
 
                 holder.txtpoastedDays.setText(result);
             }else {
 
             }
 
-           // holder.txtpoastedDays.setText(result);
 
         } catch (ParseException ex) {
             Log.v("Exception", ex.getLocalizedMessage());

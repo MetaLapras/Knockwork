@@ -148,6 +148,8 @@ public class ClientBaseActivity extends AppCompatActivity
                         PreferenceUtils.setPhotoUrl(mContext,"");
                         PreferenceUtils.setProvider(mContext,"");
                         PreferenceUtils.setPhoneNumber(mContext,"");
+                        PreferenceUtils.setLid(mContext,"");
+                        PreferenceUtils.setCid(mContext,"");
 
                         //FirebaseAuth LogOut
                         mAuth.signOut();

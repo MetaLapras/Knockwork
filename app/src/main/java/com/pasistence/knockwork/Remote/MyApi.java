@@ -1,5 +1,6 @@
 package com.pasistence.knockwork.Remote;
 
+import com.pasistence.knockwork.Model.ApiResponse.ApiBidsResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiEducationResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiExperienceResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiNotification;
@@ -170,6 +171,10 @@ public interface MyApi {
     @GET("allpostjobs/{pageNo}")
     Call<ApiPostJobResponse>ClientPostAJobRead(@Path("pageNo") int pageNo);
 
+    //getAll Posted Jobs
+    @GET("alljobswithclient/{pageNo}")
+    Call<ApiPostJobResponse>withClientJobRead(@Path("pageNo") int pageNo);
+
     //Delete Posted Job
     @FormUrlEncoded
     @POST("postjobdelete")
@@ -253,6 +258,37 @@ public interface MyApi {
     //Check if client exist
     @GET("getProfileStatus/{uid}")
     Call<ApiProfileStatus>getProfileStatus(@Path("uid") String uid);
+
+
+    //Serach Jobs
+    @FormUrlEncoded
+    @POST("jobsearch")
+    Call<ApiPostJobResponse>JobsSearch(@Field("pageNo") int pageNo, @Field("title") CharSequence Title);
+
+/**********************BIDS SECTION *******************/
+    //Serach Bids by Ids
+    @FormUrlEncoded
+    @POST("getbidsbyid")
+    Call<List<ApiBidsResponse>>getBidsById(@Field("uid") String uid, @Field("lid") String lid);
+
+    //All Bids
+    @GET("getbids")
+    Call<List<ApiBidsResponse>>getBids();
+
+       //Serach Bids by Ids
+    @FormUrlEncoded
+    @POST("addbids")
+    Call<List<ApiBidsResponse>>AddBids(@Field("uid") String uid, @Field("lid") String lid, @Field("bids") int Bids);
+
+    //Serach Bids by Ids
+    @FormUrlEncoded
+    @POST("increasebids")
+    Call<ApiBidsResponse>IncreaseBids(@Field("uid") String uid, @Field("lid") String lid, @Field("bids") int Bids);
+
+    //Serach Bids by Ids
+    @FormUrlEncoded
+    @POST("decreasebids")
+    Call<ApiBidsResponse>DecreaseBids(@Field("uid") String uid, @Field("lid") String lid, @Field("bids") int Bids);
 
 
 
