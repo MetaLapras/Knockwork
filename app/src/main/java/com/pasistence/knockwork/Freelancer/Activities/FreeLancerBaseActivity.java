@@ -108,10 +108,8 @@ public class FreeLancerBaseActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_active) {
 
-        } else if (id == R.id.nav_manage_jobs) {
-            //    startActivity(new Intent(FreelancerInboxActivity.this,JobPoastingActivity.class));
-
         } else if (id == R.id.nav_proposal) {
+            startActivity(new Intent(mContext,ReportSubmittedProposalActivity.class));
 
         }else if (id == R.id.nav_settings) {
             startActivity(new Intent(mContext,FreelancerSettingActivity.class));

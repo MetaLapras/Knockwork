@@ -363,6 +363,7 @@
             app:shadowHeight="3dp"
             app:cornerRadius="3dp"
             android:layout_margin="10dp"
+            android:visibility="gone"
             app:shadowColor="@android:color/black"
             android:layout_marginRight="5dp"
             />

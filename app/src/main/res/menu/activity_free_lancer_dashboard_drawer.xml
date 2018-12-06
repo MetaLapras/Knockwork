@@ -26,10 +26,6 @@
             android:icon="@drawable/ic_circle"
             android:title="Active Jobs" />
         <item
-            android:id="@+id/nav_manage_jobs"
-            android:icon="@drawable/job_posting"
-            android:title="Job Posting" />
-        <item
             android:id="@+id/nav_proposal"
             android:title="Submitted Proposals"
             android:icon="@drawable/ic_images"

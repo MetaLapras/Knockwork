@@ -7,12 +7,14 @@ import com.pasistence.knockwork.Model.ApiResponse.ApiNotification;
 import com.pasistence.knockwork.Model.ApiResponse.ApiPostContestResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiProfileStatus;
+import com.pasistence.knockwork.Model.ApiResponse.ApiProposalResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseLancer;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterClient;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseUpdateLancer;
 import com.pasistence.knockwork.Model.ApiResponse.ApiSkillsResponse;
+import com.pasistence.knockwork.Model.MilestonesModel;
 import com.pasistence.knockwork.Model.PopularServicesModel;
 import com.pasistence.knockwork.Model.ResponseSubCategory;
 import com.pasistence.knockwork.Model.ResponseSuggestionList;
@@ -289,6 +291,25 @@ public interface MyApi {
     @FormUrlEncoded
     @POST("decreasebids")
     Call<ApiBidsResponse>DecreaseBids(@Field("uid") String uid, @Field("lid") String lid, @Field("bids") int Bids);
+
+
+    /**********************POST QUOTE OR SUBMIT PROPOSAL SECTION *******************/
+
+    //proposal Insertion(C)
+    @FormUrlEncoded
+    @POST("addproposal")
+    Call<ApiProposalResponse>addProposal(@Field("cid") String cid, @Field("lid") String lid, @Field("jobid") String jobId);
+
+
+    //proposal Milestone Insertion(C)
+    @Headers({"Content-Type:application/json"})
+    @POST("addmilestone")
+    Call<ApiProposalResponse> addMilestones(@Body MilestonesModel milestonesModel);
+
+    //proposal CoverLetter Insertion(C)
+    @FormUrlEncoded
+    @POST("addCoverletter")
+    Call<ApiProposalResponse>addCoverLetter(@Field("pid") String uid,  @Field("coverletter") String coverLetter);
 
 
 

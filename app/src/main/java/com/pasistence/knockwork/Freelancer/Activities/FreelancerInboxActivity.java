@@ -190,6 +190,7 @@ public class FreelancerInboxActivity extends DemoDialogsActivity
         AfterLoad.setVisibility(View.GONE);
         shimmerlayout.stopShimmerAnimation();
 
+
     }
     /********-----------------------------------------------*********/
     @Override
