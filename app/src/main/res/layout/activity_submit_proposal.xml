@@ -217,6 +217,7 @@
                     android:layout_width="0dp"
                     android:maxLines="1"
                     android:hint="Rupees"
+                    android:inputType="number"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"/>
 
@@ -248,6 +249,7 @@
                     android:layout_width="0dp"
                     android:maxLines="1"
                     android:hint="Rupees"
+                    android:inputType="number"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"/>
 
@@ -277,6 +279,7 @@
                     android:layout_width="0dp"
                     android:hint="Rupees"
                     android:maxLines="1"
+                    android:inputType="number"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"/>
 
@@ -286,6 +289,30 @@
                     android:layout_height="wrap_content"
                     android:text="Time"
                     android:textSize="14sp"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Total"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="25sp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/txt_total"
+                    android:layout_width="0dp"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"
+                    android:text="500 rs"
+                    android:textSize="20sp"
                     android:layout_weight="1"/>
 
             </TableRow>

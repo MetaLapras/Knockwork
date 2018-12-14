@@ -1,8 +1,10 @@
 package com.pasistence.knockwork.Remote;
 
 import com.pasistence.knockwork.Model.ApiResponse.ApiBidsResponse;
+import com.pasistence.knockwork.Model.ApiResponse.ApiClientProposalsResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiEducationResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiExperienceResponse;
+import com.pasistence.knockwork.Model.ApiResponse.ApiGetProposals;
 import com.pasistence.knockwork.Model.ApiResponse.ApiNotification;
 import com.pasistence.knockwork.Model.ApiResponse.ApiPostContestResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
@@ -311,7 +313,32 @@ public interface MyApi {
     @POST("addCoverletter")
     Call<ApiProposalResponse>addCoverLetter(@Field("pid") String uid,  @Field("coverletter") String coverLetter);
 
+    // Post All Proposal Master Reading(R) per Lancer
+    @FormUrlEncoded
+    @POST("getProposalbyid")
+    Call<List<ApiGetProposals>>getProposalbyLid(@Field("lid") String lid);
 
+    // Post Proposal Milestones Reading(R)
+    @GET("getmilestonebyid/{pid}")
+    Call<List<MilestonesModel.Detail>>getMilestones(@Path("pid") String pid);
+
+    // Post Proposal CoverLetter Reading(R)
+    @GET("getcoverletterbyid/{pid}")
+    Call<List<MilestonesModel.Detail>>getCoverletter(@Path("pid") String pid);
+
+    //proposal Milestone Updation(U)
+    @Headers({"Content-Type:application/json"})
+    @POST("updatemilestone")
+    Call<ApiProposalResponse> updateMilestones(@Body MilestonesModel milestonesModel);
+
+    //proposal CoverLetter Updation(U)
+    @FormUrlEncoded
+    @POST("updateCoverletter")
+    Call<ApiProposalResponse>updateCoverLetter(@Field("pid") String pid,  @Field("coverletter") String coverLetter);
+
+    // Post Proposal CoverLetter Reading(R)
+    @GET("getProposalforclient/{cid}")
+    Call<List<ApiClientProposalsResponse>>getClientProposal(@Path("cid") String cid);
 
 }
 

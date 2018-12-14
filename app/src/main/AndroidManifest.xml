@@ -167,7 +167,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Freelancer.Activities.ReportSubmittedProposalActivity"></activity>
+        <activity android:name=".Freelancer.Activities.ReportSubmittedProposalActivity" />
+        <activity android:name=".Client.Activities.ClientProposalActivity"></activity>
     </application>
 
 </manifest>

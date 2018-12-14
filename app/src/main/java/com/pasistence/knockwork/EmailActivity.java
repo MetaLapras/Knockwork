@@ -43,6 +43,7 @@ import com.pasistence.knockwork.Client.Activities.DashboardActivityClient;
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Common.PreferenceUtils;
 import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboardActivity;
+import com.pasistence.knockwork.Model.ApiResponse.ApiBidsResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterClient;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
 import com.pasistence.knockwork.Model.SignUpEmailModel;
@@ -51,6 +52,7 @@ import com.rey.material.widget.LinearLayout;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -58,6 +60,8 @@ import info.hoang8f.widget.FButton;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.pasistence.knockwork.Common.PreferenceUtils.getLid;
 
 public class EmailActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "abc";
@@ -522,7 +526,7 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void RegisterLancerUser(String userName, String uid, String email, String imageUrl, String provider, String phoneno) {
+    private void RegisterLancerUser(String userName, final String uid, String email, String imageUrl, String provider, String phoneno) {
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Registering Data .... ");
@@ -560,6 +564,18 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
                 for(ApiResponseRegisterLancer.Lancer lan : lancers){
                     PreferenceUtils.setLid(mContext,lan.getLancerId());
                 }
+                mService.AddBids(uid,getLid(mContext),20).enqueue(new Callback<List<ApiBidsResponse>>() {
+                    @Override
+                    public void onResponse(Call<List<ApiBidsResponse>> call, Response<List<ApiBidsResponse>> response) {
+                        Log.e(TAG, response.body().toString() );
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<ApiBidsResponse>> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+
 
                 Intent intent1 = new Intent(mContext, FreeLancerDashboardActivity.class);
                 startActivity(intent1);

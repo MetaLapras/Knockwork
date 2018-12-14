@@ -100,6 +100,8 @@ public class ClientBaseActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_notification) {
 
+            startActivity(new Intent(mContext,ClientProposalActivity.class));
+
 
         } else if (id == R.id.nav_manage) {
 

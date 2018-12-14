@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Model.ApiResponse.ApiBidsResponse;
+import com.pasistence.knockwork.Model.ApiResponse.ApiGetProposals;
 import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiProposalResponse;
 import com.pasistence.knockwork.Model.MilestonesModel;
@@ -41,17 +42,18 @@ public class SubmitProposalActivity extends AppCompatActivity implements View.On
     private int mYear, mMonth, mDay;
     Context mContext;
     ApiPostJobResponse.Result clientJobs ;
-    TextView txtTitle,txtJobDuration,txtBudget,txtJobType;
+    TextView txtTitle,txtJobDuration,txtBudget,txtJobType,txtTotal;
     TextView txtDuration,txtDuration1,txtDuration2;
     Spinner spnMilstones;
     EditText edtMilestone,edtMilestone1,edtMilestone2,edtRupees,edtRupees1,edtRupees2;
     EditText edtCoverLetter;
-    String cid,pid,lid,jobid,milestone,rupees,time,coverletter,Uid;
+    String cid,pid,lid,jobid,milestone,status,milid,milid1,milid2,time,coverletter,Uid,updatePid;
     FButton btnSubmit,btnAttach;
     MyApi mService;
     List<MilestonesModel.Detail> lstMilestone = new ArrayList<MilestonesModel.Detail>();
     MilestonesModel  milestonesModel;
-
+    ApiGetProposals proposals;
+    int Total;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,11 +95,13 @@ public class SubmitProposalActivity extends AppCompatActivity implements View.On
         edtRupees1 = (EditText)findViewById(R.id.edt_price1);
         edtRupees2 = (EditText)findViewById(R.id.edt_price2);
 
+        txtTotal = (TextView)findViewById(R.id.txt_total);
+
         edtCoverLetter = (EditText)findViewById(R.id.edt_coverLetter);
 
         btnSubmit = (FButton)findViewById(R.id.btn_submit_proposal);
         btnAttach = (FButton)findViewById(R.id.btn_attach_work);
-
+        mService = Common.getApi();
 
         if(getIntent().getStringExtra("proposal") != null){
 
@@ -107,25 +111,100 @@ public class SubmitProposalActivity extends AppCompatActivity implements View.On
             Log.e(TAG, "Failed Intent" );
         }
 
-        mService = Common.getApi();
-
-
     }
 
     private void loadAllDetails() {
-        clientJobs = (ApiPostJobResponse.Result) getIntent().getSerializableExtra("jobs");
-        Log.e(TAG+"-Intent", clientJobs.toString());
+        status  = getIntent().getStringExtra("status");
+        if(status.equals(Common.update)){
+
+            proposals = (ApiGetProposals) getIntent().getSerializableExtra("jobs");
+            Log.e(TAG+"-Intent", proposals.toString());
+
+            cid = proposals.getCid();
+            jobid = proposals.getJobid();
+            lid = getLid(mContext);
+            updatePid = proposals.getId();
+
+            txtTitle.setText(proposals.getTitle());
+            txtJobDuration.setText(proposals.getDuration());
+            txtBudget.setText(proposals.getRate());
+            txtJobType.setText(proposals.getType());
+
+            loadMilestones(updatePid);
+            loadCoverLetter(updatePid);
+
+            btnSubmit.setText("Update Proposal");
 
 
-        cid = clientJobs.getCid();
-        jobid = clientJobs.getpId();
-        lid = getLid(mContext);
+        }else if(status.equals(Common.register)){
 
-        txtTitle.setText(clientJobs.getTitle());
-        txtJobDuration.setText(clientJobs.getDuration());
-        txtBudget.setText(clientJobs.getRate());
-        txtJobType.setText(clientJobs.getType());
+            clientJobs = (ApiPostJobResponse.Result) getIntent().getSerializableExtra("jobs");
+            Log.e(TAG+"-Intent", clientJobs.toString());
 
+            cid = clientJobs.getCid();
+            jobid = clientJobs.getpId();
+            lid = getLid(mContext);
+
+            txtTitle.setText(clientJobs.getTitle());
+            txtJobDuration.setText(clientJobs.getDuration());
+            txtBudget.setText(clientJobs.getRate());
+            txtJobType.setText(clientJobs.getType());
+        }
+    }
+
+    private void loadMilestones(String updatePid) {
+        mService.getMilestones(updatePid).enqueue(new Callback<List<MilestonesModel.Detail>>() {
+            @Override
+            public void onResponse(Call<List<MilestonesModel.Detail>> call, Response<List<MilestonesModel.Detail>> response) {
+                List<MilestonesModel.Detail> result = response.body();
+                Log.e(TAG,result.toString());
+
+                    edtMilestone.setText(result.get(0).getMilestone());
+                    edtMilestone1.setText(result.get(1).getMilestone());
+                    edtMilestone2.setText(result.get(2).getMilestone());
+
+                    edtRupees.setText(result.get(0).getPrice());
+                    edtRupees1.setText(result.get(1).getPrice());
+                    edtRupees2.setText(result.get(2).getPrice());
+
+                    txtDuration.setText(result.get(0).getDuration());
+                    txtDuration1.setText(result.get(1).getDuration());
+                    txtDuration2.setText(result.get(2).getDuration());
+
+                    milid = result.get(0).getId();
+                    milid1 = result.get(1).getId();
+                    milid2 = result.get(2).getId();
+
+            }
+
+            @Override
+            public void onFailure(Call<List<MilestonesModel.Detail>> call, Throwable t) {
+                t.printStackTrace();
+                Log.e(TAG,t.getMessage());
+            }
+        });
+    }
+
+    private void loadCoverLetter(String updatePid) {
+        mService.getCoverletter(updatePid).enqueue(new Callback<List<MilestonesModel.Detail>>() {
+            @Override
+            public void onResponse(Call<List<MilestonesModel.Detail>> call, Response<List<MilestonesModel.Detail>> response) {
+                List<MilestonesModel.Detail> result = response.body();
+                Log.e(TAG,result.toString());
+                if(!result.isEmpty()){
+                    edtCoverLetter.setText(result.get(0).getMilestone());
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<List<MilestonesModel.Detail>> call, Throwable t) {
+                t.printStackTrace();
+                Log.e(TAG,t.getMessage());
+            }
+        });
     }
 
     @Override
@@ -140,8 +219,81 @@ public class SubmitProposalActivity extends AppCompatActivity implements View.On
             dateDialog(txtDuration2);
         }
         if(v == btnSubmit){
-            submitProposal();
+            if(status.equals(Common.register)){
+                submitProposal();
+            }else if (status.equals(Common.update)){
+                updateProposal();
+            }
         }
+
+    }
+
+    private void updateProposal() {
+        Common.showSpotDialogue(mContext);
+        updateMilestone();
+    }
+
+    private void updateMilestone() {
+
+        MilestonesModel.Detail detail = new MilestonesModel.Detail(milid,updatePid,edtMilestone.getText().toString(),edtRupees.getText().toString(),txtDuration.getText().toString());
+        MilestonesModel.Detail detail1 = new MilestonesModel.Detail(milid1,updatePid,edtMilestone1.getText().toString(),edtRupees1.getText().toString(),txtDuration1.getText().toString());
+        MilestonesModel.Detail detail2 = new MilestonesModel.Detail(milid2,updatePid,edtMilestone2.getText().toString(),edtRupees2.getText().toString(),txtDuration2.getText().toString());
+
+        lstMilestone.add(detail);
+        lstMilestone.add(detail1);
+        lstMilestone.add(detail2);
+
+        milestonesModel = new MilestonesModel(lstMilestone);
+        coverletter = edtCoverLetter.getText().toString();
+
+        mService.updateMilestones(milestonesModel).enqueue(new Callback<ApiProposalResponse>() {
+            @Override
+            public void onResponse(Call<ApiProposalResponse> call, Response<ApiProposalResponse> response) {
+                ApiProposalResponse result = response.body();
+                Log.e(TAG, result.toString());
+                if(!result.getError()){
+
+                    mService.updateCoverLetter(updatePid,coverletter).enqueue(new Callback<ApiProposalResponse>() {
+                        @Override
+                        public void onResponse(Call<ApiProposalResponse> call, Response<ApiProposalResponse> response) {
+                            ApiProposalResponse result = response.body();
+                            Log.e(TAG, result.toString());
+
+                            if(!result.getError()){
+
+                                reduceBids();
+
+                            }else if(result.getError()) {
+                                Common.commonDialog(mContext,result.getMessage());
+                                Common.dismissSpotDilogue();
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<ApiProposalResponse> call, Throwable t) {
+                            Log.e(TAG, t.getMessage() );
+                            t.printStackTrace();
+                            Common.dismissSpotDilogue();
+                            Common.commonDialog(mContext,"Internal Server Error!");
+                        }
+                    });
+
+                }else if(result.getError()) {
+                    Common.commonDialog(mContext,result.getMessage());
+                    Common.dismissSpotDilogue();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ApiProposalResponse> call, Throwable t) {
+                Log.e(TAG, t.getMessage() );
+                t.printStackTrace();
+                Common.dismissSpotDilogue();
+            }
+        });
+
 
     }
 
@@ -167,6 +319,7 @@ public class SubmitProposalActivity extends AppCompatActivity implements View.On
                 Common.commonDialog(mContext,"Internal Server Error!");
             }
         });
+
     }
 
     private void submitMilestones(final String pid) {
@@ -266,8 +419,6 @@ public class SubmitProposalActivity extends AppCompatActivity implements View.On
                 Common.commonDialog(mContext,"Server Not Found");
             }
         });
-
-
     }
 
     private void dateDialog(final TextView Duration){

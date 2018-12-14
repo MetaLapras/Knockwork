@@ -23,6 +23,7 @@ import com.pasistence.knockwork.Common.PreferenceUtils;
 import com.pasistence.knockwork.Freelancer.Activities.FreeLancerDashboardActivity;
 
 
+import com.pasistence.knockwork.Model.ApiResponse.ApiBidsResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiNotification;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterClient;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
@@ -31,11 +32,14 @@ import com.pasistence.knockwork.Remote.MyApiNotification;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import info.hoang8f.widget.FButton;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.pasistence.knockwork.Common.PreferenceUtils.getLid;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -422,7 +426,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
           startActivity(intent1);
           finish();*/
         //If registered by Gmail OR Facebook
-        mService.RegisterLancer(
+          final String finalUid = uid;
+          mService.RegisterLancer(
                 uid,
                 displayname,
                 email,
@@ -442,6 +447,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     for(ApiResponseRegisterLancer.Lancer lan : lancers){
                         PreferenceUtils.setLid(mContext,lan.getLancerId());
                     }
+
+                    mService.AddBids(finalUid,getLid(mContext),20).enqueue(new Callback<List<ApiBidsResponse>>() {
+                        @Override
+                        public void onResponse(Call<List<ApiBidsResponse>> call, Response<List<ApiBidsResponse>> response) {
+                            Log.e(TAG, response.body().toString() );
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<ApiBidsResponse>> call, Throwable t) {
+                            t.printStackTrace();
+                        }
+                    });
+
 
                     Intent intent1 = new Intent(LoginActivity.this, FreeLancerDashboardActivity.class);
                     startActivity(intent1);
@@ -532,6 +550,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     for(ApiResponseRegisterClient.Client lan : lancers){
                         PreferenceUtils.setCid(mContext,lan.getClientId());
+
                     }
                     present = true;
                     startActivity(new Intent(mContext,DashboardActivityClient.class));

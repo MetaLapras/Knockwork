@@ -138,7 +138,9 @@ public class DashboardActivityClient extends ClientBaseActivity {
         SearchBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mContext,LancersActivity.class));
+                Intent intent = new Intent(mContext,LancersActivity.class);
+                intent.putExtra("title","");
+                startActivity(intent);
                 overridePendingTransition(R.anim.fade_in_left,R.anim.fade_in_right);
             }
         });
@@ -209,11 +211,6 @@ public class DashboardActivityClient extends ClientBaseActivity {
     }
 
     private void loadPopularServices() {
-      /*  popularAdapter.notifyDataSetChanged();
-        popularAdapter.startListening();
-        recyclerPopularServices.setAdapter(popularAdapter);
-        recyclerPopularServices.scheduleLayoutAnimation();
-        refreshLayout.setRefreshing(false);*/
 
       mService.getTopServices().enqueue(new Callback<List<ResponseTopService>>() {
             @SuppressLint("NewApi")

@@ -2,6 +2,7 @@ package com.pasistence.knockwork.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
@@ -10,11 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.pasistence.knockwork.Client.Activities.LancersActivity;
 import com.pasistence.knockwork.Interface.ItemClickListener;
 import com.pasistence.knockwork.Model.PopularServicesModel;
 import com.pasistence.knockwork.Model.ResponseTopService;
 import com.pasistence.knockwork.R;
 import com.pasistence.knockwork.Remote.MyApi;
+import com.pasistence.knockwork.SubCategoryActivity;
 import com.pasistence.knockwork.ViewHolder.ViewHolderPopularServices;
 import com.squareup.picasso.Picasso;
 
@@ -65,6 +68,17 @@ public class ClientPopularServiceAdapter extends RecyclerView.Adapter<ViewHolder
                 Snackbar.make(view, ""+clickitem.getTitle(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 Log.e("popular", model.toString());
+            }
+        });
+
+        viewHolder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View view, int position, boolean isLongClick) {
+                Intent intent = new Intent(activity,LancersActivity.class);
+
+                intent.putExtra("title",clickitem.getTitle());
+
+                activity.startActivity(intent);
             }
         });
 

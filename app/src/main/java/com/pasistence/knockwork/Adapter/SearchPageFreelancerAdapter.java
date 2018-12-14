@@ -48,9 +48,6 @@ public class SearchPageFreelancerAdapter  extends RecyclerView.Adapter<ViewHolde
         this.searchPageFreelancerModels = searchpagelist;
     }
 
-   /* public SearchPageFreelancerAdapter(Context mContext, ArrayList<SearchPageFreelancerActivity> searchPageListModels) {
-    }
-*/
     @NonNull
     @Override
     public ViewHolderSearchPageFreelancer onCreateViewHolder(@NonNull ViewGroup parent, int i) {
@@ -86,6 +83,7 @@ public class SearchPageFreelancerAdapter  extends RecyclerView.Adapter<ViewHolde
             public void onClick(View v) {
                 Intent intent = new Intent(mContext,SubmitProposalActivity.class);
                 intent.putExtra("proposal",Common.PROPOSAL);
+                intent.putExtra("status",Common.register);
                 intent.putExtra("jobs",searchPageFreelancerModels.get(position));
                 mContext.startActivity(intent);
             }
@@ -96,6 +94,7 @@ public class SearchPageFreelancerAdapter  extends RecyclerView.Adapter<ViewHolde
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, FreelancerJobDescriptionActivity.class);
                 intent.putExtra("details",Common.JOB);
+                intent.putExtra("status",Common.register);
                 intent.putExtra("jobs",searchPageFreelancerModels.get(position));
                 mContext.startActivity(intent);
 

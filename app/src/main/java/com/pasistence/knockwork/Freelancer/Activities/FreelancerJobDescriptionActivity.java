@@ -57,6 +57,7 @@ public class FreelancerJobDescriptionActivity extends FreeLancerBaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(mContext,SubmitProposalActivity.class);
                 intent.putExtra("proposal",Common.PROPOSAL);
+                intent.putExtra("status",Common.register);
                 intent.putExtra("jobs",clientJobs);
                 startActivity(intent);
             }

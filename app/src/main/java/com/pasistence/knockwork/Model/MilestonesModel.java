@@ -28,6 +28,9 @@ public class MilestonesModel {
         @SerializedName("id")
         @Expose
         private String id;
+        @SerializedName("pid")
+        @Expose
+        private String pid;
         @SerializedName("milestone")
         @Expose
         private String milestone;
@@ -38,8 +41,35 @@ public class MilestonesModel {
         @Expose
         private String duration;
 
+        @Override
+        public String toString() {
+            return "Detail{" +
+                    "id='" + id + '\'' +
+                    ", pid='" + pid + '\'' +
+                    ", milestone='" + milestone + '\'' +
+                    ", price='" + price + '\'' +
+                    ", duration='" + duration + '\'' +
+                    '}';
+        }
+
+        public String getPid() {
+            return pid;
+        }
+
+        public void setPid(String pid) {
+            this.pid = pid;
+        }
+
         public Detail(String id, String milestone, String price, String duration) {
             this.id = id;
+            this.milestone = milestone;
+            this.price = price;
+            this.duration = duration;
+        }
+
+        public Detail(String id, String pid, String milestone, String price, String duration) {
+            this.id = id;
+            this.pid = pid;
             this.milestone = milestone;
             this.price = price;
             this.duration = duration;

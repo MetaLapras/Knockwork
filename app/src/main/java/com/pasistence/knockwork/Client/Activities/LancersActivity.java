@@ -80,8 +80,16 @@ public class LancersActivity extends ClientBaseActivity {
         /*----------------------------------------------------------------------------*/
         mInit();
 
+        if(!getIntent().getStringExtra("title").equals(null)||!getIntent().getStringExtra("title").equals("")){
+            CharSequence charSequence = getIntent().getStringExtra("title");
+            startSearch(charSequence,1);
+        }else {
+            getAllLancers(PageNo);
+        }
+
+
         loadSuggestList();
-        getAllLancers(PageNo);
+
         //Setup search bar
         searchBar.setHint("Search");
         //searchBar.setLastSuggestions(suggestList);
@@ -151,7 +159,8 @@ public class LancersActivity extends ClientBaseActivity {
                 if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
                     isScrolling = false;
                     if(isSearching){
-                        performPaginationWithSerach();
+                        //performPaginationWithSerach();
+
                     }else {
                         performPagination();
                     }
@@ -258,14 +267,11 @@ public class LancersActivity extends ClientBaseActivity {
                     Common.commonDialog(mContext,result.getMessage());
                 }
 
-
-
             }
 
             @Override
             public void onFailure(Call<ApiResponseRegisterLancer> call, Throwable t) {
                 t.printStackTrace();
-
             }
 
         });
@@ -383,11 +389,11 @@ public class LancersActivity extends ClientBaseActivity {
                                 @Override
                                 public void onResponse(Call<ApiResponseRegisterLancer> call, Response<ApiResponseRegisterLancer> response) {
                                     ApiResponseRegisterLancer result = response.body();
-                                    Log.e(TAG, result.toString());
+                                    Log.e(TAG+"==>", result.toString());
 
                                     if(!result.getError()){
 
-                                        Log.e(TAG+"SizeM",resultList.size()+"");
+                                        Log.e(TAG+"SizeM===>",resultList.size()+"");
                                         for (ApiResponseRegisterLancer.Lancer res : result.getLancer()){
                                             resultList.add(res);
                                         }

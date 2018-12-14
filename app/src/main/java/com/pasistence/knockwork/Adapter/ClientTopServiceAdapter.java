@@ -77,7 +77,6 @@ public class ClientTopServiceAdapter extends RecyclerView.Adapter<ViewHolderTopS
             }
         });
 
-
     }
 
     @Override

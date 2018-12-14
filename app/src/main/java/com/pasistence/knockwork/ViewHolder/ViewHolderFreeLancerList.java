@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
+import com.pasistence.knockwork.Interface.ItemClickListener;
 import com.pasistence.knockwork.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -17,6 +18,8 @@ public class ViewHolderFreeLancerList extends RecyclerView.ViewHolder implements
     public CircleImageView CircularImageViewProfile;
     public TextView txtLancerName,txtLancerState,txtLancerEarned,txtLancerLike,txtLancerDescription;
     public Button btnLancerMessage,btnLancerHire;
+    private ItemClickListener itemClickListener;
+
 
     public ViewHolderFreeLancerList(@NonNull View itemView) {
         super(itemView);
@@ -33,6 +36,9 @@ public class ViewHolderFreeLancerList extends RecyclerView.ViewHolder implements
 
         btnLancerHire.setOnClickListener(this);
         btnLancerMessage.setOnClickListener(this);
+
+        itemView.setOnClickListener(this);
+
     }
 
     @Override
@@ -47,5 +53,9 @@ public class ViewHolderFreeLancerList extends RecyclerView.ViewHolder implements
                     .setAction("Action", null).show();*/
            // v.getContext().startActivity(new Intent(v.getContext(),CustomLayoutMessagesActivity.class));
         }
+    }
+
+    public void setItemClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
     }
 }

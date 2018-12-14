@@ -35,6 +35,5 @@ public class ViewHolderTopServices extends RecyclerView.ViewHolder implements Vi
     @Override
     public void onClick(View view) {
         itemClickListener.onClick(view,getAdapterPosition(),false);
-
     }
 }

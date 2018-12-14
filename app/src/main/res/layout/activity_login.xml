@@ -116,6 +116,7 @@
             app:shadowEnabled="true"
             app:fButtonColor="@color/com_facebook_blue"
             app:shadowHeight="5dp"
+            android:visibility="gone"
             app:cornerRadius="4dp"
             app:shadowColor="@android:color/black"
             />
@@ -132,6 +133,7 @@
             android:layout_height="wrap_content"
             android:shadowColor="@android:color/black"
             app:shadowEnabled="true"
+            android:visibility="gone"
             app:fButtonColor="@color/com_facebook_green"
             app:shadowHeight="5dp"
             app:cornerRadius="4dp"
