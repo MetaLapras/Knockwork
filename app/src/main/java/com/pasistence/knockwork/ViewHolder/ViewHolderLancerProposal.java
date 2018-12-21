@@ -1,19 +1,17 @@
 package com.pasistence.knockwork.ViewHolder;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-
 import com.pasistence.knockwork.Interface.ItemClickListener;
 import com.pasistence.knockwork.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ViewHolderFreeLancerList extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class ViewHolderLancerProposal extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public CircleImageView CircularImageViewProfile;
     public TextView txtLancerName,txtLancerState,txtLancerEarned,txtLancerLike,txtLancerDescription,txtTitle,txtCoverletter;
@@ -21,7 +19,7 @@ public class ViewHolderFreeLancerList extends RecyclerView.ViewHolder implements
     private ItemClickListener itemClickListener;
 
 
-    public ViewHolderFreeLancerList(@NonNull View itemView) {
+    public ViewHolderLancerProposal(@NonNull View itemView) {
         super(itemView);
 
         CircularImageViewProfile = (CircleImageView)itemView.findViewById(R.id.circularImage_profile);
@@ -30,7 +28,8 @@ public class ViewHolderFreeLancerList extends RecyclerView.ViewHolder implements
         txtLancerEarned          = (TextView)itemView.findViewById(R.id.txt_lancer_earing);
         txtLancerLike            = (TextView)itemView.findViewById(R.id.txt_lancer_per);
         txtLancerDescription     = (TextView)itemView.findViewById(R.id.txt_description_lancer);
-
+        txtTitle                 = (TextView)itemView.findViewById(R.id.job_title);
+        txtCoverletter           = (TextView)itemView.findViewById(R.id.job_coverletter);
 
         btnLancerHire            = (Button)itemView.findViewById(R.id.btn_hire_lancer);
         btnLancerMessage         = (Button)itemView.findViewById(R.id.btn_message_lancer);
@@ -54,6 +53,8 @@ public class ViewHolderFreeLancerList extends RecyclerView.ViewHolder implements
                     .setAction("Action", null).show();*/
            // v.getContext().startActivity(new Intent(v.getContext(),CustomLayoutMessagesActivity.class));
         }
+
+        itemClickListener.onClick(v,getAdapterPosition(),false);
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener) {

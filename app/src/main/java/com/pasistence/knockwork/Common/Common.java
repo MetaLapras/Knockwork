@@ -43,12 +43,12 @@ public class Common {
     public static AlertDialog watingDialog;
 
     //localhost
-    //public static final String BASE_URL = "http://10.0.2.2/knockwork/public/index.php/api/";
+    //public static final String BASE_URL = "http://192.168.0.150/knockwork/public/index.php/api/";
     //Server
-    //public static final String BASE_URL = "http://52.172.221.235:8985/knockwork/public/index.php/api/";
+    public static final String BASE_URL = "http://52.172.221.235:8985/knockwork/public/index.php/api/";
     public static final String FCM_Url = "https://fcm.googleapis.com/";
     private static final String TAG = "common";
-    public static final String BASE_URL = "http://192.168.0.150/knockwork/public/index.php/api/";
+
 
     public static MyApi getApi(){
         return RetrofitClient.getClient(BASE_URL).create(MyApi.class);

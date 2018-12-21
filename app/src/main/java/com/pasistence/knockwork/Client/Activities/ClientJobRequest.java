@@ -132,13 +132,6 @@ public class ClientJobRequest extends AppCompatActivity implements View.OnClickL
         loadMilestones(proposal.getId());
         loadCoverLetter(proposal.getId());
 
-
-
-
-
-
-
-
     }
 
     @Override

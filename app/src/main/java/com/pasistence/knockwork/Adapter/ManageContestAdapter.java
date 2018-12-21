@@ -40,6 +40,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.http.Field;
 
+import static com.pasistence.knockwork.Common.PreferenceUtils.getUid;
+
 public class ManageContestAdapter extends RecyclerView.Adapter<ViewHolderMnageJobPosting> implements ItemClickListener {
 
 
@@ -111,6 +113,13 @@ public class ManageContestAdapter extends RecyclerView.Adapter<ViewHolderMnageJo
         final ArrayList<ApiPostContestResponse.Result> intentList = new ArrayList<ApiPostContestResponse.Result>();
         intentList.add(job);
 
+        if(!job.getUid().equals(getUid(mContext))){
+            holder.btnJobEdit.setVisibility(View.GONE);
+            holder.btnJobRemove.setVisibility(View.GONE);
+        }else {
+            holder.btnJobEdit.setVisibility(View.VISIBLE);
+            holder.btnJobRemove.setVisibility(View.VISIBLE);
+        }
 
         holder.btnJobEdit.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <!-- <android.support.v7.widget.CardView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_margin="8dp">
+
+         <com.mancj.materialsearchbar.MaterialSearchBar
+             android:id="@+id/member_search_bar"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:elevation="10dp"
+             app:mt_speechMode="false" />
+
+     </android.support.v7.widget.CardView>-->
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/circularImage_profile"
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="7dp"
+                    android:src="@drawable/images" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_name_lancer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Jaime Lindsey"
+                        android:textColor="@color/fbutton_color_belize_hole"
+                        android:textSize="19dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txt_lancer_state"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/country"
+                            android:maxLines="1"
+                            android:textColor="@color/black"
+                            android:textSize="13dp" />
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="9dp"
+                            android:layout_marginTop="7sp"
+                            android:background="#31acf4" />
+
+                        <TextView
+                            android:id="@+id/txt_lancer_earing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="9dp"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/moneyearned"
+                            android:maxLines="1"
+                            android:textColor="@color/black"
+                            android:textSize="13dp" />
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="9dp"
+                            android:layout_marginTop="7sp"
+                            android:background="#31acf4" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="9dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@color/fbutton_color_peter_river"
+                            android:orientation="horizontal">
+                            <!-- <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_thumb_up_black_24dp"
+                                android:layout_marginLeft="10dp"/>-->
+
+                            <TextView
+                                android:id="@+id/txt_lancer_per"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:drawableStart="@drawable/ic_thumb_up_black_24dp"
+                                android:drawablePadding="5dp"
+                                android:text="@string/feedback"
+                                android:maxLines="1"
+                                android:textColor="@color/white"
+                                android:textSize="13dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/job_title"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Title of Job"
+                    android:paddingLeft="10dp"
+                    android:textSize="@dimen/text_size_large"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/job_coverletter"
+                    android:padding="5dp"
+                    android:layout_margin="5dp"
+                    android:maxLines="3"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:text="@string/info" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_description_lancer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:maxLines="3"
+                android:visibility="gone"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:text="@string/info" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:gravity="center"
+                android:layout_margin="5dp">
+
+                <!--<Button-->
+                <!--android:id="@+id/btn_message_lancer"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@drawable/rectangle_border"-->
+                <!--android:text="Message"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:textSize="16dp" />-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <info.hoang8f.widget.FButton
+                        android:id="@+id/btn_message_lancer"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rectangle_border"
+                        android:text="Message"
+                        android:textSize="17dp"
+
+                        android:textColor="@android:color/black"
+                        android:textAllCaps="false"
+                        android:shadowColor="@android:color/black"
+                        app:shadowEnabled="true"
+                        app:fButtonColor="#fff"
+                        app:shadowHeight="3dp"
+                        app:cornerRadius="3dp"
+                        app:shadowColor="@android:color/black"
+                        android:layout_marginRight="5dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <info.hoang8f.widget.FButton
+                        android:id="@+id/btn_hire_lancer"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rectangle_border"
+                        android:text="Hire"
+                        android:textSize="17dp"
+                        android:textColor="@android:color/white"
+                        android:textAllCaps="false"
+                        android:shadowColor="@android:color/white"
+                        app:shadowEnabled="true"
+                        app:fButtonColor="@color/fbutton_color_peter_river"
+                        app:shadowHeight="3dp"
+                        app:cornerRadius="3dp"
+                        app:shadowColor="@android:color/black"
+                        android:layout_marginRight="5dp"
+                        />
+
+                </LinearLayout>
+
+
+                <!--<Button-->
+                <!--android:id="@+id/btn_hire_lancer"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@color/fbutton_color_peter_river"-->
+                <!--android:text="Hire"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textSize="16dp" />-->
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

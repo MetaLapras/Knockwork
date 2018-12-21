@@ -79,6 +79,7 @@ public class ManageJobPostingAdapter extends RecyclerView.Adapter<ViewHolderMnag
         holder.txtjobName.setText(job.getTitle());
         holder.txtfixedPrice.setText(job.getType());
         holder.txtpriceRange.setText(job.getRate());
+        holder.txtStatus.setText(job.getStatus());
         //holder.txtpoastedDays.setText(job.getUpdatedAt());
         updatedat = job.getUpdatedAt();
 

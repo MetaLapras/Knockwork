@@ -17,8 +17,7 @@ public class RetrofitClient {
     public static Retrofit retrofit;
 
 
-    public static Retrofit getClient(String baseURL)
-    {
+    public static Retrofit getClient(String baseURL){
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();

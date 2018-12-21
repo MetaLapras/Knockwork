@@ -173,11 +173,15 @@ public interface MyApi {
 
     //getAll Posted Jobs
     @GET("allpostjobs/{pageNo}")
-    Call<ApiPostJobResponse>ClientPostAJobRead(@Path("pageNo") int pageNo);
+    Call<ApiPostJobResponse>ClientPostAJobRead(@Path("pageNo") String pageNo);
 
     //getAll Posted Jobs
     @GET("alljobswithclient/{pageNo}")
     Call<ApiPostJobResponse>withClientJobRead(@Path("pageNo") int pageNo);
+
+    //getAll Posted Jobs by Id
+    @GET("getJobbyId/{id}")
+    Call<ApiPostJobResponse>getPostJobbyid(@Path("id") String id);
 
     //Delete Posted Job
     @FormUrlEncoded

@@ -35,6 +35,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.pasistence.knockwork.Common.PreferenceUtils.getUid;
+
 public class ManageJobPostActivity extends ClientBaseActivity {
 
     Context mContext;
@@ -82,9 +84,9 @@ public class ManageJobPostActivity extends ClientBaseActivity {
 
         // mOnclick();
         mServices = Common.getApi();
-        readAllJobs(PageNo);
+        readAllJobs();
 
-        recyclerLancer.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        /*recyclerLancer.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -106,15 +108,15 @@ public class ManageJobPostActivity extends ClientBaseActivity {
                 }
               //  isScrolling = true;
             }
-        });
+        });*/
 
         /*--------------------------------------------------------------*/
 
     }
 
-    private void readAllJobs(int PageNo) {
+    private void readAllJobs() {
         try {
-            mServices.ClientPostAJobRead(PageNo).enqueue(new Callback<ApiPostJobResponse>() {
+            mServices.ClientPostAJobRead(getUid(mContext)).enqueue(new Callback<ApiPostJobResponse>() {
                 @Override
                 public void onResponse(Call<ApiPostJobResponse> call, Response<ApiPostJobResponse> response) {
                     ApiPostJobResponse result = response.body();
@@ -157,15 +159,6 @@ public class ManageJobPostActivity extends ClientBaseActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
 
     private void mInit() {
         mContext = ManageJobPostActivity.this;
@@ -190,6 +183,7 @@ public class ManageJobPostActivity extends ClientBaseActivity {
                     try {
                         if(TotalElementsCount!= manageJobPostingModels.size()){
                             PageNo++;
+/*
                             mServices.ClientPostAJobRead(PageNo).enqueue(new Callback<ApiPostJobResponse>() {
                                 @Override
                                 public void onResponse(Call<ApiPostJobResponse> call, Response<ApiPostJobResponse> response) {
@@ -223,6 +217,7 @@ public class ManageJobPostActivity extends ClientBaseActivity {
 
                                 }
                             });
+*/
                         }else
                         {
                             Toast.makeText(mContext, "Nothing to Display", Toast.LENGTH_SHORT).show();

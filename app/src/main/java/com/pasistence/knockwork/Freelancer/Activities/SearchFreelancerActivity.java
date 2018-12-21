@@ -144,7 +144,7 @@ public class SearchFreelancerActivity extends FreeLancerBaseActivity
 
         loadSuggestList();
 
-     /*   searchFreelancerrecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        searchFreelancerrecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -163,7 +163,7 @@ public class SearchFreelancerActivity extends FreeLancerBaseActivity
                 if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
                     isScrolling = false;
                     if(isSearching){
-                        performPaginationWithSerach();
+                        //performPaginationWithSerach();
                     }else {
                         performPagination();
                     }
@@ -171,7 +171,7 @@ public class SearchFreelancerActivity extends FreeLancerBaseActivity
                 }
                 //  isScrolling = true;
             }
-        });*/
+        });
 
     }
 

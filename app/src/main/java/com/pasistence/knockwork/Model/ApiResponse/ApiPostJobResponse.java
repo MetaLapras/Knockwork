@@ -143,6 +143,46 @@ public class ApiPostJobResponse {
         @Expose
         private String quotes;
 
+        @SerializedName("status")
+        @Expose
+        private String status;
+
+        public String getStatus() {
+            return status;
+        }
+
+        @Override
+        public String toString() {
+            return "Result{" +
+                    "pId='" + pId + '\'' +
+                    ", uid='" + uid + '\'' +
+                    ", cid='" + cid + '\'' +
+                    ", category='" + category + '\'' +
+                    ", subcategory='" + subcategory + '\'' +
+                    ", title='" + title + '\'' +
+                    ", details='" + details + '\'' +
+                    ", skills='" + skills + '\'' +
+                    ", type='" + type + '\'' +
+                    ", rate='" + rate + '\'' +
+                    ", duration='" + duration + '\'' +
+                    ", visibility='" + visibility + '\'' +
+                    ", featured='" + featured + '\'' +
+                    ", createdAt='" + createdAt + '\'' +
+                    ", updatedAt='" + updatedAt + '\'' +
+                    ", profileImage='" + profileImage + '\'' +
+                    ", cname='" + cname + '\'' +
+                    ", spending='" + spending + '\'' +
+                    ", state='" + state + '\'' +
+                    ", review='" + review + '\'' +
+                    ", quotes='" + quotes + '\'' +
+                    ", status='" + status + '\'' +
+                    '}';
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
         public String getPId() {
             return pId;
         }
@@ -319,32 +359,6 @@ public class ApiPostJobResponse {
             this.quotes = quotes;
         }
 
-        @Override
-        public String toString() {
-            return "Result{" +
-                    "pId='" + pId + '\'' +
-                    ", uid='" + uid + '\'' +
-                    ", cid='" + cid + '\'' +
-                    ", category='" + category + '\'' +
-                    ", subcategory='" + subcategory + '\'' +
-                    ", title='" + title + '\'' +
-                    ", details='" + details + '\'' +
-                    ", skills='" + skills + '\'' +
-                    ", type='" + type + '\'' +
-                    ", rate='" + rate + '\'' +
-                    ", duration='" + duration + '\'' +
-                    ", visibility='" + visibility + '\'' +
-                    ", featured='" + featured + '\'' +
-                    ", createdAt='" + createdAt + '\'' +
-                    ", updatedAt='" + updatedAt + '\'' +
-                    ", profileImage='" + profileImage + '\'' +
-                    ", cname='" + cname + '\'' +
-                    ", spending='" + spending + '\'' +
-                    ", state='" + state + '\'' +
-                    ", review='" + review + '\'' +
-                    ", quotes='" + quotes + '\'' +
-                    '}';
-        }
     }
 
 }

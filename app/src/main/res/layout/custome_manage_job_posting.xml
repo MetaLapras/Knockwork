@@ -84,6 +84,26 @@
                 android:text="@string/quotes"
                 android:singleLine="true"
                 android:textSize="13dp"
+                android:maxLength="8"
+                android:ellipsize="end"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"/>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="10dp"
+                android:background="#31acf4" />
+
+            <TextView
+                android:id="@+id/txt_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/status"
+                android:singleLine="true"
+                android:textSize="13dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"/>
 
@@ -136,9 +156,11 @@
                     <!--android:textSize="17dp"-->
                     <!--android:background="@color/fbutton_color_peter_river"-->
                     <!--android:text="@string/job_posting_edit"/>-->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end">
                 <info.hoang8f.widget.FButton
                     android:id="@+id/btn_job_edit"
                     android:layout_width="100dp"
@@ -155,7 +177,7 @@
                     app:shadowColor="@android:color/black"
                     android:layout_marginRight="5dp"
                     />
-        </LinearLayout>
+                 </LinearLayout>
 
                 <!--<Button-->
                     <!--android:id="@+id/btn_job_remove"-->
@@ -169,7 +191,9 @@
                     <!--android:text="@string/job_posting_remove"/>-->
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">                <info.hoang8f.widget.FButton
+                    android:layout_height="wrap_content">
+
+                    <info.hoang8f.widget.FButton
                     android:id="@+id/btn_job_remove"
                     android:text="@string/job_posting_remove"
                     android:textSize="17dp"

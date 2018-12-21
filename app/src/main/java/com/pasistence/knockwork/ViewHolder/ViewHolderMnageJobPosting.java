@@ -14,7 +14,7 @@ public class ViewHolderMnageJobPosting
         extends RecyclerView.ViewHolder implements View.OnClickListener
 {
 
-    public TextView txtjobName,txtfixedPrice,txtpriceRange,txtpoastedDays,txtjobQuotes,txtjobDescription;
+    public TextView txtjobName,txtfixedPrice,txtpriceRange,txtpoastedDays,txtjobQuotes,txtjobDescription,txtStatus;
     public Button btnJobEdit,btnJobRemove;
 
     public ViewHolderMnageJobPosting(@NonNull View itemView) {
@@ -27,6 +27,7 @@ public class ViewHolderMnageJobPosting
         txtpoastedDays       = (TextView)itemView.findViewById(R.id.txt_job_posting);
         txtjobQuotes         = (TextView)itemView.findViewById(R.id.txt_quotes);
         txtjobDescription    = (TextView)itemView.findViewById(R.id.txt_job_description);
+        txtStatus            = (TextView)itemView.findViewById(R.id.txt_status);
 
         btnJobEdit           = (Button)itemView.findViewById(R.id.btn_job_edit);
         btnJobRemove         = (Button)itemView.findViewById(R.id.btn_job_remove);
