@@ -170,6 +170,7 @@ public class ClientProposalAdapter extends RecyclerView.Adapter<ViewHolderLancer
                 intent.putExtra(Common.PROPOSAL, Common.PROPOSAL);
                 intent.putExtra("title", holder.txtTitle.getText().toString());
                 intent.putExtra("lancer", lancerArraylist.get(position));
+                //intent.putExtra("jobid",lancerArraylist.get(position).)
                 mContext.startActivity(intent);
             }
         });

@@ -120,6 +120,13 @@ public interface MyApi {
             @Field("start_date")  String startDate,
             @Field("end_date")  String endDate);
 
+    //hireJobs
+    @FormUrlEncoded
+    @POST("hireJobs")
+    Call<ApiExperienceResponse>LancerHireJobs(
+            @Field("LancerId") String LancerId
+    );
+
 
     //Check if lancer exist
     @GET("checkClientExist/{uid}")
@@ -168,6 +175,14 @@ public interface MyApi {
             @Field("duration")  String duration,
             @Field("visibility")  String visibility,
             @Field("featured")  String featured
+    );
+
+    //postHireBy
+    @FormUrlEncoded
+    @POST("postHireBy")
+    Call<ApiPostJobResponse>ClientPostHireBy(
+            @Field("pid") String Pid,
+            @Field("hireby")  String hireby
     );
 
 

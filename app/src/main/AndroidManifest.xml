@@ -168,7 +168,8 @@
         </service>
 
         <activity android:name=".Freelancer.Activities.ReportSubmittedProposalActivity" />
-        <activity android:name=".Client.Activities.ClientProposalActivity"></activity>
+        <activity android:name=".Client.Activities.ClientProposalActivity" />
+        <activity android:name=".Freelancer.Activities.FreeLancerNoticationsActivity"></activity>
     </application>
 
 </manifest>

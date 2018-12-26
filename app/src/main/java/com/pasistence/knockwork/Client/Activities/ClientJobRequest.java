@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.pasistence.knockwork.Common.Common;
 import com.pasistence.knockwork.Model.ApiResponse.ApiClientProposalsResponse;
+import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiResponseRegisterLancer;
 import com.pasistence.knockwork.Model.MilestonesModel;
 import com.pasistence.knockwork.R;
@@ -186,6 +187,34 @@ public class ClientJobRequest extends AppCompatActivity implements View.OnClickL
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,"I AGREE", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 // Perform Action on Button
+//                Lancer = (ApiResponseRegisterLancer.Lancer) getIntent().getSerializableExtra("lancer");
+                ApiClientProposalsResponse proposalsResponse = (ApiClientProposalsResponse)getIntent().getSerializableExtra("lancer");
+                try{
+                    mService.ClientPostHireBy(
+                            proposalsResponse.getJobid(),proposalsResponse.getLId()
+                    ).enqueue(new Callback<ApiPostJobResponse>() {
+                        @Override
+                        public void onResponse(Call<ApiPostJobResponse> call, Response<ApiPostJobResponse> response) {
+                            Toast.makeText(mContext,"hire request is sent", Toast.LENGTH_LONG).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ApiPostJobResponse> call, Throwable t) {
+                            Toast.makeText(mContext,"something when wrong", Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+
+                }catch (Exception e){
+                    Log.e("Error",e.getMessage());
+                }
+
+
+
+
+
+
+
             }
         });
 
@@ -252,6 +281,7 @@ public class ClientJobRequest extends AppCompatActivity implements View.OnClickL
         txt_description.setText(Lancer.getLancerSelfIntro());
         txt_amount.setText(Lancer.getLancerMinHourRate());
 
+        //Lancer.getUid();
     }
 
     private void loadMilestones(String updatePid) {
