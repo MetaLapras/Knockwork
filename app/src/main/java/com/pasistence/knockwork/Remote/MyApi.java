@@ -5,6 +5,7 @@ import com.pasistence.knockwork.Model.ApiResponse.ApiClientProposalsResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiEducationResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiExperienceResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiGetProposals;
+import com.pasistence.knockwork.Model.ApiResponse.ApiHirejobsReponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiNotification;
 import com.pasistence.knockwork.Model.ApiResponse.ApiPostContestResponse;
 import com.pasistence.knockwork.Model.ApiResponse.ApiPostJobResponse;
@@ -120,12 +121,16 @@ public interface MyApi {
             @Field("start_date")  String startDate,
             @Field("end_date")  String endDate);
 
+
+
+
     //hireJobs
     @FormUrlEncoded
     @POST("hireJobs")
-    Call<ApiExperienceResponse>LancerHireJobs(
+    Call<List<ApiHirejobsReponse>>LancerHireJobs(
             @Field("LancerId") String LancerId
     );
+
 
 
     //Check if lancer exist

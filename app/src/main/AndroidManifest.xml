@@ -169,7 +169,8 @@
 
         <activity android:name=".Freelancer.Activities.ReportSubmittedProposalActivity" />
         <activity android:name=".Client.Activities.ClientProposalActivity" />
-        <activity android:name=".Freelancer.Activities.FreeLancerNoticationsActivity"></activity>
+        <activity android:name=".Freelancer.Activities.FreeLancerNoticationsActivity" />
+        <activity android:name=".Freelancer.Activities.FreeLancerActiveJobsActivity"></activity>
     </application>
 
 </manifest>

@@ -108,6 +108,7 @@ public class FreeLancerBaseActivity extends AppCompatActivity
             startActivity(new Intent(mContext,ManageBidsActivity.class));
 
         } else if (id == R.id.nav_active) {
+            startActivity(new Intent(mContext,FreeLancerActiveJobsActivity.class));
 
         } else if (id == R.id.nav_proposal) {
             startActivity(new Intent(mContext,ReportSubmittedProposalActivity.class));
