@@ -59,9 +59,14 @@ public class FreeLancerActiveJobsActivity extends FreeLancerBaseActivity {
     private void mInit() {
         mContext = FreeLancerActiveJobsActivity.this;
         recyclerHirejobs = (RecyclerView)findViewById(R.id.recycler_hire_jobs);
+        recyclerHirejobs.setHasFixedSize(true);
+        recyclerHirejobs.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerHirejobs.setNestedScrollingEnabled(false);
+
+
         mService=Common.getApi();
         Common.getUserPreference(mContext);
-        mAuth = FirebaseAuth.getInstance();
+//        mAuth = FirebaseAuth.getInstance();
     }
 
 
@@ -76,7 +81,7 @@ public class FreeLancerActiveJobsActivity extends FreeLancerBaseActivity {
 
                 hireJobsAdapter = new HireJobsAdapter(mContext,hireJobsList);
                 recyclerHirejobs.setAdapter(hireJobsAdapter);
-//                hireJobsAdapter.notifyDataSetChanged();
+                hireJobsAdapter.notifyDataSetChanged();
             }
 
             @Override

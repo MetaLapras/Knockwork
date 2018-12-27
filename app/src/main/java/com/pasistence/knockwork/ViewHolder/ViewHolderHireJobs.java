@@ -13,8 +13,10 @@ public class ViewHolderHireJobs extends RecyclerView.ViewHolder{
 
     public ViewHolderHireJobs(@NonNull View itemView){
         super(itemView);
+
         txtJobTitle            = (TextView)itemView.findViewById(R.id.job_title);
         txtJobDescription           = (TextView)itemView.findViewById(R.id.job_description);
         txtHire          = (TextView)itemView.findViewById(R.id.inbox_i_can_do);
+
     }
 }
